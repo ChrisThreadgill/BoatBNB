@@ -9,8 +9,4 @@ router.get("/", (req, res) => {
   res.send("hello World");
 });
 
-router.post("/test", (req, res) => {
-  res.json({ requestBody: req });
-});
-
 module.exports = router;

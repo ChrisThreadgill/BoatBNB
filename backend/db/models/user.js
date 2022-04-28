@@ -33,8 +33,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   User.prototype.toSafeObject = function () {
-    const { id, email } = this;
-    return { id, email };
+    const { id, firstName, lastName, email } = this;
+    return { id, firstName, lastName, email };
   };
   User.prototype.validatePassword = function (password) {
     return bcrypt.compareSync(password, this.hashedPassword.toString());

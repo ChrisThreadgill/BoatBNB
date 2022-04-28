@@ -17,13 +17,26 @@ const validateSignup = [
     .withMessage("Password must be 6 characters or more."),
   handleValidationErrors,
 ];
+//get user by ID
+router.get(
+  "/profile/:userId",
+  asyncHandler(async (req, res) => {
+    const { userId } = req.params;
+    console.log("working");
+    const user = await User.findByPk(userId);
+    return res.json({
+      user,
+    });
+    // console.log(user);
+  })
+);
 
 router.post(
   "/users",
   validateSignup,
   asyncHandler(async (req, res) => {
-    const { firstName, lastName, email, password } = req.body;
-    const user = await User.signup({ firstName, lastName, email, password });
+    const { firstName, lastName, email, password, roleId } = req.body;
+    const user = await User.signup({ firstName, lastName, email, password, roleId });
 
     await setTokenCookie(res, user);
 
@@ -37,8 +50,8 @@ router.post(
   "/providers",
   validateSignup,
   asyncHandler(async (req, res) => {
-    const { firstName, lastName, email, password } = req.body;
-    const roleId = 1;
+    const { firstName, lastName, email, password, roleId } = req.body;
+
     const user = await User.signup({ firstName, lastName, email, password, roleId });
 
     await setTokenCookie(res, user);

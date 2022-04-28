@@ -1,0 +1,28 @@
+.signup__form__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.signup__form {
+  display: flex;
+  justify-content: center;
+}
+.signup__form__inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: fit-content;
+}
+
+.signup__form__inputs > label {
+  display: flex;
+  justify-content: space-between;
+}
+.signup__form__inputs > label > input {
+  border-radius: 7px;
+  margin-left: 1rem;
+}
+.radio__buttons {
+  display: flex;
+  justify-content: space-around;
+}

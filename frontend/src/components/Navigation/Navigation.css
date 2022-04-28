@@ -1,0 +1,9 @@
+.logged__in__nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.visitor__nav {
+  display: flex;
+  justify-content: flex-end;
+}

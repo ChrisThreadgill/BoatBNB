@@ -1,37 +1,56 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import Cookies from "js-cookie";
 import { csrfFetch } from "../../store/csrf";
 import { useDispatch, useSelector } from "react-redux";
 
-function AddBoat({ user }) {
+function AddBoat({ user, view, setView }) {
+  // console.log(view, setView);
   const [marina, setMarina] = useState(null);
   const [year, setYear] = useState(null);
   const [model, setModel] = useState(null);
   const [city, setCity] = useState(null);
+  const [file, setFile] = useState();
+  const [images, setImages] = useState([]);
   const [stateCode, setStateCode] = useState(null);
   const [accessories, setAccessories] = useState(null);
   const [validErrors, setValidErrors] = useState({});
-  console.log(user.id);
+  // console.log(user.id);
   const price = 100;
   const captain = false;
   const schedule = null;
   const stateValidate = new RegExp(
     /^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/
   );
+
+  async function postImage({ image, boatId }) {
+    const formData = new FormData();
+    formData.append("image", image);
+    formData.append("boatId", boatId);
+    const result = await axios.post("/api/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
+    return result.data;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = { userId: user.id, marina, year, model, city, state: stateCode, accessories, captain, price };
-    console.log(body);
+    // console.log(body);
     const newBoat = await csrfFetch(`/api/boats/${user.id}/boats`, {
       method: "POST",
       body: JSON.stringify(body),
     });
     const response = await newBoat.json();
-    console.log(response);
+    const boatId = response.newBoat.id;
+
+    const result = await postImage({ image: file, boatId });
+    setImages([result.image, ...images]);
+    setView("boats");
+
+    // console.log(newBoatId);
   };
 
   useEffect(() => {
-    console.log(stateCode);
+    // console.log(stateCode);
     // console.log(Cookies.get("XSRF-Token"), "XSRFFFFFFFFFFFFF");
     const errors = {
       marinaError: null,
@@ -53,7 +72,7 @@ function AddBoat({ user }) {
       errors.stateError = 'Please provide a valid 2 digit state code I.e."AR"';
     }
 
-    console.log(errors);
+    // console.log(errors);
 
     setValidErrors(errors);
   }, [marina, year, model, stateCode]);
@@ -163,6 +182,17 @@ function AddBoat({ user }) {
                 setAccessories(e.target.value);
               }}
             />
+          </label>
+          <label>
+            images
+            <input
+              onChange={(e) => {
+                setFile(e.target.files[0]);
+              }}
+              type="file"
+              name="file"
+              accept="image/*"
+            ></input>
           </label>
           <button type="submit" disabled={!validErrors}>
             Add A Boat

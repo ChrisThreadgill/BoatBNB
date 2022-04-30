@@ -7,6 +7,7 @@ import HomePage from "./components/HomePage";
 import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import UserProfilePage from "./components/UserProfilePage";
+import Test from "./components/test/test";
 import ProviderPanel from "./components/ProviderPages/ProviderPanel";
 import ProviderBoats from "./components/ProviderPages/ProviderBoats";
 import ProviderBookings from "./components/ProviderPages/ProviderBookings";
@@ -40,9 +41,9 @@ function App() {
             <Route exact path="/">
               <HomePage></HomePage>
             </Route>
-            {/* <Route path="/test">
-              <AddBoat />
-            </Route> */}
+            <Route path="/test">
+              <Test></Test>
+            </Route>
           </Switch>
         </div>
       )}

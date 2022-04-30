@@ -11,7 +11,6 @@ import "./ProviderBoard.css";
 
 function ProviderBoard({ user }) {
   const [view, setView] = useState(null);
-  console.log(user);
 
   return (
     <div className="provider__board__container">
@@ -85,7 +84,7 @@ function ProviderBoard({ user }) {
 
         {view === "addBoat" ? (
           <div className="add__boat__form__container">
-            <AddBoat user={user} />
+            <AddBoat user={user} view={view} setView={setView} />
           </div>
         ) : null}
       </div>

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import LoggedInNav from "./LoggedInNav";
 import * as sessionActions from "../../store/session";
 import "./Navigation.css";
+import MenuButton from "./MenuButton";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -19,6 +20,7 @@ function Navigation({ isLoaded }) {
     sessionLinks = (
       <>
         <LoggedInNav></LoggedInNav>
+        <MenuButton />
         {/* <NavLink to="/login">test</NavLink>
         <NavLink to="/signup">test sesssion</NavLink>
         <button onClick={logout}>hello</button> */}

@@ -1,0 +1,50 @@
+.provider__board__container {
+  display: flex;
+  margin: 10vh 20vh 10vh 10vh;
+}
+
+.provider__boats__container {
+  border: 1px red solid;
+  min-height: 60vh;
+}
+
+.provider__bookings__container {
+  border: 1px red solid;
+}
+
+.user__inbox__container {
+  border: 1px red solid;
+}
+.provider__view {
+  display: flex;
+  justify-content: space-around;
+  border: 1px red solid;
+}
+
+.provider__board {
+  flex: 1 2;
+  flex-direction: column;
+  margin-left: 10%;
+  border: 1px red solid;
+}
+.provider__nav__panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 20vh;
+  min-height: 50vh;
+}
+.provider__nav__panel > div {
+  display: flex;
+  width: 100%;
+  font-size: 2rem;
+  justify-content: center;
+  align-items: center;
+  min-height: 8vh;
+}
+
+.boat__img {
+  max-width: 40vh;
+  max-height: 40vh;
+}

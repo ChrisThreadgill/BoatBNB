@@ -1,10 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import { useEffect } from "react";
 import * as sessionActions from "../../store/session";
 
 function LoggedInNav() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const { id } = sessionUser;
@@ -12,6 +14,7 @@ function LoggedInNav() {
   const logout = (e) => {
     e.preventDefault();
     dispatch(sessionActions.logout());
+    history.push("/");
   };
 
   return (

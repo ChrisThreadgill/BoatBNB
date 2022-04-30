@@ -3,9 +3,12 @@ const router = express.Router();
 const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
+const csrf = require("csurf");
+
+const csrfProtection = csrf({ cookie: true });
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { User } = require("../../db/models");
+const { User, Boat, Image } = require("../../db/models");
 
 const validateSignup = [
   check("email").exists({ checkFalsy: true }).isEmail().withMessage("Please provide a valid email."),
@@ -28,6 +31,21 @@ router.get(
       user,
     });
     // console.log(user);
+  })
+);
+
+//gets all boats from specific user
+router.get(
+  "/:userId/boats",
+  asyncHandler(async (req, res) => {
+    const { userId } = req.params;
+    console.log(userId);
+    const user = await User.findByPk(userId, {
+      include: [{ model: Boat, include: { model: Image } }],
+    });
+    return res.json({
+      user,
+    });
   })
 );
 

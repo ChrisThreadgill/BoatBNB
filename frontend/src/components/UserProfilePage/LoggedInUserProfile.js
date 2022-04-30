@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as userProfileActions from "../../store/userProfile";
+import ProviderPanel from "../ProviderPages/ProviderPanel";
+import ProviderView from "../ProviderPages/ProviderView";
+import ProviderBoard from "../ProviderPages/ProviderBoard";
 import UserProfileView from "./UserProfileView";
 
 function LoggedInUserProfile() {
@@ -9,7 +12,7 @@ function LoggedInUserProfile() {
   const dispatch = useDispatch();
   const sessionUserProfile = useSelector((state) => state.userProfile.user);
   const loggedInUserId = useSelector((state) => state.session.user.id);
-  console.log(loggedInUserId, "current logged in user");
+  console.log(sessionUserProfile, "current logged in user");
   useEffect(() => {
     dispatch(userProfileActions.getUserProfile(userId));
   }, [dispatch]);
@@ -24,8 +27,8 @@ function LoggedInUserProfile() {
   }
   return (
     <div>
-      <h1>You are currently logged in {name}</h1>
-      <UserProfileView />
+      <h1>Welcome to your profile {name}!</h1>
+      {roleId === 1 ? <ProviderBoard user={sessionUserProfile} /> : null}
     </div>
   );
 }

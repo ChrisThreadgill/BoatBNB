@@ -7,6 +7,11 @@ import HomePage from "./components/HomePage";
 import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import UserProfilePage from "./components/UserProfilePage";
+import ProviderPanel from "./components/ProviderPages/ProviderPanel";
+import ProviderBoats from "./components/ProviderPages/ProviderBoats";
+import ProviderBookings from "./components/ProviderPages/ProviderBookings";
+import UserInbox from "./components/UserInbox";
+import AddBoat from "./components/Boats/AddBoat";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +23,7 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded}></Navigation>
+
       {isLoaded && (
         <div>
           <Switch>
@@ -30,9 +36,13 @@ function App() {
             <Route path="/users/:userId/profile">
               <UserProfilePage></UserProfilePage>
             </Route>
+
             <Route exact path="/">
               <HomePage></HomePage>
             </Route>
+            {/* <Route path="/test">
+              <AddBoat />
+            </Route> */}
           </Switch>
         </div>
       )}

@@ -1,0 +1,12 @@
+.provider__view {
+  display: flex;
+  justify-content: space-around;
+  border: 1px red solid;
+}
+
+/* .provider__board {
+  flex: 1 2;
+  flex-direction: column;
+  margin-left: 20%;
+  border: 1px red solid;
+} */

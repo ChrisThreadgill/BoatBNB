@@ -11,10 +11,11 @@ const { User, Boat, Image } = require("../../db/models");
 router.get(
   "/",
   asyncHandler(async (req, res) => {
+    // console.log("working");
     const boats = await Boat.findAll({
       include: Image,
     });
-    console.log(boats);
+    // console.log(boats);
     return res.json({
       boats,
     });
@@ -25,11 +26,13 @@ router.get(
 router.get(
   "/:boatId",
   asyncHandler(async (req, res) => {
+    console.log("working");
     const { boatId } = req.params;
-    // console.log(userId);
+    console.log(boatId, "------------");
     const boat = await Boat.findByPk(boatId, {
       include: Image,
     });
+    console.log(boat);
     return res.json({
       boat,
     });
@@ -42,7 +45,7 @@ router.post(
   requireAuth,
   asyncHandler(async (req, res) => {
     const { userId, marina, city, state, year, model, accessories, captain, price, schedule } = req.body;
-    console.log(userId);
+    // console.log(userId);
     const newBoat = await Boat.build({
       userId,
       marina,
@@ -67,7 +70,7 @@ router.put(
   // requireAuth,
 
   asyncHandler(async (req, res) => {
-    console.log(req);
+    // console.log(req);
     const { boatId } = req.params;
 
     const { userId, marina, city, state, year, model, accessories, captain, price, schedule } = req.body;

@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 
 function BoatCard({ boat }) {
   // console.log(boat.Images);
+  console.log(boat, "in the boat card");
   const [boatView, setBoatView] = useState(0);
   return (
-    <div>
+    <div className="boat__card">
       <h2>working</h2>
       <div>
         {boat.Images.length > 0
@@ -16,7 +17,7 @@ function BoatCard({ boat }) {
                     value={boat.id}
                     onClick={(e) => {
                       //TODO WHEN CLICKED ON PULL UP
-                      console.log(idx);
+                      console.log(boat.id);
                     }}
                     className="boat__img"
                     src={`/api/images/${image.url}`}

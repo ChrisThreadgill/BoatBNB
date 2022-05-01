@@ -66,13 +66,13 @@ router.post(
   "/",
   upload.single("image"),
   asyncHandler(async (req, res) => {
-    console.log(req, "----------------------");
+    // console.log(req, "----------------------");
     const file = req.file;
     const boatId = req.body.boatId;
-    console.log(boatId);
+    // console.log(boatId);
 
     const result = await uploadFile(file);
-    console.log(result.key);
+    // console.log(result.key);
     const url = result.key;
     if (result.key) {
       const newImage = await Image.build({

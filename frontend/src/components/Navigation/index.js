@@ -37,7 +37,7 @@ function Navigation({ isLoaded }) {
     );
   }
 
-  return <nav>{isLoaded && sessionLinks}</nav>;
+  return <nav className="nav__bar__container">{isLoaded && sessionLinks}</nav>;
 }
 
 export default Navigation;

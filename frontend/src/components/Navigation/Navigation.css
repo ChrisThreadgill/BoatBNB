@@ -1,9 +1,19 @@
 .logged__in__nav {
   display: flex;
   justify-content: space-between;
+  /* position: static; */
+  /* height: 25vh;
+  background: url("./1000_F_309830392_3unqC6gdkRuwACg55pTwVSuTzyeUlkqe.jpg"); */
 }
 
 .visitor__nav {
   display: flex;
   justify-content: flex-end;
+  /* height: 25vh;
+  background: url("./1000_F_309830392_3unqC6gdkRuwACg55pTwVSuTzyeUlkqe.jpg"); */
+}
+
+.nav__bar__container {
+  height: 25vh;
+  background: url("./1000_F_309830392_3unqC6gdkRuwACg55pTwVSuTzyeUlkqe.jpg");
 }

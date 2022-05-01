@@ -13,6 +13,7 @@ import ProviderBoats from "./components/ProviderPages/ProviderBoats";
 import ProviderBookings from "./components/ProviderPages/ProviderBookings";
 import UserInbox from "./components/UserInbox";
 import AddBoat from "./components/Boats/AddBoat";
+import BoatPage from "./components/Boats/BoatPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,9 @@ function App() {
       {isLoaded && (
         <div>
           <Switch>
+            <Route exact path="/">
+              <HomePage></HomePage>
+            </Route>
             <Route path="/sign-up">
               <SignUpForm></SignUpForm>
             </Route>
@@ -37,10 +41,10 @@ function App() {
             <Route path="/users/:userId/profile">
               <UserProfilePage></UserProfilePage>
             </Route>
-
-            <Route exact path="/">
-              <HomePage></HomePage>
+            <Route path="/boats/:boatId">
+              <BoatPage />
             </Route>
+
             <Route path="/test">
               <Test></Test>
             </Route>

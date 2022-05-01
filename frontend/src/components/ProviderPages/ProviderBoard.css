@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .provider__board__container {
   display: flex;
   margin: 10vh 20vh 10vh 10vh;
@@ -6,6 +10,12 @@
 .provider__boats__container {
   border: 1px red solid;
   min-height: 60vh;
+}
+.boat__card {
+  margin: 2vh 1.65vh;
+  border-top: 1vh double rgb(0, 157, 255);
+
+  border-bottom: 1vh double rgb(0, 157, 255);
 }
 
 .provider__bookings__container {
@@ -45,6 +55,10 @@
 }
 
 .boat__img {
+  /* min-width: 20vh;
+  min-height: 20vh;
   max-width: 40vh;
-  max-height: 40vh;
+  max-height: 40vh; */
+  width: 30vh;
+  height: 30vh;
 }

@@ -26,13 +26,13 @@ const providerBoats = (boats) => {
 };
 
 export const getOneBoat = (boatId) => async (dispatch) => {
-  console.log("working");
+  // console.log("working");
   const response = await csrfFetch(`/api/boats/${boatId}`, {
     method: "GET",
   });
-  console.log(response, "response-----------");
+  // console.log(response, "response-----------");
   const boat = await response.json();
-  console.log(boat, "----------");
+  // console.log(boat, "----------");
   dispatch(oneBoat(boat));
   return boat;
 };
@@ -58,7 +58,7 @@ export const getProviderBoats = (userId) => async (dispatch) => {
 const initialState = { boats: null };
 
 const boatsReducer = (state = initialState, action) => {
-  console.log(action, "-------action");
+  // console.log(action, "-------action");
   let newState;
   switch (action.type) {
     case GET_ALL:
@@ -68,7 +68,7 @@ const boatsReducer = (state = initialState, action) => {
     case GET_ONE:
       newState = Object.assign({}, state);
       newState = action.payload;
-      console.log(newState, "-------- new state");
+      // console.log(newState, "-------- new state");
       return newState;
     case GET_PROV:
       newState = Object.assign({}, state);

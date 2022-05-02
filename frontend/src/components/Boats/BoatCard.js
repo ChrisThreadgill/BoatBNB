@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 function BoatCard({ boat }) {
+  const location = useLocation();
+  // console.log(location, "11111111111111111111111");
   // console.log(boat.Images);
-  console.log(boat, "in the boat card");
+  const history = useHistory();
+  // console.log(boat, "in the boat card");
   const [boatView, setBoatView] = useState(0);
+
   return (
     <div className="boat__card">
       <h2>working</h2>
@@ -12,16 +18,7 @@ function BoatCard({ boat }) {
           ? boat.Images.map((image, idx) => {
               return (
                 boatView === idx && (
-                  <img
-                    key={image.id}
-                    value={boat.id}
-                    onClick={(e) => {
-                      //TODO WHEN CLICKED ON PULL UP
-                      console.log(boat.id);
-                    }}
-                    className="boat__img"
-                    src={`/api/images/${image.url}`}
-                  />
+                  <img key={image.id} value={boat.id} className="boat__img" src={`/api/images/${image.url}`} />
                 )
               );
             })
@@ -44,6 +41,13 @@ function BoatCard({ boat }) {
         // <h3>{`${boat.year} ${boat.model}`}</h3>
         // <h4>{`In ${boat.city}, ${boat.state} at ${boat.marina}`}</h4>
         // <h4>{`$${boat.price}/day`}</h4>
+        <button
+          onClick={() => {
+            history.push(`/boats/${boat.id}`);
+          }}
+        >
+          Manage Boat
+        </button>
       </div>
     </div>
   );

@@ -50,7 +50,7 @@ function AddBoat({ user, view, setView }) {
   };
 
   useEffect(() => {
-    // console.log(stateCode);
+    console.log(stateCode);
     // console.log(Cookies.get("XSRF-Token"), "XSRFFFFFFFFFFFFF");
     const errors = {
       marinaError: null,

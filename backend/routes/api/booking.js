@@ -10,16 +10,16 @@ const { User, Boat, Image, Booking } = require("../../db/models");
 //TODO SETUP ROUTE TO GET ALL BOOKINGS BY USER ID
 //gets all bookings by user ID
 router.get(
-  "/:userId",
+  "/user/:userId",
   asyncHandler(async (req, res) => {
     // console.log("working");
     const { userId } = req.params;
-    const boats = await Booking.findAll({
-      where: { userId },
+    const userWithBookings = await User.findByPk(userId, {
+      include: Booking,
     });
-    // console.log(boats);
+
     return res.json({
-      boats,
+      userWithBookings,
     });
   })
 );
@@ -27,16 +27,16 @@ router.get(
 //TODO SETUP ROUTE TO GET ALL BOOKINGS BY BOAT ID
 //gets all bookings by boat ID
 router.get(
-  "/:boatId",
+  "/boat/:boatId",
   asyncHandler(async (req, res) => {
     // console.log("working");
     const { boatId } = req.params;
-    const bookings = await Boat.findByPk(boatId, {
+    const boatWithBookings = await Boat.findByPk(boatId, {
       include: Booking,
     });
     // console.log(boats);
     return res.json({
-      bookings,
+      boatWithBookings,
     });
   })
 );

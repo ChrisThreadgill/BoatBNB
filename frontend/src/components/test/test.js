@@ -2,11 +2,11 @@ import { useState } from "react";
 import axios from "axios";
 
 async function postImage(image) {
-  console.log(image);
+  // console.log(image);
   const formData = new FormData();
   formData.append("image", image);
   const result = await axios.post("/api/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
-  console.log(result, "aaaaaaaaaaaaa");
+  // console.log(result, "aaaaaaaaaaaaa");
   return result.data;
 }
 
@@ -17,8 +17,8 @@ function Test() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    console.log(event);
-    console.log(file);
+    // console.log(event);
+    // console.log(file);
     // const result = await postImage({ image: file, boatId });
 
     // setImages([result.image], ...images);

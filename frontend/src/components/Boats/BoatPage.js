@@ -7,11 +7,11 @@ import AddBookingForm from "../Bookings/AddBookingForm";
 
 function BoatPage() {
   const { boatId } = useParams();
-  console.log(boatId);
+  // console.log(boatId);
 
   const dispatch = useDispatch();
   const { boat } = useSelector((state) => state.boats);
-  console.log(boat);
+  // console.log(boat);
   useEffect(() => {
     dispatch(boatsAction.getOneBoat(boatId));
   }, [dispatch]);

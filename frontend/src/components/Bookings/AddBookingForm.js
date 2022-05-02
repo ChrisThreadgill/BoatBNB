@@ -19,7 +19,7 @@ function AddBookingForm({ boatId }) {
     });
     const response = await newBooking.json();
 
-    console.log(response);
+    // console.log(response);
   };
 
   return (

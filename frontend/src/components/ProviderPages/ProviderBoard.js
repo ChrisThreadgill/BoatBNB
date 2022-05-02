@@ -1,5 +1,7 @@
 import { Switch, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import ProviderBoats from "./ProviderBoats";
 import ProviderBookings from "./ProviderBookings";
@@ -7,10 +9,20 @@ import UserInbox from "../UserInbox";
 import AddBoat from "../Boats/AddBoat";
 import ProviderPanel from "./ProviderPanel";
 import UserProfileView from "../UserProfilePage/UserProfileView";
+import * as bookingsActions from "../../store/bookings.js";
 import "./ProviderBoard.css";
 
 function ProviderBoard({ user }) {
+  const dispatch = useDispatch();
   const [view, setView] = useState(null);
+  // console.log(user);
+
+  const bookings = useSelector((state) => state.bookings);
+  // console.log(bookings);
+
+  useEffect(() => {
+    dispatch(bookingsActions.getAllUserBookings(user.id));
+  }, [dispatch]);
 
   return (
     <div className="provider__board__container">
@@ -73,7 +85,7 @@ function ProviderBoard({ user }) {
         ) : null}
         {view === "bookings" ? (
           <div className="provider__bookings__container">
-            <ProviderBookings />
+            <ProviderBookings bookings={bookings}></ProviderBookings>
           </div>
         ) : null}
         {view === "inbox" ? (

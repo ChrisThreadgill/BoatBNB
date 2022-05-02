@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as userProfileActions from "../../store/userProfile";
-import LoggedInUserProfile from "./LoggedInUserProfile";
+import LoggedInUser from "./LoggedInUserProfile";
 import UserProfileView from "./UserProfileView";
 
 function UserProfilePage() {
@@ -15,7 +15,7 @@ function UserProfilePage() {
     dispatch(userProfileActions.getUserProfile(userId));
   }, [dispatch]);
 
-  return <div>{loggedInUserId === parseInt(userId) ? <LoggedInUserProfile /> : <UserProfileView />}</div>;
+  return <div>{loggedInUserId === parseInt(userId) ? <LoggedInUser /> : <UserProfileView />}</div>;
 }
 
 export default UserProfilePage;

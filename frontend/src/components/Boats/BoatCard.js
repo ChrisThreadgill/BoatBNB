@@ -5,7 +5,7 @@ import { useHistory, useLocation } from "react-router-dom";
 function BoatCard({ boat }) {
   const location = useLocation();
   // console.log(location, "11111111111111111111111");
-  // console.log(boat.Images);
+  // console.log(boat);
   const history = useHistory();
   // console.log(boat, "in the boat card");
   const [boatView, setBoatView] = useState(0);
@@ -14,7 +14,7 @@ function BoatCard({ boat }) {
     <div className="boat__card">
       <h2>working</h2>
       <div>
-        {boat.Images.length > 0
+        {boat?.Images.length > 0
           ? boat.Images.map((image, idx) => {
               return (
                 boatView === idx && (
@@ -24,7 +24,7 @@ function BoatCard({ boat }) {
             })
           : null}
         <div>
-          {boat.Images.length > 0
+          {boat?.Images.length > 0
             ? boat.Images.map((image, idx) => (
                 <input
                   type="radio"
@@ -38,16 +38,9 @@ function BoatCard({ boat }) {
             : null}
         </div>
         {/* <BoatImageCard></BoatImageCard>  */}
-        // <h3>{`${boat.year} ${boat.model}`}</h3>
-        // <h4>{`In ${boat.city}, ${boat.state} at ${boat.marina}`}</h4>
-        // <h4>{`$${boat.price}/day`}</h4>
-        <button
-          onClick={() => {
-            history.push(`/boats/${boat.id}`);
-          }}
-        >
-          Manage Boat
-        </button>
+        // <h3>{`${boat?.year} ${boat?.model}`}</h3>
+        // <h4>{`In ${boat?.city}, ${boat?.state} at ${boat?.marina}`}</h4>
+        // <h4>{`$${boat?.price}/day`}</h4>
       </div>
     </div>
   );

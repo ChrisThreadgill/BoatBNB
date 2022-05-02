@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as boatsAction from "../../store/boats.js";
 import BoatCard from "../Boats/BoatCard.js";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import "./ProviderBoats.css";
 
-function ProviderBoats() {
+function ProviderBoats({ view, setView }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const loggedInUserId = useSelector((state) => state.session.user.id);
   const sessionUserProfile = useSelector((state) => state.userProfile.user);
   const providerBoats = useSelector((state) => state.boats.user);
@@ -24,6 +25,14 @@ function ProviderBoats() {
         return (
           <div>
             <BoatCard key={boat.id} boat={boat}></BoatCard>
+            <button
+              onClick={() => {
+                boatsAction.getOneBoat(boat.id);
+                history.push(`/boat/${boat.id}/edit`);
+              }}
+            >
+              Manage Boat
+            </button>
           </div>
         );
       })}

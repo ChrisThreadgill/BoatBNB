@@ -3,9 +3,9 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { csrfFetch } from "../../store/csrf";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-function AddBoat({ user, view, setView }) {
-  // console.log(view, setView);
+function AddBoat({ user, view, setView, boat }) {
   const [marina, setMarina] = useState(null);
   const [year, setYear] = useState(null);
   const [model, setModel] = useState(null);
@@ -89,27 +89,30 @@ function AddBoat({ user, view, setView }) {
 
   return (
     <div className="add__boat__container">
-      <div className="add__boat__bio">
-        <h2>Welcome back {user?.firstName}, tell us about your boat!</h2>
+      {!boat ? (
+        <div className="add__boat__bio">
+          <h2>Welcome back {user?.firstName}, tell us about your boat!</h2>
 
-        <p>
-          Be mindful as we do not expect any of our users to act carelessly with your property, however, accidents do
-          happen.
-          <br></br>
-          BoatBNB will not seek litigation for any issues caused with our providers property.
-          <br></br>
-          Rent at your own risk.
-          <br></br>
-          *****IF YOU ARE CHOOSE TO CAPTAIN YOUR BOAT******
-          <br></br>
-          Understand that you are responsible for the boatBNB members that have booked your service.
-          <br></br>
-          BOATBNB WILL NOT TOLERATE ANY FORMS OF HARASSMENT!
-          <br></br>
-          ANY BEHAVIOR OF SUCH WILL RESULT IN LOSING PROVIDER PRIVILEGES AND/OR POTENTIALLY BOATBNB MEMBERSHIP ALL
-          TOGETHER.
-        </p>
-      </div>
+          <p>
+            Be mindful as we do not expect any of our users to act carelessly with your property, however, accidents do
+            happen.
+            <br></br>
+            BoatBNB will not seek litigation for any issues caused with our providers property.
+            <br></br>
+            Rent at your own risk.
+            <br></br>
+            *****IF YOU ARE CHOOSE TO CAPTAIN YOUR BOAT******
+            <br></br>
+            Understand that you are responsible for the boatBNB members that have booked your service.
+            <br></br>
+            BOATBNB WILL NOT TOLERATE ANY FORMS OF HARASSMENT!
+            <br></br>
+            ANY BEHAVIOR OF SUCH WILL RESULT IN LOSING PROVIDER PRIVILEGES AND/OR POTENTIALLY BOATBNB MEMBERSHIP ALL
+            TOGETHER.
+          </p>
+        </div>
+      ) : null}
+
       <div>
         <form onSubmit={handleSubmit}>
           <label>
@@ -183,20 +186,23 @@ function AddBoat({ user, view, setView }) {
               }}
             />
           </label>
-          <label>
-            images
-            <input
-              onChange={(e) => {
-                setFile(e.target.files[0]);
-              }}
-              type="file"
-              name="file"
-              accept="image/*"
-            ></input>
-          </label>
-          <button type="submit" disabled={!validErrors}>
-            Add A Boat
-          </button>
+
+          {!boat ? (
+            <div>
+              <label>
+                images
+                <input
+                  onChange={(e) => {
+                    setFile(e.target.files[0]);
+                  }}
+                  type="file"
+                  name="file"
+                  accept="image/*"
+                ></input>
+              </label>
+              <button type="submit">Add A Boat</button>
+            </div>
+          ) : null}
         </form>
       </div>
     </div>

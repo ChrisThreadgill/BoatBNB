@@ -8,6 +8,7 @@ import { Switch, Route } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import UserProfilePage from "./components/UserProfilePage";
 import Test from "./components/test/test";
+import ProviderBoatEdit from "./components/ProviderPages/ProviderBoatEdit";
 import ProviderPanel from "./components/ProviderPages/ProviderPanel";
 import ProviderBoats from "./components/ProviderPages/ProviderBoats";
 import ProviderBookings from "./components/ProviderPages/ProviderBookings";
@@ -40,6 +41,9 @@ function App() {
             </Route>
             <Route path="/users/:userId/profile">
               <UserProfilePage></UserProfilePage>
+            </Route>
+            <Route path="/boat/:boatId/edit">
+              <ProviderBoatEdit></ProviderBoatEdit>
             </Route>
             <Route path="/boats/:boatId">
               <BoatPage />

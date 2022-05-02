@@ -7,7 +7,7 @@ import ProviderView from "../ProviderPages/ProviderView";
 import ProviderBoard from "../ProviderPages/ProviderBoard";
 import UserProfileView from "./UserProfileView";
 
-function LoggedInUserProfile() {
+function LoggedInUser() {
   const { userId } = useParams();
   const dispatch = useDispatch();
   const sessionUserProfile = useSelector((state) => state.userProfile.user);
@@ -28,9 +28,9 @@ function LoggedInUserProfile() {
   return (
     <div>
       <h1>Welcome to your profile {name}!</h1>
-      {roleId === 1 ? <ProviderBoard user={sessionUserProfile} /> : null}
+      {roleId && roleId === 1 ? <ProviderBoard user={sessionUserProfile} /> : <UserProfileView />}
     </div>
   );
 }
 
-export default LoggedInUserProfile;
+export default LoggedInUser;

@@ -10,19 +10,22 @@ import AddBoat from "../Boats/AddBoat";
 import ProviderPanel from "./ProviderPanel";
 import UserProfileView from "../UserProfilePage/UserProfileView";
 import * as bookingsActions from "../../store/bookings.js";
+import * as boatsAction from "../../store/boats.js";
 import "./ProviderBoard.css";
+import BoatEdit from "./ProviderBoatEdit";
+import BoatCard from "../Boats/BoatCard";
+import Test from "../test/test";
 
 function ProviderBoard({ user }) {
   const dispatch = useDispatch();
   const [view, setView] = useState(null);
-  // console.log(user);
+  console.log(user.id, "--------------");
 
   const bookings = useSelector((state) => state.bookings);
-  // console.log(bookings);
 
-  useEffect(() => {
-    dispatch(bookingsActions.getAllUserBookings(user.id));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(bookingsActions.getAllUserBookings(user.id));
+  // }, [dispatch]);
 
   return (
     <div className="provider__board__container">
@@ -47,7 +50,12 @@ function ProviderBoard({ user }) {
           <div
             value="bookings"
             onClick={() => {
-              setView("bookings");
+              try {
+                setView("bookings");
+                dispatch(bookingsActions.getAllUserBookings(user.id));
+              } catch (error) {
+                setView("bookings");
+              }
             }}
           >
             Bookings
@@ -80,12 +88,12 @@ function ProviderBoard({ user }) {
 
         {view === "boats" ? (
           <div className="provider__boats__container">
-            <ProviderBoats />
+            <ProviderBoats view={view} setView={setView} />
           </div>
         ) : null}
         {view === "bookings" ? (
           <div className="provider__bookings__container">
-            <ProviderBookings bookings={bookings}></ProviderBookings>
+            <ProviderBookings></ProviderBookings>
           </div>
         ) : null}
         {view === "inbox" ? (
@@ -99,6 +107,15 @@ function ProviderBoard({ user }) {
             <AddBoat user={user} view={view} setView={setView} />
           </div>
         ) : null}
+
+        {/* {view == "editBoat" ? (
+          <div className="edit__boat__form__container">
+            <h1>hello</h1>
+            {useSelector((state) => state.boats)}
+            {/* <BoatCard boatId={view} /> */}
+        {/* <BoatEdit /> */}
+        {/* </div>
+        ) : null} */}
       </div>
     </div>
   );

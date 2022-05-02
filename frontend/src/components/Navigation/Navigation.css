@@ -8,7 +8,7 @@
 
 .visitor__nav {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   /* height: 25vh;
   background: url("./1000_F_309830392_3unqC6gdkRuwACg55pTwVSuTzyeUlkqe.jpg"); */
 }

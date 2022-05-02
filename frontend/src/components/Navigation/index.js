@@ -36,9 +36,14 @@ function Navigation({ isLoaded }) {
     sessionLinks = (
       <>
         <nav className="visitor__nav">
-          <button onClick={demoLogin}>Login As Demo</button>
-          <NavLink to="/login">Log In</NavLink>
-          <NavLink to="/sign-up">Sign Up</NavLink>
+          <div>
+            <NavLink to="/">Home</NavLink>
+          </div>
+          <div>
+            <button onClick={demoLogin}>Login As Demo</button>
+            <NavLink to="/login">Log In</NavLink>
+            <NavLink to="/sign-up">Sign Up</NavLink>
+          </div>
         </nav>
       </>
     );

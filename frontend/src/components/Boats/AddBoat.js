@@ -13,12 +13,12 @@ function AddBoat({ user, view, setView, boat }) {
   const [file, setFile] = useState();
   const [images, setImages] = useState([]);
   const [stateCode, setStateCode] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [captain, setCaptain] = useState(false);
   const [accessories, setAccessories] = useState(null);
   const [validErrors, setValidErrors] = useState({});
   // console.log(user.id);
-  const price = 100;
-  const captain = false;
-  const schedule = null;
+
   const stateValidate = new RegExp(
     /^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/
   );
@@ -89,29 +89,27 @@ function AddBoat({ user, view, setView, boat }) {
 
   return (
     <div className="add__boat__container">
-      {!boat ? (
-        <div className="add__boat__bio">
-          <h2>Welcome back {user?.firstName}, tell us about your boat!</h2>
+      <div className="add__boat__bio">
+        <h2>Welcome back {user?.firstName}, tell us about your boat!</h2>
 
-          <p>
-            Be mindful as we do not expect any of our users to act carelessly with your property, however, accidents do
-            happen.
-            <br></br>
-            BoatBNB will not seek litigation for any issues caused with our providers property.
-            <br></br>
-            Rent at your own risk.
-            <br></br>
-            *****IF YOU ARE CHOOSE TO CAPTAIN YOUR BOAT******
-            <br></br>
-            Understand that you are responsible for the boatBNB members that have booked your service.
-            <br></br>
-            BOATBNB WILL NOT TOLERATE ANY FORMS OF HARASSMENT!
-            <br></br>
-            ANY BEHAVIOR OF SUCH WILL RESULT IN LOSING PROVIDER PRIVILEGES AND/OR POTENTIALLY BOATBNB MEMBERSHIP ALL
-            TOGETHER.
-          </p>
-        </div>
-      ) : null}
+        <p>
+          Be mindful as we do not expect any of our users to act carelessly with your property, however, accidents do
+          happen.
+          <br></br>
+          BoatBNB will not seek litigation for any issues caused with our providers property.
+          <br></br>
+          Rent at your own risk.
+          <br></br>
+          *****IF YOU ARE CHOOSE TO CAPTAIN YOUR BOAT******
+          <br></br>
+          Understand that you are responsible for the boatBNB members that have booked your service.
+          <br></br>
+          BOATBNB WILL NOT TOLERATE ANY FORMS OF HARASSMENT!
+          <br></br>
+          ANY BEHAVIOR OF SUCH WILL RESULT IN LOSING PROVIDER PRIVILEGES AND/OR POTENTIALLY BOATBNB MEMBERSHIP ALL
+          TOGETHER.
+        </p>
+      </div>
 
       <div>
         <form onSubmit={handleSubmit}>
@@ -186,23 +184,58 @@ function AddBoat({ user, view, setView, boat }) {
               }}
             />
           </label>
+          <label>
+            Price
+            <input
+              type="text"
+              maxLength={4}
+              placeholder="ex. 100, 1000 no decimal"
+              name="accessories"
+              value={price}
+              onChange={(e) => {
+                setPrice(e.target.value);
+              }}
+            />
+          </label>
+          <label>
+            <input
+              type="radio"
+              value={false}
+              name="captain"
+              // checked={captain === false}
+              onChange={(e) => {
+                setCaptain(e.target.value);
+              }}
+            />
+            No Captain
+          </label>
+          <label>
+            <input
+              type="radio"
+              value={true}
+              name="captain"
+              // checked={captain === true}
+              onChange={(e) => {
+                setCaptain(e.target.value);
+              }}
+            />
+            Captain available
+          </label>
 
-          {!boat ? (
-            <div>
-              <label>
-                images
-                <input
-                  onChange={(e) => {
-                    setFile(e.target.files[0]);
-                  }}
-                  type="file"
-                  name="file"
-                  accept="image/*"
-                ></input>
-              </label>
-              <button type="submit">Add A Boat</button>
-            </div>
-          ) : null}
+          <div>
+            <label>
+              images
+              <input
+                onChange={(e) => {
+                  setFile(e.target.files[0]);
+                }}
+                type="file"
+                name="file"
+                accept="image/*"
+              ></input>
+            </label>
+            <button type="submit">Add A Boat</button>
+          </div>
         </form>
       </div>
     </div>

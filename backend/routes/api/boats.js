@@ -26,13 +26,13 @@ router.get(
 router.get(
   "/:boatId",
   asyncHandler(async (req, res) => {
-    console.log("working");
+    // console.log("working");
     const { boatId } = req.params;
-    console.log(boatId, "------------");
+    // console.log(boatId, "------------");
     const boat = await Boat.findByPk(boatId, {
       include: Image,
     });
-    console.log(boat);
+    // console.log(boat);
     return res.json({
       boat,
     });
@@ -67,10 +67,10 @@ router.post(
 
 router.put(
   "/:boatId",
-  // requireAuth,
+  requireAuth,
 
   asyncHandler(async (req, res) => {
-    // console.log(req);
+    console.log(req.body);
     const { boatId } = req.params;
 
     const { userId, marina, city, state, year, model, accessories, captain, price, schedule } = req.body;

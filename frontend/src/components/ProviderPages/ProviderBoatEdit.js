@@ -5,6 +5,7 @@ import { useParams, useHistory, Redirect } from "react-router-dom";
 import BoatCard from "../Boats/BoatCard";
 import AddBoatImage from "../forms/AddBoatImage";
 import AddBoat from "../Boats/AddBoat.js";
+import EditBoat from "../Boats/EditBoat.js";
 
 function BoatEdit() {
   const history = useHistory();
@@ -25,9 +26,8 @@ function BoatEdit() {
     <div>
       {sessionUser && boat && sessionUser.id === boat.userId && (
         <div>
-          <AddBoatImage></AddBoatImage>
           <BoatCard boat={boat}></BoatCard>
-          <AddBoat boat={boat}></AddBoat>
+          <EditBoat user={sessionUser} boat={boat} />
         </div>
       )}
       {sessionUser && boat && sessionUser.id !== boat.userId && history.push("/")}

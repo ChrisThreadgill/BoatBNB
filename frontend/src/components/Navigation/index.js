@@ -26,7 +26,7 @@ function Navigation({ isLoaded }) {
     sessionLinks = (
       <>
         <LoggedInNav></LoggedInNav>
-        <MenuButton />
+        {/* <MenuButton /> */}
         {/* <NavLink to="/login">test</NavLink>
         <NavLink to="/signup">test sesssion</NavLink>
         <button onClick={logout}>hello</button> */}

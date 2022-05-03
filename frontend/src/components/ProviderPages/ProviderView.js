@@ -5,8 +5,7 @@ import ProviderBoats from "./ProviderBoats";
 import ProviderBookings from "./ProviderBookings";
 import UserInbox from "../UserInbox";
 import ProviderPanel from "./ProviderPanel";
-import "./ProviderView.css";
-
+import "./ProviderPagesCSS/ProviderView.css";
 function ProviderView({ userId }) {
   return (
     <div className="provider__view">

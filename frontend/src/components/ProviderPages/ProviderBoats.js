@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as boatsAction from "../../store/boats.js";
 import BoatCard from "../Boats/BoatCard.js";
 import { useParams, useHistory } from "react-router-dom";
-import "./ProviderBoats.css";
+import "./ProviderPagesCSS/ProviderBoats.css";
 
 function ProviderBoats({ view, setView }) {
   const dispatch = useDispatch();

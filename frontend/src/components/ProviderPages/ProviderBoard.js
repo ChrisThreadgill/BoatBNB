@@ -11,7 +11,7 @@ import ProviderPanel from "./ProviderPanel";
 import UserProfileView from "../UserProfilePage/UserProfileView";
 import * as bookingsActions from "../../store/bookings.js";
 import * as boatsAction from "../../store/boats.js";
-import "./ProviderBoard.css";
+import "./ProviderPagesCSS/ProviderBoard.css";
 import BoatEdit from "./ProviderBoatEdit";
 import BoatCard from "../Boats/BoatCard";
 import Test from "../test/test";

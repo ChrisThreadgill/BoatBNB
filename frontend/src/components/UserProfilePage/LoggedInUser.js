@@ -21,14 +21,15 @@ function LoggedInUser() {
   let email;
   let roleId;
   if (sessionUserProfile) {
-    name = sessionUserProfile.firstName + " " + sessionUserProfile.lastName;
+    name = sessionUserProfile.firstName;
     email = sessionUserProfile.email;
     roleId = sessionUserProfile.roleId;
   }
   return (
     <div>
       <h1>Welcome to your profile {name}!</h1>
-      {roleId && roleId === 1 ? <ProviderBoard user={sessionUserProfile} /> : <UserProfileView />}
+      {roleId && roleId === 1 && <ProviderBoard user={sessionUserProfile} />}
+      {roleId && roleId === 2 && <UserProfileView user={sessionUserProfile} />}
     </div>
   );
 }

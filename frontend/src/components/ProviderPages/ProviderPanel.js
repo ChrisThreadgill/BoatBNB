@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import "./ProviderPanel.css";
+import "./ProviderPagesCSS/ProviderPanel.css";
 
 function ProviderPanel({ userId }) {
   //TODO make these routes after setting up database

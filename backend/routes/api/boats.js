@@ -5,7 +5,7 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { User, Boat, Image } = require("../../db/models");
+const { User, Boat, Image, Booking } = require("../../db/models");
 
 //gets all boats
 router.get(
@@ -18,6 +18,20 @@ router.get(
     // console.log(boats);
     return res.json({
       boats,
+    });
+  })
+);
+
+router.get(
+  `/:boatId/bookings`,
+  asyncHandler(async (req, res) => {
+    const { boatId } = req.params;
+    const boatBookings = await Boat.findByPk(boatId, {
+      include: Booking,
+    });
+
+    return res.json({
+      boatBookings,
     });
   })
 );

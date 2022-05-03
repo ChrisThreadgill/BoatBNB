@@ -6,16 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 function AddBoat({ user, view, setView, boat }) {
-  const [marina, setMarina] = useState(null);
-  const [year, setYear] = useState(null);
-  const [model, setModel] = useState(null);
-  const [city, setCity] = useState(null);
+  const [marina, setMarina] = useState("");
+  const [year, setYear] = useState("");
+  const [model, setModel] = useState("");
+  const [city, setCity] = useState("");
   const [file, setFile] = useState();
   const [images, setImages] = useState([]);
-  const [stateCode, setStateCode] = useState(null);
-  const [price, setPrice] = useState(null);
+  const [stateCode, setStateCode] = useState("");
+  const [price, setPrice] = useState("");
   const [captain, setCaptain] = useState(false);
-  const [accessories, setAccessories] = useState(null);
+  const [accessories, setAccessories] = useState("");
   const [validErrors, setValidErrors] = useState({});
   // console.log(user.id);
 

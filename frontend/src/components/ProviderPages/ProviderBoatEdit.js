@@ -7,7 +7,7 @@ import AddBoatImage from "../forms/AddBoatImage";
 import AddBoat from "../Boats/AddBoat.js";
 import EditBoat from "../Boats/EditBoat.js";
 
-function BoatEdit() {
+function ProviderBoatEdit() {
   const history = useHistory();
   const { boatId } = useParams();
   console.log(typeof parseInt(boatId));
@@ -35,4 +35,4 @@ function BoatEdit() {
   );
 }
 
-export default BoatEdit;
+export default ProviderBoatEdit;

@@ -1,4 +1,4 @@
-function ProviderBookingsScroll() {
+function ProviderBookingsScroll({ bookings }) {
   return (
     <div>
       <h1>hello from provider Bookings Scroll</h1>

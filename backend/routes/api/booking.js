@@ -14,12 +14,15 @@ router.get(
   asyncHandler(async (req, res) => {
     // console.log("working");
     const { userId } = req.params;
-    const userWithBookings = await User.findByPk(userId, {
-      include: Booking,
+    const bookingsForSpecificUser = await Booking.findAll({
+      where: {
+        userId,
+      },
+      include: [{ model: Boat, include: Image }],
     });
 
     return res.json({
-      userWithBookings,
+      bookingsForSpecificUser,
     });
   })
 );
@@ -60,6 +63,19 @@ router.post(
     return res.json({
       newBooking,
     });
+  })
+);
+
+router.delete(
+  "/:bookingId",
+  asyncHandler(async (req, res) => {
+    const { bookingId } = req.params;
+
+    const bookingToDelete = await Booking.findByPk(bookingId);
+    if (bookingToDelete) {
+      await bookingToDelete.destroy();
+      res.json({ message: "Successfully Cancelled Booking" });
+    }
   })
 );
 

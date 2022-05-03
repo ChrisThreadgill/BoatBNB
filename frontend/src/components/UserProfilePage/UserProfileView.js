@@ -1,31 +1,36 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import UserProfileCard from "./UserProfileCard";
 import * as userProfileActions from "../../store/userProfile";
+import * as userBookings from "../../store/bookings";
+import "./UserProfileCSS/UserProfileCard.css";
+import UserBookings from "../Bookings/UserBookings";
 
-function UserProfileView() {
+function UserProfileView({ user }) {
   const { userId } = useParams();
   const dispatch = useDispatch();
+
+  //will refactor this to use store after dev debugging with card setup
   const sessionUserProfile = useSelector((state) => state.userProfile.user);
   const loggedInUserId = useSelector((state) => state.session.user.id);
-  // console.log(loggedInUserId, "current logged in user");
+  const bookings = useSelector((state) => state.bookings);
+  console.log(bookings, "current logged in user");
   useEffect(() => {
     dispatch(userProfileActions.getUserProfile(userId));
   }, [dispatch]);
+  useEffect(() => {
+    dispatch(userBookings.getAllUserBookings(userId));
+  }, [dispatch]);
 
-  let name;
-  let email;
-  let roleId;
-  if (sessionUserProfile) {
-    name = sessionUserProfile.firstName + " " + sessionUserProfile.lastName;
-    email = sessionUserProfile.email;
-    roleId = sessionUserProfile.roleId;
-  }
   return (
     <div>
-      <h1>{name}</h1>
-      <h2>{email}</h2>
-      <h2>{roleId}</h2>
+      <div className="user__profile__card__container">
+        <UserProfileCard user={user}></UserProfileCard>
+      </div>
+      <div className="user__bookings__container">
+        <UserBookings bookings={bookings}></UserBookings>
+      </div>
     </div>
   );
 }

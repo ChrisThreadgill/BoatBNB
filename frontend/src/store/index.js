@@ -4,12 +4,16 @@ import thunk from "redux-thunk";
 import userProfileReducer from "./userProfile";
 import boatsReducer from "./boats";
 import bookingsReducer from "./bookings";
+import boatReviewsReducer from "./boatReviews";
+import boatRatingsReducer from "./boatRatings";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   userProfile: userProfileReducer,
   boats: boatsReducer,
   bookings: bookingsReducer,
+  boatReviews: boatReviewsReducer,
+  boatRatings: boatRatingsReducer,
 });
 
 let enhancer;

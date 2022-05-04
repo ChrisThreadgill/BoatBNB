@@ -1,0 +1,4 @@
+.boat__rating__card {
+  display: flex;
+  flex-direction: row;
+}

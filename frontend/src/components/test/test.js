@@ -1,5 +1,10 @@
 import { useState } from "react";
+import { FaStar } from "react-icons/fa";
 import axios from "axios";
+import UserRating from "../Ratings/UserRating";
+import UserReview from "../Reviews/UserReview";
+import BoatReview from "../Reviews/BoatReview";
+// import "..Ratings/Rating.css";
 
 async function postImage(image) {
   // console.log(image);
@@ -29,13 +34,12 @@ function Test() {
     setFile(file);
   };
 
+  const boat = { id: 1 };
+
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <input onChange={fileSelected} type="file" name="file" accept="image/*"></input>
-        <button type="submit">submit</button>
-      </form>
-      <img src="/api/images/345a00a61d75fa917306342db5a6d2d9" />
+      {/* <UserReview></UserReview> */}
+      <BoatReview boat={boat}></BoatReview>
     </div>
   );
 }

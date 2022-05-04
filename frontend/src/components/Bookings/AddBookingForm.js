@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { csrfFetch } from "../../store/csrf";
 import { useEffect, useState } from "react";
+import "./BookingsCSS/BoatBooking.css";
 
 function AddBookingForm({ boatId }) {
   const [startDate, setStartDate] = useState(null);
@@ -23,7 +24,7 @@ function AddBookingForm({ boatId }) {
   };
 
   return (
-    <div>
+    <div className="boat__booking__form">
       <h1>hello From the Add a Booking Form</h1>
       <form onSubmit={handleSubmit}>
         <label>

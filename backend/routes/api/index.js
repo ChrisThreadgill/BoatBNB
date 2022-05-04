@@ -4,6 +4,8 @@ const usersRouter = require("./users.js");
 const boatsRouter = require("./boats.js");
 const imagesRouter = require("./images");
 const bookingsRouter = require("./booking");
+const ratingsRouter = require("./ratings");
+const reviewsRouter = require("./reviews");
 // const asyncHandler = require("express-async-handler");
 
 router.use("/session", sessionRouter);
@@ -15,6 +17,10 @@ router.use("/boats", boatsRouter);
 router.use("/images", imagesRouter);
 
 router.use("/bookings", bookingsRouter);
+
+router.use("/ratings", ratingsRouter);
+
+router.use("/reviews", reviewsRouter);
 
 // router.get(
 //   "/set-token-cookie",

@@ -1,0 +1,17 @@
+.single__boat__view {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.boat__review__board {
+  display: flex;
+  justify-content: center;
+}
+.boat__info__booking {
+  display: flex;
+}
+.boat__booking__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

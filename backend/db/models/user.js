@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60],
         },
       },
+      profilePicture: DataTypes.STRING,
       roleId: DataTypes.INTEGER,
     },
     {
@@ -69,7 +70,8 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     User.hasMany(models.Booking, { foreignKey: "userId" });
     User.hasMany(models.Boat, { foreignKey: "userId" });
-    User.hasMany(models.Review, { foreignKey: "userId" });
+    User.hasMany(models.UserReview, { foreignKey: "userId" });
+    User.hasMany(models.UserRating, { foreignKey: "userId" });
   };
   return User;
 };

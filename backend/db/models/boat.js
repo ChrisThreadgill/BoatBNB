@@ -12,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
       accessories: DataTypes.STRING,
       captain: DataTypes.BOOLEAN,
       price: DataTypes.INTEGER,
-      scheduleId: DataTypes.INTEGER,
     },
     {}
   );
@@ -21,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     Boat.hasMany(models.Booking, { foreignKey: "boatId", onDelete: "CASCADE", hooks: true });
     Boat.belongsTo(models.User, { foreignKey: "userId" });
     Boat.hasMany(models.Image, { foreignKey: "boatId", onDelete: "CASCADE", hooks: true });
-    Boat.hasMany(models.Review, { foreignKey: "boatId" });
+    Boat.hasMany(models.BoatReview, { foreignKey: "boatId" });
+    Boat.hasMany(models.BoatRating, { foreignKey: "boatId" });
   };
   return Boat;
 };

@@ -1,0 +1,8 @@
+.boat__review__card {
+  display: flex;
+  width: 100vh;
+  justify-content: space-between;
+}
+.boat__review__card__ratings {
+  display: flex;
+}

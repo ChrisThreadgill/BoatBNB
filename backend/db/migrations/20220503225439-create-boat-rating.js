@@ -1,46 +1,39 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("Boats", {
+    return queryInterface.createTable("BoatRatings", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      boatId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: "Boats" },
+      },
       userId: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: { model: "Users" },
       },
-      marina: {
-        allowNull: false,
-        type: Sequelize.STRING(75),
-      },
-      city: {
-        allowNull: false,
-        type: Sequelize.STRING(50),
-      },
-      state: {
-        allowNull: false,
-        type: Sequelize.STRING(2),
-      },
-      year: {
+      cleanliness: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      model: {
+      functional: {
         allowNull: false,
-        type: Sequelize.STRING(100),
+        type: Sequelize.INTEGER,
       },
-      accessories: {
-        type: Sequelize.STRING,
-      },
-      captain: {
-        type: Sequelize.BOOLEAN,
-      },
-      price: {
+      comfort: {
         allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+      boatReviewId: {
+        type: Sequelize.INTEGER,
+        references: { model: "BoatReviews" },
+      },
+      average: {
         type: Sequelize.INTEGER,
       },
       createdAt: {
@@ -56,6 +49,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("Boats");
+    return queryInterface.dropTable("BoatRatings");
   },
 };

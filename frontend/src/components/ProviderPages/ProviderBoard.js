@@ -23,7 +23,7 @@ import ProviderProfileView from "./ProviderProfileView";
 function ProviderBoard({ user }) {
   const dispatch = useDispatch();
   const [view, setView] = useState(null);
-  console.log(user.id, "--------------");
+  // console.log(user.id, "--------------");
 
   const bookings = useSelector((state) => state.bookings);
 

@@ -15,7 +15,7 @@ const clearProfile = () => {
   };
 };
 export const getUserProfile = (userId) => async (dispatch) => {
-  console.log("working");
+  // console.log("working");
   const response = await fetch(`/api/users/profile/${userId}`, {
     method: "GET",
   });

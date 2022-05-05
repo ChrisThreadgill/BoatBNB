@@ -11,7 +11,7 @@ const { User, Boat, Image, Booking, BoatRating, BoatReview, UserRating, UserRevi
 router.get(
   "/boat/:boatId",
   asyncHandler(async (req, res) => {
-    console.log("working");
+    // console.log("working");
     const { boatId } = req.params;
     const boatReviews = await BoatReview.findAll({
       where: {

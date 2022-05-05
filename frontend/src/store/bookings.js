@@ -76,7 +76,7 @@ export const getAllBoatBookings = (boatId) => async (dispatch) => {
 };
 
 export const cancelUserBooking = (booking) => async (dispatch) => {
-  console.log(booking.id, "goooooking id");
+  // console.log(booking.id, "goooooking id");
   const bookingToDelete = await csrfFetch(`/api/bookings/${booking.id}`, {
     method: "DELETE",
   });

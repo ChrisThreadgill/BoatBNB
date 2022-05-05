@@ -16,7 +16,7 @@ function UserProfileView({ user }) {
   const history = useHistory();
   const { userId } = useParams();
   const dispatch = useDispatch();
-  console.log(user, "neeed thisssssssssssssssssss");
+  // console.log(user, "neeed thisssssssssssssssssss");
 
   //will refactor this to use store after dev debugging with card setup
   const userProfile = useSelector((state) => state.userProfile.user);
@@ -28,12 +28,12 @@ function UserProfileView({ user }) {
       dispatch(userProfileActions.profileCleanUp());
     };
   }, [dispatch]);
-  console.log(userProfile);
+  // console.log(userProfile);
 
   const loggedInUser = useSelector((state) => state.session.user);
-  console.log(loggedInUser);
+  // console.log(loggedInUser);
   const bookings = useSelector((state) => state.bookings);
-  console.log(userProfile, "current logged in user");
+  // console.log(userProfile, "current logged in user");
 
   return (
     <div>

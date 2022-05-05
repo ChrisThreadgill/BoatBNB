@@ -32,7 +32,7 @@ export const getAllReviewsForSingleUser = (userId) => async (dispatch) => {
   });
 
   const reviews = await response.json();
-  console.log(reviews, "----------");
+  // console.log(reviews, "----------");
   dispatch(singleUserReviews(reviews));
   return reviews;
 };

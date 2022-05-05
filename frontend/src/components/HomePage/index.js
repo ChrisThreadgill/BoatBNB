@@ -10,7 +10,7 @@ function HomePage() {
   const history = useHistory();
   const sessionUser = useSelector((state) => state.session.user);
   const allBoats = useSelector((state) => state.boats);
-  console.log(sessionUser, "-----------------");
+  // console.log(sessionUser, "-----------------");
   useEffect(() => {
     dispatch(boatsAction.getAllBoats());
   }, [dispatch]);

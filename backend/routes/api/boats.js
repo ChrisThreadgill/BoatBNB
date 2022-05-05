@@ -107,7 +107,7 @@ router.put(
   requireAuth,
 
   asyncHandler(async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const { boatId } = req.params;
 
     const { userId, marina, city, state, year, model, accessories, captain, price, schedule } = req.body;

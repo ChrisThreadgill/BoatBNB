@@ -1,5 +1,5 @@
 function BoatReviewCard({ review }) {
-  console.log(review);
+  // console.log(review);
   // const userId = useSelector((state) => state.session.user?.id);
   // console.log(review.User.profilePicture, "----------------------------------- the review card");
 

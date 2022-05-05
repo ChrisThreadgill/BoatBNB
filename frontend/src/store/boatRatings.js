@@ -26,13 +26,13 @@ const singleBoatRatingsNR = (ratings) => {
 // };
 
 export const getRatingsForSingleBoatNR = (boatId) => async (dispatch) => {
-  console.log(boatId);
+  // console.log(boatId);
   const response = await csrfFetch(`/api/ratings/boat/${boatId}/noReview`, {
     method: "GET",
   });
 
   const ratings = await response.json();
-  console.log(ratings, "----------");
+  // console.log(ratings, "----------");
   dispatch(singleBoatRatingsNR(ratings));
   return ratings;
 };
@@ -58,11 +58,11 @@ export const getRatingsForSingleBoatNR = (boatId) => async (dispatch) => {
 const initialState = {};
 
 const boatRatingsReducer = (state = initialState, action) => {
-  console.log(action, "-------action");
+  // console.log(action, "-------action");
   let newState;
   switch (action.type) {
     case GET_RATINGS_NO_REVIEW:
-      console.log(action.payload, "-------------------");
+      // console.log(action.payload, "-------------------");
       const ratingsNR = {};
       for (let rating of action.payload.boatRatings) ratingsNR[rating.id] = rating;
       return { ...state, ...ratingsNR };

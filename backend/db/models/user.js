@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
     return await User.scope("currentUser").findByPk(id);
   };
   User.login = async function ({ credential, password }) {
-    console.log(credential, "helooooo");
+    // console.log(credential, "helooooo");
 
     const user = await User.scope("loginUser").findOne({
       where: {

@@ -35,7 +35,7 @@ router.get(
 router.get(
   "/boat/:boatId/noReview",
   asyncHandler(async (req, res) => {
-    console.log("working");
+    // console.log("working");
     const { boatId } = req.params;
     const boatRatings = await BoatRating.findAll({
       where: {
@@ -107,7 +107,7 @@ router.put(
   "/urEdit/:userRatingId",
   // requireAuth,
   asyncHandler(async (req, res) => {
-    console.log("in this?");
+    // console.log("in this?");
     const { userRatingId } = req.params;
 
     const { userId, reviewerId, friendliness, punctuality, trustworthy, average, userReviewId } = req.body;

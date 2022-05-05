@@ -12,7 +12,7 @@ function LoggedInUser() {
   const dispatch = useDispatch();
   const sessionUserProfile = useSelector((state) => state.userProfile.user);
   const loggedInUserId = useSelector((state) => state.session.user.id);
-  console.log(sessionUserProfile, "current logged in user");
+  // console.log(sessionUserProfile, "current logged in user");
   useEffect(() => {
     dispatch(userProfileActions.getUserProfile(userId));
   }, [dispatch]);

@@ -32,7 +32,7 @@ const cleanBoats = () => {
 };
 
 export const getOneBoat = (boatId) => async (dispatch) => {
-  console.log("working");
+  // console.log("working");
   const response = await csrfFetch(`/api/boats/${boatId}`, {
     method: "GET",
   });

@@ -11,7 +11,7 @@ function BoatBookings({ boat }) {
   const dispatch = useDispatch();
   const bookingsObj = useSelector((state) => state.bookings);
   const bookingsArr = Object.values(bookingsObj);
-  console.log(bookingsArr);
+  // console.log(bookingsArr);
 
   useEffect(() => {
     dispatch(bookingsActions.getAllBoatBookings(boat.id));
@@ -21,7 +21,7 @@ function BoatBookings({ boat }) {
     <div>
       {bookingsArr.length > 0 &&
         bookingsArr.map((booking) => {
-          console.log(booking);
+          // console.log(booking);
           return (
             <div className="provider__bookings__view">
               <div>

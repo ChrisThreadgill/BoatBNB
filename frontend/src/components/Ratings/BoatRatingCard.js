@@ -1,7 +1,7 @@
 import "./BoatRating/BoatRatingCard.css";
 
 function BoatRatingCard({ rating }) {
-  console.log(rating, "--------- rating");
+  // console.log(rating, "--------- rating");
   return (
     <div className="boat__rating__card">
       <div>

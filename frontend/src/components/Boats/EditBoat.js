@@ -13,7 +13,7 @@ function EditBoat({ user, view, setView, boat }) {
   const dispatch = useDispatch();
   const bookingsObj = useSelector((state) => state.bookings);
   const bookingsArr = Object.values(bookingsObj);
-  console.log(bookingsArr);
+  // console.log(bookingsArr);
 
   let {
     id: boatId,
@@ -71,13 +71,13 @@ function EditBoat({ user, view, setView, boat }) {
   };
 
   const deleteBoat = async (e) => {
-    console.log("working");
+    // console.log("working");
     e.preventDefault();
     const deletedBoat = await csrfFetch(`/api/boats/${boatId}`, {
       method: "DELETE",
     });
     const response = await deletedBoat.json();
-    console.log(response.message);
+    // console.log(response.message);
     // if (response.message === "Successfully Removed Boat") {
     //   console.log("working");
     history.push(`/users/${userId}/profile`);

@@ -32,7 +32,7 @@ export const getAllReviewsForSingleBoat = (boatId) => async (dispatch) => {
   });
 
   const reviews = await response.json();
-  console.log(reviews, "----------");
+  // console.log(reviews, "----------");
   dispatch(singleBoatReviews(reviews));
   return reviews;
 };

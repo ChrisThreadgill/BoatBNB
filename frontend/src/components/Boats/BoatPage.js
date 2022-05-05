@@ -20,7 +20,7 @@ function BoatPage() {
   const boatReviews = useSelector((state) => state.boatReviews);
   const boatRatingsNR = useSelector((state) => state.boatRatings);
 
-  console.log(boatRatingsNR, "NR BOAT RATINGS-------------------");
+  // console.log(boatRatingsNR, "NR BOAT RATINGS-------------------");
   useEffect(() => {
     dispatch(boatsAction.getOneBoat(boatId));
     dispatch(reviewsAction.getAllReviewsForSingleBoat(boatId));

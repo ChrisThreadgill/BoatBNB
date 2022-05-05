@@ -21,7 +21,7 @@ function BoatReviewForm({ boat, rating, func, comfort, clean }) {
       const response = await newBoatReview.json();
       if (response.newBoatReview) {
         boatReviewId = response.newBoatReview.id;
-        console.log("you suck don't forget that, do better");
+        // console.log("you suck don't forget that, do better");
       }
     }
 
@@ -40,7 +40,7 @@ function BoatReviewForm({ boat, rating, func, comfort, clean }) {
       });
       const response = await newBoatRating.json();
 
-      console.log("good job");
+      // console.log("good job");
     }
 
     // console.log(newBoatId);

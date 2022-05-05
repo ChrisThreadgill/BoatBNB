@@ -21,7 +21,7 @@ function AddBookingForm({ boatId }) {
       body: JSON.stringify(body),
     });
     const response = await newBooking.json();
-    console.log(response.newBooking);
+    // console.log(response.newBooking);
     if (response.newBooking.userId === loggedInUserId) {
       history.push(`/users/${loggedInUserId}/profile`);
     }

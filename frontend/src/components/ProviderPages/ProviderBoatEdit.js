@@ -12,13 +12,13 @@ import "./ProviderPagesCSS/ProviderBoatEdit.css";
 function ProviderBoatEdit() {
   const history = useHistory();
   const { boatId } = useParams();
-  console.log(typeof parseInt(boatId));
+  // console.log(typeof parseInt(boatId));
   const dispatch = useDispatch();
 
   const sessionUser = useSelector((state) => state.session.user);
   const boat = useSelector((state) => state.boats.boat);
 
-  console.log(sessionUser);
+  // console.log(sessionUser);
 
   useEffect(() => {
     dispatch(boatsAction.getOneBoat(boatId));

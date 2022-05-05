@@ -8,7 +8,7 @@ function BoatRatingCard({ rating }) {
         <div>
           <img src={`/api/images/${rating.User.profilePicture}`} className="profile__avatar" />
         </div>
-        <div>{rating.User.UserRatings[0].average}</div>
+        {/* <div>{rating.User.UserRatings[0].average}</div> */}
       </div>
 
       <div className="boat__rating__card__NR">

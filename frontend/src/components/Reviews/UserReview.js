@@ -2,9 +2,11 @@ import { useState } from "react";
 import UserRating from "../Ratings/UserRating";
 
 import { FaStar } from "react-icons/fa";
+import UserReviewForm from "../forms/UserReviewForm";
 // import "./Rating.css";
+import "./UserReviews/UserReview.css";
 
-function UserReview() {
+function UserReview({ userProfile }) {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
 
@@ -18,7 +20,8 @@ function UserReview() {
   const [trustHover, setTrustHover] = useState(null);
 
   return (
-    <div>
+    <div className="user__profile__review__container">
+      <h2>Tell us what {`${userProfile?.firstName}`} did to stand out!</h2>
       <UserRating
         rating={rating}
         setRating={setRating}
@@ -37,6 +40,7 @@ function UserReview() {
         trustHover={trustHover}
         setTrustHover={setTrustHover}
       ></UserRating>
+      <UserReviewForm></UserReviewForm>
     </div>
   );
 }

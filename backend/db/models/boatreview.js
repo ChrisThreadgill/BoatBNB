@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     BoatReview.belongsTo(models.Boat, { foreignKey: "boatId" });
     BoatReview.hasOne(models.BoatRating, { foreignKey: "boatReviewId" });
+    BoatReview.belongsTo(models.User, { foreignKey: "userId" });
   };
   return BoatReview;
 };

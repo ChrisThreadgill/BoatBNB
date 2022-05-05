@@ -9,12 +9,11 @@ const reviewsRouter = require("./reviews");
 // const asyncHandler = require("express-async-handler");
 
 router.use("/session", sessionRouter);
+router.use("/images", imagesRouter);
 
 router.use("/users", usersRouter);
 
 router.use("/boats", boatsRouter);
-
-router.use("/images", imagesRouter);
 
 router.use("/bookings", bookingsRouter);
 

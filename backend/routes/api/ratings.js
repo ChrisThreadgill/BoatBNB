@@ -18,6 +18,12 @@ router.get(
       where: {
         boatId,
       },
+      include: [
+        {
+          model: User,
+          include: UserRating,
+        },
+      ],
     });
     // console.log(boats);
     return res.json({
@@ -36,6 +42,12 @@ router.get(
         boatId,
         boatReviewId: null,
       },
+      include: [
+        {
+          model: User,
+          include: UserRating,
+        },
+      ],
     });
 
     return res.json({

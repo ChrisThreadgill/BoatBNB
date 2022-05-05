@@ -1,10 +1,18 @@
-function UserProfileCard({ user }) {
+function UserProfileCard({ userProfile }) {
+  const profilePic = userProfile?.profilePicture;
   return (
     <div>
       <div className="user__profile__card">
-        <h1>{user && user.firstName}</h1>
-        <h2>{user && user.email}</h2>
-        <h2>{user && user.roleId}</h2>
+        {profilePic && (
+          <div>
+            <img src={`/api/images/${profilePic}`} className="user__profile__picture" />
+          </div>
+        )}
+        <div className="user__profile__information">
+          <h1>{userProfile && userProfile.firstName}</h1>
+          <h2>{userProfile && userProfile.email}</h2>
+          <h2>{userProfile && userProfile.roleId}</h2>
+        </div>
       </div>
     </div>
   );

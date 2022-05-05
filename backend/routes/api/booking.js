@@ -5,7 +5,7 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { User, Boat, Image, Booking } = require("../../db/models");
+const { User, Boat, Image, Booking, UserRating } = require("../../db/models");
 
 //TODO SETUP ROUTE TO GET ALL BOOKINGS BY USER ID
 //gets all bookings by user ID
@@ -27,19 +27,42 @@ router.get(
   })
 );
 
-//TODO SETUP ROUTE TO GET ALL BOOKINGS BY BOAT ID
-//gets all bookings by boat ID
+// // TODO SETUP ROUTE TO GET ALL BOOKINGS BY BOAT ID
+// // gets all bookings by boat ID
+// router.get(
+//   "/boat/:boatId",
+//   asyncHandler(async (req, res) => {
+//     // console.log("working");
+//     const { boatId } = req.params;
+//     const boatWithBookings = await Boat.findByPk(boatId, {
+//       include: Booking,
+//     });
+//     // console.log(boats);
+//     return res.json({
+//       boatWithBookings,
+//     });
+//   })
+// );
+
 router.get(
   "/boat/:boatId",
   asyncHandler(async (req, res) => {
     // console.log("working");
     const { boatId } = req.params;
-    const boatWithBookings = await Boat.findByPk(boatId, {
-      include: Booking,
+    const bookingsForBoat = await Booking.findAll({
+      where: {
+        boatId,
+      },
+      include: [
+        {
+          model: User,
+          include: UserRating,
+        },
+      ],
     });
     // console.log(boats);
     return res.json({
-      boatWithBookings,
+      bookingsForBoat,
     });
   })
 );

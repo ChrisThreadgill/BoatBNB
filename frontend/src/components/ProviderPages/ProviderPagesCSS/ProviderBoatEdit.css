@@ -1,0 +1,10 @@
+.provider__boat__edit__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.provider__boat__edit__container > div {
+  margin-left: 15vh;
+  margin-right: 15vh;
+}

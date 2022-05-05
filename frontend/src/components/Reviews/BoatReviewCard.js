@@ -1,10 +1,14 @@
 function BoatReviewCard({ review }) {
-  // console.log(review);
+  console.log(review);
+  // const userId = useSelector((state) => state.session.user?.id);
+  // console.log(review.User.profilePicture, "----------------------------------- the review card");
   return (
     <div className="boat__review__card">
       <div>
-        <div>userprofile pic</div>
-        <div>user rating</div>
+        <div>
+          <img src={`/api/images/${review.User.profilePicture}`} className="profile__avatar" />
+        </div>
+        <div>{review.User.UserRatings[0].average}</div>
       </div>
 
       <div>

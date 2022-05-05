@@ -9,20 +9,19 @@ function UserReviewForm({ user, rating, func, access, clean }) {
     <div>
       <div>
         <form>
-          <label>
-            Write a review!
-            <input
-              type="text"
-              value={content}
-              onChange={(e) => {
-                setContent(e.target.value);
-              }}
-            ></input>
-          </label>
+          <label>Leave a Review!</label>
+          <input
+            type="text"
+            value={content}
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
+          ></input>
+          <button type="submit">Add Review!</button>
         </form>
       </div>
     </div>
   );
 }
 
-export default BoatReviewForm;
+export default UserReviewForm;

@@ -1,0 +1,12 @@
+.provider__profile__bookings {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.booking__card__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

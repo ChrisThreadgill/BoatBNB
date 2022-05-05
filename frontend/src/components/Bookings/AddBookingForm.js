@@ -1,13 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { csrfFetch } from "../../store/csrf";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import "./BookingsCSS/BoatBooking.css";
 
 function AddBookingForm({ boatId }) {
+  const history = useHistory();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [checkIn, setCheckIn] = useState(null);
-  const [checkOut, setCheckOut] = useState(null);
+  const [checkIn, setCheckIn] = useState(7);
+  const [checkOut, setCheckOut] = useState(17);
   const loggedInUserId = useSelector((state) => state.session.user.id);
 
   const handleSubmit = async (e) => {
@@ -19,8 +21,10 @@ function AddBookingForm({ boatId }) {
       body: JSON.stringify(body),
     });
     const response = await newBooking.json();
-
-    // console.log(response);
+    console.log(response.newBooking);
+    if (response.newBooking.userId === loggedInUserId) {
+      history.push(`/users/${loggedInUserId}/profile`);
+    }
   };
 
   return (

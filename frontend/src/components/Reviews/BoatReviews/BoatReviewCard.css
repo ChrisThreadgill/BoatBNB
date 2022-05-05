@@ -6,3 +6,8 @@
 .boat__review__card__ratings {
   display: flex;
 }
+
+.profile__avatar {
+  width: 75px;
+  height: 75px;
+}

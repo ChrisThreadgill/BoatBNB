@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as userProfileActions from "../../store/userProfile";
 import ProviderPanel from "../ProviderPages/ProviderPanel";
-import ProviderView from "../ProviderPages/ProviderView";
+
 import ProviderBoard from "../ProviderPages/ProviderBoard";
 import UserProfileView from "./UserProfileView";
 

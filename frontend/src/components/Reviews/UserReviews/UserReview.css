@@ -1,0 +1,4 @@
+.user__profile__review__container {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,7 +1,8 @@
 import { csrfFetch } from "./csrf";
 
 const GET_ALL_FOR_USER = "bookings/getAllForUser";
-
+const GET_ALL_FOR_BOAT = "bookings/getAllForBoat";
+const CLEAR = "bookings/clear";
 const CANCEL = "bookings/cancel";
 
 const allUserBookings = (bookings) => {
@@ -15,6 +16,19 @@ const cancelBooking = (booking) => {
   return {
     type: CANCEL,
     payload: booking,
+  };
+};
+
+const clearBookings = () => {
+  return {
+    type: CLEAR,
+  };
+};
+
+const allBookingsForBoat = (bookings) => {
+  return {
+    type: GET_ALL_FOR_BOAT,
+    payload: bookings,
   };
 };
 // const oneBoat = (boat) => {
@@ -53,6 +67,14 @@ export const getAllUserBookings = (userId) => async (dispatch) => {
   // return boats;
 };
 
+export const getAllBoatBookings = (boatId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/bookings/boat/${boatId}`, {
+    method: "GET",
+  });
+  const { bookingsForBoat } = await response.json();
+  dispatch(allBookingsForBoat(bookingsForBoat));
+};
+
 export const cancelUserBooking = (booking) => async (dispatch) => {
   console.log(booking.id, "goooooking id");
   const bookingToDelete = await csrfFetch(`/api/bookings/${booking.id}`, {
@@ -64,6 +86,9 @@ export const cancelUserBooking = (booking) => async (dispatch) => {
   return booking;
 };
 
+export const cleanUp = () => (dispatch) => {
+  dispatch(clearBookings());
+};
 // export const getProviderBoats = (userId) => async (dispatch) => {
 //   const response = await csrfFetch(`/api/users/${userId}/boats`, {
 //     method: "GET",
@@ -83,7 +108,14 @@ const bookingsReducer = (state = initialState, action) => {
       for (let booking of action.payload) {
         bookings[booking.id] = booking;
       }
-      return { ...state, ...bookings };
+      return { ...bookings };
+    case GET_ALL_FOR_BOAT:
+      const boatBookings = {};
+      // console.log(action.payload);
+      for (let booking of action.payload) {
+        boatBookings[booking.id] = booking;
+      }
+      return { ...boatBookings };
     // console.log(action.payload, "payload");
     // newState = Object.assign({}, state);
     // newState = action.payload;
@@ -109,6 +141,8 @@ const bookingsReducer = (state = initialState, action) => {
       // }
       // console.log(bookings);
       return newState;
+    case CLEAR:
+      return {};
     default:
       return state;
   }

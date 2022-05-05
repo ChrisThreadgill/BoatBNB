@@ -1,0 +1,43 @@
+.edit__boat__form {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.edit__boat__form > label {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+
+  /* align-items: center; */
+}
+
+.edit__boat__form > div {
+  display: flex;
+  flex-direction: column;
+  /* align-self: flex-end; */
+
+  /* align-items: center; */
+}
+.edit__boat__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.add__boat__image__form {
+  display: flex;
+  flex-direction: column;
+}
+.manage__boat__form__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.delete__button__form > form {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}

@@ -10,11 +10,15 @@ import AddBoat from "../Boats/AddBoat";
 import ProviderPanel from "./ProviderPanel";
 import UserProfileView from "../UserProfilePage/UserProfileView";
 import * as bookingsActions from "../../store/bookings.js";
+import * as userProfileActions from "../../store/userProfile";
+import UserProfileCard from "../UserProfilePage/UserProfileCard";
+import UserRatingDisplay from "../Ratings/UserRatingDisplay";
 import * as boatsAction from "../../store/boats.js";
 import "./ProviderPagesCSS/ProviderBoard.css";
 import BoatEdit from "./ProviderBoatEdit";
 import BoatCard from "../Boats/BoatCard";
 import Test from "../test/test";
+import ProviderProfileView from "./ProviderProfileView";
 
 function ProviderBoard({ user }) {
   const dispatch = useDispatch();
@@ -23,9 +27,15 @@ function ProviderBoard({ user }) {
 
   const bookings = useSelector((state) => state.bookings);
 
-  // useEffect(() => {
-  //   dispatch(bookingsActions.getAllUserBookings(user.id));
-  // }, [dispatch]);
+  const userProfile = useSelector((state) => state.userProfile.user);
+
+  useEffect(() => {
+    dispatch(userProfileActions.getUserProfile(user.id));
+    return () => {
+      dispatch(bookingsActions.cleanUp());
+      dispatch(userProfileActions.profileCleanUp());
+    };
+  }, [dispatch]);
 
   return (
     <div className="provider__board__container">
@@ -80,17 +90,22 @@ function ProviderBoard({ user }) {
         </div>
       </div>
       <div className="provider__board">
-        {view === "profile" ? (
+        {view === "profile" && userProfile ? (
           <div className="user__profile__view__container">
-            <UserProfileView />
+            <div>
+              <UserProfileCard userProfile={userProfile}></UserProfileCard>
+            </div>
+            <div>
+              <UserRatingDisplay userProfile={userProfile}></UserRatingDisplay>
+            </div>
           </div>
         ) : null}
-
         {view === "boats" ? (
           <div className="provider__boats__container">
             <ProviderBoats view={view} setView={setView} />
           </div>
         ) : null}
+
         {view === "bookings" ? (
           <div className="provider__bookings__container">
             <ProviderBookings></ProviderBookings>

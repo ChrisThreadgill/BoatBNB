@@ -5,7 +5,7 @@ import { useHistory, useLocation } from "react-router-dom";
 function BoatCard({ boat }) {
   const location = useLocation();
   // console.log(location, "11111111111111111111111");
-  console.log(boat);
+  console.log(boat, "helooooooooooooooooooooo");
   const history = useHistory();
   // console.log(boat, "in the boat card");
   const [boatView, setBoatView] = useState(0);

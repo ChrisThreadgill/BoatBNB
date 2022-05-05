@@ -52,7 +52,7 @@ router.get(
 
 router.put(
   "/boat/:reviewId",
-  // requireAuth,
+  requireAuth,
   asyncHandler(async (req, res) => {
     const { reviewId } = req.params;
     const { userId, review } = req.body;
@@ -77,7 +77,7 @@ router.put(
 //edit review for user
 router.put(
   "/user/:reviewId",
-  // requireAuth,
+  requireAuth,
   asyncHandler(async (req, res) => {
     const { reviewId } = req.params;
     const { reviewerId, content } = req.body;
@@ -102,7 +102,7 @@ router.put(
 //post new rating for boat
 router.post(
   "/boatReview",
-  // requireAuth,
+  requireAuth,
   asyncHandler(async (req, res) => {
     const { userId, boatId, review } = req.body;
     // console.log(userId);
@@ -123,7 +123,7 @@ router.post(
 //post new review for user
 router.post(
   "/userReview",
-  // requireAuth,
+  requireAuth,
   asyncHandler(async (req, res) => {
     const { userId, reviewerId, content } = req.body;
     // console.log(userId);

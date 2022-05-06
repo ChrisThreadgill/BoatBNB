@@ -45,6 +45,7 @@ function AddBookingForm({ boatId }) {
               Booking Date :{validErrors && <span>Please Select a date!</span>}
               <input
                 type="date"
+                required
                 name="startDate"
                 value={bookingDate}
                 onChange={(e) => {

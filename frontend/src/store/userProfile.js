@@ -26,6 +26,12 @@ export const getUserProfile = (userId) => async (dispatch) => {
   return userProfile;
 };
 
+export const getUserProfileWithBookings = (userId) => async (dispatch) => {
+  const response = await fetch(`/api/user/profile/${userId}/bookings`, {
+    method: "GET",
+  });
+};
+
 export const profileCleanUp = () => (dispatch) => {
   dispatch(clearProfile());
 };

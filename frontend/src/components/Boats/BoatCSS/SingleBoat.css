@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  background-color: beige;
+  border: rgb(103, 103, 196) 3rem ridge;
 }
 .boat__review__board {
   display: flex;

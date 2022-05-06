@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import "./BoatRating/BoatRatingCard.css";
 
 import {
   FaStar,
@@ -46,7 +47,7 @@ function BoatRating({
     setRating(overall);
   }, [setRating, func, comfort, clean]);
   return (
-    <div>
+    <div className="star__rating__form">
       <h1>Average</h1>
       {[...Array(5)].map((star, idx) => {
         const currentVal = idx + 1;

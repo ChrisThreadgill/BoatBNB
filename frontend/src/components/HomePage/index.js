@@ -17,7 +17,7 @@ function HomePage() {
   useEffect(() => {
     dispatch(boatsAction.getAllBoats());
     return () => {
-      dispatch(boatsAction.clean());
+      // dispatch(boatsAction.clean());
       dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     };
   }, [dispatch]);
@@ -31,7 +31,7 @@ function HomePage() {
           allBoats.map((boat) => {
             console.log(boat);
             return (
-              <div key={boat.id}>
+              <div key={boat.id} className="home__page__boat__card">
                 <BoatCard key={boat.id} boat={boat}></BoatCard>
                 {sessionUser && boat && sessionUser.id === boat.userId ? (
                   <button

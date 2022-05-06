@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as boatsAction from "../../store/boats.js";
+import "./BoatCSS/BoatCard.css";
 
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -20,9 +21,8 @@ function BoatCard({ boat }) {
   }, [dispatch]);
 
   return (
-    <div className="boat__card">
-      <h2>working</h2>
-      <div>
+    <div className="boat__card__container">
+      <div className="boat__card">
         {boat?.Images?.length > 0
           ? boat.Images.map((image, idx) => {
               return (
@@ -48,9 +48,30 @@ function BoatCard({ boat }) {
             : null}
         </div>
         {/* <BoatImageCard></BoatImageCard>  */}
-        // <h3>{`${boat?.year} ${boat?.model}`}</h3>
-        // <h4>{`In ${boat?.city}, ${boat?.state} at ${boat?.marina}`}</h4>
-        // <h4>{`$${boat?.price}/day`}</h4>
+      </div>
+      <div className="boat__card__details">
+        <div className="boat__location__div">
+          <div>
+            <h2>{`Come hang out in ${boat?.marina}`}</h2>
+          </div>
+          <div>
+            <h4>{`In ${boat?.city}, ${boat?.state} at ${boat?.marina}`}</h4>
+          </div>
+        </div>
+        <div>
+          <div>
+            <h2>Boat Year Make and Model</h2>
+            <h3>{`${boat?.year} ${boat?.model}`}</h3>
+          </div>
+        </div>
+
+        <div>
+          <div>
+            <h2>For as Low as!</h2>
+
+            <h4>{`$${boat?.price}/day`}</h4>
+          </div>
+        </div>
       </div>
     </div>
   );

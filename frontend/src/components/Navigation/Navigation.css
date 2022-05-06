@@ -1,9 +1,16 @@
 .logged__in__nav {
   display: flex;
   justify-content: space-between;
+  background-color: none;
+  background-color: cadetblue;
+  border: 2px ridge cadetblue;
+  border-radius: 15px;
   /* position: static; */
   /* height: 25vh;
   background: url("./1000_F_309830392_3unqC6gdkRuwACg55pTwVSuTzyeUlkqe.jpg"); */
+}
+body {
+  background-color: bisque;
 }
 
 .visitor__nav {
@@ -16,4 +23,30 @@
 .nav__bar__container {
   height: 25vh;
   background: url("./1000_F_309830392_3unqC6gdkRuwACg55pTwVSuTzyeUlkqe.jpg");
+}
+.home__button__nav {
+  width: 75px;
+  height: 75px;
+  color: ;
+}
+.home__nav__div {
+  display: flex;
+  align-items: center;
+}
+
+.nav__profile__picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.profile__nav__links {
+  background-color: cadetblue;
+  display: flex;
+  align-items: center;
+}
+
+.profile__nav__links > a {
+  font-size: 40px;
+  color: black;
+  text-decoration: none;
 }

@@ -110,6 +110,7 @@ function EditBoat({ user, view, setView, boat }) {
               <input
                 type="text"
                 value={marina}
+                required
                 name="marina"
                 onChange={(e) => {
                   setMarina(e.target.value);
@@ -125,6 +126,7 @@ function EditBoat({ user, view, setView, boat }) {
                 type="text"
                 name="year"
                 value={year}
+                required
                 placeholder="YYYY"
                 maxLength={4}
                 onChange={(e) => {
@@ -139,6 +141,7 @@ function EditBoat({ user, view, setView, boat }) {
               <input
                 type="text"
                 name="model"
+                required
                 value={model}
                 onChange={(e) => {
                   setModel(e.target.value);
@@ -152,6 +155,7 @@ function EditBoat({ user, view, setView, boat }) {
               <input
                 type="text"
                 name="city"
+                required
                 value={city}
                 onChange={(e) => {
                   setCity(e.target.value);
@@ -166,6 +170,7 @@ function EditBoat({ user, view, setView, boat }) {
               <input
                 type="text"
                 name="state"
+                required
                 value={stateCode}
                 maxLength={2}
                 onChange={(e) => {
@@ -180,6 +185,7 @@ function EditBoat({ user, view, setView, boat }) {
               <input
                 type="text"
                 name="accessories"
+                required
                 value={accessories}
                 onChange={(e) => {
                   setAccessories(e.target.value);
@@ -193,6 +199,7 @@ function EditBoat({ user, view, setView, boat }) {
               <input
                 type="text"
                 maxLength={4}
+                required
                 placeholder="ex. 100, 1000 no decimal"
                 name="accessories"
                 value={price}

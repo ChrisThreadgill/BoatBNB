@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import * as reviewActions from "../../store/boatReviews";
 import * as ratingActions from "../../store/boatRatings";
 import { useDispatch } from "react-redux";
+import "./forms.css/BoatReviewForm.css";
 
 function BoatReviewForm({ boat, rating, setRating, setClean, setComfort, setFunc, func, comfort, clean }) {
   const dispatch = useDispatch();
@@ -85,13 +86,15 @@ function BoatReviewForm({ boat, rating, setRating, setClean, setComfort, setFunc
         <form onSubmit={handleSubmit}>
           <label>
             Write a review!
-            <input
-              type="text"
+            <textarea
+              className="review__text__area"
+              cols="40"
+              rows="5"
               value={review}
               onChange={(e) => {
                 setReview(e.target.value);
               }}
-            ></input>
+            ></textarea>
           </label>
           <button disabled={reviewLengthError} type="submit">
             Add Review!

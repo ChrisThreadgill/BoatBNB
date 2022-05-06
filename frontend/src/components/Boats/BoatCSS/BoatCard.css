@@ -1,0 +1,23 @@
+.boat__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  /* flex-direction: column; */
+}
+.boat__card__container {
+  display: flex;
+}
+.home__page__boat__card {
+  border: red 1px solid;
+  overflow-wrap: break-word;
+  max-width: 60vh;
+  display: flex;
+  align-items: center;
+}
+.boat__card__details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 27vh;
+}

@@ -1,5 +1,6 @@
 .front__page__all__boats {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   max-width: 100vh;
 }

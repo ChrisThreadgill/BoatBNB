@@ -2,3 +2,7 @@
   display: flex;
   flex-direction: row;
 }
+.star__rating__form {
+  display: flex;
+  flex-direction: column;
+}

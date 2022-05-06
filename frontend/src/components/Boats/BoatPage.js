@@ -12,15 +12,12 @@ import BoatReviewBoard from "../Reviews/BoatReviewBoard";
 
 function BoatPage() {
   const { boatId } = useParams();
-  console.log(boatId, "----------------------boatID");
 
   const dispatch = useDispatch();
   const boat = useSelector((state) => state.boats);
   const userId = useSelector((state) => state.session.user?.id);
   const boatReviews = useSelector((state) => state.boatReviews);
   const boatRatingsNR = useSelector((state) => state.boatRatings);
-  console.log(boat, "NR BOAT RATINGS-------------------");
-  console.log(boatRatingsNR);
 
   useEffect(() => {
     dispatch(boatsAction.getOneBoat(boatId));

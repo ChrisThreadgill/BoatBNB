@@ -4,7 +4,7 @@ import { useParams, useHistory } from "react-router-dom";
 import UserProfileCard from "./UserProfileCard";
 import * as userProfileActions from "../../store/userProfile";
 
-import * as userBookings from "../../store/bookings";
+import * as bookingsAction from "../../store/bookings";
 import "./UserProfileCSS/UserProfileCard.css";
 import UserBookings from "../Bookings/UserBookings";
 import BoatCard from "../Boats/BoatCard";
@@ -21,17 +21,24 @@ function UserProfileView({ user }) {
   //will refactor this to use store after dev debugging with card setup
   const userProfile = useSelector((state) => state.userProfile.user);
   const sessionUserProfile = useSelector((state) => state.session.user);
+  const bookingsForLoggedInUser = useSelector((state) => state);
+  const bookingsArr = Object.values(bookingsForLoggedInUser);
+
+  console.log(bookingsArr);
+  console.log(sessionUserProfile, "l;kjgkdjsflkgjdfslkghjfdsl;kgjl;skdfj");
+
   useEffect(() => {
     dispatch(userProfileActions.getUserProfile(userId));
+    dispatch(bookingsAction.getAllUserBookings(userId));
     return () => {
       dispatch(userProfileActions.profileCleanUp());
-      dispatch(userProfileActions.profileCleanUp());
+      dispatch(bookingsAction.cleanUp());
     };
   }, [dispatch]);
   // console.log(userProfile);
 
   const loggedInUser = useSelector((state) => state.session.user);
-  // console.log(loggedInUser);
+  console.log(loggedInUser);
   const bookings = useSelector((state) => state.bookings);
   // console.log(userProfile, "current logged in user");
 

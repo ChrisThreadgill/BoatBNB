@@ -11,12 +11,12 @@
   border: 1px red solid;
   min-height: 60vh;
 }
-.boat__card {
+/* .boat__card {
   margin: 2vh 1.65vh;
   border-top: 1vh double rgb(0, 157, 255);
 
   border-bottom: 1vh double rgb(0, 157, 255);
-}
+} */
 
 .provider__bookings__container {
   border: 1px red solid;

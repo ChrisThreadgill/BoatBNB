@@ -5,8 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       userId: DataTypes.INTEGER,
       boatId: DataTypes.INTEGER,
-      startDate: DataTypes.DATE,
-      endDate: DataTypes.DATE,
+      bookingDate: DataTypes.DATE,
       checkIn: DataTypes.INTEGER,
       checkOut: DataTypes.INTEGER,
     },

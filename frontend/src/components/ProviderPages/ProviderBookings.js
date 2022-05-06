@@ -21,9 +21,9 @@ function ProviderBookings() {
       {bookings &&
         Object.values(bookings).map((booking) => {
           return (
-            <div className="provider__profile__bookings">
+            <div className="provider__profile__bookings" key={booking.id}>
               <div>
-                <BoatCard boat={booking.Boat}></BoatCard>
+                <BoatCard key={booking.id} boat={booking.Boat}></BoatCard>
               </div>
 
               <div className="booking__card__container">

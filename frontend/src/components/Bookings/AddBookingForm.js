@@ -6,15 +6,16 @@ import "./BookingsCSS/BoatBooking.css";
 
 function AddBookingForm({ boatId }) {
   const history = useHistory();
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [bookingDate, setBookingDate] = useState("");
   const [checkIn, setCheckIn] = useState(7);
   const [checkOut, setCheckOut] = useState(17);
+  const [validErrors, setValidErrors] = useState(null);
   const loggedInUserId = useSelector((state) => state.session.user.id);
+  console.log(bookingDate);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const body = { userId: loggedInUserId, boatId, startDate, endDate, checkIn, checkOut };
+    const body = { userId: loggedInUserId, boatId, bookingDate, checkIn, checkOut };
     // console.log(body);
     const newBooking = await csrfFetch(`/api/bookings/${boatId}`, {
       method: "POST",
@@ -27,33 +28,29 @@ function AddBookingForm({ boatId }) {
     }
   };
 
+  useEffect(() => {
+    if (!bookingDate) setValidErrors("Please select a date");
+  }, [bookingDate]);
+  useEffect(() => {
+    setValidErrors(null);
+  }, []);
+
   return (
     <div className="boat__booking__form">
       <h1>hello From the Add a Booking Form</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          Start Date :{/* {validErrors.marinaError ? <span>{validErrors.marinaError}</span> : null} */}
+          Booking Date :{validErrors && <span>Please Select a date!</span>}
           <input
             type="date"
             name="startDate"
-            value={startDate}
+            value={bookingDate}
             onChange={(e) => {
-              setStartDate(e.target.value);
+              setBookingDate(e.target.value);
             }}
           />
         </label>
-        <label>
-          End Date
-          {/* {validErrors.yearError ? <span>{validErrors.yearError}</span> : null} */}
-          <input
-            type="date"
-            name="endDate"
-            value={endDate}
-            onChange={(e) => {
-              setEndDate(e.target.value);
-            }}
-          />
-        </label>
+
         <label>
           Check-In Time
           <select

@@ -19,8 +19,9 @@ function BoatPage() {
   const userId = useSelector((state) => state.session.user?.id);
   const boatReviews = useSelector((state) => state.boatReviews);
   const boatRatingsNR = useSelector((state) => state.boatRatings);
+  console.log(boatReviews, "NR BOAT RATINGS-------------------");
+  console.log(boatRatingsNR);
 
-  // console.log(boatRatingsNR, "NR BOAT RATINGS-------------------");
   useEffect(() => {
     dispatch(boatsAction.getOneBoat(boatId));
     dispatch(reviewsAction.getAllReviewsForSingleBoat(boatId));

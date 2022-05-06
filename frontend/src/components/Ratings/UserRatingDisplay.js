@@ -1,19 +1,17 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
-import * as userRatingsActions from "../../store/userRatings";
+import { useSelector } from "react-redux";
+
 import {
   FaStar,
-  FaUserClock,
+  // FaUserClock,
   FaRegSmile,
-  FaHandshakeAltSlash,
+  // FaHandshakeAltSlash,
   FaRegHandshake,
   FaRegClock,
-  FaAirbnb,
-  FaRegCalendarAlt,
-  FaRegCalendarCheck,
-  FaRegCalendarMinus,
-  FaWrench,
+  // FaAirbnb,
+  // FaRegCalendarAlt,
+  // FaRegCalendarCheck,
+  // FaRegCalendarMinus,
+  // FaWrench,
 } from "react-icons/fa";
 
 function UserRatingDisplay({ userProfile }) {

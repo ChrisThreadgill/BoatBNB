@@ -22,8 +22,8 @@ function HomePage() {
       <div className="front__page__all__boats">
         {allBoats.boats?.map((boat) => {
           return (
-            <div>
-              <BoatCard boat={boat}></BoatCard>
+            <div key={boat.id}>
+              <BoatCard key={boat.id} boat={boat}></BoatCard>
               {sessionUser && boat && sessionUser.id === boat.userId ? (
                 <button
                   onClick={() => {
@@ -45,11 +45,6 @@ function HomePage() {
           );
         })}
       </div>
-      <ul>
-        <li>Leo</li>
-        <li>X</li>
-        <li>Joon</li>
-      </ul>
     </div>
   );
 }

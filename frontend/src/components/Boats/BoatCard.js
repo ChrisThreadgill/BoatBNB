@@ -29,6 +29,7 @@ function BoatCard({ boat }) {
                 <input
                   type="radio"
                   value={idx}
+                  key={image.id}
                   checked={boatView === idx}
                   onChange={(e) => {
                     setBoatView(idx);

@@ -9,7 +9,7 @@ function BoatReviewBoard({ boatReviews, boatRatingsNR }) {
       {Object.values(boatReviews).map((review) => {
         if (review.BoatRating) {
           return (
-            <div>
+            <div key={review.id}>
               <BoatReviewCard key={review.id} review={review}></BoatReviewCard>
             </div>
           );
@@ -18,7 +18,7 @@ function BoatReviewBoard({ boatReviews, boatRatingsNR }) {
       {Object.values(boatReviews).map((review) => {
         if (!review.BoatRating) {
           return (
-            <div>
+            <div key={review.id}>
               <BoatReviewCard key={review.id} review={review}></BoatReviewCard>
             </div>
           );
@@ -26,8 +26,8 @@ function BoatReviewBoard({ boatReviews, boatRatingsNR }) {
       })}
       {Object.values(boatRatingsNR).map((rating) => {
         return (
-          <div>
-            <BoatRatingCard rating={rating}></BoatRatingCard>
+          <div key={rating.id}>
+            <BoatRatingCard key={rating.id} rating={rating}></BoatRatingCard>
           </div>
         );
       })}

@@ -25,14 +25,14 @@ router.get(
   "/profile/:userId",
   asyncHandler(async (req, res) => {
     const { userId } = req.params;
-    // console.log("working");
+    console.log("working ---------------------------");
+
     const user = await User.findByPk(userId, {
       include: [{ model: Boat, include: Image }, UserRating, UserReview],
     });
     return res.json({
       user,
     });
-    // console.log(user);
   })
 );
 
@@ -41,7 +41,7 @@ router.get(
   "/:userId/boats",
   asyncHandler(async (req, res) => {
     const { userId } = req.params;
-    // console.log(userId);
+
     const user = await User.findByPk(userId, {
       include: [{ model: Boat, include: { model: Image } }],
     });

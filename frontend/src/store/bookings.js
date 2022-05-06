@@ -134,12 +134,6 @@ const bookingsReducer = (state = initialState, action) => {
       // let bookings = {};
       newState = { ...state };
       delete newState[action.payload.id];
-      // console.log(newState[action.payload.id]);
-      // for (const booking in newState) {
-      //   console.log(newState.booking);
-      //   bookings[booking.id] = booking;
-      // }
-      // console.log(bookings);
       return newState;
     case CLEAR:
       return {};

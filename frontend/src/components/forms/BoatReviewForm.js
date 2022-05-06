@@ -1,55 +1,87 @@
 import { useSelector } from "react-redux";
-import { useState } from "react";
-import { csrfFetch } from "../../store/csrf";
+import { useEffect, useState } from "react";
 
-function BoatReviewForm({ boat, rating, func, comfort, clean }) {
-  const loggedInUserId = useSelector((state) => state.session.user.id);
-  // console.log(boat);
+import * as reviewActions from "../../store/boatReviews";
+import * as ratingActions from "../../store/boatRatings";
+import { useDispatch } from "react-redux";
+
+function BoatReviewForm({ boat, rating, setRating, setClean, setComfort, setFunc, func, comfort, clean }) {
+  const dispatch = useDispatch();
+  const loggedInUser = useSelector((state) => state.session.user);
+  const [reviewLengthError, setReviewLengthError] = useState(null);
+  const [review, setReview] = useState("");
+
+  useEffect(() => {
+    if (review.length > 500) setReviewLengthError("Please limit your review to 500 characters");
+    if (review.length < 500) setReviewLengthError(false);
+  }, [review, reviewLengthError]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     let boatReviewId = null;
-
-    if (review) {
-      const reviewBody = { userId: 1, boatId: boat.id, review };
-      // console.log(body);
-      const newBoatReview = await csrfFetch(`/api/reviews/boatReview`, {
-        method: "POST",
-        body: JSON.stringify(reviewBody),
-      });
-      const response = await newBoatReview.json();
-      if (response.newBoatReview) {
-        boatReviewId = response.newBoatReview.id;
-        // console.log("you suck don't forget that, do better");
-      }
-    }
-
-    if (rating) {
+    if (rating && !review) {
       const ratingBody = {
-        userId: 1,
+        userId: loggedInUser.id,
         boatId: boat.id,
         cleanliness: clean,
+        average: rating,
         functional: func,
         comfort: comfort,
         boatReviewId,
       };
-      const newBoatRating = await csrfFetch(`/api/ratings/boatRating`, {
-        method: "POST",
-        body: JSON.stringify(ratingBody),
-      });
-      const response = await newBoatRating.json();
+      if (func === 0) ratingBody.functional = rating;
+      if (clean === 0) ratingBody.cleanliness = rating;
+      if (comfort === 0) ratingBody.comfort = rating;
 
-      // console.log("good job");
+      dispatch(ratingActions.addBoatRatingNR(ratingBody));
+
+      setRating(0);
+      setClean(0);
+      setComfort(0);
+      setFunc(0);
     }
+    if (!reviewLengthError) {
+      if (review && !rating) {
+        const reviewBody = { userId: loggedInUser.id, boatId: boat.id, review };
 
-    // console.log(newBoatId);
+        dispatch(reviewActions.addReview(reviewBody));
+
+        setReview("");
+      }
+      if (review && rating) {
+        const ratingBody = {
+          userId: loggedInUser.id,
+          boatId: boat.id,
+          average: rating,
+          cleanliness: clean,
+          functional: func,
+          comfort: comfort,
+          boatReviewId,
+        };
+        if (func === 0) ratingBody.functional = rating;
+        if (clean === 0) ratingBody.cleanliness = rating;
+        if (comfort === 0) ratingBody.comfort = rating;
+        console.log(comfort);
+        console.log(clean);
+        console.log(func);
+        const reviewBody = { userId: loggedInUser.id, boatId: boat.id, review };
+
+        dispatch(reviewActions.addReviewWithRating(reviewBody, ratingBody));
+
+        setReview("");
+        setRating(0);
+        setClean(0);
+        setComfort(0);
+        setFunc(0);
+      }
+    }
   };
 
-  const [review, setReview] = useState("");
   return (
     <div>
       <div>
+        {reviewLengthError && <span>Review Must be less than 500 Characters!</span>}
         <form onSubmit={handleSubmit}>
           <label>
             Write a review!
@@ -61,7 +93,9 @@ function BoatReviewForm({ boat, rating, func, comfort, clean }) {
               }}
             ></input>
           </label>
-          <button type="submit">Add Review!</button>
+          <button disabled={reviewLengthError} type="submit">
+            Add Review!
+          </button>
         </form>
       </div>
     </div>

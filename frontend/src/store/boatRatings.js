@@ -1,8 +1,11 @@
+import * as reviewActions from "./boatReviews";
 import { csrfFetch } from "./csrf";
+import rfdc from "rfdc";
+const clone = rfdc();
 
-const GET_REVIEWS_BOAT = "reviews/boatsGetAll";
 const GET_RATINGS_NO_REVIEW = "ratings/allNoReview";
-const GET_ONE_REVIEW = "reviews/boatsGetOne";
+const ADD_RATING = "ratings/addRating";
+const DELETE_RATING = "ratings/delete";
 
 const singleBoatRatingsNR = (ratings) => {
   return {
@@ -11,70 +14,96 @@ const singleBoatRatingsNR = (ratings) => {
   };
 };
 
-// const oneBoat = (boat) => {
-//   return {
-//     type: GET_ONE,
-//     payload: boat,
-//   };
-// };
+const addBoatRating = (rating) => {
+  return {
+    type: ADD_RATING,
+    payload: rating,
+  };
+};
 
-// const providerBoats = (boats) => {
-//   return {
-//     type: GET_PROV,
-//     payload: boats,
-//   };
-// };
+const deleteRating = (ratingId) => {
+  return {
+    type: DELETE_RATING,
+    payload: ratingId,
+  };
+};
 
 export const getRatingsForSingleBoatNR = (boatId) => async (dispatch) => {
-  // console.log(boatId);
   const response = await csrfFetch(`/api/ratings/boat/${boatId}/noReview`, {
     method: "GET",
   });
 
   const ratings = await response.json();
-  // console.log(ratings, "----------");
+
   dispatch(singleBoatRatingsNR(ratings));
   return ratings;
 };
-// export const getAllBoats = () => async (dispatch) => {
-//   const response = await csrfFetch(`/api/boats/`, {
-//     method: "GET",
-//   });
-//   const boats = await response.json();
-//   // console.log(boats);
-//   dispatch(allBoats(boats));
-//   return boats;
-// };
 
-// export const getProviderBoats = (userId) => async (dispatch) => {
-//   const response = await csrfFetch(`/api/users/${userId}/boats`, {
-//     method: "GET",
-//   });
-//   const boats = await response.json();
-//   dispatch(providerBoats(boats));
-//   return boats;
-// };
+export const addBoatRatingNR = (ratingBody) => async (dispatch) => {
+  const { userId } = ratingBody;
+  const newBoatRating = await csrfFetch(`/api/ratings/boatRating`, {
+    method: "POST",
+    body: JSON.stringify(ratingBody),
+  });
+  const response = await newBoatRating.json();
+
+  const getUser = await csrfFetch(`/api/users/profile/${userId}`, {
+    method: "GET",
+  });
+  const User = await getUser.json();
+  response.newBoatRating["User"] = User.user;
+
+  dispatch(addBoatRating(response.newBoatRating));
+  return newBoatRating;
+};
+
+export const deleteBoatRating = (reviewId, ratingId) => async (dispatch) => {
+  const ratingToDelete = await csrfFetch(`/api/ratings/boats/${ratingId}`, {
+    method: "DELETE",
+  });
+  const ratingResponse = await ratingToDelete.json();
+  console.log(ratingResponse);
+  dispatch(deleteRating(ratingId));
+
+  const reviewToDelete = await csrfFetch(`/api/reviews/boats/${reviewId}`, {
+    method: "DELETE",
+  });
+  const reviewResponse = await reviewToDelete.json();
+  dispatch(reviewActions.deleteReview(reviewId));
+
+  console.log(reviewResponse);
+};
+
+export const deleteSingleBoatRating = (ratingId) => async (dispatch) => {
+  // console.log(ratingId);
+  const ratingToDelete = await csrfFetch(`/api/ratings/boats/${ratingId}`, {
+    method: "DELETE",
+  });
+  const ratingResponse = await ratingToDelete.json();
+
+  dispatch(deleteRating(ratingId));
+};
 
 const initialState = {};
 
 const boatRatingsReducer = (state = initialState, action) => {
-  // console.log(action, "-------action");
-  let newState;
+  let newState = clone(state);
   switch (action.type) {
     case GET_RATINGS_NO_REVIEW:
-      // console.log(action.payload, "-------------------");
       const ratingsNR = {};
       for (let rating of action.payload.boatRatings) ratingsNR[rating.id] = rating;
       return { ...state, ...ratingsNR };
-    // case GET_ONE:
-    //   newState = Object.assign({}, state);
-    //   newState = action.payload;
-    //   // console.log(newState, "-------- new state");
-    //   return newState;
-    // case GET_PROV:
-    //   newState = Object.assign({}, state);
-    //   newState = action.payload;
-    //   return newState;
+
+    case ADD_RATING:
+      console.log(state);
+      console.log(action.payload.id);
+      newState[action.payload.id] = action.payload;
+      return newState;
+
+    case DELETE_RATING:
+      delete newState[action.payload];
+      return newState;
+
     default:
       return state;
   }

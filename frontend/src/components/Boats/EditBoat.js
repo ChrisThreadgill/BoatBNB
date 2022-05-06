@@ -54,20 +54,15 @@ function EditBoat({ user, view, setView, boat }) {
   }
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
     const body = { userId, marina, year, model, city, state: stateCode, accessories, captain, price };
-    // console.log(body);
+
     const newBoat = await csrfFetch(`/api/boats/${boatId}`, {
       method: "PUT",
       body: JSON.stringify(body),
     });
     const response = await newBoat.json();
-    // console.log(response);
+
     history.push(`/boat/${boatId}/edit`);
-
-    // setView("boats");
-
-    // console.log(newBoatId);
   };
 
   const deleteBoat = async (e) => {
@@ -98,7 +93,7 @@ function EditBoat({ user, view, setView, boat }) {
       errors.marinaError = "Please provide the marina your boat is at.";
     }
     // console.log(errors.marinaError);
-    if (year === "" || year?.length !== 4 || year < 1940 || year > 2025) {
+    if (year === "") {
       errors.yearError = "Please enter a valid year in the format 'YYYY'.";
     }
     // console.log(errors.yearError);
@@ -112,15 +107,15 @@ function EditBoat({ user, view, setView, boat }) {
     setValidErrors(errors);
   }, [marina, year, model, stateCode]);
 
-  useEffect(() => {
-    const errors = {
-      marinaError: null,
-      yearError: null,
-      cityError: null,
-      stateError: null,
-    };
-    setValidErrors(errors);
-  }, []);
+  // useEffect(() => {
+  //   const errors = {
+  //     marinaError: null,
+  //     yearError: null,
+  //     cityError: null,
+  //     stateError: null,
+  //   };
+  //   setValidErrors(errors);
+  // }, []);
 
   return (
     <div className="edit__boat__container">

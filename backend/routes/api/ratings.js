@@ -12,7 +12,6 @@ const { User, Boat, Image, Booking, BoatRating, BoatReview, UserRating, UserRevi
 router.get(
   "/boat/:boatId",
   asyncHandler(async (req, res) => {
-    // console.log("working");
     const { boatId } = req.params;
     const boatRatings = await BoatRating.findAll({
       where: {
@@ -25,7 +24,7 @@ router.get(
         },
       ],
     });
-    // console.log(boats);
+
     return res.json({
       boatRatings,
     });
@@ -35,7 +34,6 @@ router.get(
 router.get(
   "/boat/:boatId/noReview",
   asyncHandler(async (req, res) => {
-    // console.log("working");
     const { boatId } = req.params;
     const boatRatings = await BoatRating.findAll({
       where: {
@@ -60,14 +58,13 @@ router.get(
 router.get(
   "/:userId",
   asyncHandler(async (req, res) => {
-    // console.log("working");
     const { userId } = req.params;
     const userRatings = await UserRating.findAll({
       where: {
         userId,
       },
     });
-    // console.log(boats);
+
     return res.json({
       userRatings,
     });
@@ -76,12 +73,12 @@ router.get(
 
 router.put(
   "/brEdit/:boatRatingId",
-  // requireAuth,
+  requireAuth,
   asyncHandler(async (req, res) => {
     const { boatRatingId } = req.params;
 
     const { userId, boatId, cleanliness, functional, comfort, average, boatReviewId } = req.body;
-    // console.log(userId);
+
     const boatRatingToUpdate = await BoatRating.findByPk(boatRatingId);
 
     if (userId === boatRatingToUpdate.userId) {
@@ -105,13 +102,11 @@ router.put(
 
 router.put(
   "/urEdit/:userRatingId",
-  // requireAuth,
+  requireAuth,
   asyncHandler(async (req, res) => {
-    // console.log("in this?");
     const { userRatingId } = req.params;
 
     const { userId, reviewerId, friendliness, punctuality, trustworthy, average, userReviewId } = req.body;
-    // console.log(userId);
 
     const userRatingToUpdate = await UserRating.findByPk(userRatingId);
 
@@ -140,7 +135,6 @@ router.post(
   // requireAuth,
   asyncHandler(async (req, res) => {
     const { userId, boatId, cleanliness, functional, comfort, average, boatReviewId } = req.body;
-    // console.log(userId);
 
     const newBoatRating = await BoatRating.build({
       userId,
@@ -165,7 +159,6 @@ router.post(
   // requireAuth,
   asyncHandler(async (req, res) => {
     const { userId, reviewerId, friendliness, punctuality, trustworthy, average, userReviewId } = req.body;
-    // console.log(userId);
 
     const newUserRating = await UserRating.build({
       userId,
@@ -177,7 +170,7 @@ router.post(
       userReviewId,
     });
 
-    await newBoatRating.save();
+    await newUserRating.save();
     return res.json({
       newUserRating,
     });

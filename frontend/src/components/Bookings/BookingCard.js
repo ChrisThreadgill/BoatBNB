@@ -13,10 +13,8 @@ function BookingCard({ booking }) {
 
   return (
     <div>
-      <h1>Start Date</h1>
-      <h3>{booking && booking.startDate}</h3>
-      <h1>End Date</h1>
-      <h3>{booking && booking.endDate}</h3>
+      <h1>Booking Date</h1>
+      <h3>{booking && booking.bookingDate}</h3>
       <h1>Check In</h1>
       <h3>{booking && booking.checkIn}</h3>
       <h1>Check Out</h1>

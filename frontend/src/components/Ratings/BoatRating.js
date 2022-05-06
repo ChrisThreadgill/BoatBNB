@@ -2,21 +2,21 @@ import { useEffect } from "react";
 
 import {
   FaStar,
-  FaUserClock,
-  FaRegSmile,
-  FaWheelchair,
+  // FaUserClock,
+  // FaRegSmile,
+  // FaWheelchair,
   FaSoap,
   FaCouch,
-  FaHandshakeAltSlash,
-  FaHammer,
-  FaRegHandshake,
-  FaRegClock,
-  FaHorse,
-  FaHorseHead,
-  FaAirbnb,
-  FaRegCalendarAlt,
-  FaRegCalendarCheck,
-  FaRegCalendarMinus,
+  // FaHandshakeAltSlash,
+  // FaHammer,
+  // FaRegHandshake,
+  // FaRegClock,
+  // FaHorse,
+  // FaHorseHead,
+  // FaAirbnb,
+  // FaRegCalendarAlt,
+  // FaRegCalendarCheck,
+  // FaRegCalendarMinus,
   FaWrench,
 } from "react-icons/fa";
 import "./Rating.css";
@@ -44,7 +44,7 @@ function BoatRating({
     const average = (func + comfort + clean) / 3;
     const overall = Math.ceil(average);
     setRating(overall);
-  }, [func, comfort, clean]);
+  }, [setRating, func, comfort, clean]);
   return (
     <div>
       <h1>Average</h1>
@@ -75,7 +75,7 @@ function BoatRating({
         );
       })}
 
-      <h1>Cleanliness</h1>
+      <h1>Functionality</h1>
       {[...Array(5)].map((star, idx) => {
         const currentVal = idx + 1;
         return (
@@ -87,13 +87,13 @@ function BoatRating({
               value={currentVal}
               onClick={() => setFunc(currentVal)}
             ></input>
-            <FaSoap
+            <FaWrench
               size={22}
               color={currentVal <= (funcHover || func) ? "#ffc107" : "#e4e5e9"}
               className="user__stars"
               onMouseEnter={() => setFuncHover(currentVal)}
               onMouseLeave={() => setFuncHover(null)}
-            ></FaSoap>
+            ></FaWrench>
           </label>
         );
       })}
@@ -119,7 +119,7 @@ function BoatRating({
           </label>
         );
       })}
-      <h1>Functionality</h1>
+      <h1>Cleanliness</h1>
       {[...Array(5)].map((star, idx) => {
         const currentVal = idx + 1;
         return (
@@ -131,13 +131,13 @@ function BoatRating({
               value={currentVal}
               onClick={() => setClean(currentVal)}
             ></input>
-            <FaWrench
+            <FaSoap
               size={22}
               color={currentVal <= (cleanHover || clean) ? "#ffc107" : "#e4e5e9"}
               className="user__stars"
               onMouseEnter={() => setCleanHover(currentVal)}
               onMouseLeave={() => setCleanHover(null)}
-            ></FaWrench>
+            ></FaSoap>
           </label>
         );
       })}

@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     Boat.hasMany(models.Booking, { foreignKey: "boatId", onDelete: "CASCADE", hooks: true });
     Boat.belongsTo(models.User, { foreignKey: "userId" });
     Boat.hasMany(models.Image, { foreignKey: "boatId", onDelete: "CASCADE", hooks: true });
-    Boat.hasMany(models.BoatReview, { foreignKey: "boatId" });
-    Boat.hasMany(models.BoatRating, { foreignKey: "boatId" });
+    Boat.hasMany(models.BoatReview, { foreignKey: "boatId", onDelete: "CASCADE", hooks: true });
+    Boat.hasMany(models.BoatRating, { foreignKey: "boatId", onDelete: "CASCADE", hooks: true });
   };
   return Boat;
 };

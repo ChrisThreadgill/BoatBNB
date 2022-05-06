@@ -26,7 +26,7 @@ function ProviderBoats({ view, setView }) {
     <div className="provider__boats__card">
       {providerBoats?.Boats.map((boat) => {
         return (
-          <div>
+          <div key={boat.id}>
             <BoatCard key={boat.id} boat={boat}></BoatCard>
             <button
               onClick={() => {

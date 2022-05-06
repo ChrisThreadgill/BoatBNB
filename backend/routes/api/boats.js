@@ -12,38 +12,15 @@ const { User, Boat, Image, Booking } = require("../../db/models");
 router.get(
   "/",
   asyncHandler(async (req, res) => {
-    // console.log("working");
     const boats = await Boat.findAll({
       include: Image,
     });
-    // console.log(boats);
+
     return res.json({
       boats,
     });
   })
 );
-
-//TODO COME BACK TO THIS GET BOATS WITH SPECIFIC RATINGS
-
-// router.get(
-//   "/boat/:boatId",
-//   asyncHandler(async (req, res) => {
-//     // console.log("working");
-//     const { boatId } = req.params;
-//     const boatRatings = await BoatRating.findAll({
-//       where: {
-//         boatId,
-//         average: {
-//           [Op.gt]: 2,
-//         },
-//       },
-//     });
-//     // console.log(boats);
-//     return res.json({
-//       boatRatings,
-//     });
-//   })
-// );
 
 router.get(
   `/:boatId/bookings`,
@@ -63,23 +40,36 @@ router.get(
 router.get(
   "/:boatId",
   asyncHandler(async (req, res) => {
-    // console.log("working");
     const { boatId } = req.params;
-    // console.log(boatId, "------------");
+
     const boat = await Boat.findByPk(boatId, {
       include: Image,
     });
-    // console.log(boat);
+
     return res.json({
       boat,
     });
   })
 );
 
+const validateBoatAddForm = [
+  check("marina").exists({ checkFalsy: true }).withMessage("Please Provide a Marina"),
+  check("marina").isLength({ max: 70 }).withMessage("Your marina name must be within 75 characters."),
+  check("city").exists({ checkFalsy: true }).withMessage("Please provide a city."),
+  check("city").isLength({ max: 50 }).withMessage("City must be within 50 characters."),
+  check("state").exists({ checkFalsy: true }).withMessage("Please provide state."),
+  check("state").isLength({ max: 2 }).withMessage("State Can only be 2 characters."),
+  check("year").exists({ checkFalsy: true }).withMessage("Must provide a year."),
+  check("model").exists({ checkFalsy: true }).withMessage("Please a model name."),
+  check("price").exists({ checkFalsy: true }).withMessage("please provide a price."),
+  handleValidationErrors,
+];
+
 //post create a new boat for a user
 router.post(
   "/:userId/boats",
   requireAuth,
+  validateBoatAddForm,
   asyncHandler(async (req, res) => {
     const { userId, marina, city, state, year, model, accessories, captain, price, schedule } = req.body;
     // console.log(userId);
@@ -105,7 +95,7 @@ router.post(
 router.put(
   "/:boatId",
   requireAuth,
-
+  validateBoatAddForm,
   asyncHandler(async (req, res) => {
     // console.log(req.body);
     const { boatId } = req.params;
@@ -136,6 +126,7 @@ router.put(
 
 router.delete(
   "/:boatId",
+  requireAuth,
   asyncHandler(async (req, res) => {
     const { boatId } = req.params;
 

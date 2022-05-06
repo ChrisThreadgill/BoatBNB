@@ -3,6 +3,17 @@ const router = express.Router();
 const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+const S3 = require("aws-sdk/clients/s3");
+const fs = require("fs");
+const util = require("util");
+const unlinkFile = util.promisify(fs.unlink);
+const s3 = new S3({
+  region: process.env.AWS_BUCKET_REGION,
+  accessKeyId: process.env.AWS_ACCESS_KEY,
+  secretAccessKey: process.env.AWS_SECRET_KEY,
+});
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const { User, Boat, Image } = require("../../db/models");
@@ -24,18 +35,6 @@ router.post(
   })
 );
 
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
-const S3 = require("aws-sdk/clients/s3");
-const fs = require("fs");
-const util = require("util");
-const unlinkFile = util.promisify(fs.unlink);
-const s3 = new S3({
-  region: process.env.AWS_BUCKET_REGION,
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET_KEY,
-});
-
 function uploadFile(file) {
   const fileStream = fs.createReadStream(file.path);
 
@@ -54,10 +53,10 @@ function getFileStream(fileKey) {
   return s3.getObject(downloadParams).createReadStream();
 }
 
-// s3.putObject({});
-
 router.get("/:key", (req, res) => {
+  console.log("workinggggggggggggggg, in the image request");
   const key = req.params.key;
+  console.log(key);
   const readStream = getFileStream(key);
   readStream.pipe(res);
 });
@@ -66,13 +65,11 @@ router.post(
   "/",
   upload.single("image"),
   asyncHandler(async (req, res) => {
-    // console.log(req, "----------------------");
     const file = req.file;
     const boatId = req.body.boatId;
-    // console.log(boatId);
 
     const result = await uploadFile(file);
-    // console.log(result.key);
+
     const url = result.key;
     if (result.key) {
       const newImage = await Image.build({
@@ -86,9 +83,6 @@ router.post(
         newImage,
       });
     }
-    // console.log(result.key);
-
-    // res.send("yes");
   })
 );
 

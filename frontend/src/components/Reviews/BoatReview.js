@@ -14,7 +14,7 @@ function BoatReview({ boat }) {
 
   const [clean, setClean] = useState(null);
   const [cleanHover, setCleanHover] = useState(null);
-
+  console.log(rating);
   return (
     <div>
       <h1>Leave a Review!</h1>
@@ -36,7 +36,17 @@ function BoatReview({ boat }) {
         cleanHover={cleanHover}
         setCleanHover={setCleanHover}
       ></BoatRating>
-      <BoatReviewForm rating={rating} func={func} clean={clean} comfort={comfort} boat={boat}></BoatReviewForm>
+      <BoatReviewForm
+        rating={rating}
+        setComfort={setComfort}
+        setRating={setRating}
+        setClean={setClean}
+        setFunc={setFunc}
+        func={func}
+        clean={clean}
+        comfort={comfort}
+        boat={boat}
+      ></BoatReviewForm>
     </div>
   );
 }

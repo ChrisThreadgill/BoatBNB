@@ -1,5 +1,6 @@
 function UserProfileCard({ userProfile }) {
   const profilePic = userProfile?.profilePicture;
+  console.log(profilePic);
   return (
     <div>
       <div className="user__profile__card">

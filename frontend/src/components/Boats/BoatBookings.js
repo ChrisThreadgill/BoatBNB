@@ -6,12 +6,12 @@ import { csrfFetch } from "../../store/csrf";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import "./BoatCSS/BoatBookings.css";
+import { FaStar } from "react-icons/fa";
 
 function BoatBookings({ boat }) {
   const dispatch = useDispatch();
   const bookingsObj = useSelector((state) => state.bookings);
   const bookingsArr = Object.values(bookingsObj);
-  // console.log(bookingsArr);
 
   useEffect(() => {
     dispatch(bookingsActions.getAllBoatBookings(boat.id));
@@ -21,18 +21,42 @@ function BoatBookings({ boat }) {
     <div>
       {bookingsArr.length > 0 &&
         bookingsArr.map((booking) => {
-          // console.log(booking);
+          console.log(booking.User.UserRatings);
+
+          const averageUserRatings = booking.User.UserRatings.reduce(
+            (prev, curr, idx) => {
+              prev.average = prev.average + curr.average;
+              prev.friendliness = prev.friendliness + curr.friendliness;
+              prev.punctuality = prev.punctuality + curr.punctuality;
+              prev.trustworthy = prev.trustworthy + curr.trustworthy;
+              prev.count = ++idx;
+              if (prev.count === booking.User.UserRatings.length) {
+                prev.average = Math.ceil(prev.average / prev.count);
+                prev.friendliness = Math.ceil(prev.friendliness / prev.count);
+                prev.punctuality = Math.ceil(prev.punctuality / prev.count);
+                prev.trustworthy = Math.ceil(prev.trustworthy / prev.count);
+              }
+              return prev;
+            },
+            { average: null, friendliness: null, punctuality: null, trustworthy: null, count: null }
+          );
           return (
             <div className="provider__bookings__view">
               <div>
-                <h1>profile div</h1>
+                <h1>{booking.User.firstName}</h1>
                 <img src={`/api/images/${booking.User.profilePicture}`} className="profile__avatar" />
-                <h2>user average rating will go here</h2>
+                {averageUserRatings && averageUserRatings.average >= 1 && (
+                  <div>
+                    {[...Array(averageUserRatings.average)].map((star, idx) => {
+                      return <FaStar key={idx} color={"#ffc107"}></FaStar>;
+                    })}
+                  </div>
+                )}
               </div>
 
               <div>
                 <h1>booking Information Div</h1>
-                <h3>{booking.startDate}</h3>
+                <h3>{booking.bookingDate}</h3>
                 <h3>{booking.checkIn}</h3>
                 <h3>{booking.checkOut}</h3>
 

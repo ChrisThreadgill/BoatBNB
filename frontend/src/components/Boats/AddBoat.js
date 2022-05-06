@@ -100,7 +100,7 @@ function AddBoat({ user, view, setView, boat }) {
           <br></br>
           Rent at your own risk.
           <br></br>
-          *****IF YOU ARE CHOOSE TO CAPTAIN YOUR BOAT******
+          *****IF YOU CHOOSE TO CAPTAIN YOUR BOAT******
           <br></br>
           Understand that you are responsible for the boatBNB members that have booked your service.
           <br></br>

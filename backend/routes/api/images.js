@@ -54,9 +54,8 @@ function getFileStream(fileKey) {
 }
 
 router.get("/:key", (req, res) => {
-  console.log("workinggggggggggggggg, in the image request");
   const key = req.params.key;
-  console.log(key);
+
   const readStream = getFileStream(key);
   readStream.pipe(res);
 });

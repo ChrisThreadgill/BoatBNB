@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import * as bookingsActions from "../../store/bookings.js";
+import * as boatActions from "../../store/boats";
 import { csrfFetch } from "../../store/csrf";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
@@ -33,7 +33,6 @@ function EditBoat({ user, view, setView, boat }) {
   const [model, setModel] = useState(cModel);
   const [city, setCity] = useState(cCity);
   const [file, setFile] = useState();
-  const [images, setImages] = useState([]);
   const [stateCode, setStateCode] = useState(cState);
   const [price, setPrice] = useState(cPrice);
   const [captain, setCaptain] = useState(cCaptain);
@@ -50,38 +49,31 @@ function EditBoat({ user, view, setView, boat }) {
     formData.append("image", image);
     formData.append("boatId", boatId);
     const result = await axios.post("/api/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
-    return result.data;
+
+    if (result.ok) {
+      history.push(`/users/${userId}/profile`);
+      return result.data;
+    }
   }
 
   const handleSubmit = async (e) => {
-    const body = { userId, marina, year, model, city, state: stateCode, accessories, captain, price };
-
-    const newBoat = await csrfFetch(`/api/boats/${boatId}`, {
-      method: "PUT",
-      body: JSON.stringify(body),
-    });
-    const response = await newBoat.json();
+    const body = { boatId, userId, marina, year, model, city, state: stateCode, accessories, captain, price };
+    dispatch(boatActions.updateOneBoat(body));
 
     history.push(`/boat/${boatId}/edit`);
   };
 
   const deleteBoat = async (e) => {
-    // console.log("working");
     e.preventDefault();
     const deletedBoat = await csrfFetch(`/api/boats/${boatId}`, {
       method: "DELETE",
     });
     const response = await deletedBoat.json();
-    // console.log(response.message);
-    // if (response.message === "Successfully Removed Boat") {
-    //   console.log("working");
+
     history.push(`/users/${userId}/profile`);
-    // }
   };
 
   useEffect(() => {
-    // console.log(boatId);
-    // console.log(Cookies.get("XSRF-Token"), "XSRFFFFFFFFFFFFF");
     const errors = {
       marinaError: null,
       yearError: null,
@@ -106,16 +98,6 @@ function EditBoat({ user, view, setView, boat }) {
 
     setValidErrors(errors);
   }, [marina, year, model, stateCode]);
-
-  // useEffect(() => {
-  //   const errors = {
-  //     marinaError: null,
-  //     yearError: null,
-  //     cityError: null,
-  //     stateError: null,
-  //   };
-  //   setValidErrors(errors);
-  // }, []);
 
   return (
     <div className="edit__boat__container">

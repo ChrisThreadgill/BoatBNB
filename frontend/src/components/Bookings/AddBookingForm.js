@@ -38,51 +38,64 @@ function AddBookingForm({ boatId }) {
   return (
     <div className="boat__booking__form">
       <h1>hello From the Add a Booking Form</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Booking Date :{validErrors && <span>Please Select a date!</span>}
-          <input
-            type="date"
-            name="startDate"
-            value={bookingDate}
-            onChange={(e) => {
-              setBookingDate(e.target.value);
-            }}
-          />
-        </label>
+      <div>
+        <form onSubmit={handleSubmit} className="booking__form">
+          <div>
+            <label>
+              Booking Date :{validErrors && <span>Please Select a date!</span>}
+              <input
+                type="date"
+                name="startDate"
+                value={bookingDate}
+                onChange={(e) => {
+                  setBookingDate(e.target.value);
+                }}
+              />
+            </label>
+          </div>
 
-        <label>
-          Check-In Time
-          <select
-            name="checkIn"
-            value={checkIn}
-            onChange={(e) => {
-              setCheckIn(e.target.value);
-            }}
-          >
-            <option value={7}>7:00 A.M</option>
-            <option value={12}>12:00 P.M</option>
-            <option value={17}>5:00 P.M</option>
-            <option value={22}>10:00 P.M</option>
-          </select>
-        </label>
-        <label>
-          Check-Out Time
-          <select
-            name="checkOut"
-            value={checkOut}
-            onChange={(e) => {
-              setCheckOut(e.target.value);
-            }}
-          >
-            <option value={7}>7:00 A.M</option>
-            <option value={12}>12:00 P.M</option>
-            <option value={17}>5:00 P.M</option>
-            <option value={22}>10:00 P.M</option>
-          </select>
-        </label>
-        <button type="submit">Book Now!</button>
-      </form>
+          <div>
+            <label>
+              Check-In Time
+              <select
+                name="checkIn"
+                value={checkIn}
+                onChange={(e) => {
+                  setCheckIn(e.target.value);
+                }}
+              >
+                <option value={7}>7:00 A.M</option>
+                <option value={12}>12:00 P.M</option>
+                <option value={17}>5:00 P.M</option>
+                <option value={22}>10:00 P.M</option>
+              </select>
+            </label>
+          </div>
+
+          <div>
+            <label>
+              Check-Out Time
+              <select
+                name="checkOut"
+                value={checkOut}
+                onChange={(e) => {
+                  setCheckOut(e.target.value);
+                }}
+              >
+                <option value={7}>7:00 A.M</option>
+                <option value={12}>12:00 P.M</option>
+                <option value={17}>5:00 P.M</option>
+                <option value={22}>10:00 P.M</option>
+              </select>
+            </label>
+          </div>
+          <div className="book__now__button__div">
+            <button className="add__booking__button" type="submit">
+              Book Now!
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

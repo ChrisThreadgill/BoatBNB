@@ -7,21 +7,27 @@ import { useParams } from "react-router-dom";
 
 function AddBoat({ user, view, setView, boat }) {
   const [marina, setMarina] = useState("");
+  const [marinaError, setMarinaError] = useState("");
   const [year, setYear] = useState("");
+  const [yearError, setYearError] = useState(null);
   const [model, setModel] = useState("");
   const [city, setCity] = useState("");
-  const [file, setFile] = useState();
+  const [file, setFile] = useState(null);
+  const [fileError, setFileError] = useState("");
   const [images, setImages] = useState([]);
   const [stateCode, setStateCode] = useState("");
+  const [stateCodeError, setStateCodeError] = useState("");
   const [price, setPrice] = useState("");
   const [captain, setCaptain] = useState(false);
   const [accessories, setAccessories] = useState("");
-  const [validErrors, setValidErrors] = useState({});
+  const [validErrors, setValidErrors] = useState(false);
   // console.log(user.id);
 
   const stateValidate = new RegExp(
     /^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/
   );
+
+  const yearValidator = new RegExp(/\d+/);
 
   async function postImage({ image, boatId }) {
     const formData = new FormData();
@@ -33,6 +39,7 @@ function AddBoat({ user, view, setView, boat }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const body = { userId: user.id, marina, year, model, city, state: stateCode, accessories, captain, price };
     // console.log(body);
     const newBoat = await csrfFetch(`/api/boats/${user.id}/boats`, {
@@ -50,42 +57,38 @@ function AddBoat({ user, view, setView, boat }) {
   };
 
   useEffect(() => {
-    // console.log(stateCode);
-    // console.log(Cookies.get("XSRF-Token"), "XSRFFFFFFFFFFFFF");
-    const errors = {
-      marinaError: null,
-      yearError: null,
-      cityError: null,
-      stateError: null,
-    };
+    if (marina.length > 75) setMarinaError("The Marina can only be 75 characters");
 
-    if (!marina?.length) {
-      errors.marinaError = "Please provide the marina your boat is at.";
-    }
-    // console.log(errors.marinaError);
-    if (year === "" || year?.length !== 4 || year < 1940 || year > 2025) {
-      errors.yearError = "Please enter a valid year in the format 'YYYY'.";
-    }
-    // console.log(errors.yearError);
+    if (marina.length < 75) setMarinaError(true);
 
-    if (!stateValidate.test(stateCode)) {
-      errors.stateError = 'Please provide a valid 2 digit state code I.e."AR"';
-    }
+    if (year === "") setYearError("You must provide a year");
+    if (year !== "") setYearError(true);
 
-    // console.log(errors);
+    if (!yearValidator.test(year)) setYearError("Year Must be a number ");
+    if (yearValidator.test(year)) setYearError(true);
 
-    setValidErrors(errors);
-  }, [marina, year, model, stateCode]);
+    if (!stateValidate.test(stateCode)) setStateCodeError("Please provide a valid 2 digit state code");
+    if (stateValidate.test(stateCode)) setStateCodeError(true);
 
-  useEffect(() => {
-    const errors = {
-      marinaError: null,
-      yearError: null,
-      cityError: null,
-      stateError: null,
-    };
-    setValidErrors(errors);
-  }, []);
+    if (file === null) setFileError("please provide an Image for your Boat!");
+    if (file) setFileError(true);
+
+    // if(!yearValidator.test(price))
+    // if(!yearValidator.test(price))
+
+    if (marinaError || yearError || stateCodeError || fileError) setValidErrors(true);
+  }, [marina, year, model, stateCode, file]);
+
+  console.log(yearError, stateCodeError, marinaError, fileError, year, typeof year, validErrors);
+  // useEffect(() => {
+  //   const errors = {
+  //     marinaError: null,
+  //     yearError: null,
+  //     cityError: null,
+  //     stateError: null,
+  //   };
+  //   setValidErrors(errors);
+  // }, []);
 
   return (
     <div className="add__boat__container">
@@ -115,7 +118,7 @@ function AddBoat({ user, view, setView, boat }) {
         <form onSubmit={handleSubmit}>
           <label>
             Marina
-            {validErrors.marinaError ? <span>{validErrors.marinaError}</span> : null}
+            {validErrors?.marinaError ? <span>{validErrors.marinaError}</span> : null}
             <input
               type="text"
               name="marina"
@@ -126,7 +129,7 @@ function AddBoat({ user, view, setView, boat }) {
           </label>
           <label>
             Year
-            {validErrors.yearError ? <span>{validErrors.yearError}</span> : null}
+            {validErrors?.yearError ? <span>{validErrors.yearError}</span> : null}
             <input
               type="text"
               name="year"
@@ -162,7 +165,7 @@ function AddBoat({ user, view, setView, boat }) {
           </label>
           <label>
             State
-            {validErrors.stateError ? <span>{validErrors.stateError}</span> : null}
+            {validErrors?.stateError ? <span>{validErrors.stateError}</span> : null}
             <input
               type="text"
               name="state"
@@ -234,7 +237,9 @@ function AddBoat({ user, view, setView, boat }) {
                 accept="image/*"
               ></input>
             </label>
-            <button type="submit">Add A Boat</button>
+            <button disabled={!validErrors} type="submit">
+              Add A Boat
+            </button>
           </div>
         </form>
       </div>

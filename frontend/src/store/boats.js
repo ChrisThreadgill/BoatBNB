@@ -1,8 +1,11 @@
 import { csrfFetch } from "./csrf";
+import rfdc from "rfdc";
+const clone = rfdc();
 
 const GET_ALL = "boats/getAll";
 const GET_PROV = "boats/getprov";
 const GET_ONE = "boats/getone";
+const UPDATE = "/boats/update";
 const CLEAN = "boats/clean";
 
 const allBoats = (boats) => {
@@ -25,6 +28,13 @@ const providerBoats = (boats) => {
     payload: boats,
   };
 };
+
+const updateBoat = (boat) => {
+  return {
+    type: UPDATE,
+    payload: boat,
+  };
+};
 const cleanBoats = () => {
   return {
     type: CLEAN,
@@ -32,15 +42,26 @@ const cleanBoats = () => {
 };
 
 export const getOneBoat = (boatId) => async (dispatch) => {
-  // console.log("working");
+  console.log("working");
+  console.log(boatId);
   const response = await csrfFetch(`/api/boats/${boatId}`, {
     method: "GET",
   });
-  // console.log(response, "response-----------");
+  console.log(response, "response-----------");
   const boat = await response.json();
-  // console.log(boat, "----------");
-  dispatch(oneBoat(boat));
-  return boat;
+  console.log(boat.boat, "----------");
+  dispatch(oneBoat(boat.boat));
+  return boat.boat;
+};
+
+export const updateOneBoat = (body) => async (dispatch) => {
+  const response = await csrfFetch(`/api/boats/${body.boatId}`, {
+    method: "PUT",
+    body: JSON.stringify(body),
+  });
+  const boat = await response.json();
+  console.log(boat);
+  dispatch(updateBoat(boat.boatToUpdate));
 };
 export const getAllBoats = () => async (dispatch) => {
   const response = await csrfFetch(`/api/boats/`, {
@@ -57,31 +78,46 @@ export const getProviderBoats = (userId) => async (dispatch) => {
     method: "GET",
   });
   const boats = await response.json();
-  dispatch(providerBoats(boats));
+  // console.log(boats.user.Boats);
+  dispatch(providerBoats(boats.user.Boats));
   return boats;
 };
 export const clean = () => (dispatch) => {
   dispatch(cleanBoats());
 };
 
-const initialState = { boats: null };
+const initialState = {};
 
 const boatsReducer = (state = initialState, action) => {
   // console.log(action, "-------action");
-  let newState;
+  let newState = clone(state);
   switch (action.type) {
     case GET_ALL:
-      newState = Object.assign({}, state);
-      newState = action.payload;
-      return newState;
+      const boats = {};
+      console.log(action.payload);
+      for (let boat of action.payload.boats) {
+        boats[boat.id] = boat;
+      }
+
+      return { ...boats };
     case GET_ONE:
+      console.log(action);
       newState = Object.assign({}, state);
       newState = action.payload;
-      // console.log(newState, "-------- new state");
       return newState;
+
     case GET_PROV:
-      newState = Object.assign({}, state);
-      newState = action.payload;
+      const provBoats = {};
+      console.log(action.payload);
+      for (let boat of action.payload) {
+        provBoats[boat.id] = boat;
+      }
+      return { ...provBoats };
+    case UPDATE:
+      console.log(newState);
+      console.log(action.payload.id);
+      newState[action.payload.id] = action.payload;
+      console.log(newState);
       return newState;
     case CLEAN:
       return {};

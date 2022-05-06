@@ -10,7 +10,8 @@ function ProviderBoats({ view, setView }) {
   const history = useHistory();
   const loggedInUserId = useSelector((state) => state.session.user.id);
   const sessionUserProfile = useSelector((state) => state.userProfile.user);
-  const providerBoats = useSelector((state) => state.boats.user);
+  const providerBoats = useSelector((state) => state.boats);
+  console.log(providerBoats);
   const [currentBoat, setCurrentBoat] = useState("");
   // console.log(providerBoats);
   // console.log(loggedInUserId, "current logged in user");
@@ -24,21 +25,22 @@ function ProviderBoats({ view, setView }) {
 
   return (
     <div className="provider__boats__card">
-      {providerBoats?.Boats.map((boat) => {
-        return (
-          <div key={boat.id}>
-            <BoatCard key={boat.id} boat={boat}></BoatCard>
-            <button
-              onClick={() => {
-                boatsAction.getOneBoat(boat.id);
-                history.push(`/boat/${boat.id}/edit`);
-              }}
-            >
-              Manage Boat
-            </button>
-          </div>
-        );
-      })}
+      {Object.values(providerBoats).length > 0 &&
+        Object.values(providerBoats).map((boat) => {
+          return (
+            <div key={boat.id}>
+              <BoatCard key={boat.id} boat={boat}></BoatCard>
+              <button
+                onClick={() => {
+                  boatsAction.getOneBoat(boat.id);
+                  history.push(`/boat/${boat.id}/edit`);
+                }}
+              >
+                Manage Boat
+              </button>
+            </div>
+          );
+        })}
     </div>
   );
 }

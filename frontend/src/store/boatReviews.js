@@ -6,6 +6,7 @@ const GET_REVIEWS_BOAT = "reviews/boatsGetAll";
 const ADD_REVIEW_NR = "reviews/addReviewNR";
 const ADD_REVIEW = "reviews/addReview";
 const DELETE = "reviews/delete";
+const CLEAN = "reviews/clean";
 
 const singleBoatReviews = (reviews) => {
   return {
@@ -32,6 +33,11 @@ export const deleteReview = (reviewId) => {
   return {
     type: DELETE,
     payload: reviewId,
+  };
+};
+const cleanReviews = () => {
+  return {
+    type: CLEAN,
   };
 };
 
@@ -105,6 +111,9 @@ export const deleteBoatReview = (reviewId) => async (dispatch) => {
   const reviewResponse = await reviewToDelete.json();
   dispatch(deleteReview(reviewId));
 };
+export const clean = () => (dispatch) => {
+  dispatch(cleanReviews());
+};
 
 const initialState = {};
 
@@ -125,6 +134,9 @@ const boatReviewsReducer = (state = initialState, action) => {
     case DELETE:
       delete newState[action.payload];
       return newState;
+
+    case CLEAN:
+      return {};
 
     default:
       return state;

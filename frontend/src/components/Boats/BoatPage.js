@@ -12,20 +12,24 @@ import BoatReviewBoard from "../Reviews/BoatReviewBoard";
 
 function BoatPage() {
   const { boatId } = useParams();
-  // console.log(boatId);
+  console.log(boatId, "----------------------boatID");
 
   const dispatch = useDispatch();
-  const { boat } = useSelector((state) => state.boats);
+  const boat = useSelector((state) => state.boats);
   const userId = useSelector((state) => state.session.user?.id);
   const boatReviews = useSelector((state) => state.boatReviews);
   const boatRatingsNR = useSelector((state) => state.boatRatings);
-  console.log(boatReviews, "NR BOAT RATINGS-------------------");
+  console.log(boat, "NR BOAT RATINGS-------------------");
   console.log(boatRatingsNR);
 
   useEffect(() => {
     dispatch(boatsAction.getOneBoat(boatId));
     dispatch(reviewsAction.getAllReviewsForSingleBoat(boatId));
     dispatch(ratingsAction.getRatingsForSingleBoatNR(boatId));
+
+    return () => {
+      dispatch(ratingsAction.clean());
+    };
   }, [dispatch]);
 
   return (
@@ -39,12 +43,14 @@ function BoatPage() {
               <div>
                 <h1>HOPEFULLY SCHEDULE BOARD GOES HERE</h1>
               </div>
-              <div>
-                <AddBookingForm boatId={boatId}></AddBookingForm>
-              </div>
             </div>
           )}
         </div>
+        {boatId && (
+          <div className="add__booking__form__container">
+            <AddBookingForm boatId={boatId}></AddBookingForm>
+          </div>
+        )}
 
         {userId && (
           <div>

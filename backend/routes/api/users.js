@@ -25,7 +25,6 @@ router.get(
   "/profile/:userId",
   asyncHandler(async (req, res) => {
     const { userId } = req.params;
-    console.log("working ---------------------------");
 
     const user = await User.findByPk(userId, {
       include: [{ model: Boat, include: Image }, UserRating, UserReview],

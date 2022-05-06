@@ -1,4 +1,6 @@
 import { csrfFetch } from "./csrf";
+import rfdc from "rfdc";
+const clone = rfdc();
 
 const GET_ALL_FOR_USER = "bookings/getAllForUser";
 const GET_ALL_FOR_BOAT = "bookings/getAllForBoat";
@@ -101,7 +103,7 @@ export const cleanUp = () => (dispatch) => {
 const initialState = {};
 
 const bookingsReducer = (state = initialState, action) => {
-  let newState;
+  let newState = clone(state);
   switch (action.type) {
     case GET_ALL_FOR_USER:
       const bookings = {};
@@ -132,7 +134,6 @@ const bookingsReducer = (state = initialState, action) => {
     //   return newState;
     case CANCEL:
       // let bookings = {};
-      newState = { ...state };
       delete newState[action.payload.id];
       return newState;
     case CLEAR:

@@ -14,7 +14,7 @@ function BoatReview({ boat }) {
 
   const [clean, setClean] = useState(null);
   const [cleanHover, setCleanHover] = useState(null);
-  console.log(rating);
+
   return (
     <div>
       <h1>Leave a Review!</h1>

@@ -9,9 +9,15 @@
 }
 .boat__info__booking {
   display: flex;
+  justify-content: space-around;
 }
 .boat__booking__container {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+.add__booking__form__container {
+  display: flex;
+  align-items: center;
 }

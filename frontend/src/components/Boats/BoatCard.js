@@ -1,20 +1,29 @@
 import { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import * as boatsAction from "../../store/boats.js";
+
 import { useHistory, useLocation } from "react-router-dom";
 
 function BoatCard({ boat }) {
   const location = useLocation();
+  const dispatch = useDispatch();
   // console.log(location, "11111111111111111111111");
-  // console.log(boat, "helooooooooooooooooooooo");
+  console.log(boat, "helooooooooooooooooooooo");
   const history = useHistory();
   // console.log(boat, "in the boat card");
   const [boatView, setBoatView] = useState(0);
+
+  useEffect(() => {
+    return () => {
+      dispatch(boatsAction.clean());
+    };
+  }, [dispatch]);
 
   return (
     <div className="boat__card">
       <h2>working</h2>
       <div>
-        {boat?.Images.length > 0
+        {boat?.Images?.length > 0
           ? boat.Images.map((image, idx) => {
               return (
                 boatView === idx && (
@@ -24,7 +33,7 @@ function BoatCard({ boat }) {
             })
           : null}
         <div>
-          {boat?.Images.length > 0
+          {boat?.Images?.length > 0
             ? boat.Images.map((image, idx) => (
                 <input
                   type="radio"

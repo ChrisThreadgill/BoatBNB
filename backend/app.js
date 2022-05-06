@@ -18,25 +18,25 @@ app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(express.json());
 
-// if (!isProduction) {
-//   app.use(cors());
-// }
+if (!isProduction) {
+  app.use(cors());
+}
 
-// app.use(
-//   helmet.crossOriginResourcePolicy({
-//     policy: "cross-origin",
-//   })
-// );
+app.use(
+  helmet.crossOriginResourcePolicy({
+    policy: "cross-origin",
+  })
+);
 
-// app.use(
-//   csurf({
-//     cookie: {
-//       secure: isProduction,
-//       sameSite: isProduction && "Lax",
-//       httpOnly: true,
-//     },
-//   })
-// );
+app.use(
+  csurf({
+    cookie: {
+      secure: isProduction,
+      sameSite: isProduction && "Lax",
+      httpOnly: true,
+    },
+  })
+);
 
 app.use(routes);
 

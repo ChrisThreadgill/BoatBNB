@@ -1,4 +1,4 @@
-.provider__boats__card {
+.provider__boats__container {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;

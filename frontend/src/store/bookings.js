@@ -107,11 +107,11 @@ const bookingsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_FOR_USER:
       const bookings = {};
-      console.log(action);
+      // console.log(action);
       for (let booking of action.payload) {
         bookings[booking.id] = booking;
       }
-      console.log({ ...bookings });
+      // console.log({ ...bookings });
       return { ...bookings };
     case GET_ALL_FOR_BOAT:
       const boatBookings = {};

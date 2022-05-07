@@ -25,34 +25,36 @@ function HomePage() {
   // if (!sessionUser) return <Redirect to="/login" />;
   return (
     <div className="home__page__view">
-      <h1>ALL OF THE BOATS PLEASE?</h1>
-      <div className="front__page__all__boats">
-        {allBoats.length > 0 &&
-          allBoats.map((boat) => {
-            console.log(boat);
-            return (
-              <div key={boat.id} className="home__page__boat__card">
-                <BoatCard key={boat.id} boat={boat}></BoatCard>
-                {sessionUser && boat && sessionUser.id === boat.userId ? (
-                  <button
-                    onClick={() => {
-                      history.push(`/boat/${boat.id}/edit`);
-                    }}
-                  >
-                    Manage Boat
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      sessionUser ? history.push(`/boats/${boat.id}`) : history.push("/sign-up");
-                    }}
-                  >
-                    Book Now!
-                  </button>
-                )}
-              </div>
-            );
-          })}
+      <div className="homepage__test">
+        <h1>Welcome to BoatBNB</h1>
+        <div className="front__page__all__boats">
+          {allBoats.length > 0 &&
+            allBoats.map((boat) => {
+              console.log(boat);
+              return (
+                <div key={boat.id} className="home__page__boat__card">
+                  <BoatCard key={boat.id} boat={boat}></BoatCard>
+                  {sessionUser && boat && sessionUser.id === boat.userId ? (
+                    <button
+                      onClick={() => {
+                        history.push(`/boat/${boat.id}/edit`);
+                      }}
+                    >
+                      Manage Boat
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        sessionUser ? history.push(`/boats/${boat.id}`) : history.push("/sign-up");
+                      }}
+                    >
+                      Book Now!
+                    </button>
+                  )}
+                </div>
+              );
+            })}
+        </div>
       </div>
     </div>
   );

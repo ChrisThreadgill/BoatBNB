@@ -47,7 +47,7 @@ export const getAllReviewsForSingleBoat = (boatId) => async (dispatch) => {
   });
 
   const reviews = await response.json();
-  console.log(reviews);
+  // console.log(reviews);
 
   dispatch(singleBoatReviews(reviews));
   return reviews;
@@ -88,7 +88,7 @@ export const addReviewWithRating = (reviewBody, ratingBody) => async (dispatch) 
     body: JSON.stringify(reviewBody),
   });
   const response = await newBoatReview.json();
-  console.log(response.newBoatReview.id, "this is the response");
+  // console.log(response.newBoatReview.id, "this is the response");
   ratingBody.boatReviewId = response.newBoatReview.id;
 
   const newBoatRating = await csrfFetch(`/api/ratings/boatRating`, {

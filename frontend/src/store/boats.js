@@ -42,14 +42,14 @@ const cleanBoats = () => {
 };
 
 export const getOneBoat = (boatId) => async (dispatch) => {
-  console.log("working");
-  console.log(boatId);
+  // console.log("working");
+  // console.log(boatId);
   const response = await csrfFetch(`/api/boats/${boatId}`, {
     method: "GET",
   });
-  console.log(response, "response-----------");
+  // console.log(response, "response-----------");
   const boat = await response.json();
-  console.log(boat.boat, "----------");
+  // console.log(boat.boat, "----------");
   dispatch(oneBoat(boat.boat));
   return boat.boat;
 };
@@ -60,7 +60,7 @@ export const updateOneBoat = (body) => async (dispatch) => {
     body: JSON.stringify(body),
   });
   const boat = await response.json();
-  console.log(boat);
+  // console.log(boat);
   dispatch(updateBoat(boat.boatToUpdate));
 };
 export const getAllBoats = () => async (dispatch) => {
@@ -94,30 +94,30 @@ const boatsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL:
       const boats = {};
-      console.log(action.payload);
+      // console.log(action.payload);
       for (let boat of action.payload.boats) {
         boats[boat.id] = boat;
       }
 
       return { ...boats };
     case GET_ONE:
-      console.log(action);
+      // console.log(action);
       newState = Object.assign({}, state);
       newState = action.payload;
       return newState;
 
     case GET_PROV:
       const provBoats = {};
-      console.log(action.payload);
+      // console.log(action.payload);
       for (let boat of action.payload) {
         provBoats[boat.id] = boat;
       }
       return { ...provBoats };
     case UPDATE:
-      console.log(newState);
-      console.log(action.payload.id);
+      // console.log(newState);
+      // console.log(action.payload.id);
       newState[action.payload.id] = action.payload;
-      console.log(newState);
+      // console.log(newState);
       return newState;
     case CLEAN:
       return {};

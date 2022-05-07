@@ -132,7 +132,7 @@ router.put(
 //post a new rating for a boat
 router.post(
   "/boatRating",
-  // requireAuth,
+  requireAuth,
   asyncHandler(async (req, res) => {
     const { userId, boatId, cleanliness, functional, comfort, average, boatReviewId } = req.body;
 
@@ -156,7 +156,7 @@ router.post(
 //post new rating for user
 router.post(
   "/userRating",
-  // requireAuth,
+  requireAuth,
   asyncHandler(async (req, res) => {
     const { userId, reviewerId, friendliness, punctuality, trustworthy, average, userReviewId } = req.body;
 

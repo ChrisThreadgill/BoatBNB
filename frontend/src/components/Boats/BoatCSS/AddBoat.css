@@ -1,0 +1,23 @@
+.add__boat__form {
+  display: flex;
+}
+
+.add__boat__form__div {
+  display: flex;
+  justify-content: center;
+}
+
+.add__boat__form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.boat__add__input__divs {
+  display: flex;
+  justify-content: space-between;
+}
+.test {
+  display: flex;
+  flex-direction: column;
+}

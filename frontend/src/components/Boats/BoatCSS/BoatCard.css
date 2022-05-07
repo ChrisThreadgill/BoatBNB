@@ -7,11 +7,14 @@
 }
 .boat__card__container {
   display: flex;
+  width: fit-content;
 }
 .home__page__boat__card {
   border: red 1px solid;
-  overflow-wrap: break-word;
-  max-width: 60vh;
+  /* overflow-wrap: break-word; */
+  /* flex-basis: 200px; */
+  /* max-width: 60vh; */
+  /* margin: 0; */
   display: flex;
   align-items: center;
 }

@@ -30,7 +30,7 @@ function App() {
         <div>
           <Switch>
             <Route exact path="/">
-              <HomePage></HomePage>
+              <HomePage className="home__page__component"></HomePage>
             </Route>
             <Route path="/sign-up">
               <SignUpForm></SignUpForm>

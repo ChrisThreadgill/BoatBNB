@@ -4,11 +4,13 @@
 
 .provider__board__container {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   margin: 10vh 20vh 10vh 10vh;
 }
 
-.provider__boats__container {
-  border: 1px red solid;
+.provider__boats__home__container {
+  /* border: 1px red solid; */
   min-height: 60vh;
 }
 /* .boat__card {
@@ -19,36 +21,42 @@
 } */
 
 .provider__bookings__container {
-  border: 1px red solid;
+  /* border: 1px red solid; */
 }
 
 .user__inbox__container {
-  border: 1px red solid;
+  /* border: 1px red solid; */
 }
 .provider__view {
   display: flex;
   justify-content: space-around;
-  border: 1px red solid;
+  /* border: 1px red solid; */
 }
 
 .provider__board {
   flex: 1 2;
   flex-direction: column;
-  margin-left: 10%;
-  border: 1px red solid;
+  /* border: 1px red solid; */
 }
 .provider__nav__panel {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-width: 20vh;
-  min-height: 50vh;
+}
+.user__profile__view__container {
+  margin-top: 40px;
 }
 .provider__nav__panel > div {
   display: flex;
   width: 100%;
   font-size: 2rem;
+  border: 1px solid black;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 15px;
+  cursor: pointer;
   justify-content: center;
   align-items: center;
   min-height: 8vh;
@@ -61,4 +69,9 @@
   max-height: 40vh; */
   width: 30vh;
   height: 30vh;
+}
+
+.provider__panel__tabs {
+  /* border: 1px solid black;
+  border-radius: 15px; */
 }

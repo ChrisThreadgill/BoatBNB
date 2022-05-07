@@ -38,7 +38,7 @@ function UserProfileView({ user }) {
   // console.log(userProfile);
 
   const loggedInUser = useSelector((state) => state.session.user);
-  console.log(loggedInUser);
+  // console.log(loggedInUser);
   const bookings = useSelector((state) => state.bookings);
   // console.log(userProfile, "current logged in user");
 

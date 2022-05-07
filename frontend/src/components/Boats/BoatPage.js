@@ -9,6 +9,9 @@ import AddBookingForm from "../Bookings/AddBookingForm";
 import BoatReview from "../Reviews/BoatReview";
 import "./BoatCSS/SingleBoat.css";
 import BoatReviewBoard from "../Reviews/BoatReviewBoard";
+import Calendar from "react-calendar";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 
 function BoatPage() {
   const { boatId } = useParams();
@@ -18,6 +21,10 @@ function BoatPage() {
   const userId = useSelector((state) => state.session.user?.id);
   const boatReviews = useSelector((state) => state.boatReviews);
   const boatRatingsNR = useSelector((state) => state.boatRatings);
+  const [showSearch, setShowSearch] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [calendarDate, setCalendarDate] = useState(null);
 
   useEffect(() => {
     dispatch(boatsAction.getOneBoat(boatId));
@@ -31,17 +38,17 @@ function BoatPage() {
 
   return (
     <div>
-      <h1>Single Boat Page</h1>
+      {/* <h1>Single Boat Page</h1> */}
       <div className="single__boat__view">
         <div className="boat__info__booking">
           {boat && <BoatCard boat={boat}></BoatCard>}
-          {userId && (
+          {/* {userId && (
             <div className="boat__booking__container">
               <div>
                 <h1>HOPEFULLY SCHEDULE BOARD GOES HERE</h1>
               </div>
             </div>
-          )}
+          )} */}
         </div>
         {boatId && (
           <div className="add__booking__form__container">

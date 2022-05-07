@@ -1,11 +1,21 @@
 .front__page__all__boats {
   display: flex;
-  flex-direction: row;
+  width: 60%;
+  /* flex-direction: row; */
   flex-wrap: wrap;
-  max-width: 100vh;
+  /* max-width: 100vh; */
 }
+.home__page__boat__card {
+}
+
 .home__page__view {
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* flex-wrap: wrap; */
+  /* align-items: center; */
+  /* max-width: 8rem; */
+}
+
+.home__page__test {
   display: flex;
-  flex-direction: column;
-  align-items: center;
 }

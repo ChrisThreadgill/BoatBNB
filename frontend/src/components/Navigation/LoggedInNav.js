@@ -32,14 +32,14 @@ function LoggedInNav() {
           <FaHome className="home__button__nav"></FaHome>
         </NavLink>
       </div>
-      <div>
-        <button onClick={logout}>Logout</button>
-      </div>
       <div className="profile__nav__links">
         <NavLink to={`/users/${id}/profile`}>Welcome Back {sessionUser && sessionUser.firstName}!</NavLink>
         <NavLink to={`/users/${id}/profile`}>
           {sessionUser && <img className="nav__profile__picture" src={`/api/images/${profilePic}`} />}
         </NavLink>
+        <div>
+          <button onClick={logout}>Logout</button>
+        </div>
       </div>
       {/* <button onClick={logout}>hello</button> */}
     </nav>

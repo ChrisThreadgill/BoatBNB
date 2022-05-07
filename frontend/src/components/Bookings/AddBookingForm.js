@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./BookingsCSS/BoatBooking.css";
 
+import Calendar from "react-calendar";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+
 function AddBookingForm({ boatId }) {
   const history = useHistory();
   const [bookingDate, setBookingDate] = useState("");

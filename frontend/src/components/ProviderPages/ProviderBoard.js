@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import ProviderBoats from "./ProviderBoats";
 import ProviderBookings from "./ProviderBookings";
+import { useParams, useHistory } from "react-router-dom";
 import UserInbox from "../UserInbox";
 import AddBoat from "../Boats/AddBoat";
 import ProviderPanel from "./ProviderPanel";
@@ -21,9 +22,11 @@ import Test from "../test/test";
 import ProviderProfileView from "./ProviderProfileView";
 
 function ProviderBoard({ user }) {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [view, setView] = useState(null);
   // console.log(user.id, "--------------");
+  console.log(history);
 
   const bookings = useSelector((state) => state.bookings);
 
@@ -42,6 +45,7 @@ function ProviderBoard({ user }) {
       <div>
         <div className="provider__nav__panel">
           <div
+            className="provider__panel__tabs"
             value="profile"
             onClick={() => {
               setView("profile");
@@ -50,14 +54,7 @@ function ProviderBoard({ user }) {
             Profile
           </div>
           <div
-            value="boats"
-            onClick={() => {
-              setView("boats");
-            }}
-          >
-            Boats
-          </div>
-          <div
+            className="provider__panel__tabs"
             value="bookings"
             onClick={() => {
               try {
@@ -71,14 +68,17 @@ function ProviderBoard({ user }) {
             Bookings
           </div>
           <div
-            value="inbox"
+            className="provider__panel__tabs"
+            value="boats"
             onClick={() => {
-              setView("inbox");
+              setView("boats");
             }}
           >
-            Inbox
+            Boats
           </div>
+
           <div
+            className="provider__panel__tabs"
             value="addBoat"
             onClick={() => {
               setView("addBoat");
@@ -101,7 +101,7 @@ function ProviderBoard({ user }) {
           </div>
         ) : null}
         {view === "boats" ? (
-          <div className="provider__boats__container">
+          <div className="provider__boats__home__container">
             <ProviderBoats view={view} setView={setView} />
           </div>
         ) : null}
@@ -111,26 +111,12 @@ function ProviderBoard({ user }) {
             <ProviderBookings></ProviderBookings>
           </div>
         ) : null}
-        {view === "inbox" ? (
-          <div className="user__inbox__container">
-            <UserInbox />
-          </div>
-        ) : null}
 
         {view === "addBoat" ? (
           <div className="add__boat__form__container">
             <AddBoat user={user} view={view} setView={setView} />
           </div>
         ) : null}
-
-        {/* {view == "editBoat" ? (
-          <div className="edit__boat__form__container">
-            <h1>hello</h1>
-            {useSelector((state) => state.boats)}
-            {/* <BoatCard boatId={view} /> */}
-        {/* <BoatEdit /> */}
-        {/* </div>
-        ) : null} */}
       </div>
     </div>
   );

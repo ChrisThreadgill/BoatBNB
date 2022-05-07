@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import { csrfFetch } from "../../store/csrf";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import "./BoatCSS/AddBoat.css";
 
 function AddBoat({ user, view, setView, boat }) {
   const [marina, setMarina] = useState("");
@@ -114,123 +115,132 @@ function AddBoat({ user, view, setView, boat }) {
         </p>
       </div>
 
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Marina
-            {validErrors?.marinaError ? <span>{validErrors.marinaError}</span> : null}
-            <input
-              type="text"
-              name="marina"
-              required
-              onChange={(e) => {
-                setMarina(e.target.value);
-              }}
-            />
-          </label>
-          <label>
-            Year
-            {validErrors?.yearError ? <span>{validErrors.yearError}</span> : null}
-            <input
-              type="text"
-              name="year"
-              value={year}
-              required
-              placeholder="YYYY"
-              maxLength={4}
-              onChange={(e) => {
-                setYear(e.target.value);
-              }}
-            />
-          </label>
-          <label>
-            Model
-            <input
-              type="text"
-              name="model"
-              value={model}
-              required
-              onChange={(e) => {
-                setModel(e.target.value);
-              }}
-            />
-          </label>
-          <label>
-            City
-            <input
-              type="text"
-              name="city"
-              required
-              value={city}
-              onChange={(e) => {
-                setCity(e.target.value);
-              }}
-            />
-          </label>
-          <label>
-            State
-            {validErrors?.stateError ? <span>{validErrors.stateError}</span> : null}
-            <input
-              type="text"
-              name="state"
-              required
-              value={stateCode}
-              maxLength={2}
-              onChange={(e) => {
-                setStateCode(e.target.value.toUpperCase());
-              }}
-            />
-          </label>
-          <label>
-            Accessories
-            <input
-              type="text"
-              name="accessories"
-              required
-              value={accessories}
-              onChange={(e) => {
-                setAccessories(e.target.value);
-              }}
-            />
-          </label>
-          <label>
-            Price
-            <input
-              type="text"
-              maxLength={4}
-              required
-              placeholder="ex. 100, 1000 no decimal"
-              name="accessories"
-              value={price}
-              onChange={(e) => {
-                setPrice(e.target.value);
-              }}
-            />
-          </label>
-          <label>
-            <input
-              type="radio"
-              value={false}
-              name="captain"
-              // checked={captain === false}
-              onChange={(e) => {
-                setCaptain(e.target.value);
-              }}
-            />
-            No Captain
-          </label>
-          <label>
-            <input
-              type="radio"
-              value={true}
-              name="captain"
-              // checked={captain === true}
-              onChange={(e) => {
-                setCaptain(e.target.value);
-              }}
-            />
-            Captain available
-          </label>
+      <div className="add__boat__form__div">
+        <form onSubmit={handleSubmit} className="add__boat__form">
+          <div className="test">
+            <label>
+              Marina
+              {validErrors?.marinaError ? <span>{validErrors.marinaError}</span> : null}
+              <input
+                type="text"
+                name="marina"
+                required
+                onChange={(e) => {
+                  setMarina(e.target.value);
+                }}
+              />
+            </label>
+
+            <label>
+              Year
+              {validErrors?.yearError ? <span>{validErrors.yearError}</span> : null}
+              <input
+                type="text"
+                name="year"
+                value={year}
+                required
+                placeholder="YYYY"
+                maxLength={4}
+                onChange={(e) => {
+                  setYear(e.target.value);
+                }}
+              />
+            </label>
+
+            <label>
+              Model
+              <input
+                type="text"
+                name="model"
+                value={model}
+                required
+                onChange={(e) => {
+                  setModel(e.target.value);
+                }}
+              />
+            </label>
+
+            <label>
+              City
+              <input
+                type="text"
+                name="city"
+                required
+                value={city}
+                onChange={(e) => {
+                  setCity(e.target.value);
+                }}
+              />
+            </label>
+
+            <label>
+              State
+              {validErrors?.stateError ? <span>{validErrors.stateError}</span> : null}
+              <input
+                type="text"
+                name="state"
+                required
+                value={stateCode}
+                maxLength={2}
+                onChange={(e) => {
+                  setStateCode(e.target.value.toUpperCase());
+                }}
+              />
+            </label>
+
+            <label>
+              Accessories
+              <input
+                type="text"
+                name="accessories"
+                required
+                value={accessories}
+                onChange={(e) => {
+                  setAccessories(e.target.value);
+                }}
+              />
+            </label>
+
+            <label>
+              Price
+              <input
+                type="text"
+                maxLength={4}
+                required
+                placeholder="ex. 100, 1000 no decimal"
+                name="accessories"
+                value={price}
+                onChange={(e) => {
+                  setPrice(e.target.value);
+                }}
+              />
+            </label>
+
+            <label>
+              <input
+                type="radio"
+                value={false}
+                name="captain"
+                // checked={captain === false}
+                onChange={(e) => {
+                  setCaptain(e.target.value);
+                }}
+              />
+              No Captain
+            </label>
+            <label>
+              <input
+                type="radio"
+                value={true}
+                name="captain"
+                // checked={captain === true}
+                onChange={(e) => {
+                  setCaptain(e.target.value);
+                }}
+              />
+              Captain available
+            </label>
+          </div>
 
           <div>
             <label>

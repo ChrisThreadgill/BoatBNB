@@ -51,15 +51,24 @@
 .provider__nav__panel > div {
   display: flex;
   width: 100%;
+  color: white;
+  font-weight: 600;
   font-size: 2rem;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   margin-left: 10px;
   margin-right: 10px;
-  border-radius: 15px;
+  border-radius: 15px 15px 2px 2px;
   cursor: pointer;
   justify-content: center;
   align-items: center;
   min-height: 8vh;
+}
+.profile__buttons__span {
+  display: flex;
+  border-radius: 15px 15px 15px 15px;
+  width: auto;
+  height: 3vh;
+  background-color: #4673b3;
 }
 
 .boat__img {
@@ -67,11 +76,18 @@
   min-height: 20vh;
   max-width: 40vh;
   max-height: 40vh; */
-  width: 30vh;
-  height: 30vh;
+  /* width: 30vh;
+  height: 30vh; */
 }
 
 .provider__panel__tabs {
   /* border: 1px solid black;
   border-radius: 15px; */
+}
+
+.profile__profile__checked,
+.profile__bookings__checked,
+.profile__boats__checked,
+.profile__add__boat__checked {
+  background-color: #4673b3;
 }

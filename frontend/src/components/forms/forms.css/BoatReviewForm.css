@@ -1,3 +1,26 @@
 .review__text__area {
-  border-radius: 15px;
+  border-radius: 10px;
+  font-size: 18px;
+  background-color: azure;
+}
+.boat__review__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.boat__review__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.boat__review__form > button {
+  margin: 1vh 0 1vh 0;
+  border-radius: 12px;
+  width: 30%;
+}
+
+.boat__review__form > label {
+  margin: 1vh 0 1vh 0;
+  font-size: 40px;
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as boatsAction from "../../store/boats.js";
 import "./BoatCSS/BoatCard.css";
+import { FaDharmachakra } from "react-icons/fa";
 
 import { useHistory, useLocation } from "react-router-dom";
 
@@ -27,12 +28,14 @@ function BoatCard({ boat }) {
           ? boat.Images.map((image, idx) => {
               return (
                 boatView === idx && (
-                  <img key={image.id} value={boat.id} className="boat__img" src={`/api/images/${image.url}`} />
+                  <div className="boat__image__container">
+                    <img key={image.id} value={boat.id} className="boat__img" src={`/api/images/${image.url}`} />
+                  </div>
                 )
               );
             })
           : null}
-        <div>
+        <div className="image__radio__buttons">
           {boat?.Images?.length > 0
             ? boat.Images.map((image, idx) => (
                 <input
@@ -51,12 +54,12 @@ function BoatCard({ boat }) {
       </div>
       <div className="boat__card__details">
         <div className="boat__location__div">
-          <div>
-            <h2>{`Come hang out in ${boat?.marina}`}</h2>
-          </div>
-          <div>
+          <div className="boat__">
+            <h1>{`Now Booking!`}</h1>
+            <h2>{`At ${boat?.marina}`}</h2>
             <h4>{`In ${boat?.city}, ${boat?.state} at ${boat?.marina}`}</h4>
           </div>
+          <div></div>
         </div>
         <div>
           <div>
@@ -64,12 +67,21 @@ function BoatCard({ boat }) {
             <h3>{`${boat?.year} ${boat?.model}`}</h3>
           </div>
         </div>
+        <div>
+          <h2>Features</h2>
+          <h3>{boat?.accessories}</h3>
+        </div>
 
         <div>
           <div>
-            <h2>For as Low as!</h2>
-
+            <h2>Rental Price</h2>
             <h4>{`$${boat?.price}/day`}</h4>
+            {boat?.captain ? (
+              <div>
+                <h4>Captain Available</h4>
+                <FaDharmachakra size={25}></FaDharmachakra>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

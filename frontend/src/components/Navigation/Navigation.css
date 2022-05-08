@@ -2,8 +2,8 @@
   display: flex;
   justify-content: space-between;
   background-color: none;
-  background-color: cadetblue;
-  border: 2px ridge cadetblue;
+  background-color: #a0bee8;
+  border: 2px ridge #cccccc;
   border-radius: 15px;
   /* position: static; */
   /* height: 25vh;
@@ -11,12 +11,10 @@
 }
 
 .nav__bar__container {
-  position: fixed;
+  margin-top: 0;
+  position: relative;
   width: 100%;
   /* display: flex; */
-}
-body {
-  background-color: bisque;
 }
 
 .visitor__nav {
@@ -47,7 +45,7 @@ body {
   border-radius: 50%;
 }
 .profile__nav__links {
-  background-color: cadetblue;
+  /* background-color: cadetblue; */
   display: flex;
   align-items: center;
 }

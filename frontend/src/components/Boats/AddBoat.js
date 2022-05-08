@@ -19,9 +19,11 @@ function AddBoat({ user, view, setView, boat }) {
   const [stateCode, setStateCode] = useState("");
   const [stateCodeError, setStateCodeError] = useState("");
   const [price, setPrice] = useState("");
+  const [priceError, setPriceError] = useState("");
+
   const [captain, setCaptain] = useState(false);
   const [accessories, setAccessories] = useState("");
-  const [validErrors, setValidErrors] = useState(false);
+  const [validErrors, setValidErrors] = useState([]);
   // console.log(user.id);
 
   const stateValidate = new RegExp(
@@ -58,51 +60,64 @@ function AddBoat({ user, view, setView, boat }) {
   };
 
   useEffect(() => {
-    if (marina.length > 75) setMarinaError("The Marina can only be 75 characters");
+    const errors = [];
+    if (marina.length > 75) {
+      errors.push("marina error");
+      setMarinaError("The Marina can only be 75 characters");
+    }
 
-    if (marina.length < 75) setMarinaError(true);
+    if (year === "") {
+      errors.push("year error");
+      setYearError("You must provide a year");
+    }
 
-    if (year === "") setYearError("You must provide a year");
-    if (year !== "") setYearError(true);
+    if (year < 1990 || year > 2050 || year === typeof "string") {
+      errors.push("year error NaN");
+      setYearError("Year Must be a number ");
+    }
+    if (isNaN(year)) {
+      errors.push("year error NaN");
+      setYearError("Year Must be a number ");
+    }
 
-    if (!yearValidator.test(year)) setYearError("Year Must be a number ");
-    if (yearValidator.test(year)) setYearError(true);
+    if (!stateValidate.test(stateCode)) {
+      errors.push("valid year error");
+      setStateCodeError("Please provide a valid 2 digit state code");
+    }
 
-    if (!stateValidate.test(stateCode)) setStateCodeError("Please provide a valid 2 digit state code");
-    if (stateValidate.test(stateCode)) setStateCodeError(true);
+    if (file === null) {
+      errors.push("file error");
 
-    if (file === null) setFileError("please provide an Image for your Boat!");
-    if (file) setFileError(true);
+      setFileError("Must Provide a Valid Image");
+    }
 
-    // if(!yearValidator.test(price))
-    // if(!yearValidator.test(price))
+    if (isNaN(price)) {
+      errors.push("year error NaN");
+      setPriceError("Price must be a number ");
+    }
+    if (!file?.type.includes("image")) {
+      errors.push("File error");
+      setFileError("Must Provide a Valid Image");
+    }
+    setValidErrors(errors);
+  }, [marina, year, model, stateCode, price, file]);
 
-    if (marinaError || yearError || stateCodeError || fileError) setValidErrors(true);
-  }, [marina, year, model, stateCode, file]);
-
-  console.log(yearError, stateCodeError, marinaError, fileError, year, typeof year, validErrors);
-  // useEffect(() => {
-  //   const errors = {
-  //     marinaError: null,
-  //     yearError: null,
-  //     cityError: null,
-  //     stateError: null,
-  //   };
-  //   setValidErrors(errors);
-  // }, []);
+  console.log(fileError);
 
   return (
     <div className="add__boat__container">
       <div className="add__boat__bio">
-        <h2>Welcome back {user?.firstName}, tell us about your boat!</h2>
+        <h1>Welcome back {user?.firstName}, tell us about your boat!</h1>
 
-        <p>
+        <div className="boat__disclaimer">
           Be mindful as we do not expect any of our users to act carelessly with your property, however, accidents do
           happen.
           <br></br>
           BoatBNB will not seek litigation for any issues caused with our providers property.
           <br></br>
           Rent at your own risk.
+          <br></br>
+          <br></br>
           <br></br>
           *****IF YOU CHOOSE TO CAPTAIN YOUR BOAT******
           <br></br>
@@ -112,15 +127,15 @@ function AddBoat({ user, view, setView, boat }) {
           <br></br>
           ANY BEHAVIOR OF SUCH WILL RESULT IN LOSING PROVIDER PRIVILEGES AND/OR POTENTIALLY BOATBNB MEMBERSHIP ALL
           TOGETHER.
-        </p>
+        </div>
       </div>
 
       <div className="add__boat__form__div">
         <form onSubmit={handleSubmit} className="add__boat__form">
           <div className="test">
+            {marinaError ? <span>{marinaError}</span> : null}
             <label>
               Marina
-              {validErrors?.marinaError ? <span>{validErrors.marinaError}</span> : null}
               <input
                 type="text"
                 name="marina"
@@ -131,9 +146,9 @@ function AddBoat({ user, view, setView, boat }) {
               />
             </label>
 
+            {validErrors?.yearError ? <span>{validErrors.yearError}</span> : null}
             <label>
               Year
-              {validErrors?.yearError ? <span>{validErrors.yearError}</span> : null}
               <input
                 type="text"
                 name="year"
@@ -205,7 +220,7 @@ function AddBoat({ user, view, setView, boat }) {
               Price
               <input
                 type="text"
-                maxLength={4}
+                maxLength={5}
                 required
                 placeholder="ex. 100, 1000 no decimal"
                 name="accessories"
@@ -254,7 +269,7 @@ function AddBoat({ user, view, setView, boat }) {
                 accept="image/*"
               ></input>
             </label>
-            <button disabled={!validErrors} type="submit">
+            <button disabled={!!validErrors.length} type="submit">
               Add A Boat
             </button>
           </div>

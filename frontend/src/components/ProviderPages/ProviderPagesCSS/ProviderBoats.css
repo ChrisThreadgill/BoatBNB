@@ -4,3 +4,14 @@
   flex-direction: row;
   justify-content: space-around;
 }
+
+.provider__boat__card__container {
+  display: flex;
+
+  margin: 3vh 3vh 0 0;
+  /* flex-direction: column; */
+  align-items: center;
+  /* border: ridge 7px #cccccc; */
+  border-radius: 11px;
+  background-color: #cccccc;
+}

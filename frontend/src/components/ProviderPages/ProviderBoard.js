@@ -24,7 +24,12 @@ import ProviderProfileView from "./ProviderProfileView";
 function ProviderBoard({ user }) {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [view, setView] = useState(null);
+  const [view, setView] = useState("profile");
+  const [profileTabChecked, setProfileTabChecked] = useState("profile__profile__checked");
+  const [bookingsTabChecked, setBookingsTabChecked] = useState("");
+  const [boatsTabChecked, setBoatsTabChecked] = useState("");
+  const [addBoatTabChecked, setAddBoatTabChecked] = useState("");
+
   // console.log(user.id, "--------------");
   console.log(history);
 
@@ -45,49 +50,61 @@ function ProviderBoard({ user }) {
       <div>
         <div className="provider__nav__panel">
           <div
-            className="provider__panel__tabs"
+            className={profileTabChecked}
             value="profile"
             onClick={() => {
               setView("profile");
+              setBoatsTabChecked("");
+              setAddBoatTabChecked("");
+              setBookingsTabChecked("");
+              setProfileTabChecked("profile__profile__checked");
             }}
           >
             Profile
           </div>
           <div
-            className="provider__panel__tabs"
+            className={bookingsTabChecked}
             value="bookings"
             onClick={() => {
-              try {
-                setView("bookings");
-                dispatch(bookingsActions.getAllUserBookings(user.id));
-              } catch (error) {
-                setView("bookings");
-              }
+              setView("bookings");
+              setProfileTabChecked("");
+              setAddBoatTabChecked("");
+              setBoatsTabChecked("");
+              setBookingsTabChecked("profile__bookings__checked");
+              // dispatch(bookingsActions.getAllUserBookings(user.id));
             }}
           >
             Bookings
           </div>
           <div
-            className="provider__panel__tabs"
+            className={boatsTabChecked}
             value="boats"
             onClick={() => {
               setView("boats");
+              setProfileTabChecked("");
+              setAddBoatTabChecked("");
+              setBookingsTabChecked("");
+              setBoatsTabChecked("profile__boats__checked");
             }}
           >
             Boats
           </div>
 
           <div
-            className="provider__panel__tabs"
+            className={addBoatTabChecked}
             value="addBoat"
             onClick={() => {
               setView("addBoat");
+              setProfileTabChecked("");
+              setBoatsTabChecked("");
+              setBookingsTabChecked("");
+              setAddBoatTabChecked("profile__add__boat__checked");
             }}
           >
             Add a Boat
           </div>
-          {/* <NavLink to={`/users/${userId}/profile}`}>Edit Profile</NavLink> */}
         </div>
+        <span className="profile__buttons__span"></span>
       </div>
       <div className="provider__board">
         {view === "profile" && userProfile ? (

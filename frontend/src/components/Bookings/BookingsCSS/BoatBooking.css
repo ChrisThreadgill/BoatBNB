@@ -8,13 +8,17 @@
 }
 
 .boat__booking__form {
-  border: 1px red solid;
+  /* border: 1px red solid; */
   border-radius: 15px;
   display: flex;
   justify-content: center;
+  text-align: center;
   align-items: center;
   width: 45vh;
   height: 25vh;
+}
+.boat__booking__form > label {
+  margin-left: 2vh;
 }
 
 .add__booking__button {

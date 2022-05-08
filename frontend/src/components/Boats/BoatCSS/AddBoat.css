@@ -1,6 +1,18 @@
 .add__boat__form {
   display: flex;
 }
+.add__boat__bio {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2vh;
+}
+.boat__disclaimer {
+  font-size: 2rem;
+  font-weight: bold;
+}
 
 .add__boat__form__div {
   display: flex;

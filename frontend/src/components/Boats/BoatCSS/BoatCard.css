@@ -6,21 +6,46 @@
   /* flex-direction: column; */
 }
 .boat__card__container {
+  margin-top: 2vh;
+  margin: 2vh 2vh 2vh 2vh;
   display: flex;
   width: fit-content;
+  /* border: ridge 7px #cccccc; */
 }
 .home__page__boat__card {
-  border: red 1px solid;
+  /* border: red 1px solid; */
   /* overflow-wrap: break-word; */
   /* flex-basis: 200px; */
   /* max-width: 60vh; */
   /* margin: 0; */
+
+  margin: 2vh 2vh 2vh 2vh;
+  border-radius: 11px;
+  background-color: #cccccc;
   display: flex;
   align-items: center;
 }
 .boat__card__details {
   display: flex;
   flex-direction: column;
+  margin: 0 2vh 0 2vh;
   justify-content: center;
+  overflow-wrap: break-word;
+  overflow: hidden;
   width: 27vh;
+}
+
+.boat__image__container {
+  display: flex;
+  justify-content: center;
+  margin: 0 2vh 0 2vh;
+  overflow: hidden;
+  border-radius: 12px;
+  width: 30vh;
+  height: 30vh;
+}
+.image__radio__buttons {
+  display: flex;
+  justify-content: center;
+  margin: 0 2vh 0 2vh;
 }

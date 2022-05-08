@@ -22,7 +22,7 @@ function BoatReviewForm({ boat, rating, setRating, setClean, setComfort, setFunc
 
     let boatReviewId = null;
     if (rating && !review) {
-      const ratingBody = {
+      let ratingBody = {
         userId: loggedInUser.id,
         boatId: boat.id,
         cleanliness: clean,
@@ -31,9 +31,9 @@ function BoatReviewForm({ boat, rating, setRating, setClean, setComfort, setFunc
         comfort: comfort,
         boatReviewId,
       };
-      if (func === 0) ratingBody.functional = rating;
-      if (clean === 0) ratingBody.cleanliness = rating;
-      if (comfort === 0) ratingBody.comfort = rating;
+      if (func === null) ratingBody.functional = 1;
+      if (clean === null) ratingBody.cleanliness = 1;
+      if (comfort === null) ratingBody.comfort = 1;
 
       dispatch(ratingActions.addBoatRatingNR(ratingBody));
 
@@ -63,9 +63,6 @@ function BoatReviewForm({ boat, rating, setRating, setClean, setComfort, setFunc
         if (func === 0) ratingBody.functional = rating;
         if (clean === 0) ratingBody.cleanliness = rating;
         if (comfort === 0) ratingBody.comfort = rating;
-        console.log(comfort);
-        console.log(clean);
-        console.log(func);
         const reviewBody = { userId: loggedInUser.id, boatId: boat.id, review };
 
         dispatch(reviewActions.addReviewWithRating(reviewBody, ratingBody));
@@ -81,21 +78,19 @@ function BoatReviewForm({ boat, rating, setRating, setClean, setComfort, setFunc
 
   return (
     <div>
-      <div>
-        {reviewLengthError && <span>Review Must be less than 500 Characters!</span>}
-        <form onSubmit={handleSubmit}>
-          <label>
-            Write a review!
-            <textarea
-              className="review__text__area"
-              cols="40"
-              rows="5"
-              value={review}
-              onChange={(e) => {
-                setReview(e.target.value);
-              }}
-            ></textarea>
-          </label>
+      {reviewLengthError && <span>Review Must be less than 500 Characters!</span>}
+      <div className="boat__review__container">
+        <form onSubmit={handleSubmit} className="boat__review__form">
+          <label>Leave a review!</label>
+          <textarea
+            className="review__text__area"
+            cols="40"
+            rows="4"
+            value={review}
+            onChange={(e) => {
+              setReview(e.target.value);
+            }}
+          ></textarea>
           <button disabled={reviewLengthError} type="submit">
             Add Review!
           </button>

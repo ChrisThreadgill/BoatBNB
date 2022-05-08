@@ -1,6 +1,7 @@
 import { useState } from "react";
 import BoatReviewForm from "../forms/BoatReviewForm";
 import BoatRating from "../Ratings/BoatRating";
+import "./BoatReviews/BoatReview.css";
 
 function BoatReview({ boat }) {
   const [rating, setRating] = useState(null);
@@ -16,8 +17,8 @@ function BoatReview({ boat }) {
   const [cleanHover, setCleanHover] = useState(null);
 
   return (
-    <div>
-      <h1>Leave a Review!</h1>
+    <div className="review__form__container">
+      <h1>Leave a Rating!</h1>
       <BoatRating
         rating={rating}
         setRating={setRating}

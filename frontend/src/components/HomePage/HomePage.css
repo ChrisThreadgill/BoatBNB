@@ -1,11 +1,22 @@
+body {
+  background-color: #274063;
+}
+
 .front__page__all__boats {
   display: flex;
-  width: 60%;
+  margin: 0;
+  justify-content: center;
+  width: 85%;
   /* flex-direction: row; */
   flex-wrap: wrap;
   /* max-width: 100vh; */
 }
-.home__page__boat__card {
+.home__page__boat__card > button {
+  font-size: bolder;
+  width: auto;
+  color: black;
+  border-radius: 12px;
+  margin-right: 2vh;
 }
 
 .home__page__view {

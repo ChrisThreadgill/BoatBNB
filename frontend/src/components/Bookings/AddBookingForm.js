@@ -41,12 +41,12 @@ function AddBookingForm({ boatId }) {
 
   return (
     <div className="boat__booking__form">
-      <h1>hello From the Add a Booking Form</h1>
       <div>
+        <h2>Book Today!</h2>
         <form onSubmit={handleSubmit} className="booking__form">
           <div>
+            Booking Date :{validErrors && <span>Please Select a date!</span>}
             <label>
-              Booking Date :{validErrors && <span>Please Select a date!</span>}
               <input
                 type="date"
                 required

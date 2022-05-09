@@ -106,7 +106,7 @@ function AddBoat({ user, view, setView, setAddBoatTabChecked, setBoatsTabChecked
   useEffect(() => {
     const errors = [];
     if (price.length === 0) {
-      errors.push("You have to have a price!");
+      errors.push("Rental must have a price!");
       setPriceError("Price must be a number ");
     }
 
@@ -167,8 +167,12 @@ function AddBoat({ user, view, setView, setAddBoatTabChecked, setBoatsTabChecked
           <div className="add__boat__form__inside__div">
             <div className="boat__add__errors">
               <ul className="errors">
-                {validErrors?.map((error) => {
-                  return <li>{error}</li>;
+                {validErrors?.map((error, idx) => {
+                  return (
+                    <li key={idx} className="list__errors">
+                      {error}
+                    </li>
+                  );
                 })}
               </ul>
             </div>

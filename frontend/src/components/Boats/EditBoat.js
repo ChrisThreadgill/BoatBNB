@@ -114,7 +114,7 @@ function EditBoat({ user, view, setView, boat }) {
   useEffect(() => {
     const errors = [];
     if (price <= 0) {
-      errors.push("You have to have a price!");
+      errors.push("Rental must have a price!");
       setPriceError("Price must be a number ");
     }
 
@@ -139,7 +139,7 @@ function EditBoat({ user, view, setView, boat }) {
     setValidErrors(errors);
   }, [file]);
   useEffect(() => {
-    setValidErrors();
+    setValidErrors([]);
   }, []);
 
   return (
@@ -147,7 +147,7 @@ function EditBoat({ user, view, setView, boat }) {
       <div className="manage__boat__form__container">
         <form onSubmit={handleSubmit} className="edit__boat__form">
           <div>
-            <label>
+            <label className="edit__boat__labels">
               Marina
               <input
                 type="text"
@@ -163,7 +163,7 @@ function EditBoat({ user, view, setView, boat }) {
           </div>
 
           <div>
-            <label>
+            <label className="edit__boat__labels">
               Year
               <input
                 type="text"
@@ -179,7 +179,7 @@ function EditBoat({ user, view, setView, boat }) {
             </label>
           </div>
           <div>
-            <label>
+            <label className="edit__boat__labels">
               Model
               <input
                 type="text"
@@ -194,7 +194,7 @@ function EditBoat({ user, view, setView, boat }) {
             </label>
           </div>
           <div>
-            <label>
+            <label className="edit__boat__labels">
               City
               <input
                 type="text"
@@ -209,7 +209,7 @@ function EditBoat({ user, view, setView, boat }) {
             </label>
           </div>
           <div>
-            <label>
+            <label className="edit__boat__labels">
               State
               <input
                 type="text"
@@ -224,7 +224,7 @@ function EditBoat({ user, view, setView, boat }) {
             </label>
           </div>
           <div>
-            <label>
+            <label className="edit__boat__labels">
               Accessories
               <input
                 type="text"
@@ -238,7 +238,7 @@ function EditBoat({ user, view, setView, boat }) {
             </label>
           </div>
           <div>
-            <label>
+            <label className="edit__boat__labels">
               Price
               <input
                 type="text"
@@ -255,7 +255,7 @@ function EditBoat({ user, view, setView, boat }) {
           </div>
 
           <div>
-            <label>
+            <label className="edit__boat__labels">
               <input
                 type="radio"
                 value={false}
@@ -267,7 +267,7 @@ function EditBoat({ user, view, setView, boat }) {
               />
               No Captain
             </label>
-            <label>
+            <label className="edit__boat__labels">
               <input
                 type="radio"
                 value={true}
@@ -294,7 +294,7 @@ function EditBoat({ user, view, setView, boat }) {
             }}
             className="add__boat__image__form"
           >
-            <label>
+            <label className="edit__boat__labels">
               images
               <input
                 onChange={(e) => {
@@ -318,9 +318,12 @@ function EditBoat({ user, view, setView, boat }) {
       <div className="boat__add__errors">
         <ul className="errors">
           {validErrors &&
-            validErrors?.length &&
-            validErrors?.map((error) => {
-              return <li>{error}</li>;
+            validErrors?.map((error, idx) => {
+              return (
+                <li key={idx} className="list__errors">
+                  {error}
+                </li>
+              );
             })}
         </ul>
       </div>

@@ -21,13 +21,16 @@
 .edit__boat__form > div > label {
   display: flex;
   flex-direction: column;
+  font-size: 1rem;
+  color: #274063;
   align-items: center;
   margin: 1vh 0 1vh 0;
 }
 
 .edit__boat__form > div > label > input {
   border-radius: 12px;
-  background-color: #cccccc;
+  font-size: 1.5rem;
+  background-color: whitesmoke;
   text-align: center;
 }
 .edit__boat__container {
@@ -69,4 +72,8 @@
   border: 2px solid #274063;
   border-radius: 15px;
   cursor: pointer;
+}
+.edit__boat__labels {
+  font-size: 1rem;
+  color: #274063;
 }

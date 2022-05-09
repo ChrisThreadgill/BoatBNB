@@ -109,3 +109,9 @@
 .add__boat__radio__buttons__div {
   margin-top: 2vh;
 }
+
+.list__errors {
+  font-size: 1.5rem;
+  color: #274063;
+  font-weight: 600;
+}

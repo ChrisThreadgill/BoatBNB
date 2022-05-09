@@ -47,3 +47,10 @@
 .login__form > h3 {
   color: whitesmoke;
 }
+
+.list__errors__signin {
+  margin: 1vh 1vh 1vh 1vh;
+  color: whitesmoke;
+  font-size: 1rem;
+  font-weight: 600;
+}

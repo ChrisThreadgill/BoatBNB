@@ -30,7 +30,9 @@ function UserLoginForm() {
         <h3>Let's get signed in!</h3>
         <ul>
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <li key={idx} className="list__errors__signin">
+              {error}
+            </li>
           ))}
         </ul>
 

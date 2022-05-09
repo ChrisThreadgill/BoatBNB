@@ -41,10 +41,12 @@ function EditBoat({ user, view, setView, boat }) {
   );
 
   async function postImage({ image }) {
+    console.log(image);
     console.log("inside the image post on edit page");
     const formData = new FormData();
     formData.append("image", image);
     formData.append("boatId", boatId);
+    console.log("inside the image post on edit page");
     const result = await axios.post("/api/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
     console.log(result);
 

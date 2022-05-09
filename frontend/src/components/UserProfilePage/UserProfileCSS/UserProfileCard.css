@@ -22,6 +22,7 @@
 .user__bookings__panel {
   display: flex;
   /* flex-direction: column; */
+  flex-wrap: wrap;
   justify-content: center;
   margin-top: 4vh;
   margin-bottom: 2vh;
@@ -35,12 +36,18 @@
 .user__profile__bookings {
   display: flex;
   flex-direction: row;
-  width: 70%;
+
   justify-content: space-between;
-  margin: 2vh 0 2vh 0;
+  margin: 2vh 0 2vh 3vh;
   border-radius: 15px;
   background-color: whitesmoke;
   border: 3px #cccccc solid;
+}
+.user__profile__booking__container {
+  display: flex;
+  flex-direction: row;
+
+  /* margin-left: 2vh; */
 }
 .user__profile__booking__card {
   display: flex;

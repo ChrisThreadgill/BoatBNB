@@ -13,20 +13,22 @@ function UserBookings({ bookings }) {
         Bookings.map((booking) => {
           return (
             <div className="user__profile__bookings">
-              <div>
-                <BoatCard boat={booking?.Boat}></BoatCard>
-              </div>
+              <div className="user__profile__booking__container">
+                <div>
+                  <BoatCard boat={booking?.Boat}></BoatCard>
+                </div>
 
-              <div className="user__profile__booking__card">
-                <BookingCard key={booking?.id} booking={booking}></BookingCard>
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    dispatch(bookingsActions.cancelUserBooking(booking));
-                  }}
-                >
-                  <button>Cancel Booking</button>
-                </form>
+                <div className="user__profile__booking__card">
+                  <BookingCard key={booking?.id} booking={booking}></BookingCard>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      dispatch(bookingsActions.cancelUserBooking(booking));
+                    }}
+                  >
+                    <button>Cancel Booking</button>
+                  </form>
+                </div>
               </div>
             </div>
           );

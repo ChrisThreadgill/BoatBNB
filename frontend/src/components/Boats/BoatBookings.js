@@ -9,7 +9,6 @@ import "./BoatCSS/BoatBookings.css";
 import { FaStar } from "react-icons/fa";
 
 function BoatBookings({ boat }) {
-  console.log(boat);
   const dispatch = useDispatch();
   const bookingsObj = useSelector((state) => state.bookings);
   const bookingsArr = Object.values(bookingsObj);
@@ -22,8 +21,6 @@ function BoatBookings({ boat }) {
     <div>
       {bookingsArr.length > 0 &&
         bookingsArr.map((booking) => {
-          console.log(booking.User.UserRatings);
-
           const averageUserRatings = booking.User.UserRatings.reduce(
             (prev, curr, idx) => {
               prev.average = prev.average + curr.average;

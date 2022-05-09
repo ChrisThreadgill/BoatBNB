@@ -35,8 +35,7 @@ function SignUpForm() {
     if (password === confirmPassword) {
       const result = await postImage({ image: file });
       const profilePicture = result.url;
-      console.log("working-------------------------");
-      console.log(profilePicture);
+
       setErrors([]);
       return dispatch(sessionActions.signup({ firstName, lastName, email, password, profilePicture, roleId })).catch(
         async (res) => {

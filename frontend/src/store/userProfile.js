@@ -15,13 +15,11 @@ const clearProfile = () => {
   };
 };
 export const getUserProfile = (userId) => async (dispatch) => {
-  // console.log(userId);
-  // console.log("working");
   const response = await fetch(`/api/users/profile/${userId}`, {
     method: "GET",
   });
   const userProfile = await response.json();
-  // console.log(userProfile);
+
   dispatch(setUserProfile(userProfile));
   return userProfile;
 };

@@ -68,7 +68,7 @@ export const deleteBoatRating = (reviewId, ratingId) => async (dispatch) => {
     method: "DELETE",
   });
   const ratingResponse = await ratingToDelete.json();
-  // console.log(ratingResponse);
+
   dispatch(deleteRating(ratingId));
 
   const reviewToDelete = await csrfFetch(`/api/reviews/boats/${reviewId}`, {
@@ -76,12 +76,9 @@ export const deleteBoatRating = (reviewId, ratingId) => async (dispatch) => {
   });
   const reviewResponse = await reviewToDelete.json();
   dispatch(reviewActions.deleteReview(reviewId));
-
-  // console.log(reviewResponse);
 };
 
 export const deleteSingleBoatRating = (ratingId) => async (dispatch) => {
-  // console.log(ratingId);
   const ratingToDelete = await csrfFetch(`/api/ratings/boats/${ratingId}`, {
     method: "DELETE",
   });
@@ -105,8 +102,6 @@ const boatRatingsReducer = (state = initialState, action) => {
       return { ...state, ...ratingsNR };
 
     case ADD_RATING:
-      // console.log(state);
-      // console.log(action.payload.id);
       newState[action.payload.id] = action.payload;
       return newState;
 

@@ -19,10 +19,8 @@ import * as ratingActions from "../../store/boatRatings";
 import * as reviewActions from "../../store/boatReviews";
 
 function BoatReviewCard({ review }) {
-  // console.log(review);
   const userId = useSelector((state) => state.session.user?.id);
   const dispatch = useDispatch();
-  console.log(userId, "----------------------------------- the review card");
 
   return (
     <div className="boat__review__card">

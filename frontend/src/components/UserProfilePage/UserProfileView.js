@@ -9,7 +9,7 @@ import "./UserProfileCSS/UserProfileCard.css";
 import UserBookings from "../Bookings/UserBookings";
 import BoatCard from "../Boats/BoatCard";
 import UserReview from "../Reviews/UserReview";
-// import UserReviewView from "../Reviews/UserReviewDisplay";
+
 import UserRatingDisplay from "../Ratings/UserRatingDisplay";
 import "./UserProfileCSS/UserProfileView.css";
 
@@ -17,16 +17,11 @@ function UserProfileView({ user }) {
   const history = useHistory();
   const { userId } = useParams();
   const dispatch = useDispatch();
-  // console.log(user, "neeed thisssssssssssssssssss");
 
-  //will refactor this to use store after dev debugging with card setup
   const userProfile = useSelector((state) => state.userProfile.user);
-  // const sessionUserProfile = useSelector((state) => state.session.user);
+
   const bookingsForLoggedInUser = useSelector((state) => state);
   const bookingsArr = Object.values(bookingsForLoggedInUser);
-
-  console.log(bookingsArr);
-  // console.log(sessionUserProfile, "l;kjgkdjsflkgjdfslkghjfdsl;kgjl;skdfj");
 
   useEffect(() => {
     dispatch(userProfileActions.getUserProfile(userId));
@@ -35,12 +30,10 @@ function UserProfileView({ user }) {
       // dispatch(bookingsAction.cleanUp());
     };
   }, [dispatch]);
-  // console.log(userProfile);
 
   const loggedInUser = useSelector((state) => state.session.user);
-  // console.log(loggedInUser);
+
   const bookings = useSelector((state) => state.bookings);
-  console.log(bookings, "current logged in user");
 
   return (
     <div className="user__profile__view__container">

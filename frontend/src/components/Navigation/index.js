@@ -12,7 +12,7 @@ import SignUpFormModal from "../../context/SignUpFormModal";
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const [errors, setErrors] = useState([]);
-  // console.log(process.env.DB_HOST);
+
   const credential = "demo@user.io";
   const password = "password";
   const dispatch = useDispatch();

@@ -18,7 +18,6 @@ import { useDispatch, useSelector } from "react-redux";
 import * as ratingActions from "../../store/boatRatings";
 
 function BoatRatingCard({ rating }) {
-  console.log(rating.id, "--------- rating");
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.session.user?.id);
 
@@ -79,7 +78,7 @@ function BoatRatingCard({ rating }) {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                console.log(rating.id);
+
                 dispatch(ratingActions.deleteSingleBoatRating(rating.id));
               }}
             >

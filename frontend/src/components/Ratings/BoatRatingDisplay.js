@@ -20,8 +20,6 @@ import {
 function BoatRatingDisplay({ boat }) {
   const boatRatings = boat?.BoatRatings;
 
-  // console.log(sessionUser);
-
   const averageBoatRatings = boatRatings?.reduce(
     (prev, curr, idx) => {
       prev.average = prev.average + curr.average;

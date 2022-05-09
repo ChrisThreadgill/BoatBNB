@@ -11,8 +11,6 @@ function BoatCard({ boat }) {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  console.log(boat);
-
   const history = useHistory();
 
   const [boatView, setBoatView] = useState(0);

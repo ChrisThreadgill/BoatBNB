@@ -7,7 +7,7 @@
 // const app = express();
 
 // app.post("/images", upload.single("avatar"), (req, res) => {
-//   console.log("working");
+//
 //   res.send("yes");
 // });
 

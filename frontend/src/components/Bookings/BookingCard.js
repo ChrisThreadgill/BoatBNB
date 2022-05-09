@@ -3,14 +3,6 @@ import { csrfFetch } from "../../store/csrf";
 import { useEffect, useState } from "react";
 
 function BookingCard({ booking }) {
-  // console.log(booking);
-  // const { checkIn, checkOut, startDate, endDate } = booking;
-  // const [startDate, setStartDate] = useState(null);
-  // const [endDate, setEndDate] = useState(null);
-  // const [checkIn, setCheckIn] = useState(null);
-  // const [checkOut, setCheckOut] = useState(null);
-  // const loggedInUserId = useSelector((state) => state.session.user.id);
-
   const bookingDateView = new Date(booking?.bookingDate);
   const dateView = bookingDateView.toDateString();
 

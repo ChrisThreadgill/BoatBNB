@@ -33,40 +33,14 @@ const allBookingsForBoat = (bookings) => {
     payload: bookings,
   };
 };
-// const oneBoat = (boat) => {
-//   return {
-//     type: GET_ONE,
-//     payload: boat,
-//   };
-// };
 
-// const providerBoats = (boats) => {
-//   return {
-//     type: GET_PROV,
-//     payload: boats,
-//   };
-// };
-
-// export const getOneBoat = (boatId) => async (dispatch) => {
-//   console.log("working");
-//   const response = await csrfFetch(`/api/boats/${boatId}`, {
-//     method: "GET",
-//   });
-//   console.log(response, "response-----------");
-//   const boat = await response.json();
-//   console.log(boat, "----------");
-//   dispatch(oneBoat(boat));
-//   return boat;
-// };
 export const getAllUserBookings = (userId) => async (dispatch) => {
   const response = await csrfFetch(`/api/bookings/user/${userId}`, {
     method: "GET",
   });
   const { bookingsForSpecificUser } = await response.json();
 
-  // console.log(userWithBookings.Bookings);
   dispatch(allUserBookings(bookingsForSpecificUser));
-  // return boats;
 };
 
 export const getAllBoatBookings = (boatId) => async (dispatch) => {
@@ -78,7 +52,6 @@ export const getAllBoatBookings = (boatId) => async (dispatch) => {
 };
 
 export const cancelUserBooking = (booking) => async (dispatch) => {
-  // console.log(booking.id, "goooooking id");
   const bookingToDelete = await csrfFetch(`/api/bookings/${booking.id}`, {
     method: "DELETE",
   });
@@ -91,14 +64,6 @@ export const cancelUserBooking = (booking) => async (dispatch) => {
 export const cleanUp = () => (dispatch) => {
   dispatch(clearBookings());
 };
-// export const getProviderBoats = (userId) => async (dispatch) => {
-//   const response = await csrfFetch(`/api/users/${userId}/boats`, {
-//     method: "GET",
-//   });
-//   const boats = await response.json();
-//   dispatch(providerBoats(boats));
-//   return boats;
-// };
 
 const initialState = {};
 
@@ -107,35 +72,21 @@ const bookingsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_FOR_USER:
       const bookings = {};
-      // console.log(action);
+
       for (let booking of action.payload) {
         bookings[booking.id] = booking;
       }
-      // console.log({ ...bookings });
+
       return { ...bookings };
     case GET_ALL_FOR_BOAT:
       const boatBookings = {};
-      // console.log(action.payload);
+
       for (let booking of action.payload) {
         boatBookings[booking.id] = booking;
       }
       return { ...boatBookings };
-    // console.log(action.payload, "payload");
-    // newState = Object.assign({}, state);
-    // newState = action.payload;
-    // // console.log(newState);
-    // return newState;
-    // case GET_ONE:
-    //   newState = Object.assign({}, state);
-    //   newState = action.payload;
-    //   console.log(newState, "-------- new state");
-    //   return newState;
-    // case GET_PROV:
-    //   newState = Object.assign({}, state);
-    //   newState = action.payload;
-    //   return newState;
+
     case CANCEL:
-      // let bookings = {};
       delete newState[action.payload.id];
       return newState;
     case CLEAR:

@@ -32,9 +32,9 @@ function App() {
             <Route exact path="/">
               <HomePage className="home__page__component"></HomePage>
             </Route>
-            {/* <Route path="/sign-up">
+            <Route path="/sign-up">
               <SignUpForm></SignUpForm>
-            </Route> */}
+            </Route>
             {/* <Route path="/login">
               <UserLoginForm></UserLoginForm>
             </Route> */}

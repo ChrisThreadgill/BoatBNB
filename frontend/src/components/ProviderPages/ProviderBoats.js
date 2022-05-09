@@ -12,17 +12,15 @@ function ProviderBoats({ view, setView }) {
   const sessionUserProfile = useSelector((state) => state.userProfile.user);
   const providerBoats = useSelector((state) => state.boats);
   const boatCheck = Object.values(providerBoats);
-  console.log(providerBoats);
+
   const [currentBoat, setCurrentBoat] = useState("");
-  // console.log(providerBoats);
-  // console.log(loggedInUserId, "current logged in user");
+
   useEffect(() => {
     dispatch(boatsAction.getProviderBoats(loggedInUserId));
     return () => {
       boatsAction.clean();
     };
   }, [dispatch]);
-  // console.log(providerBoats);
 
   return (
     <div className="provider__boats__container">

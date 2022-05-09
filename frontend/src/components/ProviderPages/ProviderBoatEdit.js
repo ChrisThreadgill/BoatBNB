@@ -15,7 +15,7 @@ import BoatReviewBoard from "../Reviews/BoatReviewBoard.js";
 function ProviderBoatEdit() {
   const history = useHistory();
   const { boatId } = useParams();
-  // console.log(typeof parseInt(boatId));
+
   const dispatch = useDispatch();
 
   const sessionUser = useSelector((state) => state.session.user);
@@ -23,9 +23,6 @@ function ProviderBoatEdit() {
 
   const boatReviews = useSelector((state) => state.boats.boat);
   const test = parseInt(boatId);
-  console.log(boatId);
-  console.log(boat[boatId]);
-  // console.log(boat.test);
 
   useEffect(() => {
     dispatch(boatsAction.getOneBoat(boatId));

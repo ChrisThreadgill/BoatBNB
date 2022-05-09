@@ -17,7 +17,6 @@ import {
 function UserRatingDisplay({ userProfile }) {
   const { UserRatings } = userProfile;
   const sessionUser = useSelector((state) => state.session.user);
-  // console.log(sessionUser);
 
   const averageUserRatings = UserRatings.reduce(
     (prev, curr, idx) => {

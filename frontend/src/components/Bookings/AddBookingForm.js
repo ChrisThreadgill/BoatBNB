@@ -15,18 +15,17 @@ function AddBookingForm({ boatId }) {
   const [checkOut, setCheckOut] = useState(17);
   const [validErrors, setValidErrors] = useState(null);
   const loggedInUserId = useSelector((state) => state.session.user.id);
-  console.log(bookingDate);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const body = { userId: loggedInUserId, boatId, bookingDate, checkIn, checkOut };
-    // console.log(body);
+
     const newBooking = await csrfFetch(`/api/bookings/${boatId}`, {
       method: "POST",
       body: JSON.stringify(body),
     });
     const response = await newBooking.json();
-    // console.log(response.newBooking);
+
     if (response.newBooking.userId === loggedInUserId) {
       history.push(`/users/${loggedInUserId}/profile`);
     }

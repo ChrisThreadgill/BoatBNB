@@ -14,29 +14,9 @@ function EditBoat({ user, view, setView, boat }) {
   const { boatId } = useParams();
   const currentBoat = boat[boatId];
   const bookingsObj = useSelector((state) => state.bookings);
-  console.log(bookingsObj);
+
   const bookingsArr = Object.values(bookingsObj);
-  console.log(bookingsArr);
 
-  console.log(boat[boatId]);
-  // let {
-  //   // id: boatId,
-  //   marina: cMarina,
-  //   year: cYear,
-  //   model: cModel,
-  //   city: cCity,
-  //   state: cState,
-  //   price: cPrice,
-  //   captain: cCaptain,
-  //   accessories: cAccessories,
-  // } = boat[boatId];
-  // useEffect(() => {
-  //   dispatch(boatActions.getOneBoat(boatId));
-
-  //   return () => {};
-  // }, [dispatch]);
-
-  // console.log(userId);
   const [marina, setMarina] = useState(currentBoat?.marina);
   const [year, setYear] = useState(currentBoat?.year);
   const [model, setModel] = useState(currentBoat?.model);

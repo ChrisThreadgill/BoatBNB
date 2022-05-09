@@ -72,7 +72,7 @@ router.post(
   validateBoatAddForm,
   asyncHandler(async (req, res) => {
     const { userId, marina, city, state, year, model, accessories, captain, price, schedule } = req.body;
-    // console.log(userId);
+
     const newBoat = await Boat.build({
       userId,
       marina,
@@ -97,7 +97,6 @@ router.put(
   requireAuth,
   validateBoatAddForm,
   asyncHandler(async (req, res) => {
-    // console.log(req.body);
     const { boatId } = req.params;
 
     const { userId, marina, city, state, year, model, accessories, captain, price, schedule } = req.body;

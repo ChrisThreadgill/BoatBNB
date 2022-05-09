@@ -30,9 +30,6 @@ function ProviderBoard({ user }) {
   const [boatsTabChecked, setBoatsTabChecked] = useState("");
   const [addBoatTabChecked, setAddBoatTabChecked] = useState("");
 
-  // console.log(user.id, "--------------");
-  console.log(history);
-
   const bookings = useSelector((state) => state.bookings);
 
   const userProfile = useSelector((state) => state.userProfile.user);

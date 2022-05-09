@@ -14,7 +14,6 @@ function LoggedInNav() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const { id } = sessionUser;
-  console.log(sessionUser);
 
   const clearUser = (e) => {
     // e.preventDefault();
@@ -28,7 +27,6 @@ function LoggedInNav() {
     history.push("/");
   };
   const profilePic = sessionUser.profilePicture;
-  console.log(sessionUser.profilePicture);
 
   return (
     <nav className="logged__in__nav">

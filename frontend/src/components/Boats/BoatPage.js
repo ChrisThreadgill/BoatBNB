@@ -18,7 +18,7 @@ function BoatPage() {
 
   const dispatch = useDispatch();
   const boat = useSelector((state) => state.boats);
-  console.log(boat);
+
   const userId = useSelector((state) => state.session.user?.id);
   const boatReviews = useSelector((state) => state.boatReviews);
   const boatRatingsNR = useSelector((state) => state.boatRatings);

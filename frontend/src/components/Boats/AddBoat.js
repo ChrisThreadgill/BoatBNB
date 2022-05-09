@@ -24,7 +24,6 @@ function AddBoat({ user, view, setView, boat }) {
   const [captain, setCaptain] = useState(false);
   const [accessories, setAccessories] = useState("");
   const [validErrors, setValidErrors] = useState([]);
-  // console.log(user.id);
 
   const stateValidate = new RegExp(
     /^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/
@@ -37,16 +36,15 @@ function AddBoat({ user, view, setView, boat }) {
     formData.append("image", image);
     formData.append("boatId", boatId);
     const result = await axios.post("/api/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
-    console.log(result, "please show me the moneyyyyyyyyyyyyy");
+
     return result.data;
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("working");
 
     const body = { userId: user.id, marina, year, model, city, state: stateCode, accessories, captain, price };
-    // console.log(body);
+
     const newBoat = await csrfFetch(`/api/boats/${user.id}/boats`, {
       method: "POST",
       body: JSON.stringify(body),
@@ -55,12 +53,9 @@ function AddBoat({ user, view, setView, boat }) {
     const boatId = response.newBoat.id;
 
     const result = await postImage({ image: file, boatId });
-    console.log(result);
 
     setImages([result.image, ...images]);
     setView("boats");
-
-    // console.log(newBoatId);
   };
 
   useEffect(() => {
@@ -109,8 +104,6 @@ function AddBoat({ user, view, setView, boat }) {
     }
     setValidErrors(errors);
   }, [marina, year, model, stateCode, price, file]);
-
-  console.log(fileError);
 
   return (
     <div className="add__boat__container">

@@ -20,7 +20,7 @@ function BoatBookings({ boat }) {
   }, [dispatch]);
   return (
     <div>
-      {bookingsArr.length > 0 &&
+      {bookingsArr?.length > 0 &&
         bookingsArr.map((booking) => {
           const averageUserRatings = booking.User.UserRatings.reduce(
             (prev, curr, idx) => {

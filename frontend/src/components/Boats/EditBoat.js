@@ -45,6 +45,7 @@ function EditBoat({ user, view, setView, boat }) {
     formData.append("image", image);
     formData.append("boatId", boatId);
     const result = await axios.post("/api/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
+    console.log(result);
 
     if (result.ok) {
       history.push(`/users/${userId}/profile`);

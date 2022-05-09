@@ -109,10 +109,8 @@ function ProviderBoard({ user }) {
       <div className="provider__board">
         {view === "profile" && userProfile ? (
           <div className="user__profile__view__container">
-            <div>
+            <div className="provider__profile__display">
               <UserProfileCard userProfile={userProfile}></UserProfileCard>
-            </div>
-            <div>
               <UserRatingDisplay userProfile={userProfile}></UserRatingDisplay>
             </div>
           </div>

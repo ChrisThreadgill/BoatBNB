@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import "./SignUpForm.css";
+import axios from "axios";
 
 import { Redirect } from "react-router-dom";
 
@@ -15,35 +16,55 @@ function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [file, setFile] = useState(null);
+  const [fileError, setFileError] = useState("");
   const [errors, setErrors] = useState([]);
+
+  async function postImage({ image }) {
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const result = await axios.post("/api/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
+    return result.data;
+  }
 
   if (sessionUser) return <Redirect to="/" />;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
+      const result = await postImage({ image: file });
+      const profilePicture = result.url;
+      console.log("working-------------------------");
+      console.log(profilePicture);
       setErrors([]);
-      return dispatch(sessionActions.signup({ firstName, lastName, email, password, roleId })).catch(async (res) => {
-        const data = await res.json();
-        if (!data.errors) {
-          setRoleId("");
-          setFirstName("");
-          setLastName("");
-          setEmail("");
-          setPassword("");
-          setConfirmPassword("");
-        }
+      return dispatch(sessionActions.signup({ firstName, lastName, email, password, profilePicture, roleId })).catch(
+        async (res) => {
+          const data = await res.json();
+          if (!data.errors) {
+            setRoleId("");
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setPassword("");
+            setConfirmPassword("");
+          }
 
-        if (data && data.errors) setErrors(data.errors);
-      });
+          if (data && data.errors) setErrors(data.errors);
+        }
+      );
     }
     return setErrors(["Confirm Password field must be the same as the Password field"]);
   };
 
   return (
     <div>
-      <h1>hello from the form signup page</h1>
       <div className="signup__form__container">
+        <div className="sign__up__form__header">
+          <img src="/BNB.svg" className="boat__bnb__logo" />
+          <h3>Welcome to Boat BNB!</h3>
+          <h2>Easy Sign-Up gets you out on the water making memories faster!</h2>
+        </div>
         <form onSubmit={handleSubmit} className="signup__form">
           <ul>
             {errors.map((error, idx) => (
@@ -102,6 +123,18 @@ function SignUpForm() {
                 Boat Provider?
               </label>
             </div>
+            <label>
+              Profile Picture
+              <input
+                onChange={(e) => {
+                  setFile(e.target.files[0]);
+                }}
+                className="choose__file__button"
+                type="file"
+                name="file"
+                accept="image/*"
+              />
+            </label>
             <button type="submit">Sign Up</button>
           </div>
         </form>

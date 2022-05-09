@@ -70,17 +70,23 @@ router.post(
     const result = await uploadFile(file);
 
     const url = result.key;
-    if (result.key) {
-      const newImage = await Image.build({
-        boatId,
-        url,
-      });
-      await newImage.save();
 
-      await unlinkFile(file.path);
-      return res.json({
-        newImage,
-      });
+    if (result.key) {
+      if (boatId) {
+        const newImage = await Image.build({
+          boatId,
+          url,
+        });
+        await newImage.save();
+
+        await unlinkFile(file.path);
+        return res.json({
+          newImage,
+        });
+      } else {
+        await unlinkFile(file.path);
+        return res.json({ url });
+      }
     }
   })
 );

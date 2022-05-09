@@ -27,7 +27,6 @@ function ProviderBookings() {
               </div>
 
               <div className="booking__card__container">
-                <h1>Booking Card Rendered Below</h1>
                 <BookingCard key={booking.id} booking={booking}></BookingCard>
                 <form
                   onSubmit={(e) => {
@@ -35,7 +34,9 @@ function ProviderBookings() {
                     dispatch(bookingsActions.cancelUserBooking(booking));
                   }}
                 >
-                  <button type="submit">Cancel Booking</button>
+                  <button className="booking__cancel__button" type="submit">
+                    Cancel Booking
+                  </button>
                 </form>
               </div>
             </div>

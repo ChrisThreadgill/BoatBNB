@@ -9,12 +9,13 @@ import "./BoatCSS/BoatBookings.css";
 import { FaStar } from "react-icons/fa";
 
 function BoatBookings({ boat }) {
+  console.log(boat);
   const dispatch = useDispatch();
   const bookingsObj = useSelector((state) => state.bookings);
   const bookingsArr = Object.values(bookingsObj);
 
   useEffect(() => {
-    dispatch(bookingsActions.getAllBoatBookings(boat.id));
+    dispatch(bookingsActions.getAllBoatBookings(boat?.id));
     return () => dispatch(bookingsActions.cleanUp());
   }, [dispatch]);
   return (
@@ -42,11 +43,11 @@ function BoatBookings({ boat }) {
           );
           return (
             <div className="provider__bookings__view">
-              <div>
+              <div className="provider__booking__user__information">
                 <h1>{booking.User.firstName}</h1>
                 <img src={`/api/images/${booking.User.profilePicture}`} className="profile__avatar" />
                 {averageUserRatings && averageUserRatings.average >= 1 && (
-                  <div>
+                  <div className="provider__booking__user__rating">
                     {[...Array(averageUserRatings.average)].map((star, idx) => {
                       return <FaStar key={idx} color={"#ffc107"}></FaStar>;
                     })}
@@ -54,8 +55,7 @@ function BoatBookings({ boat }) {
                 )}
               </div>
 
-              <div>
-                <h1>booking Information Div</h1>
+              <div className="provider__booking__information__div">
                 <h3>{booking.bookingDate}</h3>
                 <h3>{booking.checkIn}</h3>
                 <h3>{booking.checkOut}</h3>

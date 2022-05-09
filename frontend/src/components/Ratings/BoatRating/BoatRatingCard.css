@@ -1,8 +1,33 @@
 .boat__rating__card {
   display: flex;
   flex-direction: row;
+  justify-self: flex-start;
+  margin: 2vh 0 2vh 0;
+  border: 3px #274063 solid;
+  border-radius: 15px;
+  background-color: whitesmoke;
+}
+.boat__rating__card__container {
+  display: flex;
+  align-self: flex-start;
+  /* border: 1px solid red; */
 }
 .star__rating__form {
   display: flex;
   flex-direction: column;
+}
+.boat__rating__card__user__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 2vh 0 1vh;
+}
+
+.boat__rating__card__user__info > img {
+  border-radius: 50%;
+}
+
+.boat__rating__card__NR {
+  margin: 2vh;
 }

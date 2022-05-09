@@ -31,7 +31,7 @@ function ProviderBoats({ view, setView }) {
           return (
             <div key={boat.id} className="provider__boat__card__container">
               <BoatCard key={boat.id} boat={boat}></BoatCard>
-              <div>
+              <div className="provider__boat__button">
                 <button
                   onClick={() => {
                     boatsAction.getOneBoat(boat.id);

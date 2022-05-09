@@ -1,0 +1,49 @@
+.login__form__div {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40vh;
+  height: 40vh;
+  background-color: #274063;
+  border-radius: 15px;
+}
+
+.login__form > div {
+  display: flex;
+  align-self: center;
+  width: 75%;
+  background-color: #cccccc;
+  margin: 2vh 0 2vh 0;
+}
+
+.login__form > div > input {
+  display: flex;
+  align-self: center;
+  border-radius: 15px;
+  text-align: center;
+  width: 100%;
+  height: 2.5vh;
+  background-color: #cccccc;
+}
+.login__form > div {
+  border-radius: 15px;
+}
+
+.login__form__button {
+  border-radius: 12px;
+  font-size: 1.5rem;
+  color: #274063;
+  font-weight: 600;
+  width: 12vh;
+  height: 3vh;
+}
+.login__form > h2,
+.login__form > h3 {
+  color: whitesmoke;
+}

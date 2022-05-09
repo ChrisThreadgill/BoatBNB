@@ -18,6 +18,7 @@ function BoatPage() {
 
   const dispatch = useDispatch();
   const boat = useSelector((state) => state.boats);
+  console.log(boat);
   const userId = useSelector((state) => state.session.user?.id);
   const boatReviews = useSelector((state) => state.boatReviews);
   const boatRatingsNR = useSelector((state) => state.boatRatings);
@@ -41,7 +42,7 @@ function BoatPage() {
       {/* <h1>Single Boat Page</h1> */}
       <div className="single__boat__view">
         <div className="boat__info__booking">
-          {boat && <BoatCard boat={boat}></BoatCard>}
+          {boat && <BoatCard boat={boat[boatId]}></BoatCard>}
           {/* {userId && (
             <div className="boat__booking__container">
               <div>

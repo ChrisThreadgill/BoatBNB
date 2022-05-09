@@ -20,9 +20,11 @@ function ProviderBoatEdit() {
 
   const sessionUser = useSelector((state) => state.session.user);
   const boat = useSelector((state) => state.boats);
+
   const boatReviews = useSelector((state) => state.boats.boat);
   const test = parseInt(boatId);
-  console.log(boat);
+  console.log(boatId);
+  console.log(boat[boatId]);
   // console.log(boat.test);
 
   useEffect(() => {
@@ -48,14 +50,14 @@ function ProviderBoatEdit() {
       {isLoaded && (
         <div>
           {sessionUser && boat && (
-            <div>
+            <div className="provider__edit__boat__page">
+              <h1>Edit Your Boat!</h1>
               <div className="provider__boat__edit__container">
-                <h1>hello</h1>
-                <BoatCard boat={boat}></BoatCard>
+                <BoatCard boat={boat[boatId]}></BoatCard>
                 <EditBoat user={sessionUser} boat={boat} />
               </div>
-              <div>
-                <BoatBookings boat={boat}></BoatBookings>
+              <div className="provider__boat__bookings__container">
+                <BoatBookings boat={boat[boatId]}></BoatBookings>
                 {/* <BoatReviewBoard></BoatReviewBoard> */}
               </div>
             </div>

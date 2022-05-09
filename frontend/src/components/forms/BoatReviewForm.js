@@ -5,9 +5,11 @@ import * as reviewActions from "../../store/boatReviews";
 import * as ratingActions from "../../store/boatRatings";
 import { useDispatch } from "react-redux";
 import "./forms.css/BoatReviewForm.css";
+import { useParams } from "react-router-dom";
 
 function BoatReviewForm({ boat, rating, setRating, setClean, setComfort, setFunc, func, comfort, clean }) {
   const dispatch = useDispatch();
+  const { boatId } = useParams();
   const loggedInUser = useSelector((state) => state.session.user);
   const [reviewLengthError, setReviewLengthError] = useState(null);
   const [review, setReview] = useState("");
@@ -24,16 +26,16 @@ function BoatReviewForm({ boat, rating, setRating, setClean, setComfort, setFunc
     if (rating && !review) {
       let ratingBody = {
         userId: loggedInUser.id,
-        boatId: boat.id,
+        boatId,
         cleanliness: clean,
         average: rating,
         functional: func,
         comfort: comfort,
         boatReviewId,
       };
-      if (func === null) ratingBody.functional = 1;
-      if (clean === null) ratingBody.cleanliness = 1;
-      if (comfort === null) ratingBody.comfort = 1;
+      if (!func || func === null) ratingBody.functional = 1;
+      if (!clean || clean === null) ratingBody.cleanliness = 1;
+      if (!comfort || comfort === null) ratingBody.comfort = 1;
 
       dispatch(ratingActions.addBoatRatingNR(ratingBody));
 
@@ -44,7 +46,7 @@ function BoatReviewForm({ boat, rating, setRating, setClean, setComfort, setFunc
     }
     if (!reviewLengthError) {
       if (review && !rating) {
-        const reviewBody = { userId: loggedInUser.id, boatId: boat.id, review };
+        const reviewBody = { userId: loggedInUser.id, boatId, review };
 
         dispatch(reviewActions.addReview(reviewBody));
 
@@ -53,7 +55,7 @@ function BoatReviewForm({ boat, rating, setRating, setClean, setComfort, setFunc
       if (review && rating) {
         const ratingBody = {
           userId: loggedInUser.id,
-          boatId: boat.id,
+          boatId,
           average: rating,
           cleanliness: clean,
           functional: func,
@@ -63,7 +65,7 @@ function BoatReviewForm({ boat, rating, setRating, setClean, setComfort, setFunc
         if (func === 0) ratingBody.functional = rating;
         if (clean === 0) ratingBody.cleanliness = rating;
         if (comfort === 0) ratingBody.comfort = rating;
-        const reviewBody = { userId: loggedInUser.id, boatId: boat.id, review };
+        const reviewBody = { userId: loggedInUser.id, boatId, review };
 
         dispatch(reviewActions.addReviewWithRating(reviewBody, ratingBody));
 

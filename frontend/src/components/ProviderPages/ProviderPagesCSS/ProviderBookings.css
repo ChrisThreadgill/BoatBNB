@@ -1,12 +1,42 @@
 .provider__profile__bookings {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  background-color: whitesmoke;
+  margin-top: 2vh;
+  border: 3px solid #274063;
+  border-radius: 15px;
+  border-left: none;
 }
 
 .booking__card__container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
+  margin-right: 2vh;
+  text-align: center;
+}
+.booking__cancel__button {
+  font-size: 1.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: whitesmoke;
+  border: 2px solid #274063;
+  font-weight: 600;
+  color: #274063;
+}
+
+.profile__bookings__panel {
+  /* border: 1px solid red; */
+  /* background-color: whitesmoke; */
+  border-top: none;
+  padding: 0 4vh 4vh 0;
+}
+.provider__board {
+  background-color: #cccccc;
+  border: 3px solid #5992e3;
+  border-radius: 11px;
+  border-top: none;
+  min-height: 60vh;
 }

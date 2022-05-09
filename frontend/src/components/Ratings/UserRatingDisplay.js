@@ -40,7 +40,7 @@ function UserRatingDisplay({ userProfile }) {
   return (
     <div>
       {sessionUser?.id === userProfile.id ? (
-        <h1>What others are saying about you!</h1>
+        <h1>Look what others are saying about you!</h1>
       ) : (
         <h1>What {userProfile.firstName} does well</h1>
       )}

@@ -4,7 +4,7 @@ import "./BoatReviews/BoatReviewCard.css";
 
 function BoatReviewBoard({ boatReviews, boatRatingsNR }) {
   return (
-    <div>
+    <div className="boat__review__board__container">
       <h1>What Are Others Saying About this Boat?</h1>
       {Object.values(boatReviews).map((review) => {
         if (review.BoatRating) {
@@ -26,7 +26,7 @@ function BoatReviewBoard({ boatReviews, boatRatingsNR }) {
       })}
       {Object.values(boatRatingsNR).map((rating) => {
         return (
-          <div key={rating.id}>
+          <div className="boat__rating__card__container" key={rating.id}>
             <BoatRatingCard key={rating.id} rating={rating}></BoatRatingCard>
           </div>
         );

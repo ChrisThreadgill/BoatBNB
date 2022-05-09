@@ -1,10 +1,32 @@
 .provider__boat__edit__container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
+  border: 3px solid #274063;
+  border-radius: 12px;
+  background-color: #cccccc;
+
+  margin: 4vh 0 4vh 0;
 }
 
 .provider__boat__edit__container > div {
-  margin-left: 15vh;
-  margin-right: 15vh;
+  /* margin-left: 15vh;
+  margin-right: 15vh; */
+}
+
+.provider__boat__bookings__container {
+  width: 80%;
+  margin: auto;
+  border: 3px solid #274063;
+  border-radius: 15px;
+  background-color: #cccccc;
+}
+
+.provider__edit__boat__page {
+  text-align: center;
+}
+
+.provider__edit__boat__page > h1 {
+  margin-top: 3vh;
+  margin-bottom: 0;
 }

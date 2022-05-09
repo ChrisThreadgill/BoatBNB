@@ -11,6 +11,7 @@ import BoatCard from "../Boats/BoatCard";
 import UserReview from "../Reviews/UserReview";
 // import UserReviewView from "../Reviews/UserReviewDisplay";
 import UserRatingDisplay from "../Ratings/UserRatingDisplay";
+import "./UserProfileCSS/UserProfileView.css";
 
 function UserProfileView({ user }) {
   const history = useHistory();
@@ -20,19 +21,18 @@ function UserProfileView({ user }) {
 
   //will refactor this to use store after dev debugging with card setup
   const userProfile = useSelector((state) => state.userProfile.user);
-  const sessionUserProfile = useSelector((state) => state.session.user);
+  // const sessionUserProfile = useSelector((state) => state.session.user);
   const bookingsForLoggedInUser = useSelector((state) => state);
   const bookingsArr = Object.values(bookingsForLoggedInUser);
 
   console.log(bookingsArr);
-  console.log(sessionUserProfile, "l;kjgkdjsflkgjdfslkghjfdsl;kgjl;skdfj");
+  // console.log(sessionUserProfile, "l;kjgkdjsflkgjdfslkghjfdsl;kgjl;skdfj");
 
   useEffect(() => {
     dispatch(userProfileActions.getUserProfile(userId));
     dispatch(bookingsAction.getAllUserBookings(userId));
     return () => {
-      dispatch(userProfileActions.profileCleanUp());
-      dispatch(bookingsAction.cleanUp());
+      // dispatch(bookingsAction.cleanUp());
     };
   }, [dispatch]);
   // console.log(userProfile);
@@ -40,10 +40,10 @@ function UserProfileView({ user }) {
   const loggedInUser = useSelector((state) => state.session.user);
   // console.log(loggedInUser);
   const bookings = useSelector((state) => state.bookings);
-  // console.log(userProfile, "current logged in user");
+  console.log(bookings, "current logged in user");
 
   return (
-    <div>
+    <div className="user__profile__view__container">
       <div className="user__profile__details__container">
         {userProfile && (
           <div className="user__profile__card__container">
@@ -55,41 +55,46 @@ function UserProfileView({ user }) {
             </div>
           </div>
         )}
-        {loggedInUser && loggedInUser?.id !== userProfile?.id ? (
-          <div>
-            <UserReview userProfile={userProfile}></UserReview>
-          </div>
-        ) : null}
       </div>
+      {loggedInUser && loggedInUser?.id === userProfile?.id ? (
+        <div>
+          <UserBookings bookings={bookings}></UserBookings>
+        </div>
+      ) : null}
 
-      {loggedInUser?.id !== userProfile?.id && (
-        <div className="user__profile__boats">
-          {userProfile &&
-            userProfile.Boats &&
-            userProfile.Boats.map((boat) => {
-              return (
-                <div>
-                  <BoatCard key={boat.id} boat={boat}></BoatCard>;
-                  {loggedInUser && loggedInUser.id === boat.userId ? (
-                    <button
-                      onClick={() => {
-                        history.push(`/boat/${boat.id}/edit`);
-                      }}
-                    >
-                      Manage Boat
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => {
-                        loggedInUser ? history.push(`/boats/${boat.id}`) : history.push("/sign-up");
-                      }}
-                    >
-                      Book Now!
-                    </button>
-                  )}
-                </div>
-              );
-            })}
+      {loggedInUser?.id !== userProfile?.id && userProfile?.Boats.length > 0 && (
+        <div className="testing">
+          <h1>{userProfile?.firstName}'s Rentals</h1>
+          <div className="user__profile__boats__container">
+            <div className="user__profile__boats">
+              {userProfile &&
+                userProfile.Boats &&
+                userProfile.Boats.map((boat) => {
+                  return (
+                    <div className="user__profile__boat__card__container">
+                      <BoatCard key={boat.id} boat={boat}></BoatCard>
+                      {loggedInUser && loggedInUser.id === boat.userId ? (
+                        <button
+                          onClick={() => {
+                            history.push(`/boat/${boat.id}/edit`);
+                          }}
+                        >
+                          Manage Boat
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => {
+                            loggedInUser ? history.push(`/boats/${boat.id}`) : history.push("/sign-up");
+                          }}
+                        >
+                          Book Now!
+                        </button>
+                      )}
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
         </div>
       )}
     </div>

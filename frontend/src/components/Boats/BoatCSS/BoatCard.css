@@ -2,12 +2,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 
   /* flex-direction: column; */
 }
 .boat__card__container {
   margin-top: 2vh;
-  margin: 2vh 2vh 2vh 2vh;
+  margin: 2vh 0vh 2vh 2vh;
   display: flex;
   width: fit-content;
   /* border: ridge 7px #cccccc; */
@@ -21,6 +22,7 @@
 
   margin: 2vh 2vh 2vh 2vh;
   border-radius: 11px;
+  border: 3px solid #5992e3;
   background-color: #cccccc;
   display: flex;
   align-items: center;
@@ -48,4 +50,8 @@
   display: flex;
   justify-content: center;
   margin: 0 2vh 0 2vh;
+}
+.boat__rating__display {
+  width: fit-content;
+  /* height: 150px; */
 }

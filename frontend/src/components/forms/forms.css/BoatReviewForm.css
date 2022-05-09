@@ -1,7 +1,9 @@
 .review__text__area {
   border-radius: 10px;
   font-size: 18px;
-  background-color: azure;
+  color: #274063;
+  font-weight: 600;
+  background-color: whitesmoke;
 }
 .boat__review__container {
   display: flex;

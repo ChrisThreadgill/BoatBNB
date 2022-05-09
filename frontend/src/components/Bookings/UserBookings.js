@@ -36,12 +36,11 @@ function UserBookings({ bookings }) {
           return (
             <div className="user__profile__bookings">
               <div>
-                <BoatCard boat={booking.Boat}></BoatCard>
+                <BoatCard boat={booking?.Boat}></BoatCard>
               </div>
 
-              <div>
-                <h1>Booking Card Rendered Below</h1>
-                <BookingCard key={booking.id} booking={booking}></BookingCard>
+              <div className="user__profile__booking__card">
+                <BookingCard key={booking?.id} booking={booking}></BookingCard>
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();

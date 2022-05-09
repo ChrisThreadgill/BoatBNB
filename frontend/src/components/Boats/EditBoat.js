@@ -11,34 +11,50 @@ function EditBoat({ user, view, setView, boat }) {
   const history = useHistory();
   const userId = user.id;
   const dispatch = useDispatch();
+  const { boatId } = useParams();
+  const currentBoat = boat[boatId];
   const bookingsObj = useSelector((state) => state.bookings);
+  console.log(bookingsObj);
   const bookingsArr = Object.values(bookingsObj);
-  // console.log(bookingsArr);
+  console.log(bookingsArr);
 
-  let {
-    id: boatId,
-    marina: cMarina,
-    year: cYear,
-    model: cModel,
-    city: cCity,
-    state: cState,
-    price: cPrice,
-    captain: cCaptain,
-    accessories: cAccessories,
-  } = boat;
+  console.log(boat[boatId]);
+  // let {
+  //   // id: boatId,
+  //   marina: cMarina,
+  //   year: cYear,
+  //   model: cModel,
+  //   city: cCity,
+  //   state: cState,
+  //   price: cPrice,
+  //   captain: cCaptain,
+  //   accessories: cAccessories,
+  // } = boat[boatId];
+  // useEffect(() => {
+  //   dispatch(boatActions.getOneBoat(boatId));
+
+  //   return () => {};
+  // }, [dispatch]);
 
   // console.log(userId);
-  const [marina, setMarina] = useState(cMarina);
-  const [year, setYear] = useState(cYear);
-  const [model, setModel] = useState(cModel);
-  const [city, setCity] = useState(cCity);
+  const [marina, setMarina] = useState(currentBoat?.marina);
+  const [year, setYear] = useState(currentBoat?.year);
+  const [model, setModel] = useState(currentBoat?.model);
+  const [city, setCity] = useState(currentBoat?.city);
   const [file, setFile] = useState();
-  const [stateCode, setStateCode] = useState(cState);
-  const [price, setPrice] = useState(cPrice);
-  const [captain, setCaptain] = useState(cCaptain);
-  const [accessories, setAccessories] = useState(cAccessories);
+  const [stateCode, setStateCode] = useState(currentBoat?.state);
+  const [price, setPrice] = useState(currentBoat?.price);
+  const [captain, setCaptain] = useState(currentBoat?.captain);
+  const [accessories, setAccessories] = useState(currentBoat?.accessories);
   const [validErrors, setValidErrors] = useState({});
-  // console.log(user.id);
+
+  const [marinaError, setMarinaError] = useState("");
+  const [yearError, setYearError] = useState(null);
+  const [fileError, setFileError] = useState([]);
+  const [images, setImages] = useState([]);
+  const [stateCodeError, setStateCodeError] = useState("");
+  const [priceError, setPriceError] = useState("");
+  const [invalidFileError, setInvalidFileError] = useState([]);
 
   const stateValidate = new RegExp(
     /^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/
@@ -57,10 +73,9 @@ function EditBoat({ user, view, setView, boat }) {
   }
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     const body = { boatId, userId, marina, year, model, city, state: stateCode, accessories, captain, price };
     dispatch(boatActions.updateOneBoat(body));
-
-    history.push(`/boat/${boatId}/edit`);
   };
 
   const deleteBoat = async (e) => {
@@ -74,30 +89,54 @@ function EditBoat({ user, view, setView, boat }) {
   };
 
   useEffect(() => {
-    const errors = {
-      marinaError: null,
-      yearError: null,
-      cityError: null,
-      stateError: null,
-    };
+    const invalidFile = [];
+    const errors = [];
 
-    if (!marina?.length) {
-      errors.marinaError = "Please provide the marina your boat is at.";
+    if (marina?.length > 75) {
+      errors.push("marina error");
+      setMarinaError("The Marina can only be 75 characters");
     }
-    // console.log(errors.marinaError);
+
     if (year === "") {
-      errors.yearError = "Please enter a valid year in the format 'YYYY'.";
+      errors.push("year error");
+      setYearError("You must provide a year");
     }
-    // console.log(errors.yearError);
+
+    if (year < 1990 || year > 2050 || year === typeof "string") {
+      errors.push("year error NaN");
+      setYearError("Year Must be a number ");
+    }
+    if (isNaN(year)) {
+      errors.push("year error NaN");
+      setYearError("Year Must be a number ");
+    }
 
     if (!stateValidate.test(stateCode)) {
-      errors.stateError = 'Please provide a valid 2 digit state code I.e."AR"';
+      errors.push("valid year error");
+      setStateCodeError("Please provide a valid 2 digit state code");
     }
 
-    // console.log(errors);
+    if (file === null) {
+      errors.push("file error");
 
+      setFileError("Must Provide a Valid Image");
+    }
+    if (price?.length === 0) {
+      errors.push("year error NaN");
+      setPriceError("Price must be a number ");
+    }
+
+    if (isNaN(price)) {
+      errors.push("year error NaN");
+      setPriceError("Price must be a number ");
+    }
+    if (!file?.type.includes("image")) {
+      invalidFile.push("File error");
+      setFileError("Must Provide a Valid Image");
+    }
+    setInvalidFileError(invalidFile);
     setValidErrors(errors);
-  }, [marina, year, model, stateCode]);
+  }, [marina, year, model, stateCode, price, file]);
 
   return (
     <div className="edit__boat__container">
@@ -111,6 +150,7 @@ function EditBoat({ user, view, setView, boat }) {
                 type="text"
                 value={marina}
                 required
+                maxLength={70}
                 name="marina"
                 onChange={(e) => {
                   setMarina(e.target.value);
@@ -142,6 +182,7 @@ function EditBoat({ user, view, setView, boat }) {
                 type="text"
                 name="model"
                 required
+                maxLength={100}
                 value={model}
                 onChange={(e) => {
                   setModel(e.target.value);
@@ -157,6 +198,7 @@ function EditBoat({ user, view, setView, boat }) {
                 name="city"
                 required
                 value={city}
+                maxLength={50}
                 onChange={(e) => {
                   setCity(e.target.value);
                 }}
@@ -238,7 +280,9 @@ function EditBoat({ user, view, setView, boat }) {
           </div>
 
           <div>
-            <button type="submit">Update Your Boat</button>
+            <button disabled={!!validErrors.length} type="submit">
+              Update Your Boat
+            </button>
           </div>
         </form>
         <div className="add__boat__images">
@@ -259,7 +303,7 @@ function EditBoat({ user, view, setView, boat }) {
                 accept="image/*"
               ></input>
             </label>
-            <button>Add a boat Image</button>
+            <button disabled={!!invalidFileError.length}>Add a boat Image</button>
           </form>
         </div>
       </div>

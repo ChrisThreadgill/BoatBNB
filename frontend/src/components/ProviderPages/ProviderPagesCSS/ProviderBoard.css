@@ -10,8 +10,12 @@
 }
 
 .provider__boats__home__container {
-  /* border: 1px red solid; */
+  border: 3px #5992e3 solid;
+  border-top: none;
+  border-radius: 15px;
+  background-color: floralwhite;
   min-height: 60vh;
+  padding: 0 4vh 4vh 4vh;
 }
 /* .boat__card {
   margin: 2vh 1.65vh;
@@ -51,7 +55,7 @@
 .provider__nav__panel > div {
   display: flex;
   width: 100%;
-  color: white;
+  color: #274063;
   font-weight: 600;
   font-size: 2rem;
   /* border: 1px solid black; */
@@ -65,10 +69,10 @@
 }
 .profile__buttons__span {
   display: flex;
-  border-radius: 15px 15px 15px 15px;
+  border-radius: 15px 15px 10px 10px;
   width: auto;
   height: 3vh;
-  background-color: #4673b3;
+  background-color: #5992e3;
 }
 
 .boat__img {
@@ -89,5 +93,5 @@
 .profile__bookings__checked,
 .profile__boats__checked,
 .profile__add__boat__checked {
-  background-color: #4673b3;
+  background-color: #5992e3;
 }

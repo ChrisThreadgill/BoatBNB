@@ -9,7 +9,7 @@ function UserProfilePage() {
   const { userId } = useParams();
   const dispatch = useDispatch();
   const sessionUserProfile = useSelector((state) => state.userProfile.user);
-  const loggedInUserId = useSelector((state) => state.session.user.id);
+  const loggedInUserId = useSelector((state) => state.session.user?.id);
   // console.log(loggedInUserId, "current logged in user");
   useEffect(() => {
     dispatch(userProfileActions.getUserProfile(userId));

@@ -2,10 +2,16 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  border-radius: 15px;
+  background-color: #274063;
 }
 .signup__form {
   display: flex;
   justify-content: center;
+  width: 40vh;
+  height: 35vh;
+  margin-right: 2vh;
+  margin-left: 5vh;
 }
 .signup__form__inputs {
   display: flex;
@@ -17,12 +23,36 @@
 .signup__form__inputs > label {
   display: flex;
   justify-content: space-between;
+  margin: 1vh 0 1vh 0;
+  color: whitesmoke;
 }
 .signup__form__inputs > label > input {
   border-radius: 7px;
   margin-left: 1rem;
+  background-color: #cccccc;
 }
 .radio__buttons {
   display: flex;
   justify-content: space-around;
+  color: whitesmoke;
+}
+
+.file__input {
+  color: #274063;
+}
+.signup__form__inputs > button {
+  /* display: flex; */
+  margin-top: 1vh;
+  border-radius: 15px;
+  width: 150px;
+  align-self: center;
+}
+.sign__up__form__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  /* margin-top: 4vh; */
+  margin: 4vh 2vh 0 2vh;
+  color: whitesmoke;
 }

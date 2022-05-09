@@ -37,11 +37,13 @@ function AddBoat({ user, view, setView, boat }) {
     formData.append("image", image);
     formData.append("boatId", boatId);
     const result = await axios.post("/api/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
+    console.log(result, "please show me the moneyyyyyyyyyyyyy");
     return result.data;
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("working");
 
     const body = { userId: user.id, marina, year, model, city, state: stateCode, accessories, captain, price };
     // console.log(body);
@@ -53,6 +55,8 @@ function AddBoat({ user, view, setView, boat }) {
     const boatId = response.newBoat.id;
 
     const result = await postImage({ image: file, boatId });
+    console.log(result);
+
     setImages([result.image, ...images]);
     setView("boats");
 
@@ -90,6 +94,10 @@ function AddBoat({ user, view, setView, boat }) {
 
       setFileError("Must Provide a Valid Image");
     }
+    if (price.length === 0) {
+      errors.push("year error NaN");
+      setPriceError("Price must be a number ");
+    }
 
     if (isNaN(price)) {
       errors.push("year error NaN");
@@ -123,6 +131,7 @@ function AddBoat({ user, view, setView, boat }) {
           <br></br>
           Understand that you are responsible for the boatBNB members that have booked your service.
           <br></br>
+          <br></br>
           BOATBNB WILL NOT TOLERATE ANY FORMS OF HARASSMENT!
           <br></br>
           ANY BEHAVIOR OF SUCH WILL RESULT IN LOSING PROVIDER PRIVILEGES AND/OR POTENTIALLY BOATBNB MEMBERSHIP ALL
@@ -132,143 +141,142 @@ function AddBoat({ user, view, setView, boat }) {
 
       <div className="add__boat__form__div">
         <form onSubmit={handleSubmit} className="add__boat__form">
-          <div className="test">
+          <div className="add__boat__form__inside__div">
             {marinaError ? <span>{marinaError}</span> : null}
-            <label>
-              Marina
-              <input
-                type="text"
-                name="marina"
-                required
-                onChange={(e) => {
-                  setMarina(e.target.value);
-                }}
-              />
-            </label>
+            <label>Marina</label>
+            <input
+              className="add__boat__inputs"
+              type="text"
+              name="marina"
+              required
+              onChange={(e) => {
+                setMarina(e.target.value);
+              }}
+            />
 
             {validErrors?.yearError ? <span>{validErrors.yearError}</span> : null}
-            <label>
-              Year
-              <input
-                type="text"
-                name="year"
-                value={year}
-                required
-                placeholder="YYYY"
-                maxLength={4}
-                onChange={(e) => {
-                  setYear(e.target.value);
-                }}
-              />
-            </label>
+            <label>Year</label>
+            <input
+              className="add__boat__input__year"
+              type="text"
+              name="year"
+              value={year}
+              required
+              placeholder="ex. YYYY"
+              maxLength={4}
+              onChange={(e) => {
+                setYear(e.target.value);
+              }}
+            />
 
-            <label>
-              Model
-              <input
-                type="text"
-                name="model"
-                value={model}
-                required
-                onChange={(e) => {
-                  setModel(e.target.value);
-                }}
-              />
-            </label>
+            <label>Model</label>
+            <input
+              className="add__boat__inputs"
+              type="text"
+              name="model"
+              value={model}
+              maxLength={85}
+              required
+              onChange={(e) => {
+                setModel(e.target.value);
+              }}
+            />
 
-            <label>
-              City
-              <input
-                type="text"
-                name="city"
-                required
-                value={city}
-                onChange={(e) => {
-                  setCity(e.target.value);
-                }}
-              />
-            </label>
+            <label>City</label>
+            <input
+              className="add__boat__inputs"
+              type="text"
+              name="city"
+              required
+              value={city}
+              maxLength={40}
+              onChange={(e) => {
+                setCity(e.target.value);
+              }}
+            />
 
-            <label>
-              State
-              {validErrors?.stateError ? <span>{validErrors.stateError}</span> : null}
-              <input
-                type="text"
-                name="state"
-                required
-                value={stateCode}
-                maxLength={2}
-                onChange={(e) => {
-                  setStateCode(e.target.value.toUpperCase());
-                }}
-              />
-            </label>
+            {validErrors?.stateError ? <span>{validErrors.stateError}</span> : null}
+            <label>State</label>
+            <input
+              className="add__boat__input__state"
+              type="text"
+              name="state"
+              required
+              placeholder="ex. AR, FL, MI"
+              value={stateCode}
+              maxLength={2}
+              onChange={(e) => {
+                setStateCode(e.target.value.toUpperCase());
+              }}
+            />
 
-            <label>
-              Accessories
-              <input
-                type="text"
-                name="accessories"
-                required
-                value={accessories}
-                onChange={(e) => {
-                  setAccessories(e.target.value);
-                }}
-              />
-            </label>
+            <label>Accessories</label>
+            <input
+              className="add__boat__inputs"
+              type="text"
+              name="accessories"
+              required
+              value={accessories}
+              onChange={(e) => {
+                setAccessories(e.target.value);
+              }}
+            />
 
-            <label>
-              Price
-              <input
-                type="text"
-                maxLength={5}
-                required
-                placeholder="ex. 100, 1000 no decimal"
-                name="accessories"
-                value={price}
-                onChange={(e) => {
-                  setPrice(e.target.value);
-                }}
-              />
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                value={false}
-                name="captain"
-                // checked={captain === false}
-                onChange={(e) => {
-                  setCaptain(e.target.value);
-                }}
-              />
-              No Captain
-            </label>
-            <label>
-              <input
-                type="radio"
-                value={true}
-                name="captain"
-                // checked={captain === true}
-                onChange={(e) => {
-                  setCaptain(e.target.value);
-                }}
-              />
-              Captain available
-            </label>
+            <label>Price</label>
+            <input
+              className="add__boat__input__price"
+              type="text"
+              maxLength={5}
+              required
+              placeholder="ex. 100, 1000 "
+              name="accessories"
+              value={price}
+              onChange={(e) => {
+                setPrice(e.target.value);
+              }}
+            />
+            <div className="add__boat__radio__buttons__div">
+              <label className="add__boat__radio__buttons">
+                <input
+                  className="add__boat__radio__inputs"
+                  type="radio"
+                  value={false}
+                  name="captain"
+                  // checked={captain === false}
+                  onChange={(e) => {
+                    setCaptain(e.target.value);
+                  }}
+                />
+                No Captain
+              </label>
+              <label className="add__boat__radio__buttons">
+                <input
+                  className="add__boat__radio__inputs"
+                  type="radio"
+                  value={true}
+                  name="captain"
+                  // checked={captain === true}
+                  onChange={(e) => {
+                    setCaptain(e.target.value);
+                  }}
+                />
+                Captain available
+              </label>
+            </div>
           </div>
 
-          <div>
-            <label>
-              images
-              <input
-                onChange={(e) => {
-                  setFile(e.target.files[0]);
-                }}
-                type="file"
-                name="file"
-                accept="image/*"
-              ></input>
-            </label>
+          <div className="add__boat__file__submit">
+            <label>Add an Image of Your Boat!</label>
+            <input
+              onChange={(e) => {
+                setFile(e.target.files[0]);
+              }}
+              className="choose__file__button"
+              type="file"
+              name="file"
+              accept="image/*"
+            ></input>
+
             <button disabled={!!validErrors.length} type="submit">
               Add A Boat
             </button>
@@ -280,120 +288,3 @@ function AddBoat({ user, view, setView, boat }) {
 }
 
 export default AddBoat;
-
-// useEffect(() => {
-//   const errors = {
-//     marinaError: null,
-//     yearError: null,
-//     cityError: null,
-//     stateError: null,
-//   };
-//   if (marina === "") {
-//     errors.marinaError = "Please provide the marina your boat is at.";
-//   }
-//   if (year === "" || year.length !== 4 || year < 1940 || year > 2025) {
-//     errors.yearError = "Please enter a valid year in the format 'YYY'.";
-//   }
-//   if (
-//     state.toUpperCase() !==
-//     /^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/
-//   ) {
-//     errors.stateError = 'Please provide a valid 2 digit state code I.e."AR"';
-//   }
-
-//   setValidErrors(errors);
-// }, [marina, year, state]);
-
-// <div className="add__boat__container">
-//   <div className="add__boat__bio">
-//     <h2>Welcome back {user.firstName}, tell us about your boat!</h2>
-//     <p>
-//       Please be cautious as you rent out your personal boats. Be mindful as we do not expect any of our users to act
-//       carelessly with your property accidents do happen. BoatBNB will not seek litigation for any issues caused with
-//       our providers property. Rent at your own risk. *****IF YOU ARE CHOOSE TO CAPTAIN YOUR BOAT****** Understand
-//       that you are responsible for the boatBNB members that have booked your service. BOATBNB WILL NOT TOLERATE ANY
-//       FORMS OF HARASSMENT! ANY BEHAVIOR OF SUCH WILL RESULT IN LOSING PROVIDER PRIVILEGES AND/OR POTENTIALLY BOATBNB
-//       MEMBERSHIP ALL TOGETHER.
-//     </p>
-//   </div>
-//   <div>
-//     <form
-//       onSubmit={(e) => {
-//         e.preventDefault();
-//       }}
-//     >
-//       <label>
-//         Marina
-//         {/* {validErrors.marinaError ? <span>{validErrors.marinaError}</span> : null} */}
-//         <input
-//           type="text"
-//           name="marina"
-//           value={marina}
-//           onChange={(e) => {
-//             setMarina(e.target.value);
-//           }}
-//         />
-//       </label>
-//       <label>
-//         Year
-//         {/* {validErrors.yearError ? <span>{validErrors.yearError}</span> : null} */}
-//         <input
-//           type="text"
-//           name="year"
-//           value={year}
-//           placeholder="YYYY"
-//           maxLength={4}
-//           onChange={(e) => {
-//             setYear(e.target.value);
-//           }}
-//         />
-//       </label>
-//       <label>
-//         Model
-//         <input
-//           type="text"
-//           name="model"
-//           value={model}
-//           onChange={(e) => {
-//             setModel(e.target.value);
-//           }}
-//         />
-//       </label>
-//       <label>
-//         City
-//         <input
-//           type="text"
-//           name="city"
-//           value={city}
-//           onChange={(e) => {
-//             setCity(e.target.value);
-//           }}
-//         />
-//       </label>
-//       <label>
-//         State
-//         {/* {validErrors.stateError ? <span>{validErrors.stateError}</span> : null} */}
-//         <input
-//           type="text"
-//           name="state"
-//           value={state}
-//           onChange={(e) => {
-//             setState(e.target.value);
-//           }}
-//         />
-//       </label>
-//       <label>
-//         Accessories
-//         <input
-//           type="text"
-//           name="accessories"
-//           value={accessories}
-//           onChange={(e) => {
-//             setAccessories(e.target.value);
-//           }}
-//         />
-//       </label>
-//       <button type="submit">Add A Boat</button>
-//     </form>
-//   </div>
-// </div>

@@ -26,7 +26,14 @@ function HomePage() {
   return (
     <div className="home__page__view">
       <div className="homepage__test">
-        <h1>Welcome to BoatBNB</h1>
+        <div className="test__two__works">
+          <div className="home__page__header">
+            <h1>Welcome to BoatBNB</h1>
+            <h2>Look below for a variety of boat listings around The Nation!</h2>
+          </div>
+          <div className="test__two"></div>
+          <div className="home__page__break"></div>
+        </div>
         <div className="front__page__all__boats">
           {allBoats.length > 0 &&
             allBoats.map((boat) => {

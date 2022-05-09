@@ -9,6 +9,8 @@ import {
   FaRegCalendarAlt,
   FaRegCalendarCheck,
   FaRegCalendarMinus,
+  FaSoap,
+  FaCouch,
   FaWrench,
 } from "react-icons/fa";
 import { useEffect, useState } from "react";
@@ -34,13 +36,12 @@ function BoatReviewCard({ review }) {
         {/* <div>{review.User.UserRatings[0]?.average}</div> */}
       </div>
 
-      <div>
-        <div className="review__content__container">
-          <h1>review Content</h1>
+      <div className="review__content__container">
+        <div>
           <h2>{review.review}</h2>
         </div>
         {userId === review.User.id && (
-          <div>
+          <div className="review__delete__form">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -49,7 +50,9 @@ function BoatReviewCard({ review }) {
                 } else dispatch(reviewActions.deleteBoatReview(review.id));
               }}
             >
-              <button type="submit">Delete Review</button>
+              <button className="review__delete__button" type="submit">
+                Delete Review
+              </button>
             </form>
           </div>
         )}
@@ -72,7 +75,7 @@ function BoatReviewCard({ review }) {
 
               <div className="boat__rating__stars">
                 {[...Array(Math.ceil(review.BoatRating.cleanliness))].map((star, idx) => {
-                  return <FaStar key={idx} color={"#ffc107"}></FaStar>;
+                  return <FaSoap key={idx} color={"#ffc107"}></FaSoap>;
                 })}
               </div>
             </div>
@@ -82,7 +85,7 @@ function BoatReviewCard({ review }) {
 
               <div className="boat__rating__stars">
                 {[...Array(Math.ceil(review.BoatRating.comfort))].map((star, idx) => {
-                  return <FaStar key={idx} color={"#ffc107"}></FaStar>;
+                  return <FaCouch key={idx} color={"#ffc107"}></FaCouch>;
                 })}
               </div>
             </div>
@@ -92,7 +95,7 @@ function BoatReviewCard({ review }) {
 
               <div className="boat__rating__stars">
                 {[...Array(Math.ceil(review.BoatRating.functional))].map((star, idx) => {
-                  return <FaStar key={idx} color={"#ffc107"}></FaStar>;
+                  return <FaWrench key={idx} color={"#ffc107"}></FaWrench>;
                 })}
               </div>
             </div>

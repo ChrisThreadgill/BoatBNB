@@ -1,13 +1,16 @@
 .user__profile__card {
   display: flex;
   flex-direction: row;
+  margin: 0vh 1vh 0vh 1vh;
   /* justify-content: space-evenly; */
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 .user__profile__information {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  color: #274063;
+  font-weight: 800;
 }
 .user__bookings__card {
   /* display: flex;
@@ -18,30 +21,106 @@
 
 .user__bookings__panel {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  border: 1px solid red;
+  /* flex-direction: column; */
+  justify-content: center;
+  margin-top: 4vh;
+  margin-bottom: 2vh;
+  width: auto;
+  /* border: 1px solid red; */
+  border-radius: 15px;
+  background-color: #274063;
+  justify-content: center;
 }
 
 .user__profile__bookings {
   display: flex;
   flex-direction: row;
+  width: 70%;
   justify-content: space-between;
-  border: 1px solid red;
+  margin: 2vh 0 2vh 0;
+  border-radius: 15px;
+  background-color: whitesmoke;
+  border: 3px #cccccc solid;
+}
+.user__profile__booking__card {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin: 2vh;
 }
 
-.user__profile__boats {
+.user__profile__booking__card > form > button {
+  font-size: 1.5rem;
+  border-radius: 15px;
+  background-color: #cccccc;
+  color: #274063;
+  font-weight: 500;
+}
+
+.user__profile__boats__container {
   display: flex;
-  justify-content: space-around;
+
+  justify-content: center;
+  width: 85%;
+  height: 45vh;
+  border: 3px solid #274063;
+  background-color: #274063;
+  border-radius: 15px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.testing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4vh;
 }
 
 .user__profile__details__container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  margin-top: 4vh;
   /* justify-content: space-between; */
   /* flex-direction: row; */
 }
 
 .user__profile__card__container {
   display: flex;
+}
+.provider__profile__display {
+  display: flex;
+  justify-content: space-around;
+}
+.user__profile__picture__div {
+  overflow: hidden;
+}
+.user__profile__picture {
+  width: 350px;
+  height: 350px;
+  border-radius: 45%;
+}
+
+.user__profile__boat__card__container {
+  display: flex;
+  flex-direction: column;
+  border: 4px solid #274063;
+  background-color: whitesmoke;
+  border-radius: 15px;
+  margin: 2vh 2vh 2vh 2vh;
+}
+
+.user__profile__boat__card__container > button {
+  /* width: 10vh; */
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #274063;
+  background-color: #cccccc;
+  border: 3px solid #274063;
+  border-radius: 13px;
+  align-self: center;
+  width: 15%;
+  margin: 2vh 0 2vh 0;
 }

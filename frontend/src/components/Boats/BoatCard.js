@@ -5,14 +5,16 @@ import "./BoatCSS/BoatCard.css";
 import { FaDharmachakra } from "react-icons/fa";
 
 import { useHistory, useLocation } from "react-router-dom";
+import BoatRatingDisplay from "../Ratings/BoatRatingDisplay.js";
 
 function BoatCard({ boat }) {
   const location = useLocation();
   const dispatch = useDispatch();
-  // console.log(location, "11111111111111111111111");
-  console.log(boat, "helooooooooooooooooooooo");
+
+  console.log(boat);
+
   const history = useHistory();
-  // console.log(boat, "in the boat card");
+
   const [boatView, setBoatView] = useState(0);
 
   useEffect(() => {
@@ -50,9 +52,11 @@ function BoatCard({ boat }) {
               ))
             : null}
         </div>
+        <BoatRatingDisplay boat={boat}></BoatRatingDisplay>
         {/* <BoatImageCard></BoatImageCard>  */}
       </div>
       <div className="boat__card__details">
+        <div className="boat__rating__display"></div>
         <div className="boat__location__div">
           <div className="boat__">
             <h1>{`Now Booking!`}</h1>
@@ -84,6 +88,7 @@ function BoatCard({ boat }) {
             ) : null}
           </div>
         </div>
+        <div></div>
       </div>
     </div>
   );

@@ -1,13 +1,22 @@
 .single__boat__view {
   display: flex;
   flex-direction: row;
+  margin-top: 5vh;
   justify-content: space-around;
-  background-color: beige;
-  border: rgb(103, 103, 196) 3rem ridge;
+  background-color: #cccccc;
+  border: #274063 solid 5px;
+  border-radius: 15px;
 }
 .boat__review__board {
   display: flex;
   justify-content: center;
+}
+.boat__review__board__container {
+  padding: 3vh 3vh 3vh 3vh;
+  background-color: #cccccc;
+  border: 3px #274063 solid;
+  border-bottom: none;
+  border-radius: 15px;
 }
 .boat__info__booking {
   display: flex;

@@ -13,23 +13,90 @@
   font-size: 2rem;
   font-weight: bold;
 }
+.add__boat__container {
+  border: 4px solid #5992e3;
+  border-top: none;
+  border-radius: 15px;
+  background-color: #cccccc;
+}
 
 .add__boat__form__div {
   display: flex;
   justify-content: center;
+  margin-bottom: 8vh;
 }
 
 .add__boat__form {
   display: flex;
   flex-direction: column;
-  width: 500px;
+  /* width: 500px; */
 }
 
 .boat__add__input__divs {
   display: flex;
   justify-content: space-between;
 }
-.test {
+.add__boat__form__inside__div {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+.add__boat__form__inside__div > label {
+  font-size: 1.5rem;
+}
+
+.add__boat__file__submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add__boat__inputs {
+  margin-top: 1vh;
+  border-radius: 15px;
+  width: 50%;
+}
+.add__boat__input__year,
+.add__boat__input__price,
+.add__boat__input__state {
+  margin-top: 1vh;
+  border-radius: 15px;
+  width: 25%;
+}
+
+.add__boat__file__submit > label {
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.add__boat__file__submit > button {
+  margin-top: 2vh;
+  border-radius: 12px;
+  height: 4rem;
+  width: 20rem;
+  color: #274063;
+  font-weight: 600;
+  font-size: 2rem;
+  cursor: pointer;
+  /* display: flex;
+  flex-direction: column; */
+}
+.add__boat__radio__buttons {
+  font-size: 2rem;
+  font-weight: 600;
+
+  margin-left: 2vh;
+}
+.add__boat__radio__inputs {
+  /* font-size: 50px;
+   */
+  height: 30px;
+  width: 30px;
+  vertical-align: middle;
+  margin-right: 1vh;
+}
+.add__boat__radio__buttons__div {
+  margin-top: 2vh;
 }

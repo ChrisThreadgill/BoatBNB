@@ -27,7 +27,6 @@ function LoggedInUser() {
   }
   return (
     <div>
-      <h1>Welcome to your profile {name}!</h1>
       {roleId && roleId === 1 && <ProviderBoard user={sessionUserProfile} />}
       {roleId && roleId === 2 && <UserProfileView user={sessionUserProfile} />}
     </div>

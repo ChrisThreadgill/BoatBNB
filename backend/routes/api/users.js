@@ -68,8 +68,8 @@ router.post(
   "/users",
   validateSignup,
   asyncHandler(async (req, res) => {
-    const { firstName, lastName, email, password, roleId } = req.body;
-    const user = await User.signup({ firstName, lastName, email, password, roleId });
+    const { firstName, lastName, email, password, roleId, profilePicture } = req.body;
+    const user = await User.signup({ firstName, lastName, email, password, roleId, profilePicture });
 
     await setTokenCookie(res, user);
 
@@ -83,9 +83,9 @@ router.post(
   "/providers",
   validateSignup,
   asyncHandler(async (req, res) => {
-    const { firstName, lastName, email, password, roleId } = req.body;
+    const { firstName, lastName, email, password, roleId, profilePicture } = req.body;
 
-    const user = await User.signup({ firstName, lastName, email, password, roleId });
+    const user = await User.signup({ firstName, lastName, email, password, roleId, profilePicture });
 
     await setTokenCookie(res, user);
 

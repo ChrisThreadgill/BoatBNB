@@ -1,12 +1,12 @@
 body {
-  background-color: #274063;
+  background-color: whitesmoke;
 }
 
 .front__page__all__boats {
   display: flex;
-  margin: 0;
+  margin-top: 10vh;
   justify-content: center;
-  width: 85%;
+  /* width: 85%; */
   /* flex-direction: row; */
   flex-wrap: wrap;
   /* max-width: 100vh; */
@@ -29,4 +29,41 @@ body {
 
 .home__page__test {
   display: flex;
+  justify-content: center;
+}
+.test__two {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 65%;
+  height: 25vh;
+
+  border: 1px solid #5992e3;
+  border-radius: 12px;
+  color: black;
+  /* background-color: whitesmoke; */
+  background-image: url("./san-juan-mini-boats-adventure-007.jpg");
+  background-position: center;
+}
+.home__page__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #274063;
+}
+
+.test__two__works {
+  display: flex;
+  /* justify-content: flex-end; */
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8vh;
+  margin-bottom: 10vh;
+}
+.home__page__break {
+  margin-top: 1vh;
+  width: 80%;
+  height: 4px;
+  background-color: #5992e3;
+  border-radius: 10px;
 }

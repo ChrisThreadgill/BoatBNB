@@ -1,18 +1,18 @@
 function UserProfileCard({ userProfile }) {
   const profilePic = userProfile?.profilePicture;
-  console.log(profilePic);
+
   return (
     <div>
       <div className="user__profile__card">
         {profilePic && (
-          <div>
+          <div className="user__profile__picture__div">
             <img src={`/api/images/${profilePic}`} className="user__profile__picture" />
           </div>
         )}
         <div className="user__profile__information">
-          <h1>{userProfile && userProfile.firstName}</h1>
-          <h2>{userProfile && userProfile.email}</h2>
-          <h2>{userProfile && userProfile.roleId}</h2>
+          <h1>
+            {userProfile && userProfile.firstName} {userProfile && userProfile.lastName}
+          </h1>
         </div>
       </div>
     </div>

@@ -1,7 +1,32 @@
 .boat__review__card {
   display: flex;
+  margin: 2vh 0 2vh 0;
   width: 100vh;
+  border: 3px #274063 solid;
+  border-radius: 15px;
+  padding: 1.5vh 1.5vh 1.5vh 1.5vh;
   justify-content: space-between;
+  align-items: center;
+  background-color: whitesmoke;
+}
+.review__content__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.review__delete__form {
+  display: flex;
+  align-self: center;
+}
+
+.review__delete__button {
+  border-radius: 12px;
+}
+.boat__review__board__container {
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .boat__review__card__ratings {
   display: flex;

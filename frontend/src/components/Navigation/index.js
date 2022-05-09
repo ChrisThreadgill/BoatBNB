@@ -3,8 +3,11 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import LoggedInNav from "./LoggedInNav";
 import * as sessionActions from "../../store/session";
+import { FaHome, FaDharmachakra, FaSignOutAlt, FaSignInAlt } from "react-icons/fa";
 import "./Navigation.css";
 import MenuButton from "./MenuButton";
+import LoginFormModal from "../../context/LoginFormModal";
+import SignUpFormModal from "../../context/SignUpFormModal";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -26,23 +29,35 @@ function Navigation({ isLoaded }) {
     sessionLinks = (
       <>
         <LoggedInNav></LoggedInNav>
-        {/* <MenuButton /> */}
-        {/* <NavLink to="/login">test</NavLink>
-        <NavLink to="/signup">test sesssion</NavLink>
-        <button onClick={logout}>hello</button> */}
       </>
     );
   } else {
     sessionLinks = (
       <>
-        <nav className="visitor__nav">
-          <div>
-            <NavLink to="/">Home</NavLink>
+        <nav className="logged__in__nav">
+          <div className="home__nav__div">
+            <NavLink to="/">
+              <FaDharmachakra className="home__button__nav"></FaDharmachakra>
+            </NavLink>
           </div>
-          <div>
-            <button onClick={demoLogin}>Login As Demo</button>
-            <NavLink to="/login">Log In</NavLink>
-            <NavLink to="/sign-up">Sign Up</NavLink>
+          <div className="nav__bar__center">
+            <NavLink to={`/`}>
+              <img src="/BNB.svg" className="boat__bnb__logo" />
+            </NavLink>
+          </div>
+          <div className="sign__out__button__container">
+            <div className="profile__nav__links">
+              <SignUpFormModal></SignUpFormModal>
+              <h4>Sign-Up</h4>
+            </div>
+            <div className="sign__in__buttons__div">
+              <LoginFormModal className="login__nav__button"></LoginFormModal>
+
+              <h4>Login</h4>
+              <button className="demo__login__button" onClick={demoLogin}>
+                Login As Demo
+              </button>
+            </div>
           </div>
         </nav>
       </>

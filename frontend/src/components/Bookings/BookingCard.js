@@ -11,10 +11,13 @@ function BookingCard({ booking }) {
   // const [checkOut, setCheckOut] = useState(null);
   // const loggedInUserId = useSelector((state) => state.session.user.id);
 
+  const bookingDateView = new Date(booking?.bookingDate);
+  const dateView = bookingDateView.toDateString();
+
   return (
     <div>
       <h1>Booking Date</h1>
-      <h3>{booking && booking.bookingDate}</h3>
+      <h3>{booking && dateView}</h3>
       <h1>Check In</h1>
       <h3>{booking && booking.checkIn}</h3>
       <h1>Check Out</h1>

@@ -23,22 +23,34 @@ function UserLoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
-      <label>
-        Email
-        <input type="text" value={credential} onChange={(e) => setCredential(e.target.value)} required />
-      </label>
-      <label>
-        Password
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-      </label>
-      <button type="submit">Log In</button>
-    </form>
+    <div className="login__form__div">
+      <form onSubmit={handleSubmit} className="login__form">
+        <img src="/BNB.svg" className="boat__bnb__logo" />
+        <h2>Welcome to Boat BnB!</h2>
+        <h3>Let's get signed in!</h3>
+        <ul>
+          {errors.map((error, idx) => (
+            <li key={idx}>{error}</li>
+          ))}
+        </ul>
+
+        <div>
+          <input type="text" placeHolder="EMAIL" value={credential} onChange={(e) => setCredential(e.target.value)} />
+        </div>
+        <div>
+          <input
+            type="password"
+            placeHolder="PASSWORD"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        <button className="login__form__button" type="submit">
+          Log In
+        </button>
+      </form>
+    </div>
   );
 }
 

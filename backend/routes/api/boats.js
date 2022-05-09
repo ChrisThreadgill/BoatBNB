@@ -6,14 +6,14 @@ const { handleValidationErrors } = require("../../utils/validation");
 const { Op } = require("sequelize");
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { User, Boat, Image, Booking } = require("../../db/models");
+const { User, Boat, Image, Booking, BoatRating } = require("../../db/models");
 
 //gets all boats
 router.get(
   "/",
   asyncHandler(async (req, res) => {
     const boats = await Boat.findAll({
-      include: Image,
+      include: [Image, BoatRating, User],
     });
 
     return res.json({
@@ -27,7 +27,7 @@ router.get(
   asyncHandler(async (req, res) => {
     const { boatId } = req.params;
     const boatBookings = await Boat.findByPk(boatId, {
-      include: Booking,
+      include: [Image, BoatRating, User],
     });
 
     return res.json({
@@ -43,7 +43,7 @@ router.get(
     const { boatId } = req.params;
 
     const boat = await Boat.findByPk(boatId, {
-      include: Image,
+      include: [Image, BoatRating, User],
     });
 
     return res.json({
@@ -102,7 +102,9 @@ router.put(
 
     const { userId, marina, city, state, year, model, accessories, captain, price, schedule } = req.body;
 
-    const boatToUpdate = await Boat.findByPk(boatId);
+    const boatToUpdate = await Boat.findByPk(boatId, {
+      include: [Image, BoatRating, User],
+    });
 
     if (userId === boatToUpdate.userId) {
       await boatToUpdate.update({

@@ -101,10 +101,13 @@ const boatsReducer = (state = initialState, action) => {
 
       return { ...boats };
     case GET_ONE:
+      const oneBoat = {};
+      oneBoat[action.payload.id] = action.payload;
+      console.log(oneBoat);
       // console.log(action);
-      newState = Object.assign({}, state);
-      newState = action.payload;
-      return newState;
+      // newState = Object.assign({}, state);
+      // newState = action.payload;
+      return oneBoat;
 
     case GET_PROV:
       const provBoats = {};
@@ -114,10 +117,12 @@ const boatsReducer = (state = initialState, action) => {
       }
       return { ...provBoats };
     case UPDATE:
-      // console.log(newState);
-      // console.log(action.payload.id);
+      console.log(newState);
+      console.log(action.payload);
+      delete newState[action.payload.id];
+      console.log(newState);
       newState[action.payload.id] = action.payload;
-      // console.log(newState);
+      console.log(newState);
       return newState;
     case CLEAN:
       return {};

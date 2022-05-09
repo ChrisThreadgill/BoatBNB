@@ -11,6 +11,8 @@ import {
   FaRegCalendarCheck,
   FaRegCalendarMinus,
   FaWrench,
+  FaSoap,
+  FaCouch,
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import * as ratingActions from "../../store/boatRatings";
@@ -22,19 +24,17 @@ function BoatRatingCard({ rating }) {
 
   return (
     <div className="boat__rating__card">
-      <div>
-        <div>
-          <h3>{rating.User.firstName}</h3>
-          <img src={`/api/images/${rating.User.profilePicture}`} className="profile__avatar" />
-        </div>
-        {/* <div>{rating.User.UserRatings[0].average}</div> */}
+      <div className="boat__rating__card__user__info">
+        <h3>{rating.User.firstName}</h3>
+        <img src={`/api/images/${rating.User.profilePicture}`} className="profile__avatar" />
       </div>
+      {/* <div>{rating.User.UserRatings[0].average}</div> */}
 
       <div className="boat__rating__card__NR">
         {rating && (
           <div>
             <div>
-              <h1>Rating: {rating.average}</h1>
+              <h1>Rating</h1>
 
               <div className="boat__rating__stars">
                 {[...Array(Math.ceil(rating.average))].map((star, idx) => {
@@ -44,31 +44,31 @@ function BoatRatingCard({ rating }) {
             </div>
 
             <div>
-              <h2>Cleanliness: {rating.cleanliness}</h2>
+              <h2>Cleanliness</h2>
 
               <div className="boat__rating__stars">
                 {[...Array(Math.ceil(rating.cleanliness))].map((star, idx) => {
-                  return <FaStar key={idx} color={"#ffc107"}></FaStar>;
+                  return <FaSoap key={idx} color={"#ffc107"}></FaSoap>;
                 })}
               </div>
             </div>
 
             <div>
-              <h2>Comfort: {rating.comfort}</h2>
+              <h2>Comfort</h2>
 
               <div className="boat__rating__stars">
                 {[...Array(Math.ceil(rating.comfort))].map((star, idx) => {
-                  return <FaStar key={idx} color={"#ffc107"}></FaStar>;
+                  return <FaCouch key={idx} color={"#ffc107"}></FaCouch>;
                 })}
               </div>
             </div>
 
             <div>
-              <h2>Functionality: {rating.functional}</h2>
+              <h2>Functionality</h2>
 
               <div className="boat__rating__stars">
                 {[...Array(Math.ceil(rating.functional))].map((star, idx) => {
-                  return <FaStar key={idx} color={"#ffc107"}></FaStar>;
+                  return <FaWrench key={idx} color={"#ffc107"}></FaWrench>;
                 })}
               </div>
             </div>

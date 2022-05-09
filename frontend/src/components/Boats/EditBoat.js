@@ -48,6 +48,7 @@ function EditBoat({ user, view, setView, boat }) {
     console.log(result);
 
     if (result.ok) {
+      console.log(result);
       history.push(`/users/${userId}/profile`);
       return result.data;
     }
@@ -95,7 +96,7 @@ function EditBoat({ user, view, setView, boat }) {
 
   useEffect(() => {
     const errors = [];
-    if (model.length > 99) {
+    if (model?.length > 99) {
       errors.push("Model can only have 100 characters");
       setStateCodeError("Model too long");
     }
@@ -299,6 +300,7 @@ function EditBoat({ user, view, setView, boat }) {
               images
               <input
                 onChange={(e) => {
+                  e.preventDefault();
                   setFile(e.target.files[0]);
                 }}
                 type="file"

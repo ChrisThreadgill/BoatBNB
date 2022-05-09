@@ -126,7 +126,13 @@ function ProviderBoard({ user }) {
 
         {view === "addBoat" ? (
           <div className="add__boat__form__container">
-            <AddBoat user={user} view={view} setView={setView} />
+            <AddBoat
+              user={user}
+              setAddBoatTabChecked={setAddBoatTabChecked}
+              setBoatsTabChecked={setBoatsTabChecked}
+              view={view}
+              setView={setView}
+            />
           </div>
         ) : null}
       </div>

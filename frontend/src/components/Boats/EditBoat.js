@@ -26,7 +26,7 @@ function EditBoat({ user, view, setView, boat }) {
   const [price, setPrice] = useState(currentBoat?.price);
   const [captain, setCaptain] = useState(currentBoat?.captain);
   const [accessories, setAccessories] = useState(currentBoat?.accessories);
-  const [validErrors, setValidErrors] = useState({});
+  const [validErrors, setValidErrors] = useState([]);
 
   const [marinaError, setMarinaError] = useState("");
   const [yearError, setYearError] = useState(null);
@@ -69,54 +69,78 @@ function EditBoat({ user, view, setView, boat }) {
   };
 
   useEffect(() => {
-    const invalidFile = [];
     const errors = [];
-
     if (marina?.length > 75) {
-      errors.push("marina error");
+      errors.push("Marina can only be 75 character");
       setMarinaError("The Marina can only be 75 characters");
     }
 
-    if (year === "") {
-      errors.push("year error");
-      setYearError("You must provide a year");
-    }
+    setValidErrors(errors);
+  }, [marina]);
 
-    if (year < 1990 || year > 2050 || year === typeof "string") {
-      errors.push("year error NaN");
+  useEffect(() => {
+    const errors = [];
+    if (year < 1800 || year > 2050 || year === typeof "string") {
+      errors.push("Year Must be between 1800-2050");
       setYearError("Year Must be a number ");
     }
     if (isNaN(year)) {
-      errors.push("year error NaN");
+      errors.push("Year must be a number YYYY");
       setYearError("Year Must be a number ");
     }
 
+    setValidErrors(errors);
+  }, [year]);
+
+  useEffect(() => {
+    const errors = [];
+    if (model.length > 99) {
+      errors.push("Model can only have 100 characters");
+      setStateCodeError("Model too long");
+    }
+
+    setValidErrors(errors);
+  }, [model]);
+
+  useEffect(() => {
+    const errors = [];
     if (!stateValidate.test(stateCode)) {
-      errors.push("valid year error");
+      errors.push("Must provide a 2 digit state code");
       setStateCodeError("Please provide a valid 2 digit state code");
     }
+    setValidErrors(errors);
+  }, [stateCode]);
 
-    if (file === null) {
-      errors.push("file error");
-
-      setFileError("Must Provide a Valid Image");
-    }
-    if (price?.length === 0) {
-      errors.push("year error NaN");
+  useEffect(() => {
+    const errors = [];
+    if (price <= 0) {
+      errors.push("You have to have a price!");
       setPriceError("Price must be a number ");
     }
 
     if (isNaN(price)) {
-      errors.push("year error NaN");
+      errors.push("Price Must be a number ");
       setPriceError("Price must be a number ");
     }
-    if (!file?.type.includes("image")) {
-      invalidFile.push("File error");
-      setFileError("Must Provide a Valid Image");
-    }
-    setInvalidFileError(invalidFile);
     setValidErrors(errors);
-  }, [marina, year, model, stateCode, price, file]);
+  }, [price]);
+
+  useEffect(() => {
+    const errors = [];
+    const invalidFile = [];
+
+    if (!file?.type.includes("image")) {
+      errors.push("File must me an image");
+      invalidFile.push("must have a valid file");
+      setFileError("Must Provide a Valid Image");
+      setInvalidFileError("Must Be a valid image");
+    }
+
+    setValidErrors(errors);
+  }, [file]);
+  useEffect(() => {
+    setValidErrors();
+  }, []);
 
   return (
     <div className="edit__boat__container">
@@ -125,7 +149,6 @@ function EditBoat({ user, view, setView, boat }) {
           <div>
             <label>
               Marina
-              {validErrors.marinaError ? <span>{validErrors.marinaError}</span> : null}
               <input
                 type="text"
                 value={marina}
@@ -138,7 +161,7 @@ function EditBoat({ user, view, setView, boat }) {
               />
             </label>
           </div>
-          {validErrors.yearError ? <span>{validErrors.yearError}</span> : null}
+
           <div>
             <label>
               Year
@@ -188,7 +211,6 @@ function EditBoat({ user, view, setView, boat }) {
           <div>
             <label>
               State
-              {validErrors.stateError ? <span>{validErrors.stateError}</span> : null}
               <input
                 type="text"
                 name="state"
@@ -260,7 +282,7 @@ function EditBoat({ user, view, setView, boat }) {
           </div>
 
           <div>
-            <button disabled={!!validErrors.length} type="submit">
+            <button disabled={!!validErrors?.length} type="submit">
               Update Your Boat
             </button>
           </div>
@@ -283,7 +305,7 @@ function EditBoat({ user, view, setView, boat }) {
                 accept="image/*"
               ></input>
             </label>
-            <button disabled={!!invalidFileError.length}>Add a boat Image</button>
+            <button disabled={!!invalidFileError?.length}>Add a boat Image</button>
           </form>
         </div>
       </div>
@@ -292,6 +314,15 @@ function EditBoat({ user, view, setView, boat }) {
         <form onSubmit={deleteBoat} className="delete__boat__form">
           <button type="submit">Delete this listing</button>
         </form>
+      </div>
+      <div className="boat__add__errors">
+        <ul className="errors">
+          {validErrors &&
+            validErrors?.length &&
+            validErrors?.map((error) => {
+              return <li>{error}</li>;
+            })}
+        </ul>
       </div>
     </div>
   );

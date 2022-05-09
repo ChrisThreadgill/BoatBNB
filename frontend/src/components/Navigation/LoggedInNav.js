@@ -18,6 +18,7 @@ function LoggedInNav() {
   const clearUser = (e) => {
     // e.preventDefault();
     dispatch(profileActions.profileCleanUp());
+    dispatch(profileActions.getUserProfile(id));
   };
   // const [isLoaded, setIsLoaded] = useState(false);
   const logout = (e) => {

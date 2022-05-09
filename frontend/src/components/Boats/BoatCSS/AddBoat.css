@@ -43,6 +43,7 @@
 }
 .add__boat__form__inside__div > label {
   font-size: 1.5rem;
+  margin-top: 2vh;
 }
 
 .add__boat__file__submit {
@@ -59,6 +60,7 @@
 .add__boat__input__year,
 .add__boat__input__price,
 .add__boat__input__state {
+  text-align: center;
   margin-top: 1vh;
   border-radius: 15px;
   width: 25%;

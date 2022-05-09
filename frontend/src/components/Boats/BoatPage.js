@@ -28,13 +28,13 @@ function BoatPage() {
   const [calendarDate, setCalendarDate] = useState(null);
 
   useEffect(() => {
+    dispatch(ratingsAction.clean());
+    dispatch(reviewsAction.clean());
     dispatch(boatsAction.getOneBoat(boatId));
     dispatch(reviewsAction.getAllReviewsForSingleBoat(boatId));
     dispatch(ratingsAction.getRatingsForSingleBoatNR(boatId));
 
-    return () => {
-      dispatch(ratingsAction.clean());
-    };
+    return () => {};
   }, [dispatch]);
 
   return (

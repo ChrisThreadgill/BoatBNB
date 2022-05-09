@@ -48,9 +48,9 @@ function App() {
               <BoatPage />
             </Route>
 
-            <Route path="/test">
+            {/* <Route path="/test">
               <Test></Test>
-            </Route>
+            </Route> */}
           </Switch>
         </div>
       )}

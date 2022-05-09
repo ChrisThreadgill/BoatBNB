@@ -35,12 +35,12 @@ function UserLoginForm() {
         </ul>
 
         <div>
-          <input type="text" placeHolder="EMAIL" value={credential} onChange={(e) => setCredential(e.target.value)} />
+          <input type="text" placeholder="EMAIL" value={credential} onChange={(e) => setCredential(e.target.value)} />
         </div>
         <div>
           <input
             type="password"
-            placeHolder="PASSWORD"
+            placeholder="PASSWORD"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

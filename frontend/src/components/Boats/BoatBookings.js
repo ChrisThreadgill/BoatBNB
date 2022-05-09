@@ -14,6 +14,7 @@ function BoatBookings({ boat }) {
   const bookingsArr = Object.values(bookingsObj);
 
   useEffect(() => {
+    dispatch(bookingsActions.cleanUp());
     dispatch(bookingsActions.getAllBoatBookings(boat?.id));
     return () => dispatch(bookingsActions.cleanUp());
   }, [dispatch]);

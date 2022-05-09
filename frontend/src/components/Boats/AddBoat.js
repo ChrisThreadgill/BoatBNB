@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import "./BoatCSS/AddBoat.css";
 
-function AddBoat({ user, view, setView, boat }) {
+function AddBoat({ user, view, setView, setAddBoatTabChecked, setBoatsTabChecked, boat }) {
   const [marina, setMarina] = useState("");
   const [marinaError, setMarinaError] = useState("");
   const [year, setYear] = useState("");
@@ -55,56 +55,86 @@ function AddBoat({ user, view, setView, boat }) {
     const result = await postImage({ image: file, boatId });
 
     setImages([result.image, ...images]);
+    setAddBoatTabChecked("");
+    setBoatsTabChecked("profile__boats__checked");
     setView("boats");
   };
 
   useEffect(() => {
     const errors = [];
     if (marina.length > 75) {
-      errors.push("marina error");
+      errors.push("Marina can only be 75 character");
       setMarinaError("The Marina can only be 75 characters");
     }
 
-    if (year === "") {
-      errors.push("year error");
-      setYearError("You must provide a year");
-    }
+    setValidErrors(errors);
+  }, [marina]);
 
-    if (year < 1990 || year > 2050 || year === typeof "string") {
-      errors.push("year error NaN");
+  useEffect(() => {
+    const errors = [];
+    if (year < 1800 || year > 2050 || year === typeof "string") {
+      errors.push("Year Must be between 1800-2050");
       setYearError("Year Must be a number ");
     }
     if (isNaN(year)) {
-      errors.push("year error NaN");
+      errors.push("Year must be a number YYYY");
       setYearError("Year Must be a number ");
     }
 
+    setValidErrors(errors);
+  }, [year]);
+
+  useEffect(() => {
+    const errors = [];
+    if (model.length > 99) {
+      errors.push("Model can only have 100 characters");
+      setStateCodeError("Model too long");
+    }
+
+    setValidErrors(errors);
+  }, [model]);
+
+  useEffect(() => {
+    const errors = [];
     if (!stateValidate.test(stateCode)) {
-      errors.push("valid year error");
+      errors.push("Must provide a 2 digit state code");
       setStateCodeError("Please provide a valid 2 digit state code");
     }
+    setValidErrors(errors);
+  }, [stateCode]);
 
-    if (file === null) {
-      errors.push("file error");
-
-      setFileError("Must Provide a Valid Image");
-    }
+  useEffect(() => {
+    const errors = [];
     if (price.length === 0) {
-      errors.push("year error NaN");
+      errors.push("You have to have a price!");
       setPriceError("Price must be a number ");
     }
 
     if (isNaN(price)) {
-      errors.push("year error NaN");
+      errors.push("Price Must be a number ");
       setPriceError("Price must be a number ");
     }
-    if (!file?.type.includes("image")) {
-      errors.push("File error");
+    setValidErrors(errors);
+  }, [price]);
+
+  useEffect(() => {
+    const errors = [];
+    if (file === null) {
+      errors.push("Provide a file");
+
       setFileError("Must Provide a Valid Image");
     }
-    setValidErrors(errors);
-  }, [marina, year, model, stateCode, price, file]);
+    if (!file?.type.includes("image")) {
+      errors.push("File must me an image");
+      setFileError("Must Provide a Valid Image");
+    }
 
+    setValidErrors(errors);
+  }, [file]);
+
+  useEffect(() => {
+    setValidErrors();
+  }, []);
   return (
     <div className="add__boat__container">
       <div className="add__boat__bio">
@@ -135,7 +165,13 @@ function AddBoat({ user, view, setView, boat }) {
       <div className="add__boat__form__div">
         <form onSubmit={handleSubmit} className="add__boat__form">
           <div className="add__boat__form__inside__div">
-            {marinaError ? <span>{marinaError}</span> : null}
+            <div className="boat__add__errors">
+              <ul className="errors">
+                {validErrors?.map((error) => {
+                  return <li>{error}</li>;
+                })}
+              </ul>
+            </div>
             <label>Marina</label>
             <input
               className="add__boat__inputs"
@@ -147,7 +183,6 @@ function AddBoat({ user, view, setView, boat }) {
               }}
             />
 
-            {validErrors?.yearError ? <span>{validErrors.yearError}</span> : null}
             <label>Year</label>
             <input
               className="add__boat__input__year"
@@ -208,7 +243,7 @@ function AddBoat({ user, view, setView, boat }) {
               className="add__boat__inputs"
               type="text"
               name="accessories"
-              required
+              maxLength={150}
               value={accessories}
               onChange={(e) => {
                 setAccessories(e.target.value);
@@ -270,7 +305,7 @@ function AddBoat({ user, view, setView, boat }) {
               accept="image/*"
             ></input>
 
-            <button disabled={!!validErrors.length} type="submit">
+            <button disabled={!!validErrors?.length} type="submit">
               Add A Boat
             </button>
           </div>

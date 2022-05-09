@@ -28,7 +28,7 @@ function BoatCard({ boat }) {
           ? boat.Images.map((image, idx) => {
               return (
                 boatView === idx && (
-                  <div className="boat__image__container">
+                  <div key={image.id} className="boat__image__container">
                     <img key={image.id} value={boat.id} className="boat__img" src={`/api/images/${image.url}`} />
                   </div>
                 )
@@ -71,7 +71,7 @@ function BoatCard({ boat }) {
         </div>
         <div>
           <h2>Features</h2>
-          <h3>{boat?.accessories}</h3>
+          <h3>{boat?.accessories ? boat.accessories : "No Amenities"}</h3>
         </div>
 
         <div>

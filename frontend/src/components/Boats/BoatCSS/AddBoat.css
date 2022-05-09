@@ -53,9 +53,13 @@
 }
 
 .add__boat__inputs {
+  text-align: center;
   margin-top: 1vh;
   border-radius: 15px;
   width: 50%;
+  font-size: 1.5rem;
+  background-color: whitesmoke;
+  color: #274063;
 }
 .add__boat__input__year,
 .add__boat__input__price,
@@ -64,6 +68,9 @@
   margin-top: 1vh;
   border-radius: 15px;
   width: 25%;
+  font-size: 1.5rem;
+  background-color: whitesmoke;
+  color: #274063;
 }
 
 .add__boat__file__submit > label {

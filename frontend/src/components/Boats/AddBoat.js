@@ -223,7 +223,6 @@ function AddBoat({ user, view, setView, setAddBoatTabChecked, setBoatsTabChecked
               }}
             />
 
-            {validErrors?.stateError ? <span>{validErrors.stateError}</span> : null}
             <label>State</label>
             <input
               className="add__boat__input__state"

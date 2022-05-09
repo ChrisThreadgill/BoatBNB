@@ -136,7 +136,7 @@ function EditBoat({ user, view, setView, boat }) {
       setInvalidFileError("Must Be a valid image");
     }
 
-    setValidErrors(errors);
+    setInvalidFileError(invalidFile);
   }, [file]);
   useEffect(() => {
     setValidErrors([]);

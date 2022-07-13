@@ -27,6 +27,32 @@
   margin: 0 22px 35px 0;
   color: #ffffff;
 }
+.home__search__filter__container {
+  position: absolute;
+  width: 444px;
+  height: 250px;
+  padding: 26px;
+  padding-top: 10px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  box-shadow: 2px 2px 5px 2px rgba(40, 39, 39, 0.2);
+  transform: translate(0px, 157px);
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.home__search__filter__container::-webkit-scrollbar {
+  display: none;
+}
+.home__search__filter__header {
+  display: flex;
+  padding: 15px 40px 15px 15px;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgba(60, 59, 59, 0.6);
+  border-bottom: 1px solid rgba(40, 39, 39, 0.2);
+}
 
 .home__page__search__div {
   max-width: 904px;

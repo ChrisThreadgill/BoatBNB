@@ -1,69 +1,20 @@
 import "./BoatListings.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as boatsActions from "../../store/boats";
 import BoatCard from "../Boats/BoatCard";
 import { useParams, useHistory } from "react-router-dom";
+import { states } from "../Utils";
 
 function BoatListings() {
   let { searchState } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
+  const searchInput = useRef(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [blur, setBlur] = useState(false);
   const [search, setSearch] = useState("");
   const [searchFilterShow, setSearchFilterShow] = useState(false);
-  const states = [
-    "Alabama,AL",
-    " Alaska,AK",
-    "Arizona,AZ",
-    "Arkansas,AR",
-    "California,CA",
-    "Colorado,CO",
-    " Connecticut,CT",
-    "Delaware,DE",
-    " Florida,FL",
-    "Georgia,GA",
-    "Hawaii,HI",
-    "Idaho,ID",
-    "Illinois,IL",
-    "Indiana,IN",
-    "Iowa,IA",
-    "Kansas,KS",
-    "Kentucky,KY",
-    "Louisiana,LA",
-    "Maine	ME,",
-    "Maryland,MD",
-    "Massachusetts,MA",
-    "Michigan,MI",
-    "Minnesota,MN",
-    "Mississippi,MS",
-    "Missouri,MO",
-    "Montana,MT",
-    "Nebraska,NE",
-    "Nevada,NV",
-    "New Hampshire,NH",
-    "New Jersey,NJ",
-    "New Mexico,NM",
-    "New York,NY",
-    "North Carolina,NC",
-    "North Dakota,ND",
-    "Ohio,OH",
-    "Oklahoma,OK",
-    "Oregon,OR",
-    "Pennsylvania,PA",
-    "Rhode Island,RI",
-    "South Carolina,SC",
-    "South Dakota,SD",
-    "Tennessee,TN",
-    "Texas,TX",
-    "Utah,UT",
-    "Vermont,VT",
-    "Virginia,VA",
-    "Washington,WA",
-    "West Virginia,WV",
-    "Wisconsin,WI",
-    "Wyoming,WY",
-  ];
 
   const [searchFilter, setSearchFilter] = useState(states);
 
@@ -76,10 +27,19 @@ function BoatListings() {
     // console.log("this is the search", search);
 
     e.preventDefault();
+    // console.log(e);
+    // const searchButton = document.getElementById("search");
+    // searchButton.click();
+    // console.log(searchButton);
 
     dispatch(boatsActions.getAllBoatsSearch(search)).then(() => {
+      console.log(searchInput);
+      // searchInput.current.onblur = true;
+      searchInput.current.blur();
       setIsLoaded(true);
       setSearch("");
+      setSearchFilterShow(false);
+      // setBlur(true);
       history.push(`/boat-listings/${search.toUpperCase()}`);
     });
   };
@@ -126,11 +86,16 @@ function BoatListings() {
           <div className="home__page__location__marker"></div>
 
           <input
+            ref={searchInput}
             placeholder="Search New State"
             type="search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             onFocus={() => setSearchFilterShow(true)}
+            onBlur={() => {
+              if (blur) return;
+              setSearchFilterShow(false);
+            }}
             onfocusout={() => {
               setSearchFilterShow(false);
             }}
@@ -140,17 +105,23 @@ function BoatListings() {
             //   // setSearchState(e.target.value);
             // }}
           ></input>
-          <button type="submit">SEARCH</button>
+          <button id="search" type="submit">
+            SEARCH
+          </button>
         </div>
         {searchFilterShow && searchFilter ? (
           <div className="search__filter__container">
+            <div className="search__filter__header">Where do you want to boat?</div>
             {searchFilter.map((state) => {
+              const fullState = state.split(",")[0];
+              const stateAbr = state.split(",")[1];
               return (
                 <div
+                  onMouseUp={() => setBlur(false)}
+                  onMouseDown={() => setBlur(true)}
                   className="search__option"
                   onClick={async (e) => {
                     setSearchFilterShow(false);
-                    console.log(e, "---------event");
                     setSearch(state);
                     dispatch(boatsActions.getAllBoatsSearch(state.slice(-2).toUpperCase())).then(() => {
                       setIsLoaded(true);
@@ -161,7 +132,10 @@ function BoatListings() {
                     // history.push(`/boat-listings/${state.slice(-2).toUpperCase()}`);
                   }}
                 >
-                  {state}
+                  <div className="location__marker"></div>
+                  <div className="location__state__full">
+                    {fullState},<span className="location__state__abr">{stateAbr}</span>
+                  </div>
                 </div>
               );
             })}

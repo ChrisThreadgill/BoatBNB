@@ -41,36 +41,36 @@ function BoatPage() {
     <div>
       {/* <h1>Single Boat Page</h1> */}
       <div className="single__boat__view">
-        {/* <div className="boat__info__booking"> */}
-        {boat && <BoatCard boat={boat[boatId]}></BoatCard>}
-        {/* {userId && (
+        <div className="boat__info__booking">
+          {boat && <BoatCard boat={boat[boatId]}></BoatCard>}
+          {userId && (
             <div className="boat__booking__container">
               <div>
                 <h1>HOPEFULLY SCHEDULE BOARD GOES HERE</h1>
               </div>
             </div>
-          )} */}
-        {/* </div> */}
-        {/* {boatId && (
+          )}
+        </div>
+        {boatId && (
           <div className="add__booking__form__container">
             <AddBookingForm boatId={boatId}></AddBookingForm>
           </div>
-        )} */}
+        )}
 
-        {/* {userId && (
+        {userId && (
           <div>
             <div>
               <BoatReview boat={boat} userId={userId}></BoatReview>
             </div>
           </div>
-        )} */}
+        )}
       </div>
-      {/* <div className="boat__review__board">
+      <div className="boat__review__board">
         {boatReviews && boatRatingsNR && (
           <BoatReviewBoard boatReviews={boatReviews} boatRatingsNR={boatRatingsNR}></BoatReviewBoard>
         )}
         {boatReviews && !boatRatingsNR && <BoatReviewBoard boatReviews={boatReviews}></BoatReviewBoard>}
-      </div> */}
+      </div>
     </div>
   );
 }

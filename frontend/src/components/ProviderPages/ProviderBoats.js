@@ -27,19 +27,21 @@ function ProviderBoats({ view, setView }) {
       {Object.values(providerBoats).length > 0 &&
         Object.values(providerBoats).map((boat) => {
           return (
-            <div key={boat.id} className="provider__boat__card__container">
+            <>
+              {/* <div key={boat.id} className="provider__boat__card__container"> */}
               <BoatCard key={boat.id} boat={boat}></BoatCard>
-              <div className="provider__boat__button">
+              {/* <div className="provider__boat__button">
                 <button
-                  onClick={() => {
-                    boatsAction.getOneBoat(boat.id);
-                    history.push(`/boat/${boat.id}/edit`);
-                  }}
+                onClick={() => {
+                  boatsAction.getOneBoat(boat.id);
+                  history.push(`/boat/${boat.id}/edit`);
+                }}
                 >
-                  Manage Boat
-                </button>
-              </div>
-            </div>
+                Manage Boat
+              </button> */}
+              {/* </div> */}
+              {/* </div> */}
+            </>
           );
         })}
     </div>

@@ -8,6 +8,7 @@ import { FaHome, FaDharmachakra, FaSignOutAlt } from "react-icons/fa";
 import { useEffect } from "react";
 import * as sessionActions from "../../store/session";
 import * as profileActions from "../../store/userProfile";
+import MenuButton from "./MenuButton";
 
 function LoggedInNav() {
   const history = useHistory();
@@ -31,29 +32,29 @@ function LoggedInNav() {
 
   return (
     <nav className="logged__in__nav">
-      <div className="home__nav__div">
+      {/* <div className="home__nav__div">
         <NavLink to="/">
           <FaDharmachakra className="home__button__nav"></FaDharmachakra>
         </NavLink>
-      </div>
+      </div> */}
       <div className="nav__bar__center">
-        <img src="/BNB.svg" className="boat__bnb__logo" />
-        <NavLink to={`/users/${id}/profile`}>Welcome Back {sessionUser && sessionUser.firstName}!</NavLink>
+        <img src="/BNB.svg" className="boat__bnb__logo" onClick={() => history.push("/")} />
+        {/* <NavLink to={`/users/${id}/profile`}>Welcome Back {sessionUser && sessionUser.firstName}!</NavLink> */}
       </div>
-      <div className="sign__out__button__container">
-        <div className="profile__nav__links">
-          <NavLink to={`/users/${id}/profile`} onClick={clearUser}>
+      {/* <button onClick={logout}>// </button> */}
+      <MenuButton user={sessionUser}></MenuButton>
+      {/* <div className="sign__out__button__container"> */}
+      {/* <div className="profile__nav__links"> */}
+      {/* <NavLink to={`/users/${id}/profile`} onClick={clearUser}>
             {sessionUser && <img className="nav__profile__picture" src={`/api/images/${profilePic}`} />}
-          </NavLink>
-          <h4>Profile</h4>
-        </div>
-        <div onClick={logout} className="sign__out__button__div">
-          {/* <button onClick={logout}>
-          </button> */}
-          <FaSignOutAlt className="sign__out__button"></FaSignOutAlt>
-          <h4>Sign-Out</h4>
-        </div>
-      </div>
+          </NavLink> */}
+      {/* <h4>Profile</h4> */}
+      {/* </div> */}
+      {/* <div onClick={logout} className="sign__out__button__div"> */}
+      {/* <FaSignOutAlt className="sign__out__button"></FaSignOutAlt> */}
+      {/* <h4>Sign-Out</h4> */}
+      {/* </div> */}
+      {/* </div> */}
       {/* <button onClick={logout}>hello</button> */}
     </nav>
   );

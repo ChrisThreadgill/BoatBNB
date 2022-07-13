@@ -10,7 +10,7 @@ import HomePageSearch from "./HomePageSearch/HomePageSearch.js";
 import HomePageInfo from "./HomePageInfo/HomePageInfo.js";
 import HomePageDiscover from "./HomePageDiscover/HomePageDiscover.js";
 
-function HomePage() {
+function HomePage({ searchState, setSearchState }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -20,7 +20,7 @@ function HomePage() {
   const allBoats = Object.values(allBoatsObj);
 
   useEffect(() => {
-    dispatch(boatsAction.getAllBoats());
+    // dispatch(boatsAction.getAllBoats());
     return () => {
       // dispatch(boatsAction.clean());
       dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
@@ -30,7 +30,7 @@ function HomePage() {
   // if (!sessionUser) return <Redirect to="/login" />;
   return (
     <div className="home__page__view">
-      <HomePageSearch></HomePageSearch>
+      <HomePageSearch searchState={searchState} setSearchState={setSearchState}></HomePageSearch>
       <HomePageInfo></HomePageInfo>
       <HomePageDiscover></HomePageDiscover>
       {/* <div className="homepage__test">

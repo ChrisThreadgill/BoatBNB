@@ -1,4 +1,4 @@
-.boat__card {
+.boat__card__image__container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,11 +7,74 @@
   /* flex-direction: column; */
 }
 .boat__card__container {
-  margin-top: 2vh;
-  margin: 2vh 0vh 2vh 2vh;
+  width: 100%;
+  max-width: 1111px;
+  height: 211px;
+  padding: 5px;
+  padding-top: 10px;
+  margin: 10px 0 10px 0;
+  border-radius: 10px;
   display: flex;
-  width: fit-content;
-  /* border: ridge 7px #cccccc; */
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  box-shadow: 2px 2px 8px 1px rgba(40, 39, 39, 0.2);
+  background-color: #ffffff;
+  cursor: pointer;
+}
+.boat__card__container:hover {
+  border: 1px solid black;
+}
+
+.boat__card__details__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  width: 100%;
+  /* border: 2px dashed orange; */
+}
+.boat__card__rating__container {
+  display: flex;
+  /* border: 1px solid red; */
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.boat__card__city__state {
+  color: #849697;
+  font-size: 12px;
+}
+.boat__card__year__make {
+  /* border: 1px solid red; */
+  height: 70px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  /* font-weight: bold; */
+  color: rgba(#17233c, 0.1);
+  /* color: #17233c; */
+}
+.boat__price__container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  /* border: 1px solid blue; */
+}
+.boat__card__captain__container {
+  display: flex;
+  align-items: center;
+}
+.captain__wheel {
+  color: #72d4ba;
+  margin-right: 10px;
+}
+.boat__price {
+  font-size: 14px;
+}
+.boat__price > span {
+  font-weight: bold;
+  font-size: 16px;
 }
 .home__page__boat__card {
   /* border: red 1px solid; */
@@ -40,9 +103,9 @@
 .boat__image__container {
   display: flex;
   justify-content: center;
-  margin: 0 2vh 0 2vh;
+  margin: 5px 10px 0 10px;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 10px;
   width: 30vh;
   height: 30vh;
 }
@@ -54,4 +117,18 @@
 .boat__rating__display {
   width: fit-content;
   /* height: 150px; */
+}
+
+.boat__rating__display__container {
+  display: flex;
+}
+.boat__rating__display__average {
+  margin-left: 5px;
+  font-size: 14px;
+  color: #17233c;
+}
+.boat__rating__display__average > span {
+  margin-left: 5px;
+  font-size: 14px;
+  color: #91999a;
 }

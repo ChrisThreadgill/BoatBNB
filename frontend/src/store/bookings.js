@@ -62,6 +62,7 @@ export const cancelUserBooking = (booking) => async (dispatch) => {
 };
 
 export const cleanUp = () => (dispatch) => {
+  console.log("in the clean up bookings");
   dispatch(clearBookings());
 };
 

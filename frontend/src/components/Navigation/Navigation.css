@@ -1,3 +1,97 @@
+.profile-dropdown {
+  /* position: absolute; */
+}
+.nav__menu__button__container {
+  /* position: relative; */
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+.nav__menu__picture__container {
+  position: relative;
+}
+.nav__menu__dropdown {
+  position: absolute;
+  background-color: #f5f7f9;
+  transform: translate(-0px, 202px);
+  width: 256px;
+  height: 315px;
+  /* border: 1px solid red; */
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  box-shadow: 2px 2px 5px 5px rgba(40, 39, 39, 0.2);
+  /* cursor: pointer; */
+}
+.nav__menu__static__options {
+  margin: 0px 22px 0px 22px;
+  color: #0a4195;
+  font-size: 14px;
+  cursor: pointer;
+}
+.nav__menu__static__options:hover {
+  text-decoration: underline;
+  /* font-weight: bolder; */
+}
+.nav__menu__options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(111, 111, 111, 0.2);
+  margin: 0 22px 0 22px;
+  /* width: 210px; */
+  /* height: 96px; */
+  /* padding: 15px 0px; */
+}
+.nav__menu__options > span {
+  /* border: 1px solid red; */
+  width: 210px;
+  height: 32px;
+  padding: 5px 0px;
+  margin: 10px 0 8px 0;
+  color: #0a4195;
+  font-size: 14px;
+  cursor: pointer;
+}
+.nav__menu__username__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgba(111, 111, 111, 0.2);
+  margin: 0 22px 0 22px;
+}
+.nav__menu__username__container > span {
+  width: 210px;
+  height: 32px;
+  padding: 0px 0px;
+  padding-top: 22px;
+  font-size: 14px;
+  color: #0a4195;
+  /* transform: translateY(25px); */
+
+  /* margin: 10px 0 8px 0; */
+}
+.nav__menu__username__container > div {
+  width: 210px;
+  height: 22px;
+  /* padding: 5px 0px; */
+  font-size: 12px;
+  color: #0a4195;
+  cursor: pointer;
+  padding-top: 7px;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 7px;
+  /* border: 1px solid red; */
+}
+.logout__button {
+  /* margin-top: 15px; */
+  color: #0a4195;
+  margin: 15px 22px 0 22px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
 .logged__in__nav {
   display: flex;
 
@@ -52,8 +146,8 @@
 }
 
 .nav__profile__picture {
-  width: 100px;
-  height: 100px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   cursor: pointer;
 }

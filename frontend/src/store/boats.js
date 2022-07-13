@@ -61,8 +61,9 @@ export const updateOneBoat = (body) => async (dispatch) => {
 
   dispatch(updateBoat(boat.boatToUpdate));
 };
-export const getAllBoats = () => async (dispatch) => {
-  const response = await csrfFetch(`/api/boats/`, {
+export const getAllBoatsSearch = (state) => async (dispatch) => {
+  console.log("in here hopefully on unmount");
+  const response = await csrfFetch(`/api/boats/${state}`, {
     method: "GET",
   });
   const boats = await response.json();
@@ -81,6 +82,7 @@ export const getProviderBoats = (userId) => async (dispatch) => {
   return boats;
 };
 export const clean = () => (dispatch) => {
+  console.log("we are in the clean");
   dispatch(cleanBoats());
 };
 

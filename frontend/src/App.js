@@ -16,6 +16,7 @@ import UserInbox from "./components/UserInbox";
 import AddBoat from "./components/Boats/AddBoat";
 import BoatPage from "./components/Boats/BoatPage";
 import LoginForm from "./components/forms/AuthForms/Login";
+import BoatListings from "./components/BoatListings/BoatListings";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,6 +46,11 @@ function App() {
             </Route> */}
             <Route path="/users/:userId/profile">
               <UserProfilePage></UserProfilePage>
+            </Route>
+            <Route path="/boat-listings/:searchState">
+              <BoatListings></BoatListings>
+
+              {/* <UserProfilePage></UserProfilePage> */}
             </Route>
             <Route path="/boat/:boatId/edit">
               <ProviderBoatEdit></ProviderBoatEdit>

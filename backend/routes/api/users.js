@@ -8,7 +8,7 @@ const csrf = require("csurf");
 const csrfProtection = csrf({ cookie: true });
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { User, Boat, Image, UserRating, UserReview, Booking } = require("../../db/models");
+const { User, Boat, Image, UserRating, UserReview, Booking, BoatRating } = require("../../db/models");
 
 const validateSignup = [
   check("email").exists({ checkFalsy: true }).isEmail().withMessage("Please provide a valid email."),
@@ -42,7 +42,9 @@ router.get(
     const { userId } = req.params;
 
     const user = await User.findByPk(userId, {
-      include: [{ model: Boat, include: { model: Image } }],
+      include: [{ model: Boat, include: [Image, BoatRating, User] }],
+      // include: { model: Image },
+      // [Image, BoatRating, User]
     });
     return res.json({
       user,

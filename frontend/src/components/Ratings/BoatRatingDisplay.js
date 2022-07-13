@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import "../Boats/BoatCSS/BoatCard.css";
 
 import {
   FaStar,
@@ -23,12 +24,14 @@ function BoatRatingDisplay({ boat }) {
   const averageBoatRatings = boatRatings?.reduce(
     (prev, curr, idx) => {
       prev.average = prev.average + curr.average;
+
       prev.functional = prev.functional + curr.functional;
       prev.comfort = prev.comfort + curr.comfort;
       prev.cleanliness = prev.cleanliness + curr.cleanliness;
       prev.count = ++idx;
       if (prev.count === boatRatings.length) {
         prev.average = Math.ceil(prev.average / prev.count);
+
         prev.functional = Math.ceil(prev.functional / prev.count);
         prev.comfort = Math.ceil(prev.comfort / prev.count);
         prev.cleanliness = Math.ceil(prev.cleanliness / prev.count);
@@ -42,16 +45,18 @@ function BoatRatingDisplay({ boat }) {
     <div>
       {/* {sessionUser?.id === userProfile.id ? <h1>What others are saying about your boat!</h1> : null} */}
       {averageBoatRatings?.average && averageBoatRatings?.average >= 1 && (
-        <div>
+        <div className="boat__rating__display__container">
           <div>
-            <h2>Overall</h2>
-            <div>
-              {[...Array(averageBoatRatings?.average)].map((star, idx) => {
-                return <FaStar key={idx} color={"#ffc107"}></FaStar>;
-              })}
-            </div>
+            {[...Array(averageBoatRatings?.average)].map((star, idx) => {
+              return <FaStar size={15} color="#72d4ba"></FaStar>;
+            })}
           </div>
-          <div>
+          <div className="boat__rating__display__average">
+            {averageBoatRatings?.average}
+            <span>({boatRatings?.length} ratings)</span>
+          </div>
+
+          {/* <div>
             <h2>Functionality</h2>
             <div>
               {[...Array(averageBoatRatings?.functional)].map((smile, idx) => {
@@ -74,7 +79,7 @@ function BoatRatingDisplay({ boat }) {
                 return <FaSoap key={idx} color={"#ffc107"}></FaSoap>;
               })}
             </div>
-          </div>
+          </div> */}
         </div>
       )}
     </div>

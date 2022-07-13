@@ -10,12 +10,12 @@
 }
 
 .provider__boats__home__container {
-  border: 3px #5992e3 solid;
+  /* border: 3px #5992e3 solid;
   border-top: none;
   border-radius: 15px;
   background-color: floralwhite;
   min-height: 60vh;
-  padding: 0 4vh 4vh 4vh;
+  padding: 0 4vh 4vh 4vh; */
 }
 /* .boat__card {
   margin: 2vh 1.65vh;

@@ -22,6 +22,26 @@ router.get(
   })
 );
 
+//search by state
+router.get(
+  "/:state",
+  asyncHandler(async (req, res) => {
+    const { state } = req.params;
+
+    const boats = await Boat.findAll({
+      where: {
+        state: state.toUpperCase(),
+      },
+      include: [Image, BoatRating, User],
+      // include: [{ model: Boat, include: Image }],
+    });
+
+    return res.json({
+      boats,
+    });
+  })
+);
+
 router.get(
   `/:boatId/bookings`,
   asyncHandler(async (req, res) => {

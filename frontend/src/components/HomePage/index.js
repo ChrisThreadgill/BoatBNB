@@ -6,6 +6,9 @@ import { Modal } from "../../context/Modal";
 import { Redirect, useHistory } from "react-router-dom";
 import BoatCard from "../Boats/BoatCard.js";
 import "./HomePage.css";
+import HomePageSearch from "./HomePageSearch/HomePageSearch.js";
+import HomePageInfo from "./HomePageInfo/HomePageInfo.js";
+import HomePageDiscover from "./HomePageDiscover/HomePageDiscover.js";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -27,7 +30,10 @@ function HomePage() {
   // if (!sessionUser) return <Redirect to="/login" />;
   return (
     <div className="home__page__view">
-      <div className="homepage__test">
+      <HomePageSearch></HomePageSearch>
+      <HomePageInfo></HomePageInfo>
+      <HomePageDiscover></HomePageDiscover>
+      {/* <div className="homepage__test">
         <div className="test__two__works">
           <div className="home__page__header">
             <h1>Welcome to BoatBNB</h1>
@@ -63,7 +69,7 @@ function HomePage() {
               );
             })}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

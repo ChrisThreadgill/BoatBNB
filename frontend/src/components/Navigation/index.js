@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import LoggedInNav from "./LoggedInNav";
 import * as sessionActions from "../../store/session";
+import { useHistory } from "react-router-dom";
 import { FaHome, FaDharmachakra, FaSignOutAlt, FaSignInAlt } from "react-icons/fa";
 import "./Navigation.css";
 import MenuButton from "./MenuButton";
@@ -12,6 +13,7 @@ import SignUpFormModal from "../../context/SignUpFormModal";
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const [errors, setErrors] = useState([]);
+  const history = useHistory();
 
   const credential = "demo@user.io";
   const password = "password";
@@ -36,28 +38,16 @@ function Navigation({ isLoaded }) {
       <>
         <nav className="logged__in__nav">
           <div className="home__nav__div">
-            <NavLink to="/">
-              <FaDharmachakra className="home__button__nav"></FaDharmachakra>
-            </NavLink>
-          </div>
-          <div className="nav__bar__center">
             <NavLink to={`/`}>
               <img src="/BNB.svg" className="boat__bnb__logo" />
             </NavLink>
           </div>
-          <div className="sign__out__button__container">
-            <div className="profile__nav__links">
-              <SignUpFormModal></SignUpFormModal>
-              <h4>Sign-Up</h4>
-            </div>
-            <div className="sign__in__buttons__div">
-              <LoginFormModal className="login__nav__button"></LoginFormModal>
 
-              <h4>Login</h4>
-              <button className="demo__login__button" onClick={demoLogin}>
-                Login As Demo
-              </button>
-            </div>
+          <div className="visitor__nav__auth">
+            {/* <div className="sign__in__buttons__div"> */}
+            <div onClick={() => history.push("/sign-up")}>Sign up</div>
+            <div onClick={() => history.push("/login")}>Log in</div>
+            {/* </div> */}
           </div>
         </nav>
       </>

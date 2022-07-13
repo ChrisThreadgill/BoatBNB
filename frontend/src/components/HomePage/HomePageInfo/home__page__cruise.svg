@@ -1,0 +1,12 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+    <line x1="12.2256" y1="9.04431" x2="12.2256" y2="0.499979" stroke="#72D4BA" stroke-linecap="round"/>
+    <line x1="12.2256" y1="23.679" x2="12.2256" y2="15.1347" stroke="#72D4BA" stroke-linecap="round"/>
+    <line x1="15.1348" y1="12.2258" x2="23.6791" y2="12.2258" stroke="#72D4BA" stroke-linecap="round"/>
+    <line x1="0.5" y1="12.2258" x2="9.04433" y2="12.2258" stroke="#72D4BA" stroke-linecap="round"/>
+    <line x1="10.0331" y1="9.83984" x2="3.99137" y2="3.79809" stroke="#72D4BA" stroke-linecap="round"/>
+    <line x1="20.3808" y1="20.1882" x2="14.339" y2="14.1464" stroke="#72D4BA" stroke-linecap="round"/>
+    <line x1="14.3389" y1="10.0326" x2="20.3806" y2="3.99082" stroke="#72D4BA" stroke-linecap="round"/>
+    <line x1="3.99121" y1="20.3808" x2="10.033" y2="14.3391" stroke="#72D4BA" stroke-linecap="round"/>
+    <circle cx="11.7711" cy="12.4076" r="8.47619" stroke="#0A4195" stroke-width="1.5"/>
+    <circle cx="11.7711" cy="12.4077" r="2.74959" stroke="#0A4195" stroke-width="1.5"/>
+</svg>

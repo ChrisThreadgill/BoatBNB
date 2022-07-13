@@ -1,4 +1,4 @@
-.signup__form__container {
+/* .signup__form__container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,17 +43,18 @@
 }
 .signup__form__inputs > button {
   /* display: flex; */
+/*
   margin-top: 1vh;
   border-radius: 15px;
   width: 150px;
   align-self: center;
-}
-.sign__up__form__header {
+} */
+/* .sign__up__form__header {
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  /* margin-top: 4vh; */
+  /* margin-top: 4vh; */ /*
   margin: 4vh 2vh 0 2vh;
   color: whitesmoke;
-}
+} */

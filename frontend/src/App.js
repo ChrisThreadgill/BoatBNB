@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Navigation from "./components/Navigation";
-import SignUpForm from "./components/SignUpForm";
+import SignUpForm from "./components/forms/AuthForms/SignUp";
 import UserLoginForm from "./components/UserLoginForm";
 import HomePage from "./components/HomePage";
 import { Switch, Route } from "react-router-dom";
@@ -15,6 +15,7 @@ import ProviderBookings from "./components/ProviderPages/ProviderBookings";
 import UserInbox from "./components/UserInbox";
 import AddBoat from "./components/Boats/AddBoat";
 import BoatPage from "./components/Boats/BoatPage";
+import LoginForm from "./components/forms/AuthForms/Login";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,10 @@ function App() {
             </Route>
             <Route path="/sign-up">
               <SignUpForm></SignUpForm>
+            </Route>
+            <Route path="/login">
+              <LoginForm></LoginForm>
+              {/* <UserLoginForm></UserLoginForm> */}
             </Route>
             {/* <Route path="/login">
               <UserLoginForm></UserLoginForm>

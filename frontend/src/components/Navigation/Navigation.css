@@ -3,9 +3,13 @@
 
   justify-content: space-between;
 
-  background-color: #274063;
-  border: 2px ridge #274063;
-  border-radius: 0 0 12px 12px;
+  /* background-color: #313335; */
+  background-color: #ffffff;
+  /* background-color: rgb(211, 204, 204); */
+  border-bottom: #d0d4d7 1px ridge;
+  /* border: 2px ridge #274063; */
+  height: 60px;
+  /* border-radius: 0 0 12px 12px; */
   /* margin-top: 1.5vh; */
 }
 
@@ -23,7 +27,7 @@
   justify-content: space-between;
 
   background-color: #274063;
-  border: 2px ridge #274063;
+  /* border: 2px ridge #274063; */
   border-radius: 0 0 12px 12px;
   /* height: 25vh;
   background: url("./1000_F_309830392_3unqC6gdkRuwACg55pTwVSuTzyeUlkqe.jpg"); */
@@ -171,10 +175,26 @@
 }
 
 .boat__bnb__logo {
-  height: 120px;
+  height: 50px;
 }
 
 .login__modal__button {
   background: none;
   border: none;
+}
+
+.visitor__nav__auth {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  color: #0a4195;
+  font-size: 14px;
+}
+.visitor__nav__auth > div {
+  padding: 15px;
+  cursor: pointer;
+}
+.visitor__nav__auth > div:hover {
+  text-decoration: underline;
 }

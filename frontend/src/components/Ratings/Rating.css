@@ -5,3 +5,24 @@
 .star__radio__buttons {
   display: none;
 }
+
+.empty__star {
+  /* color: 1px solid rgb(168, 54, 54); */
+  color: rgb(206, 225, 225);
+
+  /* border: 1px solid black; */
+}
+.empty__star__container > div {
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #4b5765;
+}
+
+.single__review__header,
+.multiple__reviews__header {
+  margin-top: 2px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #4b5765;
+}

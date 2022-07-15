@@ -9,6 +9,7 @@ import "./HomePage.css";
 import HomePageSearch from "./HomePageSearch/HomePageSearch.js";
 import HomePageInfo from "./HomePageInfo/HomePageInfo.js";
 import HomePageDiscover from "./HomePageDiscover/HomePageDiscover.js";
+import Footer from "../Footer/Footer.js";
 
 function HomePage({ searchState, setSearchState }) {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ function HomePage({ searchState, setSearchState }) {
       <HomePageSearch searchState={searchState} setSearchState={setSearchState}></HomePageSearch>
       <HomePageInfo></HomePageInfo>
       <HomePageDiscover></HomePageDiscover>
+      <Footer></Footer>
       {/* <div className="homepage__test">
         <div className="test__two__works">
           <div className="home__page__header">

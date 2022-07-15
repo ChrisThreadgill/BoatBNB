@@ -17,7 +17,7 @@ export const states = [
   "Kansas,KS",
   "Kentucky,KY",
   "Louisiana,LA",
-  "Maine	ME,",
+  "Maine,ME",
   "Maryland,MD",
   "Massachusetts,MA",
   "Michigan,MI",

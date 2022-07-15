@@ -11,6 +11,7 @@ const singleUserReviews = (reviews) => {
 };
 
 export const getAllReviewsForSingleUser = (userId) => async (dispatch) => {
+  console.log("in the thunk");
   const response = await csrfFetch(`/api/reviews/user/${userId}`, {
     method: "GET",
   });

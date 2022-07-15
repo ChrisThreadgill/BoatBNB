@@ -1,0 +1,27 @@
+.user__profile__reviews__container {
+  display: flex;
+  /* align-items: center; */
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 450px;
+  max-height: 777px;
+  margin-top: 22px;
+  /* margin: 22px 0px 0px 55px; */
+  /* border: 2px dashed purple; */
+
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.user__profile__reviews__container::-webkit-scrollbar {
+  display: none;
+}
+
+.user__profile__reviews__header {
+  display: flex;
+  align-self: flex-start;
+  font-size: 16px;
+  font-weight: bolder;
+  margin: 45px 0px 15px 25px;
+}

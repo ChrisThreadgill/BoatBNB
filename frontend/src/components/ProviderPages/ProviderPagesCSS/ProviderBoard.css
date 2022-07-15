@@ -49,9 +49,9 @@
   align-items: flex-start;
   min-width: 20vh;
 }
-.user__profile__view__container {
+/* .user__profile__view__container {
   margin-top: 40px;
-}
+} */
 .provider__nav__panel > div {
   display: flex;
   width: 100%;

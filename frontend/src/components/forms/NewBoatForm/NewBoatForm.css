@@ -1,0 +1,33 @@
+.new__boat__listing__container {
+  width: 100%;
+  height: 94vh;
+  background: url("./new__boat__form__background.png") no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 77px;
+  /* border: 1px solid red; */
+}
+
+.new__boat__form {
+  width: 547px;
+  height: 777px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  /* border: 1px dashed purple; */
+  margin-left: 77px;
+}
+
+.new__boat__listing__header__container {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  /* align-self: flex-start; */
+  margin-bottom: 150px;
+  flex-direction: column;
+  color: #ffffff;
+}
+.new__boat__listing__header__container > div {
+  color: #ffffff;
+}

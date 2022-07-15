@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 
 function MenuButton({ user }) {
-  // console.log(user);
+  console.log(user, " user in the nav menu button");
+  const history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
 
@@ -31,32 +33,45 @@ function MenuButton({ user }) {
 
   return (
     <div className="nav__menu__button__container">
-      <div className="nav__menu__static__options">List Your Boat</div>
-      <div className="nav__menu__static__options">Bookings</div>
+      <div
+        className={user.roleId === 1 ? "nav__menu__static__options__owner" : "nav__menu__static__options"}
+        onClick={() => history.push("/new-listing")}
+      >
+        List Your Boat
+      </div>
+      <div
+        className={user.roleId === 1 ? "nav__menu__static__options__owner" : "nav__menu__static__options"}
+        onClick={() => history.push("/bookings")}
+      >
+        Bookings
+      </div>
+
       <img className="nav__profile__picture" src={`/api/images/${user.profilePicture}`} onClick={openMenu} />
       <div className="nav__menu__picture__container"></div>
       {showMenu && (
-        <div className="nav__menu__dropdown">
-          <div className="nav__menu__username__container">
+        <div className={user.roleId === 1 ? "nav__menu__dropdown" : "nav__menu__dropdown__no__owner"}>
+          <div
+            className={user.roleId === 1 ? "nav__menu__username__container__owner" : "nav__menu__username__container"}
+          >
             <span>Hi, {user.firstName}</span>
-            <div>View Profile</div>
+            <div onClick={() => history.push(`/test/${user.id}`)}>View Profile</div>
           </div>
-          <div className="nav__menu__options">
-            <span>Owner dashboard</span>
-            <span>My boats</span>
-          </div>
-          <div className="nav__menu__options">
+          {user.roleId === 1 ? (
+            <div className="nav__menu__options__owner">
+              {/* <span>Owner dashboard</span> */}
+              <span onClick={() => history.push("/manage-boats")}>My boats</span>
+            </div>
+          ) : null}
+
+          <div className={user.roleId === 1 ? "nav__menu__options__owner" : "nav__menu__options"}>
             <span>My account</span>
-            <span>List your boat</span>
+            <span onClick={() => history.push("/new-listing")}>List your boat</span>
           </div>
-          <div className="logout__button" onClick={logout}>
+          <div className={user.roleId === 1 ? "logout__button__owner" : "logout__button"} onClick={logout}>
             Log Out
           </div>
         </div>
       )}
-      {/* <img className="nav__profile__picture" src={`/api/images/${user.profilePicture}`} onClick={openMenu} /> */}
-
-      {/* <button onClick={openMenu}>MENU</button> */}
     </div>
   );
 }

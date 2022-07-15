@@ -48,7 +48,7 @@ function BoatRatingDisplay({ boat }) {
         <div className="boat__rating__display__container">
           <div>
             {[...Array(averageBoatRatings?.average)].map((star, idx) => {
-              return <FaStar size={15} color="#72d4ba"></FaStar>;
+              return <FaStar size={15} color="#72d4ba" key={idx}></FaStar>;
             })}
           </div>
           <div className="boat__rating__display__average">

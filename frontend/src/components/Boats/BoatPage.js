@@ -36,7 +36,7 @@ function BoatPage() {
 
     return () => {};
   }, [dispatch]);
-
+  console.log(boat[boatId]);
   return (
     <div>
       {/* <h1>Single Boat Page</h1> */}
@@ -57,20 +57,20 @@ function BoatPage() {
           </div>
         )}
 
-        {userId && (
+        {/* {userId && (
           <div>
             <div>
               <BoatReview boat={boat} userId={userId}></BoatReview>
             </div>
           </div>
-        )}
+        )} */}
       </div>
-      <div className="boat__review__board">
+      {/* <div className="boat__review__board">
         {boatReviews && boatRatingsNR && (
           <BoatReviewBoard boatReviews={boatReviews} boatRatingsNR={boatRatingsNR}></BoatReviewBoard>
         )}
         {boatReviews && !boatRatingsNR && <BoatReviewBoard boatReviews={boatReviews}></BoatReviewBoard>}
-      </div>
+      </div> */}
     </div>
   );
 }

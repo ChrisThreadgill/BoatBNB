@@ -27,8 +27,15 @@ router.get(
     const { userId } = req.params;
 
     const user = await User.findByPk(userId, {
-      include: [{ model: Boat, include: Image }, UserRating, UserReview],
+      include: [
+        { model: Boat, include: [Image, BoatRating] },
+        { model: UserRating, include: [User] },
+        { model: UserReview, include: [UserRating, User] },
+        //
+      ],
     });
+    const userReviews = await UserReview.findAll({ where: { userId } });
+    // console.log(userReviews);
     return res.json({
       user,
     });

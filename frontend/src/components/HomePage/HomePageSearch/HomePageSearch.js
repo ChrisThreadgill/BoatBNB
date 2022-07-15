@@ -17,7 +17,7 @@ function HomePageSearch() {
 
   const searchSubmit = async (e) => {
     e.preventDefault();
-    console.log("hello");
+    // console.log("hello");
     dispatch(boatsActions.getAllBoatsSearch(searchState)).then(() =>
       history.push(`/boat-listings/${searchState.toUpperCase()}`)
     );

@@ -11,7 +11,7 @@ import { FaStar } from "react-icons/fa/index.esm.js";
 function BoatCard({ boat }) {
   const location = useLocation();
   const dispatch = useDispatch();
-  console.log(boat);
+  // console.log(boat);
   const history = useHistory();
 
   const [boatView, setBoatView] = useState(0);
@@ -26,7 +26,7 @@ function BoatCard({ boat }) {
     <div
       className="boat__card__container"
       onClick={() => {
-        console.log("hello");
+        // console.log("hello");
         history.push(`/boats/${boat.id}`);
       }}
     >

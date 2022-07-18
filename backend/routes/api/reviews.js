@@ -48,7 +48,7 @@ router.get(
       },
       include: [UserRating],
     });
-    console.log(userReviews);
+    // console.log(userReviews);
     return res.json({
       userReviews,
     });

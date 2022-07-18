@@ -1,0 +1,14 @@
+.boat__page__owner__rating__container {
+  margin-left: 22px;
+}
+.boat__page__owner__information > h3 {
+  display: flex;
+  /* align-self: flex-end; */
+}
+.boat__page__avatar__container {
+  display: flex;
+  /* align-self: flex-end; */
+}
+.boat__page__boat__owner__name {
+  font-weight: bold;
+}

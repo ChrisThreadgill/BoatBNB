@@ -14,16 +14,21 @@ import ProviderBoats from "./components/ProviderPages/ProviderBoats";
 import ProviderBookings from "./components/ProviderPages/ProviderBookings";
 import UserInbox from "./components/UserInbox";
 import AddBoat from "./components/Boats/AddBoat";
-import BoatPage from "./components/Boats/BoatPage";
+// import BoatPage from "./components/Boats/BoatPage";
 import LoginForm from "./components/forms/AuthForms/Login";
 import BoatListings from "./components/BoatListings/BoatListings";
 import NewBoatForm from "./components/forms/NewBoatForm/NewBoat";
+import BoatPage from "./components/BoatPage/BoatPage";
+import { getKey } from "./store/maps";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+    dispatch(sessionActions.restoreUser()).then(() => {
+      dispatch(getKey());
+      setIsLoaded(true);
+    });
   }, [dispatch]);
 
   return (
@@ -67,7 +72,7 @@ function App() {
               <ProviderBoatEdit></ProviderBoatEdit>
             </Route>
             <Route path="/boats/:boatId">
-              <BoatPage />
+              <BoatPage></BoatPage>
             </Route>
             <Route path="/test/:userId">
               <UserProfilePage></UserProfilePage>

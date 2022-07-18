@@ -7,6 +7,7 @@ import bookingsReducer from "./bookings";
 import boatReviewsReducer from "./boatReviews";
 import boatRatingsReducer from "./boatRatings";
 import userReviewsReducer from "./userReviews";
+import mapsReducer from "./maps";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   boatReviews: boatReviewsReducer,
   boatRatings: boatRatingsReducer,
   userReview: userReviewsReducer,
+  maps: mapsReducer,
 });
 
 let enhancer;

@@ -40,16 +40,44 @@ const cleanBoats = () => {
     type: CLEAN,
   };
 };
+export const getAllBoats = (boatId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/boats/`, {
+    method: "GET",
+    body: JSON.stringify(boatId),
+  });
+
+  const boat = await response.json();
+  console.log(boat, "in the thunk");
+
+  dispatch(oneBoat(boat));
+  return boat;
+};
 
 export const getOneBoat = (boatId) => async (dispatch) => {
+  // console.log(boatId, "in the thunk");
+  let boatReviewsNoRating = [];
   const response = await csrfFetch(`/api/boats/${boatId}`, {
     method: "GET",
   });
 
-  const boat = await response.json();
+  const { boat, boatBookings, boatReviews } = await response.json();
+  // console.log(boat, boatBookings, boatReviews, "in the thunk");
+  if (boatReviews.length >= 1) {
+    for (let i = 0; i < boatReviews.length; i++) {
+      let curr = boatReviews[i];
+      // console.log(curr);
+      if (curr.BoatRating) {
+        continue;
+      } else {
+        boatReviewsNoRating.push(curr);
+      }
+    }
+  }
 
-  dispatch(oneBoat(boat.boat));
-  return boat.boat;
+  boat.Bookings = boatBookings;
+  boat.boatReviewsNoRating = boatReviewsNoRating;
+  dispatch(oneBoat(boat));
+  return boat;
 };
 
 export const updateOneBoat = (body) => async (dispatch) => {
@@ -62,8 +90,8 @@ export const updateOneBoat = (body) => async (dispatch) => {
   dispatch(updateBoat(boat.boatToUpdate));
 };
 export const getAllBoatsSearch = (state) => async (dispatch) => {
-  console.log("in here hopefully on unmount");
-  const response = await csrfFetch(`/api/boats/${state}`, {
+  // console.log("in here hopefully on unmount");
+  const response = await csrfFetch(`/api/boats/search/${state}`, {
     method: "GET",
   });
   const boats = await response.json();
@@ -82,7 +110,7 @@ export const getProviderBoats = (userId) => async (dispatch) => {
   return boats;
 };
 export const clean = () => (dispatch) => {
-  console.log("we are in the clean");
+  // console.log("we are in the clean");
   dispatch(cleanBoats());
 };
 
@@ -100,10 +128,11 @@ const boatsReducer = (state = initialState, action) => {
 
       return { ...boats };
     case GET_ONE:
-      const oneBoat = {};
-      oneBoat[action.payload.id] = action.payload;
+      // console.log(action, "in the reducer");
+      // const oneBoat = {};
+      // oneBoat[action.payload.id] = action.payload;
 
-      return oneBoat;
+      return action.payload;
 
     case GET_PROV:
       const provBoats = {};

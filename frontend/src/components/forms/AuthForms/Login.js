@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import "./LoginForm.css";
 import { FaEyeSlash } from "react-icons/fa/index.esm";
 import { FaEye } from "react-icons/fa";
+import { ExternalLink } from "react-external-link";
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -83,22 +84,36 @@ function LoginForm() {
       <div className="login__form__break"></div>
       <div className="about__links__auth__container">
         <div>
-          <div className="about__links__github__icon"></div>
-          <div>Chris' GitHub</div>
+          <ExternalLink
+            className="about__links__auth__container__external__link"
+            href="https://github.com/ChrisThreadgill"
+          >
+            <div className="about__links__github__icon"></div>
+            <div>Chris' GitHub</div>
+          </ExternalLink>
         </div>
         <div>
-          {/* <div className="about__links__linkedin__icon"></div> */}
-
-          <img
-            className="about__links__linkedin__icon"
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original-wordmark.svg"
-          />
-
-          <div>Chris' LinkedIn</div>
+          <div>
+            <ExternalLink
+              className="about__links__auth__container__external__link"
+              href="https://www.linkedin.com/in/chris-threadgill-b05090185/"
+            >
+              <img
+                className="about__links__linkedin__icon"
+                src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original-wordmark.svg"
+              />
+              <div>Chris' LinkedIn</div>
+            </ExternalLink>
+          </div>
         </div>
         <div>
-          <div className="about__links__portfolio__icon">CT</div>
-          <div>Chris' Portfolio</div>
+          <ExternalLink
+            className="about__links__auth__container__external__link"
+            href="https://www.christhreadgill.com"
+          >
+            <div className="about__links__portfolio__icon">CT</div>
+            <div>Chris' Portfolio</div>
+          </ExternalLink>
         </div>
       </div>
       <div className="login__form__redirect">

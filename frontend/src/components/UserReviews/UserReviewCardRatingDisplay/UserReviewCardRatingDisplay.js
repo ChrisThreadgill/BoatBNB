@@ -4,7 +4,7 @@ import { FaStar, FaRegSmile, FaRegHandshake, FaRegClock } from "react-icons/fa";
 const moment = require("moment");
 
 function UserReviewCardRatingDisplay({ userRating }) {
-  console.log(userRating, "in the rating card display");
+  // console.log(userRating, "in the rating card display");
   // console.log(average);
 
   return (

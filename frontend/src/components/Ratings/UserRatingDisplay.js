@@ -17,15 +17,14 @@ import {
 } from "react-icons/fa";
 
 function UserRatingDisplay({ user }) {
-  console.log(user.UserRatings);
   const UserRatings = user.UserRatings;
-  console.log(user?.UserRatings);
+
   // const sessionUser = useSelector((state) => state.session.user);
   const [averageUserRatings, setAverageUserRatings] = useState([]);
   // let averageUserRatings;
+
   useEffect(() => {
     if (UserRatings) {
-      console.log("in the if in the use Effect");
       setAverageUserRatings(
         UserRatings.reduce(
           (prev, curr, idx) => {
@@ -35,14 +34,11 @@ function UserRatingDisplay({ user }) {
             prev.trustworthy = prev.trustworthy + curr.trustworthy;
             prev.count = ++idx;
             if (prev.count === UserRatings.length) {
-              // console.log(prev);
-              // console.log("in the reduce");
               prev.average = Math.ceil(prev.average / prev.count);
               prev.friendliness = Math.ceil(prev.friendliness / prev.count);
               prev.punctuality = Math.ceil(prev.punctuality / prev.count);
               prev.trustworthy = Math.ceil(prev.trustworthy / prev.count);
             }
-            console.log(prev);
             return prev;
           },
           { average: null, friendliness: null, punctuality: null, trustworthy: null, count: null }
@@ -50,8 +46,6 @@ function UserRatingDisplay({ user }) {
       );
     }
   }, [UserRatings]);
-  console.log(UserRatings?.length, "average user ratings");
-  console.log(averageUserRatings, "hello");
 
   return (
     <div>

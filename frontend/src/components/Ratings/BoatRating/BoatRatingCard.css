@@ -31,3 +31,9 @@
 .boat__rating__card__NR {
   margin: 2vh;
 }
+
+@media (max-width: 390px) {
+  .boat__rating__display__container {
+    display: flex;
+  }
+}

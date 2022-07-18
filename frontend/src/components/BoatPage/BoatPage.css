@@ -1,0 +1,29 @@
+.boat__page__container {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  /* border: 1px solid red; */
+}
+
+.boat__page__information__container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-around;
+
+  /* border: 3px dashed orange; */
+  height: 666px;
+}
+
+@media (max-width: 390px) {
+  .boat__page__information__container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+    /* border: 3px dashed orange; */
+    height: auto;
+  }
+}

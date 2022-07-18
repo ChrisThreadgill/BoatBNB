@@ -4,7 +4,7 @@ import UserReviewCardRatingDisplay from "../UserReviews/UserReviewCardRatingDisp
 
 function UserRatingCard({ rating }) {
   const history = useHistory();
-  console.log(rating);
+  // console.log(rating);
   //
 
   return (

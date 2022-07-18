@@ -1,0 +1,225 @@
+.new__boat__booking__form {
+  width: 100%;
+  max-width: 420px;
+  max-width: 420px;
+  background-color: whitesmoke;
+  height: 620px;
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 12px;
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  box-shadow: 2px 2px 5px 5px rgba(40, 39, 39, 0.2);
+}
+
+.new__boat__booking__container {
+  max-width: 420px;
+  width: 100%;
+  align-self: flex-start;
+}
+.date__picker {
+  margin-top: 7px;
+}
+.react-datepicker {
+  margin-top: 22px;
+  /* margin-right: 2rem; */
+}
+.react-datepicker__month-container {
+  background-color: whitesmoke;
+  outline: 0;
+  border: none;
+  border-radius: 15px;
+}
+.react-datepicker__header {
+  background-color: rgb(218, 212, 212);
+  outline: 0;
+}
+.react-datepicker__current-month {
+  color: #0751c2;
+}
+.react-datepicker__day-name {
+  color: #0751c2;
+}
+.react-datepicker__day {
+  color: black;
+  font-weight: bold;
+}
+.react-datepicker__day:hover {
+  background-color: #0751c2;
+}
+.react-datepicker__day--keyboard-selected {
+  background-color: #0751c2;
+}
+.react-datepicker__day--selected {
+  background-color: #0751c2;
+}
+
+.react-datepicker__day--disabled {
+  border-radius: 5px;
+  background-color: #0751c2;
+  opacity: 50%;
+}
+
+.selected__date__display__container {
+  display: flex;
+  flex-direction: column;
+  max-width: 330px;
+  width: 100%;
+  height: 50px;
+  /* padding: 12px 12px 8px 12px; */
+  /* margin: 11px 0px 22px 0; */
+  border-bottom: 1px solid rgba(40, 39, 39, 0.2);
+}
+.selected__date__display__container > span {
+  width: 100%;
+  width: 27px;
+  height: 17px;
+  font-size: 12px;
+  color: #5e696a;
+  margin-bottom: 12px;
+}
+.selected__date__display__container > div {
+  width: 100%;
+  max-width: 180px;
+  height: 22px;
+  font-size: 16px;
+  color: #17233c;
+  margin-top: 2px;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+.selected__time__display__container {
+  display: flex;
+  max-width: 330px;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+  /* border: blue 3px ridge; */
+}
+.selected__time__display__container > span {
+  display: flex;
+
+  width: 100%;
+  width: 66px;
+  height: 17px;
+  font-size: 12px;
+  color: #5e696a;
+  margin: 22px 0 7px 0;
+}
+
+.booking__form__time__clock {
+  background: url("./boat__bnb__checkin.svg") center no-repeat;
+  width: 27px;
+  height: 27px;
+}
+.time__select__container {
+  /* border: 1px solid blue; */
+  /* position: relative; */
+  width: 100%;
+}
+.time__select__toggle__container {
+  width: 100%;
+  color: #17233c;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(40, 39, 39, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.check__in__menu__container {
+  position: absolute;
+}
+.checkIn__toggle__menu {
+  display: flex;
+  width: 100%;
+  max-width: 330px;
+  flex-wrap: wrap;
+  height: 144px;
+  /* height: 132px; */
+  background-color: #ffffff;
+  box-shadow: 2px 2px 5px 5px rgba(40, 39, 39, 0.2);
+  border-radius: 12px;
+  /* border: 3px dashed green; */
+  justify-content: center;
+  /* flex-direction: column; */
+}
+/* .checkIn__toggle__menu > div {
+  width: 110px;
+  height: 44px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  margin: 12px 5px 0 5px;
+  border: 1px solid red;
+} */
+
+.checkIn__time__option {
+  width: 100px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  background-color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  margin: 7px 3px 0 3px;
+
+  padding: 3px 10px;
+  cursor: pointer;
+  /* selected background color is  */
+  /* border: 1px solid red; */
+}
+.checkIn__time__option__selected {
+  width: 100px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: #0751c2; */
+  color: #0751c2;
+  background-color: #eef3fb;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  margin: 7px 3px 0 3px;
+  padding: 3px 10px;
+  /* selected background color is  */
+  /* border: 1px solid red; */
+}
+
+.booking__price__display__container {
+  display: flex;
+  border-bottom: 1px solid rgba(40, 39, 39, 0.2);
+  width: 100%;
+  max-width: 330px;
+  padding-bottom: 12px;
+  height: 22px;
+  margin-top: 33px;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.booking__price__display__container > span {
+  font-weight: bold;
+}
+
+.booking__submit__button {
+  width: 330px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: #0751c2;
+  color: #ffffff;
+  font-weight: bolder;
+  padding: 0px 25px;
+  margin-top: 44px;
+  cursor: pointer;
+}

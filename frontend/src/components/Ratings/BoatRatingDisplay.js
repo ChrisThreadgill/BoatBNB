@@ -19,7 +19,9 @@ import {
 } from "react-icons/fa";
 
 function BoatRatingDisplay({ boat }) {
+  console.log(boat);
   const boatRatings = boat?.BoatRatings;
+  // console.log(boat, "in the boat rating display");
 
   const averageBoatRatings = boatRatings?.reduce(
     (prev, curr, idx) => {
@@ -53,7 +55,7 @@ function BoatRatingDisplay({ boat }) {
           </div>
           <div className="boat__rating__display__average">
             {averageBoatRatings?.average}
-            <span>({boatRatings?.length} ratings)</span>
+            {/* <span>({boatRatings?.length + boat.boatReviewsNoRating.length} ratings)</span> */}
           </div>
 
           {/* <div>

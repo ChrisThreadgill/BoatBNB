@@ -48,7 +48,8 @@ function HomePageSearch() {
           placeholder="Where would you like to go boating?"
           ref={searchInput}
           type="search"
-          onChange={(e) => setSearchState(e.target.value)}
+          maxLength={2}
+          onChange={(e) => setSearchState(e.target.value.toUpperCase())}
           onFocus={() => setSearchFilterShow(true)}
           onBlur={() => {
             if (blur) return;

@@ -102,6 +102,22 @@
   font-size: 15px;
   font-weight: bold;
 }
+.about__links__auth__container__external__link {
+  max-width: 400px;
+  width: 100%;
+  height: 55px;
+  /* margin: 0 0 20px; */
+  border-radius: 5px;
+  /* border: 1px solid #17233c; */
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  color: #17233c;
+}
 .about__links__github__icon {
   background: url("./github.svg") center no-repeat;
   height: 35px;

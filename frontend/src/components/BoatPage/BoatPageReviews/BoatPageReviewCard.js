@@ -1,12 +1,12 @@
-import "./UserReviewCard.css";
+import "./BoatPageReviewCard.css";
 import { useHistory } from "react-router-dom";
-import UserRatingDisplay from "../../Ratings/UserRatingDisplay";
-import UserReviewCardRatingDisplay from "../UserReviewCardRatingDisplay/UserReviewCardRatingDisplay";
+import BoatPageRatingDisplay from "./BoatPageRatingDisplay";
+
 const moment = require("moment");
 
-function UserReviewCard({ review }) {
+function BoatPageReviewCard({ review, user }) {
   const history = useHistory();
-  // console.log(review, "in the review card");
+  console.log(review, user, "in the review card");
 
   //
 
@@ -22,12 +22,13 @@ function UserReviewCard({ review }) {
         />
         <div>{review.User.firstName}</div>
       </div>
-      {review && review.UserRating ? (
+      {review && review.BoatRating ? (
         <div className="user__review__card__content__container">
           <div>
-            <UserReviewCardRatingDisplay userRating={review.UserRating}></UserReviewCardRatingDisplay>
+            <BoatPageRatingDisplay boatRating={review.BoatRating}></BoatPageRatingDisplay>
+            {/* <UserReviewCardRatingDisplay userRating={review.UserRating}></UserReviewCardRatingDisplay> */}
           </div>
-          <div className="user__review__content">{review.content}</div>
+          <div className="user__review__content">{review.review}</div>
         </div>
       ) : (
         <div className="user__review__card__no__rating__content__container">
@@ -36,11 +37,11 @@ function UserReviewCard({ review }) {
               <div className="user__review__no__rating__date">{moment(review.createdAt).format("MMMM Do YYYY")}</div>
             </div>
           </div>
-          <div className="user__review__content">{review.content}</div>
+          <div className="user__review__content">{review.review}</div>
         </div>
       )}
     </div>
   );
 }
 
-export default UserReviewCard;
+export default BoatPageReviewCard;

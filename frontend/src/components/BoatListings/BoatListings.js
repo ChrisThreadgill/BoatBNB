@@ -5,6 +5,8 @@ import * as boatsActions from "../../store/boats";
 import BoatCard from "../Boats/BoatCard";
 import { useParams, useHistory } from "react-router-dom";
 import { states } from "../Utils";
+import BoatSearchMap from "../BoatSearchMap/BoatSearchMap";
+import { getKey } from "../../store/maps";
 
 function BoatListings() {
   let { searchState } = useParams();
@@ -19,10 +21,12 @@ function BoatListings() {
   const [searchFilter, setSearchFilter] = useState(states);
 
   const boatsObj = useSelector((state) => state.boats);
+  const key = useSelector((state) => state.key);
   let boatsArr = Object.values(boatsObj);
+  console.log(history);
   // console.log(boatsObj);
   // const [searchState, setSearchState] = useState(boatsArr[0]?.state);
-  // console.log(searchState);
+  console.log(searchState);
   const handleSearch = async (e) => {
     // console.log("this is the search", search);
 
@@ -33,27 +37,17 @@ function BoatListings() {
     // console.log(searchButton);
 
     dispatch(boatsActions.getAllBoatsSearch(search)).then(() => {
-      console.log(searchInput);
+      // console.log(searchInput);
       // searchInput.current.onblur = true;
       searchInput.current.blur();
       setIsLoaded(true);
       setSearch("");
       setSearchFilterShow(false);
       // setBlur(true);
-      history.push(`/boat-listings/${search.toUpperCase()}`);
+      history.push(`/boat-listings/${search.toUpperCase()}`, { test: `${searchFilter}TEST` });
     });
   };
-  // useEffect(() => {
-  //   if (setSearchFilterShow) return;
-
-  //   const closeMenu = () => {
-  //     setShowMenu(false);
-  //   };
-
-  //   document.addEventListener("click", closeMenu);
-
-  //   return () => document.removeEventListener("click", closeMenu);
-  // }, [setSearchFilterShow]);
+  useEffect(() => {}, [searchState]);
 
   // const handle
   useEffect(() => {
@@ -70,7 +64,11 @@ function BoatListings() {
   }, [search]);
 
   useEffect(() => {
-    dispatch(boatsActions.getAllBoatsSearch(searchState)).then(() => setIsLoaded(true));
+    dispatch(boatsActions.getAllBoatsSearch(searchState)).then(() => {
+      dispatch(getKey());
+
+      setIsLoaded(true);
+    });
     // setIsLoaded(true);
     return () => {
       // console.log("we are in the return");
@@ -90,7 +88,8 @@ function BoatListings() {
             placeholder="Search New State"
             type="search"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            maxLength={2}
+            onChange={(e) => setSearch(e.target.value.toUpperCase())}
             onFocus={() => setSearchFilterShow(true)}
             onBlur={() => {
               if (blur) return;
@@ -143,14 +142,20 @@ function BoatListings() {
         ) : null}
       </form>
       {isLoaded ? (
-        <div>
-          {boatsArr.length > 1 && boatsArr ? (
-            boatsArr.map((boat, idx) => {
-              return <BoatCard key={idx} boat={boat}></BoatCard>;
-            })
-          ) : (
-            <h1>no boats bitch</h1>
-          )}
+        <div className="boat__listings__container">
+          <div className="boat__cards__container">
+            {boatsArr.length > 1 && boatsArr ? (
+              boatsArr.map((boat, idx) => {
+                return <BoatCard key={idx} boat={boat}></BoatCard>;
+              })
+            ) : (
+              <h1>no boats</h1>
+            )}
+          </div>
+
+          <div>
+            <BoatSearchMap searchState={searchState} key={key}></BoatSearchMap>
+          </div>
         </div>
       ) : (
         <h1>...loading</h1>

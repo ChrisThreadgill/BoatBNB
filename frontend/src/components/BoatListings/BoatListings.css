@@ -1,3 +1,30 @@
+.boat__listings__container {
+  display: flex;
+  /* flex-direction: column; */
+  width: 100%;
+  height: auto;
+  max-height: 850px;
+  /* max-width: 1111px; */
+  /* border: 1px solid blue; */
+  /* overflow: scroll; */
+}
+
+.boat__cards__container {
+  width: 100%;
+  max-width: 1111px;
+  margin-right: 22px;
+  margin-left: 11px;
+  /* border: 4px dashed salmon; */
+  max-height: 830px;
+
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.boat__cards__container::-webkit-scrollbar {
+  display: none;
+}
+
 .boat__listings__search {
   width: 100%;
   display: flex;

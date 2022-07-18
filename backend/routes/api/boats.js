@@ -4,14 +4,17 @@ const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { Op } = require("sequelize");
+const { googleMapsAPIKey } = require("../../config");
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { User, Boat, Image, Booking, BoatRating } = require("../../db/models");
+const { User, Boat, Image, Booking, BoatRating, BoatReview, UserRating } = require("../../db/models");
 
 //gets all boats
 router.get(
   "/",
   asyncHandler(async (req, res) => {
+    const { boatId } = req.body;
+    console.log(req.body, "-------------------- in the get all route for some goddamn reason");
     const boats = await Boat.findAll({
       include: [Image, BoatRating, User],
     });
@@ -22,10 +25,15 @@ router.get(
   })
 );
 
+router.post("/key", (req, res) => {
+  res.json({ googleMapsAPIKey });
+});
+
 //search by state
 router.get(
-  "/:state",
+  "/search/:state",
   asyncHandler(async (req, res) => {
+    console.log(googleMapsAPIKey);
     const { state } = req.params;
 
     const boats = await Boat.findAll({
@@ -61,13 +69,44 @@ router.get(
   "/:boatId",
   asyncHandler(async (req, res) => {
     const { boatId } = req.params;
+    let boatBookings = [];
 
     const boat = await Boat.findByPk(boatId, {
-      include: [Image, BoatRating, User],
+      include: [
+        { model: User, include: [UserRating] },
+        Image,
+        { model: BoatRating, include: [BoatReview, User] },
+
+        Booking,
+      ],
     });
+
+    const boatReviews = await BoatReview.findAll({
+      include: [
+        { model: User, include: [UserRating] },
+        { model: BoatRating, include: [User] },
+      ],
+    });
+    if (boat.Bookings.length >= 1) {
+      for (let i = 0; i < boat.Bookings.length; i++) {
+        boatBookings.push(new Date(boat.Bookings[i].bookingDate));
+      }
+    }
+    // if (boatReviews.length >= 1) {
+    //   for (let i = 0; i < boatReviews.length; i++) {
+    //     let curr = boatReviews[i];
+    //     if (curr.dataValues.BoatRating) {
+    //       continue;
+    //     } else {
+    //       boatReviewsNoRating.push(curr);
+    //     }
+    //   }
+    // }
 
     return res.json({
       boat,
+      boatBookings,
+      boatReviews,
     });
   })
 );

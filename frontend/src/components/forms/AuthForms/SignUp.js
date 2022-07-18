@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { FaEyeSlash } from "react-icons/fa/index.esm";
 import { FaEye } from "react-icons/fa";
+import { ExternalLink } from "react-external-link";
 import "./SignUpForm.css";
 import axios from "axios";
 
@@ -142,20 +143,35 @@ function SignUpForm() {
       <div className="signup__form__break"></div>
       <div className="sign__up__about__links">
         <div className="sign__up__about__container">
-          <div className="sign__up__github__icon"></div>
-          <span>Github</span>
+          <ExternalLink
+            className="about__links__auth__container__external__link__signup"
+            href="https://github.com/ChrisThreadgill"
+          >
+            <div className="sign__up__github__icon"></div>
+            <span>Github</span>
+          </ExternalLink>
         </div>
         <div className="sign__up__about__container">
-          <img
-            className="sign__up__linkedin__icon"
-            src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
-          />
+          <ExternalLink
+            className="about__links__auth__container__external__link__signup"
+            href="https://www.linkedin.com/in/chris-threadgill-b05090185/"
+          >
+            <img
+              className="sign__up__linkedin__icon"
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
+            />
 
-          <span>LinkedIn</span>
+            <span>LinkedIn</span>
+          </ExternalLink>
         </div>
         <div className="sign__up__about__container">
-          <div className="sign__up__portfolio__icon">CT</div>
-          <span>Portfolio</span>
+          <ExternalLink
+            className="about__links__auth__container__external__link__signup"
+            href="https://www.christhreadgill.com"
+          >
+            <div className="sign__up__portfolio__icon">CT</div>
+            <span>Portfolio</span>
+          </ExternalLink>
         </div>
       </div>
       <div className="sign__up__form__redirect">

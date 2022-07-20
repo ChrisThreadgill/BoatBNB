@@ -144,7 +144,7 @@ function BoatListings() {
       {isLoaded ? (
         <div className="boat__listings__container">
           <div className="boat__cards__container">
-            {boatsArr.length > 1 && boatsArr ? (
+            {boatsArr.length >= 1 && boatsArr ? (
               boatsArr.map((boat, idx) => {
                 return <BoatCard key={idx} boat={boat}></BoatCard>;
               })

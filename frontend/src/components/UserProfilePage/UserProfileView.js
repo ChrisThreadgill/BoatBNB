@@ -47,10 +47,7 @@ function UserProfileView() {
       {isLoaded ? (
         <div>
           <div className="user__profile__details">
-            <img
-              src={user.profilePicture ? `/api/images/${user.profilePicture}` : null}
-              className="profile__page__picture"
-            />
+            <img src={user.profilePicture ? `${user.profilePicture}` : null} className="profile__page__picture" />
             <div className="user__rating__average__container">
               <span>{user?.firstName}</span>
               <UserRatingDisplay user={user}></UserRatingDisplay>

@@ -126,9 +126,11 @@
   margin-left: 5px;
   font-size: 14px;
   color: #17233c;
+  font-weight: bold;
 }
 .boat__rating__display__average > span {
   margin-left: 5px;
   font-size: 14px;
   color: #91999a;
+  font-weight: 100;
 }

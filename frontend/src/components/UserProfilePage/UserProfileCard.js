@@ -6,7 +6,7 @@ function UserProfileCard({ userProfile }) {
       <div className="user__profile__card">
         {profilePic && (
           <div className="user__profile__picture__div">
-            <img src={`/api/images/${profilePic}`} className="user__profile__picture" />
+            <img src={`${profilePic}`} className="user__profile__picture" />
           </div>
         )}
         <div className="user__profile__information">

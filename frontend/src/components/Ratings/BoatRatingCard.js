@@ -25,7 +25,7 @@ function BoatRatingCard({ rating }) {
     <div className="boat__rating__card">
       <div className="boat__rating__card__user__info">
         <h3>{rating.User.firstName}</h3>
-        <img src={`/api/images/${rating.User.profilePicture}`} className="profile__avatar" />
+        <img src={`${rating.User.profilePicture}`} className="profile__avatar" />
       </div>
       {/* <div>{rating.User.UserRatings[0].average}</div> */}
 

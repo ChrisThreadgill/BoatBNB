@@ -31,14 +31,14 @@ function AddBoat({ user, view, setView, setAddBoatTabChecked, setBoatsTabChecked
 
   const yearValidator = new RegExp(/\d+/);
 
-  async function postImage({ image, boatId }) {
-    const formData = new FormData();
-    formData.append("image", image);
-    formData.append("boatId", boatId);
-    const result = await axios.post("/api/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
+  // async function postImage({ image, boatId }) {
+  //   const formData = new FormData();
+  //   formData.append("image", image);
+  //   formData.append("boatId", boatId);
+  //   const result = await axios.post("/api/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
 
-    return result.data;
-  }
+  //   return result.data;
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,12 +52,12 @@ function AddBoat({ user, view, setView, setAddBoatTabChecked, setBoatsTabChecked
     const response = await newBoat.json();
     const boatId = response.newBoat.id;
 
-    const result = await postImage({ image: file, boatId });
+    // const result = await postImage({ image: file, boatId });
 
-    setImages([result.image, ...images]);
-    setAddBoatTabChecked("");
-    setBoatsTabChecked("profile__boats__checked");
-    setView("boats");
+    // setImages([result.image, ...images]);
+    // setAddBoatTabChecked("");
+    // setBoatsTabChecked("profile__boats__checked");
+    // setView("boats");
   };
 
   useEffect(() => {

@@ -32,11 +32,11 @@ function BoatPageImages({ boat }) {
 
       <img
         className="boat__page__image"
-        src={imagesArr[displayPicture1] ? `/api/images/${imagesArr[displayPicture1]?.url}` : null}
+        src={imagesArr[displayPicture1] ? `${imagesArr[displayPicture1]?.url}` : null}
       ></img>
       <img
         className="boat__page__image"
-        src={imagesArr[displayPicture2] ? `/api/images/${imagesArr[displayPicture2]?.url}` : null}
+        src={imagesArr[displayPicture2] ? `${imagesArr[displayPicture2]?.url}` : null}
       ></img>
 
       <button

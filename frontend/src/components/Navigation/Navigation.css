@@ -22,6 +22,7 @@
   border: 1px solid rgba(40, 39, 39, 0.2);
   box-shadow: 2px 2px 5px 5px rgba(40, 39, 39, 0.2);
   /* cursor: pointer; */
+  z-index: 2;
 }
 .nav__menu__dropdown__no__owner {
   position: absolute;
@@ -34,6 +35,7 @@
   border: 1px solid rgba(40, 39, 39, 0.2);
   box-shadow: 2px 2px 5px 5px rgba(40, 39, 39, 0.2);
   /* cursor: pointer; */
+  z-index: 2;
 }
 .nav__menu__static__options {
   margin: 0px 22px 0px 22px;

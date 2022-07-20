@@ -18,90 +18,138 @@ const s3 = new S3({
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const { User, Boat, Image } = require("../../db/models");
 
-router.post(
-  "/:boatId",
+// const singleMulterUpload = (nameOfKey) => multer({ storage: storage }).single(nameOfKey);
 
-  asyncHandler(async (req, res) => {
-    const { boatId } = req.params;
-    const { url } = req.body;
-    const newImage = await Image.build({
-      boatId,
-      url,
-    });
-    await newImage.save();
-    return res.json({
-      newImage,
-    });
-  })
-);
+// const storage = multer.memoryStorage({
+//   destination: function (req, file, callback) {
+//     callback(null, "");
+//   },
+// });
 
-function uploadFile(file) {
-  const fileStream = fs.createReadStream(file.path);
+// const singlePublicFileUpload = async (file) => {
+//   const { originalname, mimetype, buffer } = await file;
+//   const path = require("path");
+//   // name of the file in your S3 bucket will be the date in ms plus the extension name
+//   const Key = new Date().getTime().toString() + path.extname(originalname);
+//   const uploadParams = {
+//     Bucket: process.env.AWS_BUCKET,
+//     Key,
+//     Body: buffer,
+//     ACL: "public-read",
+//   };
+//   const result = await s3.upload(uploadParams).promise();
+//   console.log(result, "----------------");
 
-  const uploadParams = {
-    Bucket: process.env.AWS_BUCKET,
-    Body: fileStream,
-    Key: file.filename,
-  };
-  return s3.upload(uploadParams).promise();
-}
-function getFileStream(fileKey) {
-  const downloadParams = {
-    Key: fileKey,
-    Bucket: process.env.AWS_BUCKET,
-  };
-  return s3.getObject(downloadParams).createReadStream();
-}
+//   // save the name of the file in your bucket as the key in your database to retrieve for later
+//   // return result.Location;
+// };
+// router.post(
+//   "/",
+//   singleMulterUpload("image"),
+//   asyncHandler(async (req, res) => {
+//     // const { email, password, username } = req.body;
+//     console.log(req.file, "---------------------------");
+//     const profileImageUrl = await singlePublicFileUpload(req.file);
+//     console.log(profileImageUrl, "========================");
+//     // const user = await User.signup({
+//     //   username,
+//     //   email,
+//     //   password,
+//     //   profileImageUrl,
+//     // });
 
-router.get("/:key", (req, res) => {
-  const key = req.params.key;
+//     // setTokenCookie(res, user);
 
-  const readStream = getFileStream(key);
-  readStream.pipe(res);
-});
+//     // return res.json({
+//     //   user,
+//     // });
+//   })
+// );
 
-router.post(
-  "/",
-  upload.single("image"),
-  asyncHandler(async (req, res) => {
-    const file = req.file;
-    const boatId = req.body.boatId;
+// router.post(
+//   "/:boatId",
 
-    const result = await uploadFile(file);
+//   asyncHandler(async (req, res) => {
+//     const { boatId } = req.params;
+//     const { url } = req.body;
+//     const newImage = await Image.build({
+//       boatId,
+//       url,
+//     });
+//     await newImage.save();
+//     return res.json({
+//       newImage,
+//     });
+//   })
+// );
 
-    const url = result.key;
+// function uploadFile(file) {
+//   const fileStream = fs.createReadStream(file.path);
 
-    if (result.key) {
-      if (boatId) {
-        const newImage = await Image.build({
-          boatId,
-          url,
-        });
-        await newImage.save();
+//   const uploadParams = {
+//     Bucket: process.env.AWS_BUCKET,
+//     Body: fileStream,
+//     Key: file.filename,
+//   };
+//   return s3.upload(uploadParams).promise();
+// }
+// function getFileStream(fileKey) {
+//   const downloadParams = {
+//     Key: fileKey,
+//     Bucket: process.env.AWS_BUCKET,
+//   };
+//   return s3.getObject(downloadParams).createReadStream();
+// }
 
-        await unlinkFile(file.path);
-        return res.json({
-          newImage,
-        });
-      } else {
-        await unlinkFile(file.path);
-        return res.json({ url });
-      }
-    }
-  })
-);
+// router.get("/:key", (req, res) => {
+//   const key = req.params.key;
 
-router.delete(
-  "/:imageId",
-  asyncHandler(async (req, res) => {
-    const { imageId } = req.params;
+//   const readStream = getFileStream(key);
+//   readStream.pipe(res);
+// });
 
-    const imageToDelete = await Image.findByPk(imageId);
-    if (imageToDelete) {
-      await imageToDelete.destroy();
-      res.json({ message: "Image Removed" });
-    }
-  })
-);
+// // router.post(
+// //   "/",
+// //   upload.single("image"),
+// //   asyncHandler(async (req, res) => {
+// //     const file = req.file;
+// //     const boatId = req.body.boatId;
+
+// //     const result = await uploadFile(file);
+
+// //     const url = result.key;
+
+// //     if (result.key) {
+// //       if (boatId) {
+// //         const newImage = await Image.build({
+// //           boatId,
+// //           url,
+// //         });
+// //         await newImage.save();
+
+// //         await unlinkFile(file.path);
+// //         return res.json({
+// //           newImage,
+// //         });
+// //       } else {
+// //         await unlinkFile(file.path);
+// //         return res.json({ url });
+// //       }
+// //     }
+// //   })
+// // );
+
+// router.delete(
+//   "/:imageId",
+//   asyncHandler(async (req, res) => {
+//     const { imageId } = req.params;
+
+//     const imageToDelete = await Image.findByPk(imageId);
+//     if (imageToDelete) {
+//       await imageToDelete.destroy();
+//       res.json({ message: "Image Removed" });
+//     }
+//   })
+// );
 
 module.exports = router;

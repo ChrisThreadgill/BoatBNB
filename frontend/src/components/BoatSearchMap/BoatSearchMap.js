@@ -23,7 +23,7 @@ import "./BoatSearchMap.css";
 function BoatSearchMap({ searchState }) {
   const dispatch = useDispatch();
   const key = useSelector((state) => state.maps.key);
-  console.log("search state in boat search map", searchState);
+
   const [lat, setLat] = useState("");
   const [long, setLong] = useState("");
   const [isLoadedCenter, setIsLoadedCenter] = useState(false);
@@ -35,8 +35,6 @@ function BoatSearchMap({ searchState }) {
       setLat(currState[0]);
       setLong(currState[1]);
       setIsLoadedCenter(true);
-      console.log(lat, long, "------------");
-      console.log(statesCoords[searchState], searchCoords, long, "------------");
     }
   }, [dispatch, searchState]);
 

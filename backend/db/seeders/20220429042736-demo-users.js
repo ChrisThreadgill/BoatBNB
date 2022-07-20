@@ -18,7 +18,7 @@ module.exports = {
           email: "demo@user.io",
           hashedPassword: bcrypt.hashSync("password"),
           roleId: 1,
-          profilePicture: "e1719a50a2edddb206b5d573d207991c",
+          profilePicture: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658255947693.jpg",
         },
         {
           firstName: "Ara",
@@ -26,7 +26,7 @@ module.exports = {
           email: "ara@ara.io",
           hashedPassword: bcrypt.hashSync("password"),
           roleId: 1,
-          profilePicture: "3e872599ccbdbf6036c6272acba9f456",
+          profilePicture: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658255989375.JPG",
         },
         {
           firstName: "JP",
@@ -34,7 +34,7 @@ module.exports = {
           email: "jp@jp.io",
           hashedPassword: bcrypt.hashSync("password"),
           roleId: 2,
-          profilePicture: "aa32be9f0cf08a175725c2748989a3a1",
+          profilePicture: null,
         },
         {
           firstName: "Darren",
@@ -42,7 +42,7 @@ module.exports = {
           email: "darren@darren.io",
           hashedPassword: bcrypt.hashSync("password"),
           roleId: 1,
-          profilePicture: "aa32be9f0cf08a175725c2748989a3a1",
+          profilePicture: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658256386097.jpg",
         },
         {
           firstName: "Vern",
@@ -50,7 +50,7 @@ module.exports = {
           email: "user4@user.io",
           hashedPassword: bcrypt.hashSync("password"),
           roleId: 2,
-          profilePicture: "aa32be9f0cf08a175725c2748989a3a1",
+          profilePicture: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658256353072.png",
         },
         {
           firstName: "Leo",
@@ -58,15 +58,15 @@ module.exports = {
           email: "leo@leo.io",
           hashedPassword: bcrypt.hashSync("password"),
           roleId: 2,
-          profilePicture: "aa32be9f0cf08a175725c2748989a3a1",
+          profilePicture: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658256291880.jpg",
         },
         {
-          firstName: "Steve",
-          lastName: "Miller",
-          email: "steve@miller.io",
+          firstName: "Edward",
+          lastName: "Smith",
+          email: "e.smith@titanic.io",
           hashedPassword: bcrypt.hashSync("password"),
           roleId: 2,
-          profilePicture: null,
+          profilePicture: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658256483714.jpg",
         },
         {
           firstName: "Veronica",

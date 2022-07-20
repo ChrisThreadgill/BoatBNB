@@ -11,7 +11,7 @@ function UserRatingCard({ rating }) {
     <div className="user__review__card__container">
       <div className="review__card__user__profile">
         <img
-          src={rating.User.profilePicture ? `/api/images/${rating.User.profilePicture}` : null}
+          src={rating.User.profilePicture ? `${rating.User.profilePicture}` : null}
           className="review__profile__picture"
           onClick={() => {
             history.push(`/users/${rating.User.id}`);

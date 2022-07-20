@@ -99,6 +99,17 @@ module.exports = {
           captain: true,
           price: 1337,
         },
+        {
+          userId: 7,
+          marina: "New York City Marina",
+          city: "New York City",
+          state: "NY",
+          year: 1911,
+          model: "Titanic",
+          accessories: "Full Size Kitchen, Master Bedroom, and Bar",
+          captain: true,
+          price: 40,
+        },
       ],
       {}
     );

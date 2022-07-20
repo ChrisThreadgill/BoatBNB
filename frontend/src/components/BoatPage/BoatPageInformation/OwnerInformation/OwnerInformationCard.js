@@ -14,7 +14,7 @@ function OwnerInformationCard({ boat }) {
         <img
           className="review__profile__picture"
           onClick={() => history.push(`/test/${boat.User.id}`)}
-          src={boat.User.profilePicture ? `/api/images/${boat.User.profilePicture}` : null}
+          src={boat.User.profilePicture ? `${boat.User.profilePicture}` : null}
         ></img>
 
         <div className="boat__page__owner__rating__container">

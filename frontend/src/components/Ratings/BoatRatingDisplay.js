@@ -55,7 +55,12 @@ function BoatRatingDisplay({ boat }) {
           </div>
           <div className="boat__rating__display__average">
             {averageBoatRatings?.average}
-            {/* <span>({boatRatings?.length + boat.boatReviewsNoRating.length} ratings)</span> */}
+            <span>
+              (
+              {`${boatRatings?.length}
+                `}
+              ratings)
+            </span>
           </div>
 
           {/* <div>

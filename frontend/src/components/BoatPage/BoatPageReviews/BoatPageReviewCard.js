@@ -14,7 +14,7 @@ function BoatPageReviewCard({ review, user }) {
     <div className="user__review__card__container">
       <div className="review__card__user__profile">
         <img
-          src={review.User.profilePicture ? `/api/images/${review.User.profilePicture}` : null}
+          src={review.User.profilePicture ? `${review.User.profilePicture}` : null}
           className="review__profile__picture"
           onClick={() => {
             history.push(`/users/${review.User.id}`);

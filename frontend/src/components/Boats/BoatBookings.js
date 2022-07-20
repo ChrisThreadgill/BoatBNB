@@ -43,7 +43,7 @@ function BoatBookings({ boat }) {
             <div className="provider__bookings__view">
               <div className="provider__booking__user__information">
                 <h1>{booking.User.firstName}</h1>
-                <img src={`/api/images/${booking.User.profilePicture}`} className="profile__avatar" />
+                <img src={`${booking.User.profilePicture}`} className="profile__avatar" />
                 {averageUserRatings && averageUserRatings.average >= 1 && (
                   <div className="provider__booking__user__rating">
                     {[...Array(averageUserRatings.average)].map((star, idx) => {

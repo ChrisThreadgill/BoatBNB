@@ -99,6 +99,47 @@ export const getAllBoatsSearch = (state) => async (dispatch) => {
   dispatch(allBoats(boats));
   return boats;
 };
+export const uploadBoatPhoto = (file, boatId) => async (dispatch) => {
+  const formData = new FormData();
+
+  // if (file.length < 2) formData.append("image", file);
+
+  if (file && file.length !== 0) {
+    for (var i = 0; i < file.length; i++) {
+      formData.append("image", file[i]);
+    }
+  }
+  console.log(file.length, "=-------------");
+  if (file.length > 1) {
+    const res = await csrfFetch(`/api/boats/${boatId}/images`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      body: formData,
+    });
+  }
+  if (file.length === 1) {
+    const res = await csrfFetch(`/api/boats/${boatId}/image`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      body: formData,
+    });
+  }
+  // console.log(res, "-resssssss--------------------------");
+  // const response = await csrfFetch(`/api/users/${userId}`, {
+  //   method: "PUT",
+  //   body: JSON.stringify({
+  //     profilePicture,
+  //   }),
+  // });
+  // const data = await res.json();
+  // console.log(data, "----------- data in the thunk");
+  // dispatch(updateProfilePicture(data.user));
+  // return response;
+};
 
 export const getProviderBoats = (userId) => async (dispatch) => {
   const response = await csrfFetch(`/api/users/${userId}/boats`, {

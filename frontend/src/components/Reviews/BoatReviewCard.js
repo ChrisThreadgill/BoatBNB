@@ -28,7 +28,7 @@ function BoatReviewCard({ review }) {
         {review.User.profilePicture && (
           <div>
             <h3>{review.User.firstName}</h3>
-            <img src={`/api/images/${review.User?.profilePicture}`} className="profile__avatar" />
+            <img src={`${review.User?.profilePicture}`} className="profile__avatar" />
           </div>
         )}
         {/* <div>{review.User.UserRatings[0]?.average}</div> */}

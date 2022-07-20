@@ -9,6 +9,7 @@ const csrfProtection = csrf({ cookie: true });
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const { User, Boat, Image, UserRating, UserReview, Booking, BoatRating } = require("../../db/models");
+const { singlePublicFileUpload, singleMulterUpload } = require("../aws");
 
 const validateSignup = [
   check("email").exists({ checkFalsy: true }).isEmail().withMessage("Please provide a valid email."),
@@ -56,6 +57,26 @@ router.get(
     return res.json({
       user,
     });
+  })
+);
+
+router.put(
+  "/:userId",
+  singleMulterUpload("image"),
+  asyncHandler(async (req, res) => {
+    const { userId } = req.params;
+    console.log("kdsajg;lsdajgf;lkjsad-========", userId);
+    console.log(req.file, "-----------");
+    const profileUrl = await singlePublicFileUpload(req.file);
+    console.log(profileUrl, "jdsklagjlskadjglksdj--------------");
+    const user = await User.findByPk(userId);
+    await user.update({
+      profilePicture: profileUrl,
+    });
+    return res.json({
+      user,
+    });
+    // console.log(user, "-=---------------");
   })
 );
 

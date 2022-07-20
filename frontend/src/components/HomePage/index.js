@@ -10,11 +10,12 @@ import HomePageSearch from "./HomePageSearch/HomePageSearch.js";
 import HomePageInfo from "./HomePageInfo/HomePageInfo.js";
 import HomePageDiscover from "./HomePageDiscover/HomePageDiscover.js";
 import Footer from "../Footer/Footer.js";
+import { GoogleMap, useJsApiLoader, useLoadScript } from "@react-google-maps/api";
 
 function HomePage({ searchState, setSearchState }) {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
   const allBoatsObj = useSelector((state) => state.boats);
 
@@ -24,7 +25,7 @@ function HomePage({ searchState, setSearchState }) {
     // dispatch(boatsAction.getAllBoats());
     return () => {
       // dispatch(boatsAction.clean());
-      dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+      // dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     };
   }, [dispatch]);
 

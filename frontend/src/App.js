@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Navigation from "./components/Navigation";
 import SignUpForm from "./components/forms/AuthForms/SignUp";
 import UserLoginForm from "./components/UserLoginForm";
@@ -19,17 +19,36 @@ import LoginForm from "./components/forms/AuthForms/Login";
 import BoatListings from "./components/BoatListings/BoatListings";
 import NewBoatForm from "./components/forms/NewBoatForm/NewBoat";
 import BoatPage from "./components/BoatPage/BoatPage";
+
 import { getKey } from "./store/maps";
+import UserAccountPage from "./components/UserAccountPage/UserAccountPage";
+import { GoogleMap, useJsApiLoader, useLoadScript } from "@react-google-maps/api";
+import { google } from "./components/Utils";
 
 function App() {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
+  const key = useSelector((state) => state.maps.key);
+  // const google = process.env.array;
+  // console.log(google, "---------------hello please work");
+  const [location, setLocation] = useState([]);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => {
       dispatch(getKey());
-      setIsLoaded(true);
+      // setIsLoaded(true);
     });
+
+    // navigator.geolocation.getCurrentPosition(
+    //   (location) => setLocation([location.coords.latitude, location.coords.longitude]),
+    //   () => null
+    // );
   }, [dispatch]);
+
+  const { isLoaded, loadError } = useLoadScript({
+    id: "google-map-script",
+    googleMapsApiKey: "AIzaSyAVqOG77WsEPT8fWdK9bW67dAPCqRU4EVA",
+    libraries: google,
+  });
 
   return (
     <>
@@ -64,6 +83,9 @@ function App() {
               <BoatListings></BoatListings>
 
               {/* <UserProfilePage></UserProfilePage> */}
+            </Route>
+            <Route path="/account-settings">
+              <UserAccountPage></UserAccountPage>
             </Route>
             <Route path="/new-listing">
               <NewBoatForm></NewBoatForm>

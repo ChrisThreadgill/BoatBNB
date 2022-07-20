@@ -1,0 +1,103 @@
+.user__account__page__container {
+  width: 100%;
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.user__account__header {
+  width: 50%;
+  margin-top: 22px;
+  /* border: 2px dashed orange; */
+}
+.user__account__profile__picture__container {
+  display: flex;
+  border-bottom: 1px solid rgba(40, 39, 39, 0.2);
+  align-items: center;
+  margin-bottom: 22px;
+  padding: 11px;
+  padding-bottom: 22px;
+}
+
+.user__account__profile__picture {
+  width: 122px;
+  height: 122px;
+  border-radius: 50%;
+  /* border: 1px solid purple; */
+
+  margin-right: 22px;
+}
+.no__profile__picture__avatar {
+  width: 122px;
+  height: 122px;
+  border-radius: 50%;
+  border: 1px solid whitesmoke;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: whitesmoke;
+  background-color: #0751c2;
+  margin-right: 22px;
+}
+.user__account__name {
+  font-weight: bold;
+  font-size: 22px;
+}
+.user__profile__picture__input {
+  border: 1px solid red;
+  display: none;
+}
+.user__picture__options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.user__picture__option {
+  color: #0751c2;
+  display: flex;
+  margin: 6px;
+  font-size: 11px;
+  justify-content: center;
+  align-items: center;
+  width: 115px;
+  height: 33px;
+  padding: 8px 14px;
+  border-radius: 5px;
+  border: 1px solid #0751c2;
+  cursor: pointer;
+}
+.user__picture__option:hover {
+  background-color: #0751c2;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 12px;
+}
+.user__picture__option__cancel {
+  color: black;
+  display: flex;
+  margin: 6px;
+  font-size: 11px;
+  justify-content: center;
+  align-items: center;
+  width: 115px;
+  height: 33px;
+  padding: 8px 14px;
+  border-radius: 5px;
+  border: 1px solid firebrick;
+  cursor: pointer;
+}
+.user__picture__option__cancel:hover {
+  background-color: firebrick;
+  font-weight: bold;
+  font-size: 13px;
+}
+.user__profile__picture__update {
+  /* border: 3px dashed lime; */
+  width: 100%;
+  height: 100vh;
+  max-height: 135px;
+}

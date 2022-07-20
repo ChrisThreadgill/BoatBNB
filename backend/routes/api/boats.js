@@ -8,6 +8,12 @@ const { googleMapsAPIKey } = require("../../config");
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
 const { User, Boat, Image, Booking, BoatRating, BoatReview, UserRating } = require("../../db/models");
+const {
+  singlePublicFileUpload,
+  singleMulterUpload,
+  multipleMulterUpload,
+  multiplePublicFileUpload,
+} = require("../aws");
 
 //gets all boats
 router.get(
@@ -33,7 +39,6 @@ router.post("/key", (req, res) => {
 router.get(
   "/search/:state",
   asyncHandler(async (req, res) => {
-    console.log(googleMapsAPIKey);
     const { state } = req.params;
 
     const boats = await Boat.findAll({
@@ -43,6 +48,7 @@ router.get(
       include: [Image, BoatRating, User],
       // include: [{ model: Boat, include: Image }],
     });
+    console.log(boats, "oooooooooooooooooooooboatssssssssssssss");
 
     return res.json({
       boats,
@@ -150,6 +156,86 @@ router.post(
     });
   })
 );
+//post new image for boat
+router.post("/:boatId/image", requireAuth);
+
+router.post(
+  "/:boatId/image",
+  singleMulterUpload("image"),
+  // multipleMulterUpload("image"),
+  asyncHandler(async (req, res) => {
+    const { boatId } = req.params;
+    const url = await singlePublicFileUpload(req.file);
+
+    const image = await Image.create({
+      boatId,
+      url,
+    });
+    // console.log(image);
+    // return res.json({
+    //   user,
+    // });
+    // console.log(user, "-=---------------");
+  })
+);
+router.post(
+  "/:boatId/images",
+  // singleMulterUpload("image"),
+  multipleMulterUpload("image"),
+  asyncHandler(async (req, res) => {
+    const { boatId } = req.params;
+    console.log("kdsajg;lsdajgf;lkjsad-========", boatId);
+    const urls = await multiplePublicFileUpload(req.files);
+    // const url = await singlePublicFileUpload(req.file);
+    console.log(urls, "jdsklagjlskadjglksdj--------------");
+    // const user = await User.findByPk(userId);
+    const imagesArr = [];
+    for (let i = 0; i < urls.length; i++) {
+      const url = urls[i];
+      const image = await Image.create({
+        boatId,
+        url,
+      });
+      imagesArr.push(image);
+    }
+    console.log(imagesArr);
+    // const image = await Image.create({
+    //   boatId,
+    //   url,
+    // });
+    // console.log(image);
+    // return res.json({
+    //   user,
+    // });
+    // console.log(user, "-=---------------");
+  })
+);
+
+// //multiple image upload
+// router.post(
+//   "/:boatId/images",
+//   // singleMulterUpload("image"),
+
+//   multipleMulterUpload("image"),
+//   asyncHandler(async (req, res) => {
+//     const { boatId } = req.params;
+//     console.log("kdsajg;lsdajgf;lkjsad-========", boatId);
+//     console.log(req.file, "--------------------");
+
+//     const urls = await multiplePublicFileUpload(req.file);
+//     console.log(urls, "jdsklagjlskadjglksdj--------------");
+//     // const user = await User.findByPk(userId);
+//     // const image = await Image.create({
+//     //   boatId,
+//     //   url,
+//     // });
+//     // console.log(image);
+//     // return res.json({
+//     //   user,
+//     // });
+//     // console.log(user, "-=---------------");
+//   })
+// );
 
 router.put(
   "/:boatId",

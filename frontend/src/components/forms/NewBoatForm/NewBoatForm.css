@@ -99,7 +99,15 @@
   height: 50px;
 }
 .new__boat__model__input {
-  width: 320px;
+  width: 177px;
+  height: 50px;
+  outline: 0;
+  border-radius: 5px;
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  margin-top: 3px;
+}
+.new__boat__price__input {
+  width: 122px;
   height: 50px;
   outline: 0;
   border-radius: 5px;
@@ -234,4 +242,14 @@
   font-weight: bolder;
 
   /* border: 1px solid black; */
+}
+
+.new__boat__captain__container {
+  display: flex;
+  align-items: center;
+}
+.new__boat__captain__container > div {
+  font-size: 13px;
+  color: rgba(40, 39, 39, 0.6);
+  margin-left: 7px;
 }

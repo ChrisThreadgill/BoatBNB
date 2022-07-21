@@ -13,13 +13,13 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: "Users" },
       },
-      marina: {
+      address: {
         allowNull: false,
-        type: Sequelize.STRING(75),
+        type: Sequelize.STRING(100),
       },
       city: {
         allowNull: false,
-        type: Sequelize.STRING(50),
+        type: Sequelize.STRING(100),
       },
       state: {
         allowNull: false,
@@ -33,8 +33,8 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(100),
       },
-      accessories: {
-        type: Sequelize.STRING,
+      description: {
+        type: Sequelize.STRING(500),
       },
       captain: {
         type: Sequelize.BOOLEAN,
@@ -42,6 +42,12 @@ module.exports = {
       price: {
         allowNull: false,
         type: Sequelize.INTEGER,
+      },
+      lat: {
+        type: Sequelize.NUMERIC(10, 7),
+      },
+      lng: {
+        type: Sequelize.NUMERIC(10, 7),
       },
       createdAt: {
         allowNull: false,

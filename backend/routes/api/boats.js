@@ -117,15 +117,36 @@ router.get(
   })
 );
 
+router.get(
+  "/:userId/boats",
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { userId } = req.params;
+
+    const boats = await Boat.findAll({
+      where: {
+        userId,
+      },
+      include: [Image, BoatRating, User],
+      // include: [{ model: Boat, include: Image }],
+    });
+
+    return res.json({
+      boats,
+    });
+  })
+);
+
 const validateBoatAddForm = [
-  check("marina").exists({ checkFalsy: true }).withMessage("Please Provide a Marina"),
-  check("marina").isLength({ max: 70 }).withMessage("Your marina name must be within 75 characters."),
+  check("address").exists({ checkFalsy: true }).withMessage("Please Provide a Marina"),
+  check("address").isLength({ max: 100 }).withMessage("Your address must be within 100 characters."),
   check("city").exists({ checkFalsy: true }).withMessage("Please provide a city."),
-  check("city").isLength({ max: 50 }).withMessage("City must be within 50 characters."),
+  check("city").isLength({ max: 100 }).withMessage("City must be within 100 characters."),
   check("state").exists({ checkFalsy: true }).withMessage("Please provide state."),
   check("state").isLength({ max: 2 }).withMessage("State Can only be 2 characters."),
   check("year").exists({ checkFalsy: true }).withMessage("Must provide a year."),
   check("model").exists({ checkFalsy: true }).withMessage("Please a model name."),
+  check("model").isLength({ max: 100 }).withMessage("Model name must be within 100 characters."),
   check("price").exists({ checkFalsy: true }).withMessage("please provide a price."),
   handleValidationErrors,
 ];
@@ -136,23 +157,25 @@ router.post(
   requireAuth,
   validateBoatAddForm,
   asyncHandler(async (req, res) => {
-    const { userId, marina, city, state, year, model, accessories, captain, price, schedule } = req.body;
+    const { userId } = req.params;
+    const { address, city, state, year, model, description, price, captain, lat, lng } = req.body;
 
-    const newBoat = await Boat.build({
+    const boat = await Boat.build({
       userId,
-      marina,
+      address,
       city,
       state,
       year,
       model,
-      accessories,
-      captain,
+      description,
       price,
-      schedule,
+      lat,
+      lng,
+      captain,
     });
-    await newBoat.save();
+    await boat.save();
     return res.json({
-      newBoat,
+      boat,
     });
   })
 );

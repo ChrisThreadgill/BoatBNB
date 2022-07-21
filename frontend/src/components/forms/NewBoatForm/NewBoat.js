@@ -2,15 +2,29 @@ import "./NewBoatForm.css";
 
 import { GoogleMap, useJsApiLoader, useLoadScript } from "@react-google-maps/api";
 import usePlacesAutoComplete, { getGeocode, getLatLng } from "use-places-autocomplete";
+// import { Autocomplete } from "@react-google-maps/api";
+import Autocomplete from "react-google-autocomplete";
+import usePlacesService from "react-google-autocomplete/lib/usePlacesAutocompleteService";
 
 import { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { years } from "../../Utils";
 import * as boatsActions from "../../../store/boats";
+import { google } from "../../Utils";
 
 function NewBoatForm() {
+  const history = useHistory();
+
+  const key = useSelector((state) => state.maps.key);
+  const user = useSelector((state) => state.session.user);
+
+  const { placesService, placePredictions, getPlacePredictions, isPlacePredictionsLoading } = usePlacesService({
+    apiKey: key,
+  });
   const dispatch = useDispatch();
   const uploadHiddenInput = useRef();
+
   const handleClick = (e) => {
     e.preventDefault();
     uploadHiddenInput.current.click();
@@ -33,6 +47,7 @@ function NewBoatForm() {
   const [descriptionErr, setDescriptionErr] = useState(false);
   const [addressErr, setAddressErr] = useState(false);
   const [year, setYear] = useState("");
+  const [captain, setCaptain] = useState(false);
   const [yearErr, setYearErr] = useState(false);
   const [numImagesErr, setNumImagesErr] = useState("");
   const [images, setImages] = useState([]);
@@ -41,19 +56,55 @@ function NewBoatForm() {
   const [imageThreeLoaded, setImageThreeLoaded] = useState(false);
   const [imageFourLoaded, setImageFourLoaded] = useState(false);
   const [imageFiveLoaded, setImageFiveLoaded] = useState(false);
+  const [searchResult, setSearchResult] = useState("");
+  const [selected, setSelected] = useState(false);
+  const [value, setValue] = useState("");
+  const [price, setPrice] = useState("");
+  const [priceErr, setPriceErr] = useState(false);
+  const [imageLoading, setImageLoading] = useState(false);
+  const [boatSuccess, setBoatSuccess] = useState(false);
+
+  useEffect(() => {
+    // fetch place details for the first element in placePredictions array
+    if (placePredictions.length) {
+      // console.log("in the if");
+      // console.log(placePredictions);
+      const details = placesService.placesService?.getDetails(
+        {
+          placeId: placePredictions[0].place_id,
+        },
+        (placeDetails) => {
+          console.log(placeDetails, "------------------");
+          setSearchResult(placeDetails);
+        }
+      );
+      // console.log(details);
+    }
+    // console.log(searchResult, "-------------------");
+  }, [placePredictions, searchResult]);
 
   //
+  // console.log(process.env, process.env.google, "-----------------------");
 
-  const {
-    ready,
-    value,
-    suggestions: { status, data },
-    setValue,
-    clearSuggestions,
-  } = usePlacesAutoComplete({
-    requestOptions: { location: { lng: () => 37.0902, lng: () => 95.7129 }, radius: 200 * 1000 },
-  });
-  console.log(value, status, "---------");
+  // const {
+  //   ready,
+  //   value,
+  //   setValue,
+  //   suggestions: { status, data },
+  //   clearSuggestions,
+  // } = usePlacesAutoComplete({
+  //   requestOptions: { location: { lng: () => 34, lng: () => 241.7 }, radius: 4000 * 1000 },
+  //   debounce: 300,
+  // });
+
+  // const { isLoaded, loadError } = useLoadScript({
+  //   id: "google-map-script",
+  //   googleMapsApiKey: key,
+  //   libraries: google,
+  // });
+  // console.log(value, data, "---------");
+
+  useEffect(() => {}, [dispatch]);
   const updateImage = (e) => {
     setNumImagesErr("");
     setDisabled("");
@@ -92,10 +143,40 @@ function NewBoatForm() {
   // console.log(data);
   // console.log(lat, lng);
   const handleSubmit = async () => {
+    if (!address.trim()) {
+      setDisabled(true);
+      setAddressErr(true);
+      return;
+    }
     console.log("helooooooooooooooo");
-    console.log(model, description, address, city, state, year, lat, lng);
-    console.log(images);
-    dispatch(boatsActions.uploadBoatPhoto(images, 4));
+    // console.log(address, city, state, lat, lng, year, model, description, "----------------");
+    // const price = 500;
+    console.log(lat, lng, "----------------hello");
+    const userId = user.id;
+    const boat = {
+      address,
+      city,
+      state: state.trim(),
+      year,
+      model,
+      description,
+      price,
+      lat,
+      lng,
+      captain,
+    };
+    // console.log(images);
+    // console.log(state.trim().length);
+    setImageLoading(true);
+    dispatch(boatsActions.addOneBoat(boat, userId)).then((boat) => {
+      console.log(boat.boat, "--------- BOAT IN THE .THEN");
+      dispatch(boatsActions.uploadBoatPhoto(images, boat.boat.id));
+      setImageLoading(false);
+
+      setBoatSuccess(true);
+      setDisabled(true);
+      setTimeout(() => history.push("/manage-boats"), 1500);
+    });
 
     // dispatch(boatsActions.uploadBoatPhoto());
   };
@@ -113,6 +194,7 @@ function NewBoatForm() {
       setDisabled(true);
     }
   }, [model, description]);
+  console.log(captain);
 
   return (
     <div className="new__boat__listing__container">
@@ -127,40 +209,58 @@ function NewBoatForm() {
           <div className="address__suggestions__wrapper">
             <span>
               Address
-              {addressErr && (
-                <span className="new__boat__error"> - address must be in format "STREET ADDRESS, CITY, ST, USA"</span>
-              )}
+              {addressErr && <span className="new__boat__error"> - *Please select an address from the drop down</span>}
             </span>
+
             <input
               type="text"
               value={value}
-              onChange={(e) => setValue(e.target.value)}
-              disabled={!ready}
+              // ref={ref}
+              onPlaceSelected={(place) => console.log(place)}
+              onChange={(evt) => {
+                setValue(evt.target.value);
+                setSelected(false);
+                getPlacePredictions({ input: evt.target.value });
+              }}
+              loading={isPlacePredictionsLoading}
+              // onChange={(place, inputRef, autocomplete) => {
+              //   // setValue(e.target.value);
+              //   console.log(place, inputRef, autocomplete, "---------------------value in the onchange");
+              // }}
+              // disabled={!ready}
               placeholder="Address"
               className="new__boat__address__input"
             ></input>
 
-            {status === "OK" && (
+            {placePredictions.length > 1 && !selected && (
               <div className="address__suggestion__container">
-                {status === "OK" &&
-                  data.map(({ id, description }) => {
+                {placePredictions &&
+                  placePredictions.map(({ place_id, description, id }) => {
                     return (
                       <div
                         key={id}
                         className="address__suggestion__option"
                         onClick={async () => {
-                          const address = description;
-                          const addressArr = address.split(",");
-                          const results = await getGeocode({ address });
-                          const getLatLng = results[0].geometry.location;
-                          // console.log(addressArr[addressArr.length - 2]);
-                          setLat(getLatLng.lat());
-                          setLng(getLatLng.lng());
-                          setCity(addressArr[addressArr.length - 3]);
-                          setState(addressArr[addressArr.length - 2]);
-                          setAddress(addressArr[0]);
-                          setValue(address);
-                          // clearSuggestions();
+                          setAddressErr(false);
+                          setSelected(true);
+
+                          setValue(description);
+                          placesService?.getDetails(
+                            {
+                              placeId: place_id,
+                            },
+                            (placeDetails) => {
+                              const address = description;
+                              const addressArr = address.split(",");
+                              console.log(placeDetails);
+                              setSearchResult(placeDetails);
+                              setCity(addressArr[addressArr.length - 3]);
+                              setState(addressArr[addressArr.length - 2]);
+                              setAddress(addressArr[0]);
+                              setLat(placeDetails.geometry.location.lat());
+                              setLng(placeDetails.geometry.location.lng());
+                            }
+                          );
                         }}
                       >
                         <div className="location__marker"></div>
@@ -208,7 +308,7 @@ function NewBoatForm() {
             <span>
               Make/Model
               {/* <span className="new__boat__error"> - *Required</span> */}
-              {modelErr && <span className="new__boat__error"> - *Must be less than 100 characters </span>}
+              {/* {modelErr && <span className="new__boat__error"> - *Must be less than 100 characters </span>} */}
             </span>
             <input
               className="new__boat__model__input"
@@ -219,9 +319,25 @@ function NewBoatForm() {
               }}
             ></input>
           </div>
+          <div>
+            <span>
+              Price
+              {/* <span className="new__boat__error"> - *Required</span> */}
+              {priceErr && <span className="new__boat__error"> - *1-9999 </span>}
+            </span>
+            <input
+              className="new__boat__price__input"
+              type={"text"}
+              value={price}
+              onChange={(e) => {
+                setPrice(e.target.value);
+              }}
+            ></input>
+          </div>
         </div>
 
         <div className="new__boat__description__container">
+          {modelErr && <span id="new__boat__error"> *Make/Model Must be less than 100 characters* </span>}
           <span>A 500 character description of any accessories/features</span>
           {descriptionErr && <span id="new__boat__error"> - must be less than 500 characters - </span>}
 
@@ -232,6 +348,18 @@ function NewBoatForm() {
               setDescription(e.target.value);
             }}
           ></textarea>
+        </div>
+        <div className="new__boat__captain__container">
+          <input
+            type="checkbox"
+            onChange={() => {
+              if (!captain) setCaptain(true);
+              else {
+                setCaptain(false);
+              }
+            }}
+          ></input>
+          <div>If you will be captaining your boat or offering to captain your boat check here.</div>
         </div>
         <div className="new__boat__images">
           <span onClick={handleClick} className="boat__images__select">
@@ -258,12 +386,30 @@ function NewBoatForm() {
             accept="image/*"
           ></input>
         </div>
-        <div
-          className={disabled ? `new__boat__form__button__disabled` : "new__boat__form__button"}
-          onClick={disabled ? null : handleSubmit}
-        >
-          GET STARTED
-        </div>
+        {!imageLoading && !boatSuccess && (
+          <div
+            className={disabled ? `new__boat__form__button__disabled` : "new__boat__form__button"}
+            onClick={disabled ? null : handleSubmit}
+          >
+            GET STARTED
+          </div>
+        )}
+        {imageLoading && (
+          <div
+            className={disabled ? `new__boat__form__button__disabled` : "new__boat__form__button"}
+            // onClick={disabled ? null : handleSubmit}
+          >
+            ... loading
+          </div>
+        )}
+        {boatSuccess && (
+          <div
+            className={disabled ? `new__boat__form__button__disabled` : "new__boat__form__button"}
+            // onClick={disabled ? null : handleSubmit}
+          >
+            SUCCESS
+          </div>
+        )}
       </form>
     </div>
   );

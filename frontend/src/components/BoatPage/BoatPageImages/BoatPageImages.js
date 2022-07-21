@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 function BoatPageImages({ boat }) {
   //
   const imagesArr = boat.Images;
+  console.log(imagesArr, "---------------");
 
+  const [oneDisplay, setOneDisplay] = useState(imagesArr[0].url);
   const [displayPicture1, setDisplayPicture1] = useState(0);
   const [displayPicture2, setDisplayPicture2] = useState(1);
 
@@ -29,19 +31,33 @@ function BoatPageImages({ boat }) {
       {/* {boat.Images.map((image) => {
     return <img className="boat__page__image" src={`/api/images/${image.url}`}></img>;
   })} */}
-
-      <img
-        className="boat__page__image"
-        src={imagesArr[displayPicture1] ? `${imagesArr[displayPicture1]?.url}` : null}
-      ></img>
-      <img
-        className="boat__page__image"
-        src={imagesArr[displayPicture2] ? `${imagesArr[displayPicture2]?.url}` : null}
-      ></img>
+      {imagesArr.length < 2 ? (
+        <>
+          <img
+            className="boat__page__image"
+            src={imagesArr[displayPicture1] ? `${imagesArr[displayPicture1]?.url}` : null}
+          ></img>
+          <img
+            className="boat__page__image"
+            src={imagesArr[displayPicture1] ? `${imagesArr[displayPicture1]?.url}` : null}
+          ></img>
+        </>
+      ) : (
+        <>
+          <img
+            className="boat__page__image"
+            src={imagesArr[displayPicture1] ? `${imagesArr[displayPicture1]?.url}` : null}
+          ></img>
+          <img
+            className="boat__page__image"
+            src={imagesArr[displayPicture2] ? `${imagesArr[displayPicture2]?.url}` : null}
+          ></img>
+        </>
+      )}
 
       <button
         className={
-          displayPicture2 === imagesArr.length - 1
+          displayPicture2 === imagesArr.length - 1 || imagesArr.length < 2
             ? "boat__page__next__image__button__disabled"
             : "boat__page__next__image__button"
         }
@@ -53,7 +69,7 @@ function BoatPageImages({ boat }) {
                 setDisplayPicture2(displayPicture2 + 1);
               }
         }
-        disabled={displayPicture2 == imagesArr.length - 1}
+        disabled={displayPicture2 == imagesArr.length - 1 || imagesArr.length < 2}
         // disabled={displayPicture2 === 0}
       >
         {">"}

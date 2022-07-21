@@ -31,12 +31,12 @@ function BoatInformationCard({ boat }) {
       </div>
       <div className="boat__information__about">
         <h3>Boat will be docked/picked up at</h3>
-        <div>{boat.marina}</div>
+        <div>{boat.address}</div>
       </div>
       <div className="boat__information__about">
         <h3>About the boat</h3>
 
-        <div>{boat.accessories}</div>
+        <div>{boat.description}</div>
       </div>
     </>
   );

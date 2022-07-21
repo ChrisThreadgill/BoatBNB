@@ -35,10 +35,11 @@ router.get(
         //
       ],
     });
-    const userReviews = await UserReview.findAll({ where: { userId } });
-    // console.log(userReviews);
+    // const userRatings = await UserRating.findAll({ where: { userId }, include: [User] });
+    // console.log(userRatings, "====================");
     return res.json({
       user,
+      // userRatings,
     });
   })
 );

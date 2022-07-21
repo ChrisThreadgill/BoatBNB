@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 import rfdc from "rfdc";
 const clone = rfdc();
 
+const ADD_ONE = "boats/getone";
 const GET_ALL = "boats/getAll";
 const GET_PROV = "boats/getprov";
 const GET_ONE = "boats/getone";
@@ -12,6 +13,12 @@ const allBoats = (boats) => {
   return {
     type: GET_ALL,
     payload: boats,
+  };
+};
+const addBoat = (boat) => {
+  return {
+    type: ADD_ONE,
+    payload: boat,
   };
 };
 
@@ -51,6 +58,35 @@ export const getAllBoats = (boatId) => async (dispatch) => {
 
   dispatch(oneBoat(boat));
   return boat;
+};
+export const addOneBoat = (boat, userId) => async (dispatch) => {
+  // console.log(boatId, "in the thunk");
+  let boatReviewsNoRating = [];
+  const response = await csrfFetch(`/api/boats/${userId}/boats`, {
+    method: "POST",
+    body: JSON.stringify(boat),
+  });
+  console.log(response, "---------- response in thunk");
+  const newBoat = await response.json();
+  return newBoat;
+  // const { boat, boatBookings, boatReviews } = await response.json();
+  // // console.log(boat, boatBookings, boatReviews, "in the thunk");
+  // if (boatReviews.length >= 1) {
+  //   for (let i = 0; i < boatReviews.length; i++) {
+  //     let curr = boatReviews[i];
+  //     // console.log(curr);
+  //     if (curr.BoatRating) {
+  //       continue;
+  //     } else {
+  //       boatReviewsNoRating.push(curr);
+  //     }
+  //   }
+  // }
+
+  // boat.Bookings = boatBookings;
+  // boat.boatReviewsNoRating = boatReviewsNoRating;
+  // dispatch(oneBoat(boat));
+  // return boat;
 };
 
 export const getOneBoat = (boatId) => async (dispatch) => {
@@ -118,6 +154,7 @@ export const uploadBoatPhoto = (file, boatId) => async (dispatch) => {
       },
       body: formData,
     });
+    return "success";
   }
   if (file.length === 1) {
     const res = await csrfFetch(`/api/boats/${boatId}/image`, {
@@ -127,7 +164,10 @@ export const uploadBoatPhoto = (file, boatId) => async (dispatch) => {
       },
       body: formData,
     });
+
+    return "success";
   }
+
   // console.log(res, "-resssssss--------------------------");
   // const response = await csrfFetch(`/api/users/${userId}`, {
   //   method: "PUT",
@@ -142,12 +182,12 @@ export const uploadBoatPhoto = (file, boatId) => async (dispatch) => {
 };
 
 export const getProviderBoats = (userId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/users/${userId}/boats`, {
+  const response = await csrfFetch(`/api/boats/${userId}/boats`, {
     method: "GET",
   });
   const boats = await response.json();
 
-  dispatch(providerBoats(boats.user.Boats));
+  dispatch(providerBoats(boats.boats));
   return boats;
 };
 export const clean = () => (dispatch) => {

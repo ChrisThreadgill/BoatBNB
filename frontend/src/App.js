@@ -23,19 +23,23 @@ import BoatPage from "./components/BoatPage/BoatPage";
 import { getKey } from "./store/maps";
 import UserAccountPage from "./components/UserAccountPage/UserAccountPage";
 import { GoogleMap, useJsApiLoader, useLoadScript } from "@react-google-maps/api";
+
 import { google } from "./components/Utils";
+import BoatManager from "./components/BoatManager/BoatManager";
 
 function App() {
   const dispatch = useDispatch();
-  // const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const key = useSelector((state) => state.maps.key);
-  // const google = process.env.array;
-  // console.log(google, "---------------hello please work");
+  // const google = { key: process.env.POOP };
+  console.log(google, "---------------hello please work");
   const [location, setLocation] = useState([]);
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => {
-      dispatch(getKey());
-      // setIsLoaded(true);
+      dispatch(getKey()).then(() => {
+        setIsLoaded(true);
+      });
     });
 
     // navigator.geolocation.getCurrentPosition(
@@ -44,11 +48,14 @@ function App() {
     // );
   }, [dispatch]);
 
-  const { isLoaded, loadError } = useLoadScript({
-    id: "google-map-script",
-    googleMapsApiKey: "AIzaSyAVqOG77WsEPT8fWdK9bW67dAPCqRU4EVA",
-    libraries: google,
-  });
+  // const { isLoaded, loadError } = useLoadScript({
+  //   id: "google-map-script",
+  //   googleMapsApiKey: key,
+  //   libraries: google,
+  // });
+  // console.log(isLoaded, loadError, "---------------");
+  // if (loadError) return "Error loading maps";
+  // if (!isLoaded) return "Loading Maps";
 
   return (
     <>
@@ -77,7 +84,8 @@ function App() {
               <h1>hello from bookings</h1>
             </Route>
             <Route path="/manage-boats">
-              <h1>hello from boat manager</h1>
+              {/* <h1>hello from boat manager</h1> */}
+              <BoatManager></BoatManager>
             </Route>
             <Route path="/boat-listings/:searchState">
               <BoatListings></BoatListings>
@@ -88,7 +96,7 @@ function App() {
               <UserAccountPage></UserAccountPage>
             </Route>
             <Route path="/new-listing">
-              <NewBoatForm></NewBoatForm>
+              <NewBoatForm key={key}></NewBoatForm>
             </Route>
             <Route path="/boat/:boatId/edit">
               <ProviderBoatEdit></ProviderBoatEdit>

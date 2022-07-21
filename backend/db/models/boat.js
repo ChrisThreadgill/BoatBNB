@@ -4,14 +4,16 @@ module.exports = (sequelize, DataTypes) => {
     "Boat",
     {
       userId: DataTypes.INTEGER,
-      marina: DataTypes.STRING,
+      address: DataTypes.STRING,
       city: DataTypes.STRING,
       state: DataTypes.STRING,
       year: DataTypes.INTEGER,
       model: DataTypes.STRING,
-      accessories: DataTypes.STRING,
+      description: DataTypes.STRING,
       captain: DataTypes.BOOLEAN,
       price: DataTypes.INTEGER,
+      lat: DataTypes.NUMERIC,
+      lng: DataTypes.NUMERIC,
     },
     {}
   );

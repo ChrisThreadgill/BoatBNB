@@ -6,7 +6,7 @@ const moment = require("moment");
 
 function BoatPageRatingReview({ rating }) {
   const history = useHistory();
-  console.log(rating, "boat page rating review");
+  // console.log(rating, "boat page rating review");
 
   //
 

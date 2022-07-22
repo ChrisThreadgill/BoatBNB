@@ -1,0 +1,54 @@
+.user__bookings__container {
+  width: 100%;
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  /* border: 1px solid red; */
+  padding: 22px 100px 100px 100px;
+  /*set media Q to drop this padding for mobile */
+}
+
+.renter__owner__toggle__container {
+  display: flex;
+  width: 75%;
+  border-top: 1px solid rgba(40, 39, 39, 0.2);
+  margin-bottom: 22px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.user__renter__active {
+  width: 100%;
+  max-width: 88px;
+  font-size: 16px;
+  margin: 0 16px 0 0;
+  padding: 19px 16px 0 0;
+  border-top: 3px solid #0a4195;
+}
+.user__renter__inactive {
+  width: 100%;
+  max-width: 88px;
+  font-size: 16px;
+  margin: 0 16px 0 0;
+  padding: 19px 16px 0 0;
+  color: #d8dfe5;
+  cursor: pointer;
+}
+
+.user__owner__inactive {
+  width: 100%;
+  max-width: 88px;
+  font-size: 16px;
+  margin: 0 16px 0 0;
+  padding: 19px 16px 0 0;
+  color: #d8dfe5;
+  cursor: pointer;
+}
+.user__owner__active {
+  width: 100%;
+  max-width: 88px;
+  font-size: 16px;
+  margin: 0 16px 0 0;
+  padding: 19px 16px 0 0;
+  border-top: 3px solid#0e7873;
+}

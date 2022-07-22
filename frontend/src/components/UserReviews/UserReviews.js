@@ -35,7 +35,7 @@ function UserReviews({ user }) {
       setSpreadReviewsRatings([...userRatings, ...userReviews].sort(compare));
     }
   }, [user]);
-  console.log(spreadReviewsRatings);
+  // console.log(spreadReviewsRatings);
 
   return (
     <div className="user__profile__reviews__container">

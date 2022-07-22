@@ -24,6 +24,7 @@ import { getKey } from "./store/maps";
 import UserAccountPage from "./components/UserAccountPage/UserAccountPage";
 import { GoogleMap, useJsApiLoader, useLoadScript } from "@react-google-maps/api";
 
+import UserBookings from "./components/UserBookings/UserBookings";
 import { google } from "./components/Utils";
 import BoatManager from "./components/BoatManager/BoatManager";
 
@@ -32,7 +33,7 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const key = useSelector((state) => state.maps.key);
   // const google = { key: process.env.POOP };
-  console.log(google, "---------------hello please work");
+  // console.log(google, "---------------hello please work");
   const [location, setLocation] = useState([]);
 
   useEffect(() => {
@@ -81,7 +82,8 @@ function App() {
               {/* <UserProfilePage></UserProfilePage> */}
             </Route>
             <Route path="/bookings">
-              <h1>hello from bookings</h1>
+              {/* <h1>hello from bookings</h1> */}
+              <UserBookings></UserBookings>
             </Route>
             <Route path="/manage-boats">
               {/* <h1>hello from boat manager</h1> */}

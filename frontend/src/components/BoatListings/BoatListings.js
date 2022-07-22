@@ -23,10 +23,10 @@ function BoatListings() {
   const boatsObj = useSelector((state) => state.boats);
   const key = useSelector((state) => state.key);
   let boatsArr = Object.values(boatsObj);
-  console.log(history);
+  // console.log(history);
   // console.log(boatsObj);
   // const [searchState, setSearchState] = useState(boatsArr[0]?.state);
-  console.log(searchState);
+  // console.log(searchState);
   const handleSearch = async (e) => {
     // console.log("this is the search", search);
 

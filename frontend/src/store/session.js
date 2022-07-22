@@ -81,7 +81,7 @@ export const updateUserProfilePicture = (file, userId) => async (dispatch) => {
     },
     body: formData,
   });
-  console.log(res, "-resssssss--------------------------");
+
   // const response = await csrfFetch(`/api/users/${userId}`, {
   //   method: "PUT",
   //   body: JSON.stringify({

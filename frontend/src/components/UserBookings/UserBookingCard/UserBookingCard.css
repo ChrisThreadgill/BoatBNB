@@ -1,0 +1,35 @@
+.booking__details__container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 75%;
+  height: 44px;
+  background-color: #478aee;
+  box-shadow: 2px 2px 5px 5px rgba(40, 39, 39, 0.2);
+  color: white;
+  font-weight: bold;
+  margin-top: -7px;
+  margin-bottom: 22px;
+  border-radius: 5px;
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  border-left: 1px solid white;
+}
+.user__booking__card__container {
+  /* border: 1px solid red; */
+  width: 75%;
+}
+.user__booking__buttons__container {
+  display: flex;
+}
+.user__booking__buttons__container > div {
+  margin-right: 7px;
+}
+
+.user__booking__reschedule {
+  font-size: 22px;
+}
+.user__booking__cancel {
+  font-size: 22px;
+  margin-left: 22px;
+}

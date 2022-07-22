@@ -19,7 +19,7 @@ export const getUserProfile = (userId) => async (dispatch) => {
     method: "GET",
   });
   const userProfile = await response.json();
-  console.log(userProfile, "--------------");
+
   dispatch(setUserProfile(userProfile));
   return userProfile;
 };

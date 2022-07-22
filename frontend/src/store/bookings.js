@@ -1,8 +1,11 @@
+import * as boatsActions from "./boats";
 import { csrfFetch } from "./csrf";
 import rfdc from "rfdc";
 const clone = rfdc();
+const moment = require("moment");
 
 const GET_ALL_FOR_USER = "bookings/getAllForUser";
+const GET_ALL_FOR_PROVIDER = "bookings/getAllForProvider";
 const GET_ALL_FOR_BOAT = "bookings/getAllForBoat";
 const CLEAR = "bookings/clear";
 const CANCEL = "bookings/cancel";
@@ -11,6 +14,15 @@ const allUserBookings = (bookings) => {
   return {
     type: GET_ALL_FOR_USER,
     payload: bookings,
+  };
+};
+
+const allProviderBookings = (bookings, boatBookings) => {
+  return {
+    type: GET_ALL_FOR_PROVIDER,
+
+    userBookings: bookings,
+    boatBookings: boatBookings,
   };
 };
 
@@ -38,9 +50,38 @@ export const getAllUserBookings = (userId) => async (dispatch) => {
   const response = await csrfFetch(`/api/bookings/user/${userId}`, {
     method: "GET",
   });
-  const { bookingsForSpecificUser } = await response.json();
+  const { bookingsNoBoats } = await response.json();
+  console.log(bookingsNoBoats.Bookings);
 
-  dispatch(allUserBookings(bookingsForSpecificUser));
+  dispatch(allUserBookings(bookingsNoBoats.Bookings));
+};
+export const getAllProviderBookings = (userId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/bookings/provider/${userId}`, {
+    method: "GET",
+  });
+  const { bookingsWithBoats, providerBookings } = await response.json();
+  const personalBookings = [];
+  const pastPersonalBookings = [];
+
+  for (let b = 0; b < bookingsWithBoats.Bookings.length; b++) {
+    const currBooking = bookingsWithBoats.Bookings[b];
+
+    const today = new Date();
+    const bookingDate = new Date(currBooking.bookingDate);
+
+    if (bookingDate > today) {
+      // bookingsWithBoats.Bookings.splice(b, 1);
+      personalBookings.push(currBooking);
+
+      continue;
+    } else {
+      pastPersonalBookings.push(currBooking);
+      //setting up past personal appointments goes here.
+      continue;
+    }
+  }
+  dispatch(boatsActions.getProviderBoats(userId));
+  dispatch(allProviderBookings(personalBookings, providerBookings));
 };
 
 export const getAllBoatBookings = (boatId) => async (dispatch) => {
@@ -78,6 +119,24 @@ const bookingsReducer = (state = initialState, action) => {
       }
 
       return { ...bookings };
+    case GET_ALL_FOR_PROVIDER:
+      const ownerBookings = {};
+      const personalBookings = {};
+      for (let boatBooking of action.boatBookings) {
+        ownerBookings[boatBooking.id] = boatBooking;
+      }
+      // console.log(action.userBookings, "================");
+      for (let personalBooking of action.userBookings) {
+        // console.log(personalBooking);
+        personalBookings[personalBooking.id] = personalBooking;
+        // personalBookings[personalBooking.id] = personalBooking;
+      }
+      // console.log(action, "------------------");
+      // for (let booking of action.payload) {
+      //   bookings[booking.id] = booking;
+      // }
+
+      return { ownerBookings, personalBookings };
     case GET_ALL_FOR_BOAT:
       const boatBookings = {};
 
@@ -87,8 +146,8 @@ const bookingsReducer = (state = initialState, action) => {
       return { ...boatBookings };
 
     case CANCEL:
-      delete newState[action.payload.id];
-      return newState;
+    // delete newState[action.payload.id];
+    // return newState;
     case CLEAR:
       return {};
     default:

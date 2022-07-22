@@ -66,7 +66,7 @@ export const addOneBoat = (boat, userId) => async (dispatch) => {
     method: "POST",
     body: JSON.stringify(boat),
   });
-  console.log(response, "---------- response in thunk");
+  // console.log(response, "---------- response in thunk");
   const newBoat = await response.json();
   return newBoat;
   // const { boat, boatBookings, boatReviews } = await response.json();
@@ -145,7 +145,7 @@ export const uploadBoatPhoto = (file, boatId) => async (dispatch) => {
       formData.append("image", file[i]);
     }
   }
-  console.log(file.length, "=-------------");
+  // console.log(file.length, "=-------------");
   if (file.length > 1) {
     const res = await csrfFetch(`/api/boats/${boatId}/images`, {
       method: "POST",

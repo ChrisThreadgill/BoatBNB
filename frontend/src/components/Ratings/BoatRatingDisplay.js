@@ -19,7 +19,7 @@ import {
 } from "react-icons/fa";
 
 function BoatRatingDisplay({ boat }) {
-  console.log(boat);
+  // console.log(boat);
   const boatRatings = boat?.BoatRatings;
   // console.log(boat, "in the boat rating display");
 

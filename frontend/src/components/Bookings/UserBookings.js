@@ -1,40 +1,25 @@
-import BookingCard from "./BookingCard";
-import BoatCard from "../Boats/BoatCard";
-import { useDispatch, useSelector } from "react-redux";
-import * as bookingsActions from "../../store/bookings";
+// import BookingCard from "./BookingCard";
+// import BoatCard from "../Boats/BoatCard";
+// import { useDispatch, useSelector } from "react-redux";
+// import * as bookingsActions from "../../store/bookings";
+// import { useEffect } from "react";
 
-function UserBookings({ bookings }) {
-  const dispatch = useDispatch();
-  const Bookings = Object.values(bookings);
+// function UserBookings() {
+//   const dispatch = useDispatch();
+//   // const Bookings = Object.values(bookings);
+//   const user = useSelector((state) => state.session.user);
+//   useEffect(() => {
+//     if (user.roleId < 2) dispatch(bookingsActions.getAllProviderBookings(user.id));
+//     else {
+//       dispatch(bookingsActions.getAllUserBookings(user.id));
+//     }
+//   }, [dispatch]);
 
-  return (
-    <div className="user__bookings__panel">
-      {Bookings.length > 0 &&
-        Bookings.map((booking) => {
-          return (
-            <div className="user__profile__bookings">
-              <div className="user__profile__booking__container">
-                <div>
-                  <BoatCard boat={booking?.Boat}></BoatCard>
-                </div>
+//   return (
+//     <div className="user__bookings__panel">
+//       <h1>Bookings</h1>
+//     </div>
+//   );
+// }
 
-                <div className="user__profile__booking__card">
-                  <BookingCard key={booking?.id} booking={booking}></BookingCard>
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      dispatch(bookingsActions.cancelUserBooking(booking));
-                    }}
-                  >
-                    <button>Cancel Booking</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-    </div>
-  );
-}
-
-export default UserBookings;
+// export default UserBookings;

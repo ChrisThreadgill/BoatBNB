@@ -16,12 +16,12 @@ const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 const singlePublicFileUpload = async (file) => {
   const { originalname, mimetype, buffer } = await file;
   const path = require("path");
-  console.log(file, "--------- file");
-  console.log(process.env.AWS_ACCESS_KEY_ID, process.env.AWS_SECRET_ACCESS_KEY, "hellllooooooooooooooooooo");
+  // console.log(file, "--------- file");
+  // console.log(process.env.AWS_ACCESS_KEY_ID, process.env.AWS_SECRET_ACCESS_KEY, "hellllooooooooooooooooooo");
   // name of the file in your S3 bucket will be the date in ms plus the extension name
   const Key = new Date().getTime().toString() + path.extname(originalname);
 
-  console.log(Key, "--------- key");
+  // console.log(Key, "--------- key");
   const uploadParams = {
     Bucket: NAME_OF_BUCKET,
     Key,
@@ -29,7 +29,7 @@ const singlePublicFileUpload = async (file) => {
     ACL: "public-read",
   };
 
-  console.log(uploadParams, "--------- params");
+  // console.log(uploadParams, "--------- params");
   const result = await s3.upload(uploadParams).promise();
 
   // save the name of the file in your bucket as the key in your database to retrieve for later
@@ -37,7 +37,7 @@ const singlePublicFileUpload = async (file) => {
 };
 
 const multiplePublicFileUpload = async (files) => {
-  console.log(files, "------------");
+  // console.log(files, "------------");
   return await Promise.all(
     files.map((file) => {
       return singlePublicFileUpload(file);

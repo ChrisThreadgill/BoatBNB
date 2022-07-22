@@ -20,7 +20,7 @@ router.get(
   "/",
   asyncHandler(async (req, res) => {
     const { boatId } = req.body;
-    console.log(req.body, "-------------------- in the get all route for some goddamn reason");
+    // console.log(req.body, "-------------------- in the get all route for some goddamn reason");
     const boats = await Boat.findAll({
       include: [Image, BoatRating, User],
     });
@@ -48,7 +48,7 @@ router.get(
       include: [Image, BoatRating, User],
       // include: [{ model: Boat, include: Image }],
     });
-    console.log(boats, "oooooooooooooooooooooboatssssssssssssss");
+    // console.log(boats, "oooooooooooooooooooooboatssssssssssssss");
 
     return res.json({
       boats,
@@ -207,10 +207,10 @@ router.post(
   multipleMulterUpload("image"),
   asyncHandler(async (req, res) => {
     const { boatId } = req.params;
-    console.log("kdsajg;lsdajgf;lkjsad-========", boatId);
+    // console.log("kdsajg;lsdajgf;lkjsad-========", boatId);
     const urls = await multiplePublicFileUpload(req.files);
     // const url = await singlePublicFileUpload(req.file);
-    console.log(urls, "jdsklagjlskadjglksdj--------------");
+    // console.log(urls, "jdsklagjlskadjglksdj--------------");
     // const user = await User.findByPk(userId);
     const imagesArr = [];
     for (let i = 0; i < urls.length; i++) {
@@ -221,7 +221,7 @@ router.post(
       });
       imagesArr.push(image);
     }
-    console.log(imagesArr);
+    // console.log(imagesArr);
     // const image = await Image.create({
     //   boatId,
     //   url,

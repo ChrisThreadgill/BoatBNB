@@ -74,7 +74,7 @@ function NewBoatForm() {
           placeId: placePredictions[0].place_id,
         },
         (placeDetails) => {
-          console.log(placeDetails, "------------------");
+          // console.log(placeDetails, "------------------");
           setSearchResult(placeDetails);
         }
       );
@@ -148,10 +148,10 @@ function NewBoatForm() {
       setAddressErr(true);
       return;
     }
-    console.log("helooooooooooooooo");
+    // console.log("helooooooooooooooo");
     // console.log(address, city, state, lat, lng, year, model, description, "----------------");
     // const price = 500;
-    console.log(lat, lng, "----------------hello");
+    // console.log(lat, lng, "----------------hello");
     const userId = user.id;
     const boat = {
       address,
@@ -169,7 +169,7 @@ function NewBoatForm() {
     // console.log(state.trim().length);
     setImageLoading(true);
     dispatch(boatsActions.addOneBoat(boat, userId)).then((boat) => {
-      console.log(boat.boat, "--------- BOAT IN THE .THEN");
+      // console.log(boat.boat, "--------- BOAT IN THE .THEN");
       dispatch(boatsActions.uploadBoatPhoto(images, boat.boat.id));
       setImageLoading(false);
 
@@ -194,7 +194,7 @@ function NewBoatForm() {
       setDisabled(true);
     }
   }, [model, description]);
-  console.log(captain);
+  // console.log(captain);
 
   return (
     <div className="new__boat__listing__container">
@@ -216,7 +216,7 @@ function NewBoatForm() {
               type="text"
               value={value}
               // ref={ref}
-              onPlaceSelected={(place) => console.log(place)}
+              // onPlaceSelected={(place) => console.log(place)}
               onChange={(evt) => {
                 setValue(evt.target.value);
                 setSelected(false);
@@ -252,7 +252,7 @@ function NewBoatForm() {
                             (placeDetails) => {
                               const address = description;
                               const addressArr = address.split(",");
-                              console.log(placeDetails);
+                              // console.log(placeDetails);
                               setSearchResult(placeDetails);
                               setCity(addressArr[addressArr.length - 3]);
                               setState(addressArr[addressArr.length - 2]);

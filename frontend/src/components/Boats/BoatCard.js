@@ -11,14 +11,14 @@ import { FaStar } from "react-icons/fa/index.esm.js";
 function BoatCard({ boat }) {
   const location = useLocation();
   const dispatch = useDispatch();
-  console.log(boat);
+  // console.log(boat);
   const history = useHistory();
 
   const [boatView, setBoatView] = useState(0);
 
   useEffect(() => {
     return () => {
-      dispatch(boatsAction.clean());
+      // dispatch(boatsAction.clean());
     };
   }, [dispatch]);
 
@@ -33,7 +33,7 @@ function BoatCard({ boat }) {
       <div className="boat__card__image__container">
         {boat?.Images?.length > 0
           ? boat.Images.map((image, idx) => {
-              console.log(image.url, "-----------------url image");
+              // console.log(image.url, "-----------------url image");
               return (
                 boatView === idx && (
                   <div key={image.id} className="boat__image__container">
@@ -69,7 +69,7 @@ function BoatCard({ boat }) {
             {boat?.city},{boat?.state}
           </div>
           <div>
-            <BoatRatingDisplay boat={boat}></BoatRatingDisplay>
+            {/* <BoatRatingDisplay boat={boat}></BoatRatingDisplay> */}
 
             {/* <FaStar size={15} color="#72d4ba"></FaStar> */}
           </div>

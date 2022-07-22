@@ -18,7 +18,7 @@ function UserAccountPage() {
   const [fileError, setFileError] = useState("");
   const [errors, setErrors] = useState([]);
   const user = useSelector((state) => state.session.user);
-  console.log(user);
+  // console.log(user);
 
   async function postImage({ image }) {
     const formData = new FormData();
@@ -44,7 +44,7 @@ function UserAccountPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // if (password === confirmPassword) {
-    console.log(file);
+    // console.log(file);
     let userId = user.id;
     dispatch(sessionActions.updateUserProfilePicture(file, userId)).then(() => {
       setFile("");

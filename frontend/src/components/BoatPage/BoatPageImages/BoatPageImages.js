@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 function BoatPageImages({ boat }) {
   //
   const imagesArr = boat.Images;
-  console.log(imagesArr, "---------------");
+  // console.log(imagesArr, "---------------");
 
   const [oneDisplay, setOneDisplay] = useState(imagesArr[0].url);
   const [displayPicture1, setDisplayPicture1] = useState(0);

@@ -66,10 +66,10 @@ router.put(
   singleMulterUpload("image"),
   asyncHandler(async (req, res) => {
     const { userId } = req.params;
-    console.log("kdsajg;lsdajgf;lkjsad-========", userId);
-    console.log(req.file, "-----------");
+    // console.log("kdsajg;lsdajgf;lkjsad-========", userId);
+    // console.log(req.file, "-----------");
     const profileUrl = await singlePublicFileUpload(req.file);
-    console.log(profileUrl, "jdsklagjlskadjglksdj--------------");
+    // console.log(profileUrl, "jdsklagjlskadjglksdj--------------");
     const user = await User.findByPk(userId);
     await user.update({
       profilePicture: profileUrl,

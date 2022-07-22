@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 
 function MenuButton({ user }) {
-  console.log(user, " user in the nav menu button");
+  // console.log(user, " user in the nav menu button");
   const history = useHistory();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);

@@ -36,7 +36,7 @@ function BoatPage() {
 
     return () => {};
   }, [dispatch]);
-  console.log(boat[boatId]);
+  // console.log(boat[boatId]);
   return (
     <div>
       {/* <h1>Single Boat Page</h1> */}

@@ -34,3 +34,12 @@
   margin-left: 22px;
   cursor: pointer;
 }
+
+@media (max-width: 390px) {
+  .booking__details__container {
+    width: 100%;
+  }
+  .boat__card__container {
+    width: 100%;
+  }
+}

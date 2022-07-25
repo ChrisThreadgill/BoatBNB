@@ -1,3 +1,8 @@
+.footer__wrapper {
+  /* position: absolute; */
+  /* bottom: 0; */
+}
+
 .footer__container {
   display: flex;
   justify-content: space-between;
@@ -52,6 +57,7 @@
   font-size: 12px;
   color: #8f9697;
 }
+
 .footer__right__name__split {
   display: flex;
   margin-right: 22px;
@@ -65,9 +71,41 @@
   display: flex;
   margin-left: 2px;
 }
+.footer__profile__name__link > span {
+  margin-right: 3px;
+}
 .footer__profile__links:hover,
-.footer__profile__name__link:hover {
+.footer__portfolio__link:hover {
   color: firebrick;
   text-decoration: underline;
   cursor: pointer;
+}
+.footer__external__links {
+  text-decoration: none;
+  color: #8f9697;
+}
+
+@media (max-width: 390px) {
+  .footer__links {
+    display: flex;
+    flex-direction: column;
+  }
+  .footer__profile__links {
+    margin: 4px 0 4px 0;
+  }
+  .footer__developer__name {
+    display: flex;
+    flex-direction: column;
+  }
+  .footer__right__links {
+    display: flex;
+    align-items: center;
+  }
+  .footer__profile__name__link {
+    margin-bottom: 4px;
+  }
+  .footer__profile__name__link > span {
+    margin-right: 3px;
+    text-decoration: none;
+  }
 }

@@ -249,15 +249,15 @@ function NewBoatForm() {
   return (
     <div className="new__boat__listing__container">
       <div className="new__boat__listing__header__container">
-        <h1>Tell us a little about your boat</h1>
-        <div>
+        <h1 className="new__boat__header">Tell us a little about your boat</h1>
+        <div className="new__boat__about">
           Please make sure your address to the boat's location is correct and you specify if it is already at a slip.
         </div>
       </div>
       <form className="new__boat__form" onSubmit={handleSubmit}>
         <div className="address__input__container">
           <div className="address__suggestions__wrapper">
-            <span>
+            <span className="new__boat__address__span">
               Address
               {addressErr && <span className="new__boat__error"> - *Please select an address from the drop down</span>}
             </span>

@@ -41,7 +41,10 @@ function UserReviews({ user }) {
   return (
     <div className="user__profile__reviews__container">
       <div className="user__profile__reviews__header">
-        Reviews of {user.firstName} {`(${spreadReviewsRatings.length}) `}
+        {spreadReviewsRatings.length < 1
+          ? `No reviews of ${user.firstName} yet`
+          : `Reviews of ${user.firstName} (${spreadReviewsRatings.length}) `}
+
         <NewUserReviewModal></NewUserReviewModal>
       </div>
       <div className="profile__reviews__container">

@@ -38,7 +38,7 @@ function BoatPage() {
             <BoatPageInformation boat={boat}></BoatPageInformation>
             <BoatPageBookingForm boat={boat}></BoatPageBookingForm>
           </div>
-          <BoatPageReviews boat={boat}></BoatPageReviews>
+          {/* <BoatPageReviews boat={boat}></BoatPageReviews> */}
           <Footer></Footer>
         </div>
       ) : (

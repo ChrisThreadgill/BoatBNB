@@ -253,3 +253,49 @@
   color: rgba(40, 39, 39, 0.6);
   margin-left: 7px;
 }
+
+@media (max-width: 390px) {
+  .new__boat__header {
+    display: none;
+  }
+  .new__boat__about {
+    display: none;
+  }
+  .new__boat__listing__container {
+    width: 100%;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  .new__boat__form {
+    width: 375px;
+    height: 777px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    /* border: 1px dashed purple; */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .new__boat__year__model__container {
+    flex-direction: column;
+  }
+  .new__boat__description {
+    width: 375px;
+  }
+  .new__boat__address__span {
+    display: none;
+  }
+  .new__boat__address__input {
+    width: 350px;
+    padding: 0;
+    margin: 22px 7px 10px 10px;
+  }
+  .new__boat__description {
+    height: 100px;
+    margin: 0;
+    margin-bottom: 7px;
+  }
+}

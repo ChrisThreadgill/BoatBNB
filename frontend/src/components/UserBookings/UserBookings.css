@@ -85,3 +85,9 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+@media (max-width: 390px) {
+  .user__bookings__container {
+    padding: 0;
+  }
+}

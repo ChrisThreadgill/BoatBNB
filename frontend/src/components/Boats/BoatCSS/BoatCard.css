@@ -136,3 +136,9 @@
   color: #91999a;
   font-weight: 100;
 }
+
+@media (max-width: 390px) {
+  .boat__card__details__container {
+    display: none;
+  }
+}

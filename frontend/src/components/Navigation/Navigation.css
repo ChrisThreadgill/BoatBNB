@@ -393,3 +393,10 @@
 .visitor__nav__auth > div:hover {
   text-decoration: underline;
 }
+
+@media (max-width: 390px) {
+  .nav__menu__static__options__owner {
+    margin: 0;
+    margin: 0 12px 0 12px;
+  }
+}

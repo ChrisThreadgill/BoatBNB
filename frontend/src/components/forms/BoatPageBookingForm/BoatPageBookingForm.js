@@ -13,6 +13,8 @@ function BoatPageBookingForm({ boat }) {
   const [date, setDate] = useState("");
   const [showCheckIn, setShowCheckIn] = useState(false);
   const [checkInTime, setCheckInTime] = useState(0);
+  const [noTime, setNoTime] = useState(false);
+  const [noDate, setNoDate] = useState(false);
   const user = useSelector((state) => state.session.user);
 
   //disabled dates arr for datepicker
@@ -29,11 +31,28 @@ function BoatPageBookingForm({ boat }) {
   for (let i = 0; i < boat.Bookings?.length; i++) {
     disabledDates.push(new Date(boat.Bookings[i]));
   }
+  const checkErrs = async () => {
+    let count = 0;
+    if (!checkInTime) {
+      count++;
+      setNoTime(true);
+    }
+    if (!date) {
+      count++;
+      setNoDate(true);
+    }
+    return count;
+  };
 
   async function submitBooking() {
     if (!user) history.push("/sign-up");
-    const booking = { checkIn: checkInTime, bookingDate: date, userId: user.id, boatId: boat.id };
-    dispatch(bookingsActions.requestBoatBooking(boat.id, booking)).then(() => history.push("/bookings"));
+    const errs = await checkErrs();
+    if (!errs) {
+      const booking = { checkIn: checkInTime, bookingDate: date, userId: user.id, boatId: boat.id };
+      dispatch(bookingsActions.requestBoatBooking(boat.id, booking)).then(() => history.push("/bookings"));
+    } else {
+      return;
+    }
   }
 
   function checkInHelper(number, setter) {
@@ -41,12 +60,20 @@ function BoatPageBookingForm({ boat }) {
     return setter(number);
   }
 
+  useEffect(() => {
+    setNoTime(false);
+  }, [checkInTime]);
+  useEffect(() => {
+    setNoDate(false);
+  }, [date]);
+
   return (
     <div className="new__boat__booking__container">
       <form className="new__boat__booking__form">
         <DatePicker
           className="date__picker"
           selected={""}
+          minDate={tomorrow}
           showDateDisplay={false}
           // showDateDisplay={false}
           excludeDates={disabledDates}
@@ -60,14 +87,16 @@ function BoatPageBookingForm({ boat }) {
           inline
         ></DatePicker>
         <div className="selected__date__display__container">
-          <span>Date</span>
-          <div>{date ? moment(date).format("MMMM Do YYYY") : "Please select a date"}</div>
+          <span className={noDate ? "no__date__selected__header" : "selected__date__header"}>Date*</span>
+          <div className={noDate ? "no__date__selected__display" : "selected__date__display"}>
+            {date ? moment(date).format("MMMM Do YYYY") : "Please select a date"}
+          </div>
         </div>
         <div className="selected__time__display__container">
-          <span>Start Time</span>
+          <span className={noTime ? "no__time__selected__header" : "selected__time__header"}>Start Time*</span>
           <div className="time__select__container">
             <div
-              className="time__select__toggle__container"
+              className={noTime ? "no__time__select__toggle__container" : "time__select__toggle__container"}
               onClick={() => {
                 if (!showCheckIn) {
                   setShowCheckIn(true);

@@ -33,11 +33,14 @@ function BoatSearchMap({ searchState, markers }) {
   const [hoverBoatId, setHoverBoatId] = useState(null);
   const [hoverActive, setHoverActive] = useState(null);
   const [marker, setMarker] = useState({});
+  const [zoom, setZoom] = useState(6.5);
   useEffect(() => {
     let searchCoords;
     if (searchState) {
       searchCoords = states.filter((state) => state.includes(searchState));
       const currState = statesCoords[searchState];
+      if (searchState === "AK") setZoom(5);
+      if (searchState === "CA" || searchState === "TX") setZoom(6);
       setLat(currState[0]);
       setLong(currState[1]);
       setIsLoadedCenter(true);
@@ -169,7 +172,7 @@ function BoatSearchMap({ searchState, markers }) {
             center={hoverActive ? null : center}
             options={options}
             onLoad={onMapLoad}
-            zoom={6.5}
+            zoom={zoom}
           >
             {markers.map((marker, idx) => {
               // console.log(marker, "in the map");

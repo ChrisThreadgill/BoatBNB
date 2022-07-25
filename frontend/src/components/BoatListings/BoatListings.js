@@ -44,9 +44,7 @@ function BoatListings() {
     // searchButton.click();
     // console.log(searchButton);
     if (search.length > 2) {
-      let searchArr = search.split(",");
-      console.log(searchArr, "=-===============");
-      dispatch(boatsActions.getAllBoatsSearch(searchArr[1])).then(() => {
+      dispatch(boatsActions.getAllBoatsSearch(searchState)).then(() => {
         //   // console.log(searchInput);
         //   // searchInput.current.onblur = true;
         searchInput.current.blur();
@@ -54,7 +52,7 @@ function BoatListings() {
         setSearch("");
         setSearchFilterShow(false);
         // setBlur(true);
-        history.push(`/boat-listings/${searchArr[1].toUpperCase()}`);
+        history.push(`/boat-listings/${searchState.toUpperCase()}`);
       });
     } else {
       dispatch(boatsActions.getAllBoatsSearch(search)).then(() => {

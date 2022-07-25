@@ -26,38 +26,36 @@ function SignUpForm() {
   const [passwordShow, setPasswordShow] = useState(false);
   const history = useHistory();
 
-  async function postImage({ image }) {
-    const formData = new FormData();
-    formData.append("image", image);
+  // async function postImage({ image }) {
+  //   const formData = new FormData();
+  //   formData.append("image", image);
 
-    const result = await axios.post("/api/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
-    return result.data;
-  }
+  //   const result = await axios.post("/api/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
+  //   return result.data;
+  // }
 
   if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      const result = await postImage({ image: file });
-      const profilePicture = result.url;
+      // const result = await postImage({ image: file });
+      // const profilePicture = result.url;
 
       setErrors([]);
-      return dispatch(sessionActions.signup({ firstName, lastName, email, password, profilePicture, roleId })).catch(
-        async (res) => {
-          const data = await res.json();
-          if (!data.errors) {
-            setRoleId("");
-            setFirstName("");
-            setLastName("");
-            setEmail("");
-            setPassword("");
-            setConfirmPassword("");
-          }
-
-          if (data && data.errors) setErrors(data.errors);
+      return dispatch(sessionActions.signup({ firstName, lastName, email, password })).catch(async (res) => {
+        const data = await res.json();
+        if (!data.errors) {
+          setRoleId("");
+          setFirstName("");
+          setLastName("");
+          setEmail("");
+          setPassword("");
+          setConfirmPassword("");
         }
-      );
+
+        if (data && data.errors) setErrors(data.errors);
+      });
     }
     return setErrors(["Confirm Password field must be the same as the Password field"]);
   };

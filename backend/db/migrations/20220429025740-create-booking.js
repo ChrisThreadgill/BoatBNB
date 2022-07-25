@@ -18,17 +18,12 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: "Boats" },
       },
-      bookingDate: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
       checkIn: {
         allowNull: false,
         type: Sequelize.INTEGER,
       },
-      checkOut: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
+      bookingDate: {
+        type: Sequelize.DATE,
       },
       createdAt: {
         allowNull: false,

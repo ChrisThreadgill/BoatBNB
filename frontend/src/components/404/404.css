@@ -1,0 +1,28 @@
+.cast__away__picture {
+  width: 850px;
+  height: 540px;
+  border-radius: 5px;
+  background: url("./cast__away__404.jpg") center no-repeat;
+  animation: slide 4s ease-in;
+}
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(+100%);
+  }
+}
+
+.cast__away__page__container {
+  height: 100%;
+  /* border: 1px solid red; */
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.cast__away__header {
+  font-size: 22px;
+}

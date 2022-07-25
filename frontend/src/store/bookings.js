@@ -9,6 +9,7 @@ const GET_ALL_FOR_PROVIDER = "bookings/getAllForProvider";
 const GET_ALL_FOR_BOAT = "bookings/getAllForBoat";
 const CLEAR = "bookings/clear";
 const CANCEL = "bookings/cancel";
+const CANCEL_OWNER = "bookings/cancelOwner";
 
 const allUserBookings = (bookings) => {
   return {
@@ -26,10 +27,16 @@ const allProviderBookings = (bookings, boatBookings) => {
   };
 };
 
-const cancelBooking = (booking) => {
+const cancelBooking = (bookingId) => {
   return {
     type: CANCEL,
-    payload: booking,
+    payload: bookingId,
+  };
+};
+const cancelOwner = (bookingId) => {
+  return {
+    type: CANCEL_OWNER,
+    payload: bookingId,
   };
 };
 
@@ -51,7 +58,8 @@ export const getAllUserBookings = (userId) => async (dispatch) => {
     method: "GET",
   });
   const { bookingsNoBoats } = await response.json();
-  console.log(bookingsNoBoats.Bookings);
+  console.log(bookingsNoBoats, "-----------------");
+  // console.log(bookingsNoBoats.Bookings);
 
   dispatch(allUserBookings(bookingsNoBoats.Bookings));
 };
@@ -91,6 +99,16 @@ export const getAllBoatBookings = (boatId) => async (dispatch) => {
   const { bookingsForBoat } = await response.json();
   dispatch(allBookingsForBoat(bookingsForBoat));
 };
+export const requestBoatBooking = (boatId, booking) => async (dispatch) => {
+  const newBooking = await csrfFetch(`/api/bookings/${boatId}`, {
+    method: "POST",
+    body: JSON.stringify(booking),
+  });
+  const response = await newBooking.json();
+  console.log(response, "----------");
+  // dispatch(cancelBooking(booking));
+  // return booking;
+};
 
 export const cancelUserBooking = (booking) => async (dispatch) => {
   const bookingToDelete = await csrfFetch(`/api/bookings/${booking.id}`, {
@@ -98,8 +116,18 @@ export const cancelUserBooking = (booking) => async (dispatch) => {
   });
   const response = await bookingToDelete.json();
 
-  dispatch(cancelBooking(booking));
-  return booking;
+  dispatch(cancelBooking(booking.id));
+  // return booking;
+};
+export const cancelOwnerBooking = (booking) => async (dispatch) => {
+  console.log(booking, "----------");
+  const bookingToDelete = await csrfFetch(`/api/bookings/${booking.id}`, {
+    method: "DELETE",
+  });
+  const response = await bookingToDelete.json();
+
+  dispatch(cancelOwner(booking.id));
+  // return booking;
 };
 
 export const cleanUp = () => (dispatch) => {
@@ -110,18 +138,18 @@ const initialState = {};
 
 const bookingsReducer = (state = initialState, action) => {
   let newState = clone(state);
+  const personalBookings = {};
   switch (action.type) {
     case GET_ALL_FOR_USER:
       const bookings = {};
 
       for (let booking of action.payload) {
-        bookings[booking.id] = booking;
+        personalBookings[booking.id] = booking;
       }
 
-      return { ...bookings };
+      return { personalBookings };
     case GET_ALL_FOR_PROVIDER:
       const ownerBookings = {};
-      const personalBookings = {};
       for (let boatBooking of action.boatBookings) {
         ownerBookings[boatBooking.id] = boatBooking;
       }
@@ -146,8 +174,15 @@ const bookingsReducer = (state = initialState, action) => {
       return { ...boatBookings };
 
     case CANCEL:
-    // delete newState[action.payload.id];
-    // return newState;
+      console.log(newState, "-----------------");
+      delete newState.personalBookings[action.payload];
+      // delete newState[action.payload.id];
+      return newState;
+    case CANCEL_OWNER:
+      console.log(newState, "-----------------");
+      delete newState.ownerBookings[action.payload];
+      // delete newState[action.payload.id];
+      return newState;
     case CLEAR:
       return {};
     default:

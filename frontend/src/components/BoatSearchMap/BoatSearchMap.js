@@ -1,7 +1,7 @@
-import React from "react";
-import { GoogleMap, useJsApiLoader, useLoadScript } from "@react-google-maps/api";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
+import { GoogleMap, useJsApiLoader, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import { getKey } from "../../store/maps";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { states, statesCoords } from "../Utils";
 // import usePlacesAutoComplete, {
@@ -19,14 +19,20 @@ import { states, statesCoords } from "../Utils";
 // import mapStyles from "./mapStyles";
 
 import "./BoatSearchMap.css";
+import MapHoverCard from "./MapHoverCard/MapHoverCard";
 
-function BoatSearchMap({ searchState }) {
+function BoatSearchMap({ searchState, markers }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const key = useSelector((state) => state.maps.key);
+  const boats = useSelector((state) => state.boats);
 
   const [lat, setLat] = useState("");
   const [long, setLong] = useState("");
   const [isLoadedCenter, setIsLoadedCenter] = useState(false);
+  const [hoverBoatId, setHoverBoatId] = useState(null);
+  const [hoverActive, setHoverActive] = useState(null);
+  const [marker, setMarker] = useState({});
   useEffect(() => {
     let searchCoords;
     if (searchState) {
@@ -51,28 +57,153 @@ function BoatSearchMap({ searchState }) {
     lng: long,
   };
   const options = {
+    styles: [
+      {
+        featureType: "administrative",
+        elementType: "labels.text.fill",
+        stylers: [
+          {
+            color: "#444444",
+          },
+        ],
+      },
+      {
+        featureType: "landscape",
+        elementType: "all",
+        stylers: [
+          {
+            color: "#f2f2f2",
+          },
+        ],
+      },
+      {
+        featureType: "poi",
+        elementType: "all",
+        stylers: [
+          {
+            visibility: "off",
+          },
+        ],
+      },
+      {
+        featureType: "road",
+        elementType: "all",
+        stylers: [
+          {
+            saturation: -100,
+          },
+          {
+            lightness: 45,
+          },
+        ],
+      },
+      {
+        featureType: "road.highway",
+        elementType: "all",
+        stylers: [
+          {
+            visibility: "simplified",
+          },
+        ],
+      },
+      {
+        featureType: "road.arterial",
+        elementType: "labels.icon",
+        stylers: [
+          {
+            visibility: "off",
+          },
+        ],
+      },
+      {
+        featureType: "transit",
+        elementType: "all",
+        stylers: [
+          {
+            visibility: "off",
+          },
+        ],
+      },
+      {
+        featureType: "water",
+        elementType: "all",
+        stylers: [
+          {
+            color: "#46bcec",
+          },
+          {
+            visibility: "on",
+          },
+        ],
+      },
+    ],
     disableDefaultUI: true,
-    zoomControl: true,
-    scrollwheel: true,
+    zoomControl: false,
+    scrollwheel: false,
     navigationControl: false,
-    mapTypeControl: true,
+    mapTypeControl: false,
     scaleControl: false,
     draggable: true,
   };
+  const mapRef = useRef();
+  const onMapLoad = useCallback((map) => (mapRef.current = map));
 
   const { isLoaded, loadError } = useLoadScript({
     id: "google-map-script",
     googleMapsApiKey: key,
+    options,
   });
 
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading Maps";
   //
-
+  // console.log(marker, "-----------");
   return (
     <>
       {isLoaded && isLoadedCenter && (
-        <GoogleMap mapContainerStyle={containerStyle} center={center} options={options} zoom={7} />
+        // <GoogleMap mapContainerStyle={containerStyle} center={center} options={options} zoom={7} />
+        <div className="map__container">
+          {/* {hoverActive ? <MapHoverCard boat={boats[hoverBoatId]}></MapHoverCard> : null} */}
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={hoverActive ? null : center}
+            options={options}
+            onLoad={onMapLoad}
+            zoom={6.5}
+          >
+            {markers.map((marker, idx) => {
+              // console.log(marker, "in the map");
+              // const lat = marker[0];
+              // const lng = marker[1];
+              // console.log(typeof marker.lat);
+              return (
+                <Marker
+                  key={idx}
+                  visible={true}
+                  icon={{ url: "/red__sail__boat__marker.svg", scaledSize: new window.google.maps.Size(33, 33) }}
+                  // title={marker.model}
+                  onMouseOver={() => {
+                    setHoverBoatId(marker.boatId);
+                    setMarker(marker);
+                    setHoverActive(true);
+                  }}
+                  onMouseOut={() => {
+                    setHoverBoatId(null);
+                    setMarker(null);
+                    setHoverActive(false);
+                  }}
+                  onClick={() => history.push(`/boats/${marker.boatId}`)}
+                  position={marker}
+                ></Marker>
+              );
+            })}
+            {/* <Marker
+      icon={"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}
+      position={centers[1]}
+    /> */}
+            {hoverActive ? <MapHoverCard boat={boats[hoverBoatId]}></MapHoverCard> : <div></div>}
+          </GoogleMap>
+        </div>
       )}
     </>
   );

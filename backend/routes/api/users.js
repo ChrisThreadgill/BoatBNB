@@ -60,6 +60,22 @@ router.get(
     });
   })
 );
+router.put(
+  "/roleId/renter/:userId",
+
+  asyncHandler(async (req, res) => {
+    const { userId } = req.params;
+
+    const user = await User.findByPk(userId);
+    await user.update({
+      roleId: 2,
+    });
+    return res.json({
+      user,
+    });
+    // console.log(user, "-=---------------");
+  })
+);
 
 router.put(
   "/:userId",
@@ -99,8 +115,8 @@ router.post(
   "/users",
   validateSignup,
   asyncHandler(async (req, res) => {
-    const { firstName, lastName, email, password, roleId, profilePicture } = req.body;
-    const user = await User.signup({ firstName, lastName, email, password, roleId, profilePicture });
+    const { firstName, lastName, email, password } = req.body;
+    const user = await User.signup({ firstName, lastName, email, password });
 
     await setTokenCookie(res, user);
 

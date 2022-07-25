@@ -14,6 +14,7 @@ import ProviderBoats from "./components/ProviderPages/ProviderBoats";
 import ProviderBookings from "./components/ProviderPages/ProviderBookings";
 import UserInbox from "./components/UserInbox";
 import AddBoat from "./components/Boats/AddBoat";
+import CastAway from "./components/404/404";
 // import BoatPage from "./components/Boats/BoatPage";
 import LoginForm from "./components/forms/AuthForms/Login";
 import BoatListings from "./components/BoatListings/BoatListings";
@@ -109,10 +110,12 @@ function App() {
             <Route path="/test/:userId">
               <UserProfilePage></UserProfilePage>
             </Route>
-
-            {/* <Route path="/test">
-              <Test></Test>
-            </Route> */}
+            <Route path="/oops">
+              <CastAway></CastAway>
+            </Route>
+            <Route>
+              <CastAway></CastAway>
+            </Route>
           </Switch>
         </div>
       )}

@@ -5,14 +5,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       userId: DataTypes.INTEGER,
       boatId: DataTypes.INTEGER,
-      bookingDate: DataTypes.DATE,
       checkIn: DataTypes.INTEGER,
-      checkOut: DataTypes.INTEGER,
+      bookingDate: DataTypes.DATE,
     },
     {}
   );
   Booking.associate = function (models) {
-    // associations can be defined here
     Booking.belongsTo(models.User, { foreignKey: "userId" });
     Booking.belongsTo(models.Boat, { foreignKey: "boatId" });
   };

@@ -15,7 +15,7 @@ router.get(
   "/user/:userId",
   asyncHandler(async (req, res) => {
     const { userId } = req.params;
-
+    const today = new Date();
     const bookingsNoBoats = await User.findByPk(userId, {
       include: [
         {
@@ -130,19 +130,19 @@ router.get(
   })
 );
 
-//post create a new boat for a user
+//post create a new booking for a boat
 router.post(
   "/:boatId",
   requireAuth,
   asyncHandler(async (req, res) => {
-    const { userId, boatId, bookingDate, checkIn, checkOut } = req.body;
+    const { boatId } = req.params;
+    const { userId, bookingDate, checkIn } = req.body;
 
     const newBooking = await Booking.build({
       userId,
       boatId,
       bookingDate,
       checkIn,
-      checkOut,
     });
     await newBooking.save();
     return res.json({
@@ -157,8 +157,8 @@ router.delete(
     const { bookingId } = req.params;
 
     const bookingToDelete = await Booking.findByPk(bookingId);
+    await bookingToDelete.destroy();
     if (bookingToDelete) {
-      await bookingToDelete.destroy();
       res.json({ message: "Successfully Cancelled Booking" });
     }
   })

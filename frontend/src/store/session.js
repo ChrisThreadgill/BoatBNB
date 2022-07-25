@@ -52,7 +52,7 @@ export const logout = () => async (dispatch) => {
 };
 
 export const signup = (user) => async (dispatch) => {
-  const { firstName, lastName, email, password, profilePicture, roleId } = user;
+  const { firstName, lastName, email, password } = user;
 
   const response = await csrfFetch("/api/users/users", {
     method: "POST",
@@ -61,8 +61,6 @@ export const signup = (user) => async (dispatch) => {
       lastName,
       email,
       password,
-      profilePicture,
-      roleId,
     }),
   });
   const data = await response.json();
@@ -81,7 +79,7 @@ export const updateUserProfilePicture = (file, userId) => async (dispatch) => {
     },
     body: formData,
   });
-
+  const user = await res.json();
   // const response = await csrfFetch(`/api/users/${userId}`, {
   //   method: "PUT",
   //   body: JSON.stringify({
@@ -90,8 +88,17 @@ export const updateUserProfilePicture = (file, userId) => async (dispatch) => {
   // });
   // const data = await res.json();
   // console.log(data, "----------- data in the thunk");
-  // dispatch(updateProfilePicture(data.user));
+  // console.log(user, "----------");
+  dispatch(updateProfilePicture(user));
   // return response;
+};
+export const updateRoleId = (userId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/users/roleId/renter/${userId}`, {
+    method: "PUT",
+  });
+  const user = await res.json();
+
+  return user;
 };
 
 const initialState = { user: null };
@@ -100,7 +107,7 @@ const sessionReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case UPDATE_PICTURE:
-      return { ...state, user: action.payload };
+      return action.payload;
     case SET_USER:
       newState = Object.assign({}, state);
       newState.user = action.payload;

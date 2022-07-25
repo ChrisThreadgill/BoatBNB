@@ -1,13 +1,19 @@
 import "./BoatPageBookingForm.css";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import DatePicker from "react-datepicker";
+import * as bookingsActions from "../../../store/bookings";
 import "react-datepicker/dist/react-datepicker.css";
 const moment = require("moment");
 
 function BoatPageBookingForm({ boat }) {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const [date, setDate] = useState("");
   const [showCheckIn, setShowCheckIn] = useState(false);
   const [checkInTime, setCheckInTime] = useState(0);
+  const user = useSelector((state) => state.session.user);
 
   //disabled dates arr for datepicker
   let disabledDates = [];
@@ -22,6 +28,12 @@ function BoatPageBookingForm({ boat }) {
   //setting disabled dates for DatePicker Based on boat's availability
   for (let i = 0; i < boat.Bookings?.length; i++) {
     disabledDates.push(new Date(boat.Bookings[i]));
+  }
+
+  async function submitBooking() {
+    if (!user) history.push("/sign-up");
+    const booking = { checkIn: checkInTime, bookingDate: date, userId: user.id, boatId: boat.id };
+    dispatch(bookingsActions.requestBoatBooking(boat.id, booking)).then(() => history.push("/bookings"));
   }
 
   function checkInHelper(number, setter) {
@@ -115,8 +127,15 @@ function BoatPageBookingForm({ boat }) {
           <span>Rental total</span>
           <div>${boat.price}.00</div>
         </div>
-
-        <div className="booking__submit__button">REQUEST TO BOOK</div>
+        {user && user.id === boat.userId ? (
+          <div className="booking__submit__button" onClick={() => history.push("/manage-boats")}>
+            MANAGE BOAT
+          </div>
+        ) : (
+          <div className="booking__submit__button" onClick={submitBooking}>
+            REQUEST TO BOOK
+          </div>
+        )}
       </form>
     </div>
   );

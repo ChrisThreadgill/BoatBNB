@@ -10,6 +10,7 @@ import "./UserProfileCSS/UserProfileCard.css";
 import UserBookings from "../Bookings/UserBookings";
 import BoatCard from "../Boats/BoatCard";
 import UserReview from "../Reviews/UserReview";
+import NewUserReviewModal from "../../context/NewUserReviewModal/NewUserReviewModal";
 
 import UserRatingDisplay from "../Ratings/UserRatingDisplay";
 import "./UserProfileCSS/UserProfileView.css";

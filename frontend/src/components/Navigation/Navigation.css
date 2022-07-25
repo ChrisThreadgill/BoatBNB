@@ -27,10 +27,10 @@
 .nav__menu__dropdown__no__owner {
   position: absolute;
   background-color: #f5f7f9;
-  transform: translate(-0px, 155px);
+  transform: translate(-0px, 180px);
   width: 256px;
   /* height: auto; */
-  height: 222px;
+  height: 277px;
   /* border: 1px solid red; */
   border: 1px solid rgba(40, 39, 39, 0.2);
   box-shadow: 2px 2px 5px 5px rgba(40, 39, 39, 0.2);
@@ -239,6 +239,18 @@
   border-radius: 50%;
   cursor: pointer;
 }
+.nav__menu__no__profile {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0a4195;
+  color: whitesmoke;
+  border: 1px solid rgba(40, 39, 39, 0.2);
+}
 .profile__nav__links {
   /* background-color: cadetblue; */
   display: flex;
@@ -358,6 +370,7 @@
 
 .boat__bnb__logo {
   height: 50px;
+  cursor: pointer;
 }
 
 .login__modal__button {

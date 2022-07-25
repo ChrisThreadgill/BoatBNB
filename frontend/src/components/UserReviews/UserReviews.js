@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import UserReviewCard from "./UserReviewCard/UserReviewCard";
 import UserReviewCardRatingDisplay from "./UserReviewCardRatingDisplay/UserReviewCardRatingDisplay";
 import UserRatingCard from "../UserRatings/UserRatingCard";
+import NewUserReviewModal from "../../context/NewUserReviewModal/NewUserReviewModal";
 
 function UserReviews({ user }) {
   //
@@ -41,6 +42,7 @@ function UserReviews({ user }) {
     <div className="user__profile__reviews__container">
       <div className="user__profile__reviews__header">
         Reviews of {user.firstName} {`(${spreadReviewsRatings.length}) `}
+        <NewUserReviewModal></NewUserReviewModal>
       </div>
       <div className="profile__reviews__container">
         {" "}

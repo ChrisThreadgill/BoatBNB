@@ -20,6 +20,8 @@ function BoatPage() {
 
   const boat = useSelector((state) => state.boats);
 
+  const user = useSelector((state) => state.session.user);
+
   useEffect(() => {
     if (boatId) {
       dispatch(boatsAction.getOneBoat(boatId)).then(() => setIsLoaded(true));

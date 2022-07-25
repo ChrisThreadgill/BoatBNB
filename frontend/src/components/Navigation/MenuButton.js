@@ -46,11 +46,19 @@ function MenuButton({ user }) {
         Bookings
       </div>
 
-      <img
-        className="nav__profile__picture"
-        src={user.profilePicture ? `${user.profilePicture}` : null}
-        onClick={openMenu}
-      />
+      {user.profilePicture ? (
+        <img
+          className="nav__profile__picture"
+          src={user.profilePicture ? `${user.profilePicture}` : null}
+          onClick={openMenu}
+        />
+      ) : (
+        <div className="nav__menu__no__profile" onClick={openMenu}>
+          {user.firstName.slice(0, 1).toUpperCase()}
+          {user.lastName.slice(0, 1).toUpperCase()}
+        </div>
+      )}
+
       <div className="nav__menu__picture__container"></div>
       {showMenu && (
         <div className={user.roleId === 1 ? "nav__menu__dropdown" : "nav__menu__dropdown__no__owner"}>
@@ -65,7 +73,12 @@ function MenuButton({ user }) {
               {/* <span>Owner dashboard</span> */}
               <span onClick={() => history.push("/manage-boats")}>My boats</span>
             </div>
-          ) : null}
+          ) : (
+            <div className="nav__menu__options">
+              {/* <span>Owner dashboard</span> */}
+              <span onClick={() => history.push("/bookings")}>My bookings</span>
+            </div>
+          )}
 
           <div className={user.roleId === 1 ? "nav__menu__options__owner" : "nav__menu__options"}>
             <span onClick={() => history.push("/account-settings")}>My account</span>

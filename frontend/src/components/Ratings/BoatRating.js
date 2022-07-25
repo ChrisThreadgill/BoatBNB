@@ -1,25 +1,7 @@
 import { useEffect } from "react";
 import "./BoatRating/BoatRatingCard.css";
 
-import {
-  FaStar,
-  // FaUserClock,
-  // FaRegSmile,
-  // FaWheelchair,
-  FaSoap,
-  FaCouch,
-  // FaHandshakeAltSlash,
-  // FaHammer,
-  // FaRegHandshake,
-  // FaRegClock,
-  // FaHorse,
-  // FaHorseHead,
-  // FaAirbnb,
-  // FaRegCalendarAlt,
-  // FaRegCalendarCheck,
-  // FaRegCalendarMinus,
-  FaWrench,
-} from "react-icons/fa";
+import { FaStar, FaSoap, FaCouch, FaWrench } from "react-icons/fa";
 import "./Rating.css";
 
 function BoatRating({

@@ -1,3 +1,4 @@
+import NewBoatReviewModal from "../../../context/NewBoatReviewModal/NewBoatReviewModa";
 import BoatRatingDisplay from "../../Ratings/BoatRatingDisplay";
 import BoatPageRatingCard from "./BoatPageRatingCard";
 import BoatPageReviewCard from "./BoatPageReviewCard";
@@ -11,6 +12,7 @@ function BoatPageReviews({ boat }) {
   return (
     <div className="boat__page__reviews">
       <h1>reviews header</h1>
+      <NewBoatReviewModal></NewBoatReviewModal>
       <BoatRatingDisplay boat={boat}></BoatRatingDisplay>
       <div className="boat__page__review__container">
         {boat.boatReviewsNoRating.map((review) => {

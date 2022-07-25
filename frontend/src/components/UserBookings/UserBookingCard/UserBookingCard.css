@@ -32,4 +32,5 @@
 .user__booking__cancel {
   font-size: 22px;
   margin-left: 22px;
+  cursor: pointer;
 }

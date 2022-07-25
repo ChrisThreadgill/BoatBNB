@@ -52,3 +52,36 @@
   padding: 19px 16px 0 0;
   border-top: 3px solid#0e7873;
 }
+.user__bookings__no__bookings {
+  font-weight: bold;
+  font-size: 14px;
+  color: #4b5765;
+  margin-bottom: 22px;
+}
+.user__bookings__explore {
+  width: 153px;
+  height: 34px;
+  border-radius: 5px;
+  color: #0751c2;
+  border: 1px solid #0751c2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.user__bookings__explore:hover {
+  width: 153px;
+  height: 34px;
+  border-radius: 5px;
+  color: whitesmoke;
+  border: 1px solid #0751c2;
+  background-color: #0751c2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 11px;
+  font-weight: bold;
+  cursor: pointer;
+}

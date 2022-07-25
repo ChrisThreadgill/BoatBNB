@@ -23,6 +23,14 @@ function BoatListings() {
   const boatsObj = useSelector((state) => state.boats);
   const key = useSelector((state) => state.key);
   let boatsArr = Object.values(boatsObj);
+  // const [markers, setMarkers] = useState([]);
+  const markers = [];
+  for (let i = 0; i < boatsArr.length; i++) {
+    const boat = boatsArr[i];
+    const marker = { lat: Number(boat.lat), lng: Number(boat.lng), model: boat.model, boatId: boat.id };
+    markers.push(marker);
+  }
+  console.log(markers);
   // console.log(history);
   // console.log(boatsObj);
   // const [searchState, setSearchState] = useState(boatsArr[0]?.state);
@@ -35,17 +43,31 @@ function BoatListings() {
     // const searchButton = document.getElementById("search");
     // searchButton.click();
     // console.log(searchButton);
-
-    dispatch(boatsActions.getAllBoatsSearch(search)).then(() => {
-      // console.log(searchInput);
-      // searchInput.current.onblur = true;
-      searchInput.current.blur();
-      setIsLoaded(true);
-      setSearch("");
-      setSearchFilterShow(false);
-      // setBlur(true);
-      history.push(`/boat-listings/${search.toUpperCase()}`, { test: `${searchFilter}TEST` });
-    });
+    if (search.length > 2) {
+      let searchArr = search.split(",");
+      console.log(searchArr, "=-===============");
+      dispatch(boatsActions.getAllBoatsSearch(searchArr[1])).then(() => {
+        //   // console.log(searchInput);
+        //   // searchInput.current.onblur = true;
+        searchInput.current.blur();
+        setIsLoaded(true);
+        setSearch("");
+        setSearchFilterShow(false);
+        // setBlur(true);
+        history.push(`/boat-listings/${searchArr[1].toUpperCase()}`);
+      });
+    } else {
+      dispatch(boatsActions.getAllBoatsSearch(search)).then(() => {
+        // console.log(searchInput);
+        // searchInput.current.onblur = true;
+        searchInput.current.blur();
+        setIsLoaded(true);
+        setSearch("");
+        setSearchFilterShow(false);
+        // setBlur(true);
+        history.push(`/boat-listings/${search.toUpperCase()}`);
+      });
+    }
   };
   useEffect(() => {}, [searchState]);
 
@@ -154,7 +176,7 @@ function BoatListings() {
           </div>
 
           <div>
-            <BoatSearchMap searchState={searchState} key={key}></BoatSearchMap>
+            <BoatSearchMap markers={markers} searchState={searchState} key={key}></BoatSearchMap>
           </div>
         </div>
       ) : (

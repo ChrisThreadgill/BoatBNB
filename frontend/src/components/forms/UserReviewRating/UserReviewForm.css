@@ -1,0 +1,30 @@
+.user__review__form__modal__button {
+}
+.user__review__form__modal__wrapper {
+  width: 35vw;
+  height: 100vh;
+  min-width: 222px;
+  /* display: flex; */
+
+  /* width: 666px;
+  height: 777px; */
+  /* position: absolute; */
+  /* top: -420px; */
+  /* transform: translateX(-150px); */
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  box-shadow: 2px 2px 5px 5px rgba(40, 39, 39, 0.2);
+  background-color: rgba(40, 39, 39, 1);
+  /* border-radius: 5px; */
+  animation-duration: 0.2s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+  }
+
+  to {
+    margin-left: 0;
+  }
+}

@@ -1,12 +1,14 @@
 import "./UserAccountPage.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import axios from "axios";
 
 function UserAccountPage() {
   const dispatch = useDispatch();
   const uploadHiddenInput = useRef();
+  const history = useHistory();
   const [roleId, setRoleId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -18,15 +20,20 @@ function UserAccountPage() {
   const [fileError, setFileError] = useState("");
   const [errors, setErrors] = useState([]);
   const user = useSelector((state) => state.session.user);
+  const [isLoaded, setIsLoaded] = useState(false);
+  console.log(user, "-----------");
   // console.log(user);
 
-  async function postImage({ image }) {
-    const formData = new FormData();
-    formData.append("image", image);
-
-    const result = await axios.post("/api/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
-    return result.data;
+  if (!user) {
+    history.push("/");
   }
+
+  useEffect(() => {
+    if (!user) {
+      history.push("/");
+    }
+    setIsLoaded(true);
+  }, [dispatch, user]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -75,66 +82,75 @@ function UserAccountPage() {
   };
   //
   return (
-    <div className="user__account__page__container">
-      <div className="user__account__header">
-        <h1>My account</h1>
-        <div className="user__account__profile__picture__container">
-          {/* <div className="user__account__profile__picture"></div> */}
+    <>
+      {isLoaded ? (
+        <div className="user__account__page__container">
+          <div className="user__account__header">
+            <h1>My account</h1>
+            <div className="user__account__profile__picture__container">
+              {/* <div className="user__account__profile__picture"></div> */}
+              {user ? (
+                <>
+                  {user.profilePicture && user.profilePicture && !file ? (
+                    <img
+                      className="user__account__profile__picture"
+                      src={user.profilePicture ? `${user.profilePicture}` : null}
+                    ></img>
+                  ) : (
+                    <img className="user__account__profile__picture" src={preview ? `${preview}` : null}></img>
+                  )}
+                  {!user.profilePicture ? (
+                    <div className="no__profile__picture__avatar">{`${user.firstName.slice(0, 1)} ${user.lastName.slice(
+                      0,
+                      1
+                    )}`}</div>
+                  ) : null}
+                </>
+              ) : null}
 
-          {user.profilePicture && !file ? (
-            <img
-              className="user__account__profile__picture"
-              src={user.profilePicture ? `${user.profilePicture}` : null}
-            ></img>
-          ) : (
-            <img className="user__account__profile__picture" src={preview ? `${preview}` : null}></img>
-          )}
-          {!user.profilePicture ? (
-            <div className="no__profile__picture__avatar">{`${user.firstName.slice(0, 1)} ${user.lastName.slice(
-              0,
-              1
-            )}`}</div>
-          ) : null}
-
-          <div className="user__account__profile__name__container">
-            <div className="user__account__name">{user.firstName}</div>
-            {/* <div>rating</div> */}
-          </div>
-          <form onSubmit={handleSubmit} className="user__profile__picture__update">
-            <input
-              type="file"
-              // name="filefield"
-              ref={uploadHiddenInput}
-              className="user__profile__picture__input"
-              // multiple="multiple"
-              onChange={(e) => {
-                updateImage(e);
-              }}
-              // className="choose__file__button"
-              accept="image/*"
-              id="hello"
-            ></input>
-            <div className="user__picture__options">
-              <div className="user__picture__option" onClick={handleClick}>
-                Change Photo
+              <div className="user__account__profile__name__container">
+                <div className="user__account__name">{user ? user.firstName : null}</div>
+                {/* <div>rating</div> */}
               </div>
-              {file ? (
-                <div className="user__picture__option" onClick={handleSubmit}>
-                  Update Photo
-                </div>
-              ) : null}
+              <form onSubmit={handleSubmit} className="user__profile__picture__update">
+                <input
+                  type="file"
+                  // name="filefield"
+                  ref={uploadHiddenInput}
+                  className="user__profile__picture__input"
+                  // multiple="multiple"
+                  onChange={(e) => {
+                    updateImage(e);
+                  }}
+                  // className="choose__file__button"
+                  accept="image/*"
+                  id="hello"
+                ></input>
+                <div className="user__picture__options">
+                  <div className="user__picture__option" onClick={handleClick}>
+                    Change Photo
+                  </div>
+                  {file ? (
+                    <div className="user__picture__option" onClick={handleSubmit}>
+                      Update Photo
+                    </div>
+                  ) : null}
 
-              {file ? (
-                <div className="user__picture__option__cancel" onClick={() => setFile("")}>
-                  Cancel
+                  {file ? (
+                    <div className="user__picture__option__cancel" onClick={() => setFile("")}>
+                      Cancel
+                    </div>
+                  ) : null}
                 </div>
-              ) : null}
+              </form>
             </div>
-          </form>
+          </div>
+          <div className="user__account__options"></div>
         </div>
-      </div>
-      <div className="user__account__options"></div>
-    </div>
+      ) : (
+        <div>... Loading</div>
+      )}
+    </>
   );
 }
 

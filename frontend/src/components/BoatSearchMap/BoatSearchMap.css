@@ -1,0 +1,16 @@
+.marker {
+  width: 100px;
+  height: 100px;
+}
+.map__container {
+  position: relative;
+}
+.testing__google__div {
+  position: absolute;
+  z-index: 99;
+  border: 1px solid black;
+  width: 400px;
+  height: 222px;
+  border-radius: 5px;
+  background-color: rgba(40, 39, 39, 0.7);
+}

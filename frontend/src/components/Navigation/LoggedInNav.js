@@ -24,9 +24,9 @@ function LoggedInNav() {
   // const [isLoaded, setIsLoaded] = useState(false);
   const logout = (e) => {
     e.preventDefault();
+    history.push("/");
     dispatch(sessionActions.logout());
     // dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true)
-    history.push("/");
   };
   const profilePic = sessionUser.profilePicture;
 

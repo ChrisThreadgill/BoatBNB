@@ -43,6 +43,7 @@ function NewBoatForm() {
   const [address, setAddress] = useState("");
   const [model, setModel] = useState("");
   const [modelErr, setModelErr] = useState(false);
+  const [noModelErr, setNoModelErr] = useState(false);
   const [description, setDescription] = useState("");
   const [descriptionErr, setDescriptionErr] = useState(false);
   const [addressErr, setAddressErr] = useState(false);
@@ -50,6 +51,7 @@ function NewBoatForm() {
   const [captain, setCaptain] = useState(false);
   const [yearErr, setYearErr] = useState(false);
   const [numImagesErr, setNumImagesErr] = useState("");
+  const [noImagesErr, setNoImagesErr] = useState("");
   const [images, setImages] = useState([]);
   const [imageOneLoaded, setImageOneLoaded] = useState(false);
   const [imageTwoLoaded, setImageTwoLoaded] = useState(false);
@@ -107,6 +109,7 @@ function NewBoatForm() {
   useEffect(() => {}, [dispatch]);
   const updateImage = (e) => {
     setNumImagesErr("");
+    setNoImagesErr(false);
     setDisabled("");
     setPreview1("");
     setPreview2("");
@@ -142,48 +145,81 @@ function NewBoatForm() {
   };
   // console.log(data);
   // console.log(lat, lng);
-  const handleSubmit = async () => {
+
+  const checkErrors = async () => {
+    let err = 0;
     if (!address.trim()) {
       setDisabled(true);
       setAddressErr(true);
-      return;
+      err++;
     }
-    // console.log("helooooooooooooooo");
-    // console.log(address, city, state, lat, lng, year, model, description, "----------------");
-    // const price = 500;
-    // console.log(lat, lng, "----------------hello");
-    const userId = user.id;
-    const boat = {
-      address,
-      city,
-      state: state.trim(),
-      year,
-      model,
-      description,
-      price,
-      lat,
-      lng,
-      captain,
-    };
-    // console.log(images);
-    // console.log(state.trim().length);
-    setImageLoading(true);
-    dispatch(boatsActions.addOneBoat(boat, userId)).then((boat) => {
-      // console.log(boat.boat, "--------- BOAT IN THE .THEN");
-      dispatch(boatsActions.uploadBoatPhoto(images, boat.boat.id));
-      setImageLoading(false);
-
-      setBoatSuccess(true);
+    if (!model.trim()) {
       setDisabled(true);
-      setTimeout(() => history.push("/manage-boats"), 1500);
-    });
+      setNoModelErr(true);
+      err++;
+    }
+    if (!price.trim()) {
+      setDisabled(true);
+      setPriceErr(true);
+      err++;
+    }
+    if (!year) {
+      setDisabled(true);
+      setYearErr(true);
+      err++;
+    }
+    if (images.length < 1) {
+      setDisabled(true);
+      setNoImagesErr(true);
+      err++;
+    }
+    return err;
+  };
+  const handleSubmit = async () => {
+    // if (!address.trim()) {
+    //   setDisabled(true);
+    //   setAddressErr(true);
+    //   return;
+    // }
+    console.log("hello");
+    const errs = await checkErrors();
+    if (!errs) {
+      const userId = user.id;
+      const boat = {
+        address,
+        city,
+        state: state.trim(),
+        year,
+        model,
+        description,
+        price,
+        lat,
+        lng,
+        captain,
+      };
+      setImageLoading(true);
+      dispatch(boatsActions.addOneBoat(boat, userId)).then((boat) => {
+        if (images.length > 0) {
+          dispatch(boatsActions.uploadBoatPhoto(images, boat.boat.id));
+          setImageLoading(false);
+          setBoatSuccess(true);
+          setDisabled(true);
+          setTimeout(() => history.push("/manage-boats"), 1500);
+        }
+      });
+    }
 
     // dispatch(boatsActions.uploadBoatPhoto());
   };
 
   useEffect(() => {
+    // const numbers = new RegExp("[0-9]");
+    // const check = numbers.test(price);
+    // console.log(check, "-------");
     setModelErr(false);
     setDescriptionErr(false);
+    setNoModelErr(false);
+
     setDisabled(false);
     if (model.length > 100) {
       setModelErr(true);
@@ -193,7 +229,21 @@ function NewBoatForm() {
       setDescriptionErr(true);
       setDisabled(true);
     }
+    if (isNaN(Number(price))) {
+      setPriceErr(true);
+      setDisabled(true);
+    }
+    // if (numbers.test(price)) console.log("working");
   }, [model, description]);
+
+  useEffect(() => {
+    setPriceErr(false);
+    setDisabled(false);
+    if (isNaN(Number(price))) {
+      setPriceErr(true);
+      setDisabled(true);
+    }
+  }, [price]);
   // console.log(captain);
 
   return (
@@ -308,7 +358,7 @@ function NewBoatForm() {
             <span>
               Make/Model
               {/* <span className="new__boat__error"> - *Required</span> */}
-              {/* {modelErr && <span className="new__boat__error"> - *Must be less than 100 characters </span>} */}
+              {noModelErr && <span className="new__boat__error"> - *Required </span>}
             </span>
             <input
               className="new__boat__model__input"
@@ -365,6 +415,7 @@ function NewBoatForm() {
           <span onClick={handleClick} className="boat__images__select">
             <span className="add__boat__pictures__button"></span>
             Select up to 5 images {numImagesErr ? <span className="new__boat__error">{numImagesErr}</span> : null}
+            {noImagesErr ? <span className="new__boat__error"> - *Must Provide at least 1 picture</span> : null}
           </span>
           <div className="images__preview__container">
             {preview1 ? <img className="new__boat__image__preview" src={preview1 ? `${preview1}` : null}></img> : null}

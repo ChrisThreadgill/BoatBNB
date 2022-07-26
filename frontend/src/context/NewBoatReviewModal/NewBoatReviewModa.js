@@ -4,8 +4,9 @@ import { Modal } from "../../context/Modal";
 import { FaHome, FaDharmachakra, FaSignOutAlt, FaSignInAlt } from "react-icons/fa";
 
 import BoatReviewForm from "../../components/forms/BoatReviewForm";
+import NewBoatReviewForm from "../../components/forms/NewBoatReview/NewBoatReviewForm";
 
-function NewBoatReviewModal() {
+function NewBoatReviewModal({ reviews }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -15,7 +16,7 @@ function NewBoatReviewModal() {
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <BoatReviewForm></BoatReviewForm>
+          <NewBoatReviewForm reviews={reviews}></NewBoatReviewForm>
         </Modal>
       )}
     </>

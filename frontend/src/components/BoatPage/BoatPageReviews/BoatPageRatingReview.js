@@ -6,24 +6,24 @@ const moment = require("moment");
 
 function BoatPageRatingReview({ rating }) {
   const history = useHistory();
-  // console.log(rating, "boat page rating review");
+  // console.log(rating.User.profilePicture, "boat page rating review");
 
   //
 
   return (
     <div className="user__review__card__container">
-      {/* <div className="review__card__user__profile">
+      <div className="review__card__user__profile">
         <img
-          src={rating.User.profilePicture ? `/api/images/${rating.User.profilePicture}` : null}
-          className="rating__profile__picture"
+          src={rating.User.profilePicture ? `${rating.User.profilePicture}` : null}
+          className="review__profile__picture"
           onClick={() => {
             history.push(`/users/${rating.User.id}`);
           }}
         />
         <div>{rating.User.firstName}</div>
-      </div> */}
+      </div>
       {rating && rating.BoatReview ? (
-        <div className="user__review__card__content__container">
+        <div className="boat__review__card__content__container">
           <div>
             <BoatPageRatingDisplay boatRating={rating}></BoatPageRatingDisplay>
             {/* <UserReviewCardRatingDisplay userRating={rating.UserRating}></UserReviewCardRatingDisplay> */}

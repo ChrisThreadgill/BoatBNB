@@ -1,5 +1,7 @@
 .user__stars {
   /* color: white; */
+  margin: 0 0 0 1px;
+  cursor: pointer;
 }
 
 .star__radio__buttons {

@@ -1,0 +1,113 @@
+.boat__review__form__modal__wrapper {
+  width: 35vw;
+  height: 100vh;
+  min-width: 222px;
+  /* display: flex; */
+
+  /* width: 666px;
+  height: 777px; */
+  /* position: absolute; */
+  /* top: -420px; */
+  /* transform: translateX(-150px); */
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  box-shadow: 2px 2px 5px 5px rgba(40, 39, 39, 0.2);
+  background-color: rgb(231, 231, 237);
+  /* border-radius: 5px; */
+  animation-duration: 0.2s;
+  animation-name: slidein;
+  z-index: 99;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+  }
+
+  to {
+    margin-left: 0;
+  }
+}
+
+.boat__review__form {
+  /* color: #adc0d8; */
+  /* box-shadow: 1px 1px 1px 1px rgba(40, 39, 39, 0.2); */
+  border: 1px solid red;
+}
+
+.new__boat__review__container {
+  width: 100%;
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.new__boat__review__container > div {
+  color: #0a4195;
+  font-weight: bold;
+  font-size: 22px;
+  margin: 12px 0;
+}
+.new__boat__review__container > button {
+  border: none;
+  outline: 0;
+  margin: 10px 0;
+  color: white;
+  background-color: #0a4195;
+  width: 122px;
+  height: 22px;
+  border-radius: 5px;
+}
+.new__boat__review__text__area {
+  width: 100%;
+  max-width: 375px;
+  height: 222px;
+  resize: none;
+  border-radius: 5px;
+}
+.new__boat__rating__container {
+  display: flex;
+  width: 100%;
+  border: 2px dashed blue;
+}
+.star__rating__form {
+  display: flex;
+  border: 2px dashed orange;
+  width: 100%;
+  max-width: 150px;
+}
+.star__rating__form > div {
+  width: 100%;
+  max-width: 122px;
+
+  border: 1px solid green;
+}
+
+.reviews__modal__display {
+  width: 100%;
+  padding: 22px;
+  border: 1px solid red;
+  height: 58vh;
+  display: flex;
+  justify-content: center;
+}
+
+.modal__reviews__container {
+  width: 100%;
+  max-width: 450px;
+  border: 1px dashed black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.modal__reviews__container::-webkit-scrollbar {
+  display: none;
+}
+
+.modal__review__card {
+  /* height: 222px; */
+  /* border: blue 2px dashed; */
+}

@@ -7,6 +7,20 @@
   flex-direction: column;
   padding: 0px 22px 0px 22px;
 }
+.boat__review__card__container {
+  display: flex;
+  width: 100%;
+  max-width: 420px;
+  min-width: 420px;
+  height: auto;
+  min-height: 192px;
+  margin: 10px 0px 10px 22px;
+  /* padding: 0 22px 0 22px; */
+  border-radius: 7px;
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  box-shadow: 1px 1px 5px 1px rgba(40, 39, 39, 0.2);
+  background-color: #ffffff;
+}
 
 .average__rating__review__display {
   display: flex;
@@ -18,7 +32,7 @@
   /* height: 22px; */
   /* border: 1px solid red; */
   border-bottom: 1px solid rgba(40, 39, 39, 0.2);
-  border: 1px solid red;
+  /* border: 1px solid red; */
   /* margin-right: 22px; */
   margin-top: 7px;
 }

@@ -1,9 +1,17 @@
 import "./NewBoatReviewForm.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { FaStar, FaSoap, FaCouch, FaWrench } from "react-icons/fa";
 import NewBoatReviewCard from "./NewBoatReviewCard";
+import * as reviewActions from "../../../store/boatReviews";
+import * as ratingActions from "../../../store/boatRatings";
 
 function NewBoatReviewForm({ reviews }) {
+  const { boatId } = useParams();
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.session.user);
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
 
@@ -15,18 +23,89 @@ function NewBoatReviewForm({ reviews }) {
 
   const [clean, setClean] = useState(null);
   const [cleanHover, setCleanHover] = useState(null);
+
+  const [reviewLengthError, setReviewLengthError] = useState(null);
+  const [review, setReview] = useState("");
+
+  useEffect(() => {
+    if (review.length > 500) setReviewLengthError("Please limit your review to 500 characters");
+    if (review.length < 500) setReviewLengthError(false);
+  }, [review, reviewLengthError]);
   //
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    let boatReviewId = null;
+    if (rating && !review) {
+      let ratingBody = {
+        userId: user.id,
+        boatId,
+        cleanliness: clean,
+        average: rating,
+        functional: func,
+        comfort: comfort,
+        boatReviewId,
+      };
+      if (!func || func === null) ratingBody.functional = 1;
+      if (!clean || clean === null) ratingBody.cleanliness = 1;
+      if (!comfort || comfort === null) ratingBody.comfort = 1;
+
+      dispatch(ratingActions.addBoatRatingNR(ratingBody));
+
+      setRating(0);
+      setClean(0);
+      setComfort(0);
+      setFunc(0);
+    }
+    if (!reviewLengthError) {
+      if (review && !rating) {
+        const reviewBody = { userId: user.id, boatId, review };
+
+        dispatch(reviewActions.addReview(reviewBody));
+
+        setReview("");
+      }
+      if (review && rating) {
+        const ratingBody = {
+          userId: user.id,
+          boatId,
+          average: rating,
+          cleanliness: clean,
+          functional: func,
+          comfort: comfort,
+          boatReviewId,
+        };
+        if (func === 0) ratingBody.functional = rating;
+        if (clean === 0) ratingBody.cleanliness = rating;
+        if (comfort === 0) ratingBody.comfort = rating;
+        const reviewBody = { userId: user.id, boatId, review };
+
+        dispatch(reviewActions.addReviewWithRating(reviewBody, ratingBody));
+
+        setReview("");
+        setRating(0);
+        setClean(0);
+        setComfort(0);
+        setFunc(0);
+      }
+    }
+  };
+
   console.log(reviews, "-------------------");
   return (
     <div className="boat__review__form__modal__wrapper">
       <h1>Ratings {"& "}reviews</h1>
 
-      <form className="boat__review__form">
+      <form className="boat__review__form" onSubmit={handleSubmit}>
         <div className="new__boat__rating__container">
           <div className="new__boat__review__container">
-            <div>Leave a review</div>
-            <textarea className="new__boat__review__text__area"></textarea>
-            <button>SUBMIT</button>
+            <div>Leave a review </div>
+            {reviewLengthError ? (
+              <span className="new__boat__error">- * Review must be between 1-500 characters * -</span>
+            ) : null}
+            <textarea className="new__boat__review__text__area" onChange={(e) => setReview(e.target.value)}></textarea>
+            <button onClick={handleSubmit}>SUBMIT</button>
           </div>
           <div className="star__rating__form">
             <div>

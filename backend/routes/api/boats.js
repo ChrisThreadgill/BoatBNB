@@ -88,6 +88,10 @@ router.get(
     });
 
     const boatReviews = await BoatReview.findAll({
+      where: {
+        boatId,
+      },
+
       include: [
         { model: User, include: [UserRating] },
         { model: BoatRating, include: [User] },

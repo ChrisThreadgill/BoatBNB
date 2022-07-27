@@ -92,12 +92,13 @@ export const addOneBoat = (boat, userId) => async (dispatch) => {
 export const getOneBoat = (boatId) => async (dispatch) => {
   // console.log(boatId, "in the thunk");
   let boatReviewsNoRating = [];
+  console.log(boatReviewsNoRating, "------------ in the thunk before fetch");
   const response = await csrfFetch(`/api/boats/${boatId}`, {
     method: "GET",
   });
 
   const { boat, boatBookings, boatReviews } = await response.json();
-  // console.log(boat, boatBookings, boatReviews, "in the thunk");
+  console.log(boatReviews, "in the thunk");
   if (boatReviews.length >= 1) {
     for (let i = 0; i < boatReviews.length; i++) {
       let curr = boatReviews[i];
@@ -109,7 +110,7 @@ export const getOneBoat = (boatId) => async (dispatch) => {
       }
     }
   }
-
+  console.log(boatReviewsNoRating, "------------ in the thunk after for loop");
   boat.Bookings = boatBookings;
   boat.boatReviewsNoRating = boatReviewsNoRating;
   dispatch(oneBoat(boat));

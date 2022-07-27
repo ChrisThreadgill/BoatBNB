@@ -12,3 +12,30 @@
 .boat__page__boat__owner__name {
   font-weight: bold;
 }
+.boat__information__profile__picture {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.boat__information__no__profile__picture {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0a4195;
+  color: whitesmoke;
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  font-weight: bold;
+  font-size: 22px;
+  margin-bottom: 2px;
+}
+.no__user__ratings {
+  margin-top: 12px;
+  font-weight: bold;
+  font-size: 13px;
+  color: #282727b3;
+}

@@ -13,7 +13,9 @@ function UserBookings() {
   const user = useSelector((state) => state.session.user);
   const personalBookings = useSelector((state) => state.bookings.personalBookings);
   const ownerBookings = useSelector((state) => state.bookings.ownerBookings);
+  const userBookings = useSelector((state) => state.bookings.userBookings);
   const providerBoats = useSelector((state) => state.boats);
+
   // const boatsObj = providerBoats;
   const [userOwnerActive, setUserOwnerActive] = useState(false);
   const [userRenterActive, setUserRenterActive] = useState(true);
@@ -62,13 +64,32 @@ function UserBookings() {
           </div>
         ) : null}
       </div>
-      {isLoaded && Object.values(personalBookings).length >= 1 && userRenterActive ? (
+      {isLoaded && personalBookings && Object.values(personalBookings).length >= 1 && userRenterActive ? (
         Object.values(personalBookings).map((booking) => {
           return <UserBookingCard key={booking.id} booking={booking}></UserBookingCard>;
         })
       ) : (
         <div>
-          {isLoaded && Object.values(personalBookings).length < 1 && userRenterActive ? (
+          {isLoaded && personalBookings && Object.values(personalBookings).length < 1 && userRenterActive ? (
+            <div>
+              <div className="user__bookings__no__bookings">You have no bookings</div>
+              <div className="user__bookings__explore" onClick={() => history.push("/")}>
+                Explore BoatBNB
+              </div>
+            </div>
+          ) : (
+            <div></div>
+          )}
+        </div>
+      )}
+
+      {isLoaded && userBookings && Object.values(userBookings).length >= 1 && userRenterActive ? (
+        Object.values(userBookings).map((booking) => {
+          return <UserBookingCard key={booking.id} booking={booking}></UserBookingCard>;
+        })
+      ) : (
+        <div>
+          {isLoaded && user.roleId > 1 ? (
             <div>
               <div className="user__bookings__no__bookings">You have no bookings</div>
               <div className="user__bookings__explore" onClick={() => history.push("/")}>

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import NewBoatReviewModal from "../../../context/NewBoatReviewModal/NewBoatReviewModa";
 import BoatRatingDisplay from "../../Ratings/BoatRatingDisplay";
 import BoatPageRatingCard from "./BoatPageRatingCard";
@@ -20,24 +21,37 @@ function BoatPageReviews({ boat }) {
     // a must be equal to b
     // return 0;
   }
+  useEffect(() => {}, [boat]);
 
   const boatReviews = [...boat.BoatRatings, ...boat.boatReviewsNoRating];
-
-  console.log(boatReviews, "---------------------");
+  const boatPageReviewPreview = boatReviews.slice(0, 6);
+  // console.log(boatReviews, "---------------------");
 
   return (
     <div className="boat__page__reviews">
-      <h1>reviews header</h1>
-      <NewBoatReviewModal reviews={boatReviews}></NewBoatReviewModal>
-      <BoatRatingDisplay boat={boat}></BoatRatingDisplay>
+      <div className="boat__page__reviews__rating__modal__container">
+        <div>
+          <h1>{`Ratings & reviews`}</h1>
+          <BoatRatingDisplay boat={boat}></BoatRatingDisplay>
+        </div>
+        <NewBoatReviewModal reviews={boatReviews}></NewBoatReviewModal>
+      </div>
       <div className="boat__page__review__container">
-        {boat.boatReviewsNoRating.map((review) => {
+        {boatPageReviewPreview.map((rating) => {
+          // console.log(rating);
+          return rating.average ? (
+            <BoatPageRatingCard rating={rating}></BoatPageRatingCard>
+          ) : (
+            <BoatPageReviewCard review={rating}></BoatPageReviewCard>
+          );
+        })}
+        {/* {boat.boatReviewsNoRating.map((review) => {
           // console.log(review, review.User, "--------------- in the map");
           return <BoatPageReviewCard review={review} user={review.User}></BoatPageReviewCard>;
         })}
         {boat.BoatRatings.map((rating) => {
           return <BoatPageRatingCard rating={rating}></BoatPageRatingCard>;
-        })}
+        })} */}
       </div>
     </div>
   );

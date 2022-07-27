@@ -76,6 +76,22 @@ router.put(
     // console.log(user, "-=---------------");
   })
 );
+router.put(
+  "/roleId/provider/:userId",
+
+  asyncHandler(async (req, res) => {
+    const { userId } = req.params;
+
+    const user = await User.findByPk(userId);
+    await user.update({
+      roleId: 1,
+    });
+    return res.json({
+      user,
+    });
+    // console.log(user, "-=---------------");
+  })
+);
 
 router.put(
   "/:userId",

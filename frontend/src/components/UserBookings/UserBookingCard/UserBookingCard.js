@@ -25,12 +25,12 @@ function UserBookingCard({ booking }) {
                 onClick={
                   booking.Boat.userId === user.id
                     ? () => {
-                        console.log("in the first turn");
+                        // console.log("in the first turn");
                         dispatch(cancelOwnerBooking(booking));
                       }
                     : () => {
-                        console.log("in the else turn");
-                        dispatch(cancelUserBooking(booking));
+                        // console.log("in the else turn");
+                        dispatch(cancelUserBooking(booking, user.roleId));
                       }
                 }
               >

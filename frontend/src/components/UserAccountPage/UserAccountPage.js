@@ -21,7 +21,7 @@ function UserAccountPage() {
   const [errors, setErrors] = useState([]);
   const user = useSelector((state) => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
-  console.log(user, "-----------");
+  // console.log(user, "-----------");
   // console.log(user);
 
   if (!user) {

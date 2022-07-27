@@ -1,18 +1,4 @@
-import {
-  FaStar,
-  FaUserClock,
-  FaRegSmile,
-  FaHandshakeAltSlash,
-  FaRegHandshake,
-  FaRegClock,
-  FaAirbnb,
-  FaRegCalendarAlt,
-  FaRegCalendarCheck,
-  FaRegCalendarMinus,
-  FaSoap,
-  FaCouch,
-  FaWrench,
-} from "react-icons/fa";
+import { FaStar, FaSoap, FaCouch, FaWrench } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as ratingActions from "../../store/boatRatings";

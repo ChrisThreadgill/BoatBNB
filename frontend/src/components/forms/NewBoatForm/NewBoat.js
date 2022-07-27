@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { years } from "../../Utils";
 import * as boatsActions from "../../../store/boats";
+import * as sessionActions from "../../../store/session";
 import { google } from "../../Utils";
 
 function NewBoatForm() {
@@ -199,13 +200,14 @@ function NewBoatForm() {
       };
       setImageLoading(true);
       dispatch(boatsActions.addOneBoat(boat, userId)).then((boat) => {
-        if (images.length > 0) {
-          dispatch(boatsActions.uploadBoatPhoto(images, boat.boat.id));
-          setImageLoading(false);
-          setBoatSuccess(true);
-          setDisabled(true);
-          setTimeout(() => history.push("/manage-boats"), 1500);
-        }
+        dispatch(boatsActions.uploadBoatPhoto(images, boat.boat.id));
+        setImageLoading(false);
+        setBoatSuccess(true);
+        setDisabled(true);
+        dispatch(sessionActions.updateProviderId(user.id));
+        setTimeout(async () => {
+          history.push("/manage-boats");
+        }, 1500);
       });
     }
 

@@ -10,6 +10,8 @@ const GET_ALL_FOR_BOAT = "bookings/getAllForBoat";
 const CLEAR = "bookings/clear";
 const CANCEL = "bookings/cancel";
 const CANCEL_OWNER = "bookings/cancelOwner";
+const CANCEL_USER = "bookings/cancelUser";
+const CANCEL_PROV = "bookings/cancelProv";
 
 const allUserBookings = (bookings) => {
   return {
@@ -27,9 +29,15 @@ const allProviderBookings = (bookings, boatBookings) => {
   };
 };
 
-const cancelBooking = (bookingId) => {
+const cancelBookingUser = (bookingId) => {
   return {
-    type: CANCEL,
+    type: CANCEL_USER,
+    payload: bookingId,
+  };
+};
+const cancelUserBookingProvider = (bookingId) => {
+  return {
+    type: CANCEL_PROV,
     payload: bookingId,
   };
 };
@@ -58,10 +66,13 @@ export const getAllUserBookings = (userId) => async (dispatch) => {
     method: "GET",
   });
   const { bookingsNoBoats } = await response.json();
-  console.log(bookingsNoBoats, "-----------------");
-  // console.log(bookingsNoBoats.Bookings);
-
-  dispatch(allUserBookings(bookingsNoBoats.Bookings));
+  // console.log(bookingsNoBoats, "-----------------");
+  // console.log(bookingsNoBoats, "-----------------");
+  if (!bookingsNoBoats) {
+    dispatch(allUserBookings());
+  } else {
+    dispatch(allUserBookings(bookingsNoBoats));
+  }
 };
 export const getAllProviderBookings = (userId) => async (dispatch) => {
   const response = await csrfFetch(`/api/bookings/provider/${userId}`, {
@@ -105,22 +116,28 @@ export const requestBoatBooking = (boatId, booking) => async (dispatch) => {
     body: JSON.stringify(booking),
   });
   const response = await newBooking.json();
-  console.log(response, "----------");
+  // console.log(response, "----------");
   // dispatch(cancelBooking(booking));
   // return booking;
 };
 
-export const cancelUserBooking = (booking) => async (dispatch) => {
+export const cancelUserBooking = (booking, roleId) => async (dispatch) => {
   const bookingToDelete = await csrfFetch(`/api/bookings/${booking.id}`, {
     method: "DELETE",
   });
+
   const response = await bookingToDelete.json();
 
-  dispatch(cancelBooking(booking.id));
+  if (roleId < 2) {
+    dispatch(cancelUserBookingProvider(booking.id));
+  } else {
+    dispatch(cancelBookingUser(booking.id));
+  }
+
   // return booking;
 };
 export const cancelOwnerBooking = (booking) => async (dispatch) => {
-  console.log(booking, "----------");
+  // console.log(booking, "----------");
   const bookingToDelete = await csrfFetch(`/api/bookings/${booking.id}`, {
     method: "DELETE",
   });
@@ -138,18 +155,23 @@ const initialState = {};
 
 const bookingsReducer = (state = initialState, action) => {
   let newState = clone(state);
-  const personalBookings = {};
+
   switch (action.type) {
     case GET_ALL_FOR_USER:
-      const bookings = {};
-
-      for (let booking of action.payload) {
-        personalBookings[booking.id] = booking;
+      const userBookings = {};
+      // console.log(action.payload);
+      if (action.payload) {
+        for (let booking of action.payload.Bookings) {
+          userBookings[booking.id] = booking;
+        }
+        return { userBookings };
+      } else {
+        return userBookings;
       }
 
-      return { personalBookings };
     case GET_ALL_FOR_PROVIDER:
       const ownerBookings = {};
+      const personalBookings = {};
       for (let boatBooking of action.boatBookings) {
         ownerBookings[boatBooking.id] = boatBooking;
       }
@@ -174,13 +196,23 @@ const bookingsReducer = (state = initialState, action) => {
       return { ...boatBookings };
 
     case CANCEL:
-      console.log(newState, "-----------------");
+      // console.log(newState, "-----------------");
       delete newState.personalBookings[action.payload];
       // delete newState[action.payload.id];
       return newState;
     case CANCEL_OWNER:
-      console.log(newState, "-----------------");
+      // console.log(newState, "-----------------");
       delete newState.ownerBookings[action.payload];
+      // delete newState[action.payload.id];
+      return newState;
+    case CANCEL_PROV:
+      // console.log(newState, "-----------------");
+      delete newState.ownerBookings[action.payload];
+      // delete newState[action.payload.id];
+      return newState;
+    case CANCEL_USER:
+      // console.log(newState, "-----------------");
+      delete newState.userBookings[action.payload];
       // delete newState[action.payload.id];
       return newState;
     case CLEAR:

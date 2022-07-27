@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf";
 const SET_USER = "session/setUser";
 const REMOVE_USER = "session/removeUser";
 const UPDATE_PICTURE = "session/updatePicture";
+const UPDATE_ROLE = "session/updateRole";
 
 const updateProfilePicture = (user) => ({
   type: UPDATE_PICTURE,
@@ -12,6 +13,12 @@ const updateProfilePicture = (user) => ({
 const setUser = (user) => {
   return {
     type: SET_USER,
+    payload: user,
+  };
+};
+const updateRole = (user) => {
+  return {
+    type: UPDATE_ROLE,
     payload: user,
   };
 };
@@ -97,6 +104,15 @@ export const updateRoleId = (userId) => async (dispatch) => {
     method: "PUT",
   });
   const user = await res.json();
+  dispatch(updateRole(user));
+  return user;
+};
+export const updateProviderId = (userId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/users/roleId/provider/${userId}`, {
+    method: "PUT",
+  });
+  const user = await res.json();
+  dispatch(updateRole(user));
 
   return user;
 };
@@ -107,6 +123,8 @@ const sessionReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
     case UPDATE_PICTURE:
+      return action.payload;
+    case UPDATE_ROLE:
       return action.payload;
     case SET_USER:
       newState = Object.assign({}, state);

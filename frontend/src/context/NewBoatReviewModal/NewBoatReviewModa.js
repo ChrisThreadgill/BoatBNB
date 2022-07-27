@@ -8,12 +8,12 @@ import NewBoatReviewForm from "../../components/forms/NewBoatReview/NewBoatRevie
 
 function NewBoatReviewModal({ reviews }) {
   const [showModal, setShowModal] = useState(false);
-
+  // console.log(reviews.length);
   return (
     <>
-      <button className="user__review__form__modal__button" onClick={() => setShowModal(true)}>
-        Leave a review
-      </button>
+      <div className="user__review__form__modal__button" onClick={() => setShowModal(true)}>
+        {`SEE ALL ${reviews.length} REVIEWS`}
+      </div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <NewBoatReviewForm reviews={reviews}></NewBoatReviewForm>

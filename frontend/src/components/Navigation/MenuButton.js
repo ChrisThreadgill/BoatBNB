@@ -24,7 +24,7 @@ function MenuButton({ user }) {
     document.addEventListener("click", closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
+  }, [showMenu, user]);
 
   const logout = (e) => {
     e.preventDefault();

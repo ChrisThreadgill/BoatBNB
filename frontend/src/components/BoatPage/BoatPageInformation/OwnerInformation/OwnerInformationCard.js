@@ -11,11 +11,21 @@ function OwnerInformationCard({ boat }) {
       <h3>Boat Owner</h3>
 
       <div className="boat__page__avatar__container">
-        <img
-          className="review__profile__picture"
-          onClick={() => history.push(`/test/${boat.User.id}`)}
-          src={boat.User.profilePicture ? `${boat.User.profilePicture}` : null}
-        ></img>
+        {boat.User.profilePicture ? (
+          <img
+            className="boat__information__profile__picture"
+            onClick={() => history.push(`/test/${boat.User.id}`)}
+            src={boat.User.profilePicture ? `${boat.User.profilePicture}` : null}
+          ></img>
+        ) : (
+          <div
+            className="boat__information__no__profile__picture"
+            onClick={() => history.push(`/test/${boat.User.id}`)}
+          >
+            {boat.User.firstName.slice(0, 1).toUpperCase()}
+            {boat.User.lastName.slice(0, 1).toUpperCase()}
+          </div>
+        )}
 
         <div className="boat__page__owner__rating__container">
           <div className="boat__page__boat__owner__name">{`${boat.User.firstName} ${boat.User.lastName}`} </div>
@@ -24,7 +34,9 @@ function OwnerInformationCard({ boat }) {
               <UserRatingDisplay user={boat.User}></UserRatingDisplay>
               <span>{`(${boat.User.UserRatings.length} ratings)`}</span>
             </div>
-          ) : null}
+          ) : (
+            <div className="no__user__ratings">No user ratings yet</div>
+          )}
         </div>
       </div>
     </div>

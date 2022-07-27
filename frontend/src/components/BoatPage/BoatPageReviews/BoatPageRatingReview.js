@@ -1,6 +1,7 @@
 import "./BoatPageReviewCard.css";
 import { useHistory } from "react-router-dom";
 import BoatPageRatingDisplay from "./BoatPageRatingDisplay";
+import BoatPageReviewRatingDisplay from "./BoatPageReviewRatingDisplay";
 
 const moment = require("moment");
 
@@ -11,21 +12,28 @@ function BoatPageRatingReview({ rating }) {
   //
 
   return (
-    <div className="user__review__card__container">
+    <div className="boat__review__card__container">
       <div className="review__card__user__profile">
-        <img
-          src={rating.User.profilePicture ? `${rating.User.profilePicture}` : null}
-          className="review__profile__picture"
-          onClick={() => {
-            history.push(`/users/${rating.User.id}`);
-          }}
-        />
+        {rating.User.profilePicture ? (
+          <img
+            className="boat__information__profile__picture"
+            onClick={() => history.push(`/test/${rating.User.id}`)}
+            src={rating.User.profilePicture ? `${rating.User.profilePicture}` : null}
+          ></img>
+        ) : (
+          <div
+            className="boat__information__no__profile__picture"
+            onClick={() => history.push(`/test/${rating.User.id}`)}
+          >
+            {rating.User.firstName.slice(0, 1).toUpperCase()}
+          </div>
+        )}
         <div>{rating.User.firstName}</div>
       </div>
       {rating && rating.BoatReview ? (
         <div className="boat__review__card__content__container">
           <div>
-            <BoatPageRatingDisplay boatRating={rating}></BoatPageRatingDisplay>
+            <BoatPageReviewRatingDisplay rating={rating}></BoatPageReviewRatingDisplay>
             {/* <UserReviewCardRatingDisplay userRating={rating.UserRating}></UserReviewCardRatingDisplay> */}
           </div>
           <div className="user__review__content">{rating.BoatReview.review}</div>

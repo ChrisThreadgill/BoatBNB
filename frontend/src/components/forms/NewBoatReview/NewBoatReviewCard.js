@@ -3,7 +3,7 @@ import UserRatingDisplay from "../../Ratings/UserRatingDisplay";
 
 function NewBoatReviewCard({ review }) {
   //
-  console.log(review, "---------------------");
+  // console.log(review, "---------------------");
 
   return (
     <div className="modal__review__card">

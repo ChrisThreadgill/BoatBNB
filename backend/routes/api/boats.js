@@ -188,6 +188,7 @@ router.post("/:boatId/image", requireAuth);
 
 router.post(
   "/:boatId/image",
+  requireAuth,
   singleMulterUpload("image"),
   // multipleMulterUpload("image"),
   asyncHandler(async (req, res) => {
@@ -207,6 +208,7 @@ router.post(
 );
 router.post(
   "/:boatId/images",
+  requireAuth,
   // singleMulterUpload("image"),
   multipleMulterUpload("image"),
   asyncHandler(async (req, res) => {

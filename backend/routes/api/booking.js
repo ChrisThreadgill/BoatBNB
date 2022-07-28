@@ -30,8 +30,8 @@ router.get(
       ],
     });
     if (bookingsNoBoats === null) {
-      console.log(bookingsNoBoats);
-      console.log("workingggggggggggggggg");
+      // console.log(bookingsNoBoats);
+      // console.log("workingggggggggggggggg");
       return res.json({});
     } else {
       return res.json({

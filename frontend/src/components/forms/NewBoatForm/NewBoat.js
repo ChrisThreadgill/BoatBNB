@@ -182,7 +182,7 @@ function NewBoatForm() {
     //   setAddressErr(true);
     //   return;
     // }
-    console.log("hello");
+    // console.log("hello");
     const errs = await checkErrors();
     if (!errs) {
       const userId = user.id;

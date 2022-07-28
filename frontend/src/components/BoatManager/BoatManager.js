@@ -38,19 +38,45 @@ function BoatManager() {
     // );
   }, [dispatch]);
 
+  const deleteBoat = async (boatId) => {
+    dispatch(boatsActions.deleteBoatListing(boatId));
+
+    // history.push(`/users/${userId}/profile`);
+  };
+
   return (
-    <>
+    <div className="boat__manager__container">
       {isLoaded ? (
         <div>
-          <h1>Boat manager</h1>
+          <div className="boat__manager__header__container">
+            <h2>Boat manager</h2>
+            <div onClick={() => history.push("/new-listing")}>LIST A NEW BOAT</div>
+          </div>
           {Object.values(boats).map((boat) => {
-            return <BoatCard boat={boat}></BoatCard>;
+            return (
+              <div className="boat__manager__boat__card__container">
+                <BoatCard boat={boat}></BoatCard>
+                <div className="boat__manager__buttons__container">
+                  <div
+                    className="boat__manager__delete__listing"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      deleteBoat(boat.id);
+                      window.location.reload();
+                    }}
+                  >
+                    Delete listing
+                  </div>
+                  <div className="boat__manager__edit__listing">Edit</div>
+                </div>
+              </div>
+            );
           })}
         </div>
       ) : (
         <h1>... loading</h1>
       )}
-    </>
+    </div>
   );
 }
 

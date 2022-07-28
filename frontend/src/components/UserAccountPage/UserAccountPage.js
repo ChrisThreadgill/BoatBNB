@@ -40,6 +40,7 @@ function UserAccountPage() {
     uploadHiddenInput.current.click();
   };
   const updateImage = (e) => {
+    // console.log(e, "-----------------sadkljglksadjgkl");
     let file = e.target.files[0];
     setFile(file);
     if (file) {
@@ -54,7 +55,7 @@ function UserAccountPage() {
     // console.log(file);
     let userId = user.id;
     dispatch(sessionActions.updateUserProfilePicture(file, userId)).then(() => {
-      setFile("");
+      setFile(null);
     });
     // const result = await postImage({ image: file });
     // const profilePicture = result.url;
@@ -91,15 +92,19 @@ function UserAccountPage() {
               {/* <div className="user__account__profile__picture"></div> */}
               {user ? (
                 <>
-                  {user.profilePicture && user.profilePicture && !file ? (
-                    <img
-                      className="user__account__profile__picture"
-                      src={user.profilePicture ? `${user.profilePicture}` : null}
-                    ></img>
-                  ) : (
+                  {
+                    user.profilePicture && user.profilePicture && !file ? (
+                      <img
+                        className="user__account__profile__picture"
+                        src={user.profilePicture ? `${user.profilePicture}` : null}
+                      ></img>
+                    ) : null
+                    // <img className="user__account__profile__picture" src={preview ? `${preview}` : null}></img>
+                  }
+                  {file ? (
                     <img className="user__account__profile__picture" src={preview ? `${preview}` : null}></img>
-                  )}
-                  {!user.profilePicture ? (
+                  ) : null}
+                  {!user.profilePicture && !file ? (
                     <div className="no__profile__picture__avatar">{`${user.firstName.slice(0, 1)} ${user.lastName.slice(
                       0,
                       1
@@ -137,7 +142,7 @@ function UserAccountPage() {
                   ) : null}
 
                   {file ? (
-                    <div className="user__picture__option__cancel" onClick={() => setFile("")}>
+                    <div className="user__picture__option__cancel" onClick={() => setFile(null)}>
                       Cancel
                     </div>
                   ) : null}

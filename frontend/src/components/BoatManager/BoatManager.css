@@ -1,0 +1,56 @@
+.boat__manager__container {
+  /* border: 1px solid blue; */
+  margin-top: 44px;
+  margin-left: 44px;
+}
+.boat__manager__header__container {
+  /* border: 2px dashed purple; */
+  width: 100%;
+  max-width: 1111px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.boat__manager__header__container > div {
+  width: 162px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: #0e7873 1px solid;
+  color: #0e7873;
+  font-weight: bold;
+  font-size: 14px;
+}
+.boat__manager__header__container > div:hover {
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #0e7873;
+}
+
+.boat__manager__boat__card__container {
+  width: 100%;
+  max-width: 1111px;
+  /* border: 1px solid red; */
+}
+.boat__manager__buttons__container {
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  height: 22px;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1px solid rgba(111, 111, 111, 0.2);
+  margin: 13px 0 22px 0;
+}
+.boat__manager__delete__listing {
+  color: firebrick;
+
+  cursor: pointer;
+}
+
+.boat__manager__edit__listing {
+  color: #0a4195;
+  cursor: pointer;
+}

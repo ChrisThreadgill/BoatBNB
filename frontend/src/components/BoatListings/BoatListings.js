@@ -30,7 +30,7 @@ function BoatListings() {
     const marker = { lat: Number(boat.lat), lng: Number(boat.lng), model: boat.model, boatId: boat.id };
     markers.push(marker);
   }
-  console.log(markers);
+  // console.log(markers);
   // console.log(history);
   // console.log(boatsObj);
   // const [searchState, setSearchState] = useState(boatsArr[0]?.state);

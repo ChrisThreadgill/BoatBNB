@@ -8,6 +8,7 @@ const GET_PROV = "boats/getprov";
 const GET_ONE = "boats/getone";
 const UPDATE = "/boats/update";
 const CLEAN = "boats/clean";
+const DELETE = "boats/delete";
 
 const allBoats = (boats) => {
   return {
@@ -40,6 +41,13 @@ const updateBoat = (boat) => {
   return {
     type: UPDATE,
     payload: boat,
+  };
+};
+
+const deleteBoat = (boatId) => {
+  return {
+    type: DELETE,
+    payload: boatId,
   };
 };
 const cleanBoats = () => {
@@ -92,13 +100,13 @@ export const addOneBoat = (boat, userId) => async (dispatch) => {
 export const getOneBoat = (boatId) => async (dispatch) => {
   // console.log(boatId, "in the thunk");
   let boatReviewsNoRating = [];
-  console.log(boatReviewsNoRating, "------------ in the thunk before fetch");
+  // console.log(boatReviewsNoRating, "------------ in the thunk before fetch");
   const response = await csrfFetch(`/api/boats/${boatId}`, {
     method: "GET",
   });
 
   const { boat, boatBookings, boatReviews } = await response.json();
-  console.log(boatReviews, "in the thunk");
+  // console.log(boatReviews, "in the thunk");
   if (boatReviews.length >= 1) {
     for (let i = 0; i < boatReviews.length; i++) {
       let curr = boatReviews[i];
@@ -110,7 +118,7 @@ export const getOneBoat = (boatId) => async (dispatch) => {
       }
     }
   }
-  console.log(boatReviewsNoRating, "------------ in the thunk after for loop");
+  // console.log(boatReviewsNoRating, "------------ in the thunk after for loop");
   boat.Bookings = boatBookings;
   boat.boatReviewsNoRating = boatReviewsNoRating;
   dispatch(oneBoat(boat));
@@ -195,6 +203,15 @@ export const clean = () => (dispatch) => {
   // console.log("we are in the clean");
   dispatch(cleanBoats());
 };
+export const deleteBoatListing = (boatId) => async (dispatch) => {
+  const deletedBoat = await csrfFetch(`/api/boats/${boatId}`, {
+    method: "DELETE",
+  });
+  const response = await deletedBoat.json();
+
+  dispatch(deleteBoat(boatId));
+  return response;
+};
 
 const initialState = {};
 
@@ -228,6 +245,12 @@ const boatsReducer = (state = initialState, action) => {
 
       newState[action.payload.id] = action.payload;
 
+      return newState;
+
+    case DELETE:
+      // console.log(newState, "new state in the boat reducer");
+      // console.log(newState, "-----------------");
+      delete newState[action.payload];
       return newState;
     case CLEAN:
       return {};

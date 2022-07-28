@@ -92,7 +92,7 @@ function NewBoatReviewForm({ reviews }) {
     }
   };
 
-  console.log(reviews, "-------------------");
+  // console.log(reviews, "-------------------");
   return (
     <div className="boat__review__form__modal__wrapper">
       <h1>Ratings {"& "}reviews</h1>

@@ -5,7 +5,7 @@ import BoatPageReviewCard from "./BoatPageReviewCard";
 import BoatPageRatingReview from "./BoatPageRatingReview";
 
 function BoatPageRatingCard({ rating }) {
-  console.log(rating, "----------------------");
+  // console.log(rating, "----------------------");
   // console.log(rating, "boat page rating carddfdddddddddd");
   //
 

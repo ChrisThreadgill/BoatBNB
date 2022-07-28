@@ -7,7 +7,7 @@ import NewBoatReviewCard from "./NewBoatReviewCard";
 import * as reviewActions from "../../../store/boatReviews";
 import * as ratingActions from "../../../store/boatRatings";
 
-function NewBoatReviewForm({ reviews }) {
+function NewBoatReviewForm({ reviews, setShowModal }) {
   const { boatId } = useParams();
   const dispatch = useDispatch();
 
@@ -51,20 +51,24 @@ function NewBoatReviewForm({ reviews }) {
       if (!clean || clean === null) ratingBody.cleanliness = 1;
       if (!comfort || comfort === null) ratingBody.comfort = 1;
 
-      dispatch(ratingActions.addBoatRatingNR(ratingBody));
-
-      setRating(0);
-      setClean(0);
-      setComfort(0);
-      setFunc(0);
+      dispatch(ratingActions.addBoatRatingNR(ratingBody)).then((res) => {
+        setRating(0);
+        setClean(0);
+        setComfort(0);
+        setFunc(0);
+        setShowModal(false);
+        window.location.reload();
+      });
     }
     if (!reviewLengthError) {
       if (review && !rating) {
         const reviewBody = { userId: user.id, boatId, review };
 
-        dispatch(reviewActions.addReview(reviewBody));
-
-        setReview("");
+        dispatch(reviewActions.addReview(reviewBody)).then((res) => {
+          setReview("");
+          setShowModal(false);
+          window.location.reload();
+        });
       }
       if (review && rating) {
         const ratingBody = {
@@ -81,13 +85,15 @@ function NewBoatReviewForm({ reviews }) {
         if (comfort === 0) ratingBody.comfort = rating;
         const reviewBody = { userId: user.id, boatId, review };
 
-        dispatch(reviewActions.addReviewWithRating(reviewBody, ratingBody));
-
-        setReview("");
-        setRating(0);
-        setClean(0);
-        setComfort(0);
-        setFunc(0);
+        dispatch(reviewActions.addReviewWithRating(reviewBody, ratingBody)).then((res) => {
+          setReview("");
+          setRating(0);
+          setClean(0);
+          setComfort(0);
+          setFunc(0);
+          setShowModal(false);
+          window.location.reload();
+        });
       }
     }
   };

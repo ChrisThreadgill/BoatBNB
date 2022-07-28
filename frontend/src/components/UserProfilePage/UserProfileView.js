@@ -50,13 +50,15 @@ function UserProfileView() {
           <div className="user__profile__details">
             <img src={user.profilePicture ? `${user.profilePicture}` : null} className="profile__page__picture" />
             <div className="user__rating__average__container">
-              <span>{user?.firstName}</span>
+              <span>{`${user.firstName.slice(0, 1).toUpperCase()}${user.firstName.slice(1)}`}</span>
               <UserRatingDisplay user={user}></UserRatingDisplay>
             </div>
           </div>
           <div>
             {user && user.Boats.length >= 1 && (
-              <div className="user__profile__boats__header">{user.firstName}'s boats</div>
+              <div className="user__profile__boats__header">
+                {`${user.firstName.slice(0, 1).toUpperCase()}${user.firstName.slice(1)}`}'s boats
+              </div>
             )}
             {/* <div className="user__profile__boats__header">{User?.firstName}'s boats</div> */}
             {user && user.Boats && (

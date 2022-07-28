@@ -114,7 +114,13 @@ function UserAccountPage() {
               ) : null}
 
               <div className="user__account__profile__name__container">
-                <div className="user__account__name">{user ? user.firstName : null}</div>
+                {user ? (
+                  <div className="user__account__name">
+                    {" "}
+                    {`${user.firstName.slice(0, 1).toUpperCase()}${user.firstName.slice(1)}`}{" "}
+                  </div>
+                ) : null}
+
                 {/* <div>rating</div> */}
               </div>
               <form onSubmit={handleSubmit} className="user__profile__picture__update">

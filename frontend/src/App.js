@@ -79,8 +79,8 @@ function App() {
               <UserLoginForm></UserLoginForm>
             </Route> */}
             <Route path="/users/:userId/">
-              <h1>hello</h1>
-              {/* <UserProfilePage></UserProfilePage> */}
+              {/* <h1>hello</h1> */}
+              <UserProfilePage></UserProfilePage>
             </Route>
             <Route path="/bookings">
               {/* <h1>hello from bookings</h1> */}
@@ -107,9 +107,9 @@ function App() {
             <Route path="/boats/:boatId">
               <BoatPage></BoatPage>
             </Route>
-            <Route path="/test/:userId">
+            {/* <Route path="/test/:userId">
               <UserProfilePage></UserProfilePage>
-            </Route>
+            </Route> */}
             <Route path="/oops">
               <CastAway></CastAway>
             </Route>

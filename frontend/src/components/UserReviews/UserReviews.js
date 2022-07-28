@@ -42,10 +42,12 @@ function UserReviews({ user }) {
     <div className="user__profile__reviews__container">
       <div className="user__profile__reviews__header">
         {spreadReviewsRatings.length < 1
-          ? `No reviews of ${user.firstName} yet`
-          : `Reviews of ${user.firstName} (${spreadReviewsRatings.length}) `}
+          ? `No reviews of ${user.firstName.slice(0, 1).toUpperCase()}${user.firstName.slice(1)} yet`
+          : `Reviews of ${user.firstName.slice(0, 1).toUpperCase()}${user.firstName.slice(1)} (${
+              spreadReviewsRatings.length
+            }) `}
 
-        <NewUserReviewModal></NewUserReviewModal>
+        {/* <NewUserReviewModal></NewUserReviewModal> */}
       </div>
       <div className="profile__reviews__container">
         {" "}

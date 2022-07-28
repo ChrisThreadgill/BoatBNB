@@ -13,7 +13,7 @@ function BoatReviewCard({ review }) {
       <div>
         {review.User.profilePicture && (
           <div>
-            <h3>{review.User.firstName}</h3>
+            <h3>{`${review.User.firstName.slice(0, 1).toUpperCase()}${review.User.firstName.slice(1)}`}</h3>
             <img src={`${review.User?.profilePicture}`} className="profile__avatar" />
           </div>
         )}

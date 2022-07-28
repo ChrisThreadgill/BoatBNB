@@ -42,7 +42,7 @@ function BoatBookings({ boat }) {
           return (
             <div className="provider__bookings__view">
               <div className="provider__booking__user__information">
-                <h1>{booking.User.firstName}</h1>
+                <h1>{`${booking.User.firstName.slice(0, 1).toUpperCase()}${booking.User.firstName.slice(1)}`}</h1>
                 <img src={`${booking.User.profilePicture}`} className="profile__avatar" />
                 {averageUserRatings && averageUserRatings.average >= 1 && (
                   <div className="provider__booking__user__rating">

@@ -65,8 +65,8 @@ function MenuButton({ user }) {
           <div
             className={user.roleId === 1 ? "nav__menu__username__container__owner" : "nav__menu__username__container"}
           >
-            <span>Hi, {user.firstName}</span>
-            <div onClick={() => history.push(`/test/${user.id}`)}>View Profile</div>
+            <span>Hi, {`${user.firstName.slice(0, 1).toUpperCase()}${user.firstName.slice(1)}`}</span>
+            <div onClick={() => history.push(`/users/${user.id}`)}>View Profile</div>
           </div>
           {user.roleId === 1 ? (
             <div className="nav__menu__options__owner">

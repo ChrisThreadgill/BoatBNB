@@ -16,7 +16,7 @@ function NewBoatReviewModal({ reviews }) {
       </div>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <NewBoatReviewForm reviews={reviews}></NewBoatReviewForm>
+          <NewBoatReviewForm reviews={reviews} setShowModal={setShowModal}></NewBoatReviewForm>
         </Modal>
       )}
     </>

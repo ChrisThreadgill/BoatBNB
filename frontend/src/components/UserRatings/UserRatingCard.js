@@ -17,7 +17,7 @@ function UserRatingCard({ rating }) {
             history.push(`/users/${rating.User.id}`);
           }}
         />
-        <div>{rating.User.firstName}</div>
+        <div>{`${rating.User.firstName.slice(0, 1).toUpperCase()}${rating.User.firstName.slice(1)}`}</div>
       </div>
 
       <div className="user__review__card__content__container">

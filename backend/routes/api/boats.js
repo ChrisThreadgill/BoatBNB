@@ -200,9 +200,9 @@ router.post(
       url,
     });
     // console.log(image);
-    // return res.json({
-    //   user,
-    // });
+    return res.json({
+      image,
+    });
     // console.log(user, "-=---------------");
   })
 );
@@ -227,6 +227,9 @@ router.post(
       });
       imagesArr.push(image);
     }
+    return res.json({
+      imagesArr,
+    });
     // console.log(imagesArr);
     // const image = await Image.create({
     //   boatId,

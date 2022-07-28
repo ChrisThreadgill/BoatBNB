@@ -225,11 +225,11 @@ router.post(
         boatId,
         url,
       });
+
+      console.log(image, "----------------");
       imagesArr.push(image);
     }
-    return res.json({
-      imagesArr,
-    });
+    return res.send("hello");
     // console.log(imagesArr);
     // const image = await Image.create({
     //   boatId,

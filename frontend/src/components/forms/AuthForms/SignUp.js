@@ -16,35 +16,106 @@ function SignUpForm() {
 
   const [roleId, setRoleId] = useState("");
   const [firstName, setFirstName] = useState("");
+  const [firstNameSelected, setFirstNameSelected] = useState(false);
+  const [firstNameErr, setFirstNameErr] = useState(false);
+  const [noFirstNameErr, setNoFirstNameErr] = useState(false);
   const [lastName, setLastName] = useState("");
+  const [lastNameSelected, setLastNameSelected] = useState(false);
+  const [lastNameErr, setLastNameErr] = useState(false);
+  const [noLastNameErr, setNoLastNameErr] = useState(false);
   const [email, setEmail] = useState("");
+  const [emailSelected, setEmailSelected] = useState(false);
+  const [emailErr, setEmailErr] = useState(false);
+  const [newEmailErr, setNewEmailErr] = useState(false);
   const [password, setPassword] = useState("");
+  const [passwordMatch, setPasswordMatch] = useState(false);
+  const [passwordErr, setPasswordErr] = useState(false);
+  const [passwordLengthErr, setPasswordLengthErr] = useState(false);
+  const [confirmPasswordLengthErr, setConfirmPasswordLengthErr] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [file, setFile] = useState(null);
   const [fileError, setFileError] = useState("");
   const [errors, setErrors] = useState([]);
   const [passwordShow, setPasswordShow] = useState(false);
+
+  const [submitted, setSubmitted] = useState(false);
   const history = useHistory();
 
-  // async function postImage({ image }) {
-  //   const formData = new FormData();
-  //   formData.append("image", image);
+  useEffect(() => {}, [dispatch]);
 
-  //   const result = await axios.post("/api/images", formData, { headers: { "Content-Type": "multipart/form-data" } });
-  //   return result.data;
-  // }
+  const emailExp = new RegExp(
+    /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
+  );
 
-  if (sessionUser) return <Redirect to="/" />;
+  useEffect(() => {
+    setEmailErr(false);
+    setFirstNameErr(false);
+    setLastNameErr(false);
+    setPasswordMatch(false);
+    setConfirmPasswordLengthErr(false);
+    setPasswordLengthErr(false);
+    if (submitted && !emailExp.test(email)) setEmailErr(true);
+    if (emailExp.test(email)) setEmailErr(false);
+    if (firstName.length > 75) setFirstNameErr(true);
+    if (firstName.length < 75) setFirstNameErr(false);
+    if (lastName.length > 75) setLastNameErr(true);
+    if (lastName.length < 75) setLastNameErr(false);
+    if (submitted && password.length < 6) setPasswordLengthErr(true);
+    if (password.length > 6) setPasswordLengthErr(false);
+    if (submitted && confirmPassword.length < 6) setConfirmPasswordLengthErr(true);
+    if (confirmPassword.length > 6) setConfirmPasswordLengthErr(false);
+  }, [email, firstName, lastName, password, confirmPassword]);
+
+  const checkErrors = async () => {
+    let err = 0;
+    if (firstName.length > 75) {
+      err++;
+      setFirstNameErr(true);
+    }
+    if (!firstName.trim()) {
+      err++;
+      setNoFirstNameErr(true);
+    }
+    if (lastName.length > 75) {
+      err++;
+      setLastNameErr(true);
+    }
+    if (!lastName.trim()) {
+      err++;
+      setNoLastNameErr(true);
+    }
+    if (!emailExp.test(email)) {
+      err++;
+      setEmailErr(true);
+    }
+    if (!password.trim() || !confirmPassword.trim()) {
+      err++;
+      setPasswordErr(true);
+    }
+    if (password.length < 6) {
+      err++;
+      setPasswordLengthErr(true);
+    }
+    if (confirmPassword.length < 6) {
+      err++;
+      setConfirmPasswordLengthErr(true);
+    }
+
+    return err;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitted(true);
     if (password === confirmPassword) {
-      // const result = await postImage({ image: file });
-      // const profilePicture = result.url;
+      const errs = await checkErrors();
+      if (errs > 0) return;
 
       setErrors([]);
       return dispatch(sessionActions.signup({ firstName, lastName, email, password })).catch(async (res) => {
         const data = await res.json();
+        console.log(data, "---------------");
+        if (data.errors) setNewEmailErr(true);
         if (!data.errors) {
           setRoleId("");
           setFirstName("");
@@ -53,18 +124,17 @@ function SignUpForm() {
           setPassword("");
           setConfirmPassword("");
         }
-
-        if (data && data.errors) setErrors(data.errors);
       });
     }
-    return setErrors(["Confirm Password field must be the same as the Password field"]);
+    return setPasswordMatch(true);
   };
 
+  if (sessionUser) return <Redirect to="/" />;
   return (
     <div className="signup__form__container">
       <div className="sign__up__form__header">
         {/* <img src="/BNB.svg" className="boat__bnb__logo" /> */}
-        <>Sign up</>
+        Sign up
         {/* <h3>Welcome to Boat BNB!</h3> */}
       </div>
       <form onSubmit={handleSubmit} className="signup__form">
@@ -73,44 +143,122 @@ function SignUpForm() {
             <li key={idx}>{error}</li>
           ))}
         </ul> */}
-        <div className="sign__up__input__container">
+        <div
+          className={
+            firstNameErr || noFirstNameErr ? "sign__up__input__container__error" : "sign__up__input__container"
+          }
+        >
+          {firstNameSelected || noFirstNameErr || firstNameErr || firstName ? (
+            <div className="sign__up__input__header__selected">
+              First Name
+              {noFirstNameErr ? <span className="sign__up__input__header__selected__error"> - *Required</span> : null}
+              {firstNameErr ? (
+                <span className="sign__up__input__header__selected__error"> - *75 character limit</span>
+              ) : null}
+            </div>
+          ) : null}
+
           <input
             className="signup__form__inputs"
-            placeholder="First name"
+            placeholder={firstNameSelected || noFirstNameErr || firstNameErr ? null : "First Name"}
             type="text"
+            onFocus={() => {
+              setFirstNameSelected(true);
+              setNoFirstNameErr(false);
+            }}
+            onBlur={() => setFirstNameSelected(false)}
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            required
+            // required
           />
         </div>
-        <div className="sign__up__input__container">
+        <div
+          className={noLastNameErr || lastNameErr ? "sign__up__input__container__error" : "sign__up__input__container"}
+        >
+          {lastNameSelected || noLastNameErr || lastNameErr || lastName ? (
+            <div className="sign__up__input__header__selected">
+              Last Name
+              {noLastNameErr ? <span className="sign__up__input__header__selected__error"> - *Required</span> : null}
+              {lastNameErr ? (
+                <span className="sign__up__input__header__selected__error"> - *75 character limit</span>
+              ) : null}
+            </div>
+          ) : null}
+
           <input
             className="signup__form__inputs"
-            placeholder="Last name"
+            placeholder={lastNameSelected || noLastNameErr || lastNameErr ? null : "Last Name"}
+            onFocus={() => {
+              setLastNameSelected(true);
+              setNoLastNameErr(false);
+            }}
+            onBlur={() => setLastNameSelected(false)}
             type="text"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            required
+            // required
           />
         </div>
-        <div className="sign__up__input__container">
+        <div className={emailErr ? "sign__up__input__container__error" : "sign__up__input__container"}>
+          {emailSelected || emailErr || newEmailErr || email ? (
+            <div className="sign__up__input__header__selected">
+              Email
+              {emailErr ? (
+                <span className="sign__up__input__header__selected__error"> - *Valid e-mail required</span>
+              ) : null}
+              {newEmailErr ? (
+                <span className="sign__up__input__header__selected__error">
+                  {" "}
+                  - *Email is already in use please login or try another email
+                </span>
+              ) : null}
+            </div>
+          ) : null}
+
           <input
             className="signup__form__inputs"
-            placeholder="Email"
-            type="email"
+            placeholder={emailSelected || emailErr ? null : "Email"}
+            onFocus={() => {
+              setNewEmailErr(false);
+              setEmailSelected(true);
+            }}
+            onBlur={() => setEmailSelected(false)}
+            type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
+            // required
           />
         </div>
-        <div className="sign__up__input__container">
+        <div
+          className={
+            passwordErr || passwordMatch || passwordLengthErr
+              ? "sign__up__password__headers__errors "
+              : "sign__up__password__headers"
+          }
+        >
+          Password {passwordErr ? <span className="sign__up__input__header__selected__error"> - *Required</span> : null}{" "}
+          {passwordMatch ? (
+            <span className="sign__up__input__header__selected__error"> - *Passwords must match</span>
+          ) : null}{" "}
+        </div>
+        {passwordLengthErr ? (
+          <span className="sign__up__input__header__selected__error"> - *Must be at least 6 characters</span>
+        ) : null}{" "}
+        <div
+          className={
+            passwordErr || passwordMatch
+              ? "sign__up__password__input__container__errors"
+              : "sign__up__password__input__container"
+          }
+        >
           <input
             className="signup__form__inputs"
             placeholder="Password"
+            onFocus={() => setPasswordErr(false)}
             type={passwordShow ? "text" : "password"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
+            // required
           />
           {passwordShow ? (
             <FaEye className="password__show__hide" onClick={() => setPasswordShow(false)}></FaEye>
@@ -118,14 +266,37 @@ function SignUpForm() {
             <FaEyeSlash className="password__show__hide" onClick={() => setPasswordShow(true)}></FaEyeSlash>
           )}
         </div>
-        <div className="sign__up__input__container">
+        <div
+          className={
+            passwordErr || passwordMatch || confirmPasswordLengthErr
+              ? "sign__up__password__headers__errors"
+              : "sign__up__password__headers"
+          }
+        >
+          Confirm password{" "}
+          {passwordErr ? <span className="sign__up__input__header__selected__error"> - *Required</span> : null}{" "}
+          {passwordMatch ? (
+            <span className="sign__up__input__header__selected__error"> - *Passwords must match</span>
+          ) : null}{" "}
+        </div>
+        {confirmPasswordLengthErr ? (
+          <span className="sign__up__input__header__selected__error"> - *Must be at least 6 characters</span>
+        ) : null}{" "}
+        <div
+          className={
+            passwordErr || passwordMatch
+              ? "sign__up__password__input__container__errors"
+              : "sign__up__password__input__container"
+          }
+        >
           <input
             className="signup__form__inputs"
             placeholder="Confirm password"
             type={passwordShow ? "text" : "password"}
+            onFocus={() => setPasswordErr(false)}
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            required
+            // required
           />
           {passwordShow ? (
             <FaEye className="password__show__hide" onClick={() => setPasswordShow(false)}></FaEye>

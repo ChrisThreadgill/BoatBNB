@@ -18,8 +18,9 @@
   width: 100%;
 }
 
-.sign__up__input__container {
+.sign__up__password__input__container {
   display: flex;
+  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
   height: 55px;
@@ -27,6 +28,57 @@
   margin: 12px 0 12px 0;
   border-radius: 5px;
 }
+.sign__up__password__input__container__errors {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
+  height: 55px;
+  border: 2px solid firebrick;
+  margin: 12px 0 12px 0;
+  border-radius: 5px;
+}
+
+.sign__up__input__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 55px;
+  border: 1px solid #17233c;
+  margin: 12px 0 12px 0;
+  border-radius: 5px;
+}
+.sign__up__input__container__error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 55px;
+  border: 2px solid firebrick;
+  margin: 12px 0 12px 0;
+  border-radius: 5px;
+}
+.sign__up__input__header__selected {
+  position: absolute;
+  margin: 0 0px 33px 4px;
+  font-size: 13px;
+  color: rgba(40, 39, 39, 0.7);
+}
+.sign__up__input__header__selected__error {
+  font-size: 13px;
+  font-weight: bold;
+  color: firebrick;
+}
+.sign__up__password__headers {
+  font-size: 13px;
+  color: rgba(40, 39, 39, 0.7);
+}
+.sign__up__password__headers__errors {
+  font-size: 13px;
+  color: firebrick;
+}
+
 .signup__form__inputs {
   display: flex;
   flex-direction: column;

@@ -253,7 +253,6 @@ function SignUpForm() {
         >
           <input
             className="signup__form__inputs"
-            placeholder="Password"
             onFocus={() => setPasswordErr(false)}
             type={passwordShow ? "text" : "password"}
             value={password}
@@ -291,7 +290,6 @@ function SignUpForm() {
         >
           <input
             className="signup__form__inputs"
-            placeholder="Confirm password"
             type={passwordShow ? "text" : "password"}
             onFocus={() => setPasswordErr(false)}
             value={confirmPassword}

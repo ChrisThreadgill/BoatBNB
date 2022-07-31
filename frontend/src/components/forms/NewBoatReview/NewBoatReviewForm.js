@@ -115,7 +115,7 @@ function NewBoatReviewForm({ reviews, setShowModal }) {
           </div>
           <div className="star__rating__form">
             <div>
-              <h3>Average</h3>
+              <h3>Rating</h3>
               {[...Array(5)].map((star, idx) => {
                 const currentVal = idx + 1;
                 return (

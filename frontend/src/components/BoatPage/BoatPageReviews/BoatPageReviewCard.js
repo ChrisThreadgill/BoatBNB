@@ -11,7 +11,7 @@ function BoatPageReviewCard({ review, user }) {
   //
 
   return (
-    <div className="user__review__card__container">
+    <div className="boat__review__card__container">
       <div className="review__card__user__profile">
         {review.User.profilePicture ? (
           <img

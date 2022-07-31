@@ -4,8 +4,10 @@ import UserReviewCard from "./UserReviewCard/UserReviewCard";
 import UserReviewCardRatingDisplay from "./UserReviewCardRatingDisplay/UserReviewCardRatingDisplay";
 import UserRatingCard from "../UserRatings/UserRatingCard";
 import NewUserReviewModal from "../../context/NewUserReviewModal/NewUserReviewModal";
+import { useDispatch } from "react-redux";
 
 function UserReviews({ user }) {
+  const dispatch = useDispatch();
   //
   const [userRatings, setUserRatings] = useState(user.UserRatings);
   const [userReviews, setUserReviews] = useState(user.UserReviews);
@@ -23,19 +25,14 @@ function UserReviews({ user }) {
     // return 0;
   }
 
+  // console.log(userRatings, userReviews, "---------------");
   useEffect(() => {
     setUserReviews(user.UserReviews);
-    setUserRatings(
-      user.UserRatings.filter((rating) => {
-        if (!rating.userReviewId) {
-          return rating;
-        }
-      })
-    );
-    if (userRatings.length >= 1 && userReviews.length >= 1) {
+    setUserRatings(user.UserRatings);
+    if (userRatings.length >= 1 || userReviews.length >= 1) {
       setSpreadReviewsRatings([...userRatings, ...userReviews].sort(compare));
     }
-  }, [user]);
+  }, [dispatch]);
   // console.log(spreadReviewsRatings);
 
   return (
@@ -54,7 +51,7 @@ function UserReviews({ user }) {
         {spreadReviewsRatings.map((rating, idx) => {
           // console.log(review);
           return (
-            <div key={idx}>
+            <div key={idx} className="user__review__container">
               {rating.average ? (
                 <UserRatingCard rating={rating}></UserRatingCard>
               ) : (

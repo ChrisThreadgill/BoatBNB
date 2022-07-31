@@ -21,10 +21,15 @@
 .user__profile__reviews__header {
   display: flex;
   width: 100%;
-  max-width: 420px;
+  max-width: 1111px;
   justify-content: space-between;
   align-self: flex-start;
+  /* border: 1px solid red; */
+  width: 100%;
   font-size: 16px;
   font-weight: bolder;
   margin: 45px 0px 15px 25px;
+}
+.user__review__container {
+  width: 80%;
 }

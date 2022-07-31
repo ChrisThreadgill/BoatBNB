@@ -15,7 +15,7 @@ function UserReviewCardRatingDisplay({ userRating }) {
             return <FaStar key={idx} color={"#72d4ba"} size={17}></FaStar>;
           })}
         </div>
-        <div>{`(${userRating.average}/5) Average`}</div>
+        <div>{`(${userRating.average}/5) Rating`}</div>
       </div>
       <div className="user__review__card__rating__container">
         <div>

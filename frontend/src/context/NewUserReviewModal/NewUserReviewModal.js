@@ -15,7 +15,7 @@ function NewUserReviewModal() {
       </button>
       {showModal && (
         <SideModal onClose={() => setShowModal(false)}>
-          <UserReviewForm></UserReviewForm>
+          <UserReviewForm setShowModal={setShowModal}></UserReviewForm>
         </SideModal>
       )}
     </>

@@ -268,32 +268,56 @@ router.post(
 //     // console.log(user, "-=---------------");
 //   })
 // );
+const validateBoatEditForm = [
+  check("address").isLength({ max: 100 }).withMessage("Your address must be within 100 characters."),
+
+  check("city").isLength({ max: 100 }).withMessage("City must be within 100 characters."),
+
+  check("state").isLength({ max: 2 }).withMessage("State Can only be 2 characters."),
+
+  check("model").isLength({ max: 100 }).withMessage("Model name must be within 100 characters."),
+
+  handleValidationErrors,
+];
 
 router.put(
   "/:boatId",
   requireAuth,
-  validateBoatAddForm,
+  validateBoatEditForm,
   asyncHandler(async (req, res) => {
     const { boatId } = req.params;
 
-    const { userId, marina, city, state, year, model, accessories, captain, price, schedule } = req.body;
+    const { userId, address, city, state, year, model, description, price, captain, lat, lng } = req.body;
+
+    // const { userId, marina, city, state, year, model, accessories, captain, price, schedule } = req.body;
 
     const boatToUpdate = await Boat.findByPk(boatId, {
       include: [Image, BoatRating, User],
     });
 
-    if (userId === boatToUpdate.userId) {
+    if (userId === boatToUpdate.userId && address) {
       await boatToUpdate.update({
-        marina,
+        address,
         city,
         state,
         year,
         model,
-        accessories,
-        captain,
+        description,
         price,
-        schedule,
+        lat,
+        lng,
+        captain,
       });
+    } else {
+      if (userId === boatToUpdate.userId) {
+        await boatToUpdate.update({
+          year,
+          model,
+          description,
+          price,
+          captain,
+        });
+      }
     }
 
     res.json({

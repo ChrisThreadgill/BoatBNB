@@ -47,7 +47,7 @@ function UserReviews({ user }) {
               spreadReviewsRatings.length
             }) `}
 
-        {/* <NewUserReviewModal></NewUserReviewModal> */}
+        <NewUserReviewModal></NewUserReviewModal>
       </div>
       <div className="profile__reviews__container">
         {" "}

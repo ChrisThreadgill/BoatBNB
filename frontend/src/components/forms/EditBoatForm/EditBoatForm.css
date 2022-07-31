@@ -1,0 +1,320 @@
+.boat__edit__form__container {
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  box-shadow: 2px 2px 5px 5px rgba(40, 39, 39, 0.2);
+  height: 85vh;
+  border-radius: 5px;
+  background-color: #0e7873;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.boat__edit__header {
+  font-size: 22px;
+  color: #ffffff;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.new__boat__listing__container {
+  width: 100%;
+  height: 94vh;
+  /* background: url("./new__boat__form__background.png") no-repeat; */
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 77px;
+  /* border: 1px solid red; */
+}
+.new__boat__listing__header__container {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  /* align-self: flex-start; */
+  margin-bottom: 150px;
+  flex-direction: column;
+  color: #ffffff;
+}
+.new__boat__listing__header__container > div {
+  color: #ffffff;
+}
+
+.new__boat__form {
+  width: 547px;
+  height: 777px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  /* border: 1px dashed purple; */
+  margin-left: 77px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.address__input__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.new__boat__address__input {
+  /* position: center; */
+  width: 100%;
+  max-width: 467px;
+  height: 50px;
+  border-radius: 5px;
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  outline: 0;
+}
+.address__suggestions__wrapper {
+  width: 100%;
+  max-width: 467px;
+  position: relative;
+}
+.address__suggestions__wrapper > span {
+  color: rgba(40, 39, 39, 0.6);
+  font-size: 13px;
+}
+
+.address__suggestion__container {
+  position: absolute;
+  background-color: #ffffff;
+  width: 80%;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px 5px rgba(40, 39, 39, 0.2);
+  /* border: 1px solid red; */
+}
+.address__suggestion__option {
+  display: flex;
+  align-items: center;
+}
+.address__suggestion__option > span {
+  display: flex;
+  align-items: center;
+  color: rgba(16, 23, 114, 0.7);
+  width: 100%;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 7px 0 7px 0;
+  cursor: pointer;
+  /* border: 1px solid red; */
+}
+
+.new__boat__year__model__container {
+  display: flex;
+  width: 86%;
+  /* border: 1px dashed purple; */
+  /* flex-direction: column; */
+}
+.new__boat__year__select {
+  width: 122px;
+  margin-top: 3px;
+  outline: 0;
+  border-radius: 5px;
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  height: 50px;
+}
+.new__boat__model__input {
+  width: 177px;
+  height: 50px;
+  outline: 0;
+  border-radius: 5px;
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  margin-top: 3px;
+}
+.new__boat__price__input {
+  width: 122px;
+  height: 50px;
+  outline: 0;
+  border-radius: 5px;
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  margin-top: 3px;
+}
+.new__boat__year__model__container > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* max-width: 222px; */
+  height: 55px;
+  margin: 7px 7px 0 7px;
+  /* padding: 22px; */
+  /* border: 1px solid blue; */
+}
+
+.new__boat__year__model__container > div > span {
+  color: rgba(40, 39, 39, 0.6);
+  font-size: 13px;
+}
+
+.new__boat__description {
+  width: 477px;
+  height: 150px;
+  resize: none;
+  line-height: 1.5;
+  outline: 0;
+  border-radius: 5px;
+  border: 1px solid rgba(40, 39, 39, 0.2);
+  margin-bottom: 22px;
+}
+
+.new__boat__description__container {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* border: 1px solid red; */
+}
+.new__boat__description__container > span {
+  color: rgba(40, 39, 39, 0.6);
+  font-size: 13px;
+  margin: 7px;
+}
+.new__boat__images > span {
+  margin-top: 7px;
+  color: rgba(40, 39, 39, 0.6);
+  font-size: 13px;
+  margin-top: 7px;
+}
+
+.new__boat__image__preview {
+  width: 311px;
+  height: 173px;
+  margin: 7px;
+  border-radius: 5px;
+  /* border: 1px solid red; */
+}
+.new__boat__images {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.boat__images__select {
+  height: 30px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.new__boat__images__input {
+  display: none;
+}
+.new__boat__error {
+  font-size: 13px;
+  font-weight: bold;
+  color: firebrick;
+}
+#new__boat__error {
+  font-size: 13px;
+  font-weight: bold;
+  color: firebrick;
+}
+.add__boat__pictures__button {
+  margin-right: 5px;
+  width: 22px;
+  height: 22px;
+  /* background: url("./new__boat__images__select.svg") center no-repeat; */
+}
+
+.images__preview__container {
+  display: flex;
+  width: 100%;
+  max-width: 477px;
+  align-items: center;
+  height: 222px;
+  overflow-x: scroll;
+}
+
+.new__boat__form__button {
+  width: 233px;
+  height: 55px;
+  margin: 22px 0 22px 0;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f4c064;
+  color: #001d58;
+  font-weight: bolder;
+  cursor: pointer;
+  /* border: 1px solid black; */
+}
+.new__boat__form__button:hover {
+  background-color: #ca9b49;
+}
+.new__boat__form__button__disabled {
+  width: 233px;
+  height: 55px;
+  margin: 22px 0 22px 0;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ede2d0;
+  color: #001d58;
+  font-weight: bolder;
+
+  /* border: 1px solid black; */
+}
+
+.new__boat__captain__container {
+  display: flex;
+  align-items: center;
+}
+.new__boat__captain__container > div {
+  font-size: 13px;
+  color: rgba(40, 39, 39, 0.6);
+  margin-left: 7px;
+}
+
+@media (max-width: 390px) {
+  .new__boat__header {
+    display: none;
+  }
+  .new__boat__about {
+    display: none;
+  }
+  .new__boat__listing__container {
+    width: 100%;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  .new__boat__form {
+    width: 375px;
+    height: 777px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    /* border: 1px dashed purple; */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .new__boat__year__model__container {
+    flex-direction: column;
+  }
+  .new__boat__description {
+    width: 375px;
+  }
+  .new__boat__address__span {
+    display: none;
+  }
+  .new__boat__address__input {
+    width: 350px;
+    padding: 0;
+    margin: 22px 7px 10px 10px;
+  }
+  .new__boat__description {
+    height: 100px;
+    margin: 0;
+    margin-bottom: 7px;
+  }
+}

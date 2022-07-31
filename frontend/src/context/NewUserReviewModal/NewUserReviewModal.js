@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Modal } from "../../context/Modal";
+import { SideModal } from "../SideModal/Index";
 import { FaHome, FaDharmachakra, FaSignOutAlt, FaSignInAlt } from "react-icons/fa";
 import UserReviewForm from "../../components/forms/UserReviewRating/UserReview";
 
@@ -13,9 +14,9 @@ function NewUserReviewModal() {
         Leave a review
       </button>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
+        <SideModal onClose={() => setShowModal(false)}>
           <UserReviewForm></UserReviewForm>
-        </Modal>
+        </SideModal>
       )}
     </>
   );

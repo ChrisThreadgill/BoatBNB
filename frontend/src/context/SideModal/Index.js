@@ -1,34 +1,34 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import "./Modal.css";
+import "./SideModal.css";
 
-const ModalContext = React.createContext();
+const SideModalContext = React.createContext();
 
-export function ModalProvider({ children }) {
-  const modalRef = useRef();
+export function SideModalProvider({ children }) {
+  const sideModalRef = useRef();
   const [value, setValue] = useState();
 
   useEffect(() => {
-    setValue(modalRef.current);
+    setValue(sideModalRef.current);
   }, []);
 
   return (
     <>
-      <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
-      <div ref={modalRef} />
+      <SideModalContext.Provider value={value}>{children}</SideModalContext.Provider>
+      <div ref={sideModalRef} />
     </>
   );
 }
 
-export function Modal({ onClose, children }) {
-  const modalNode = useContext(ModalContext);
-  if (!modalNode) return null;
+export function SideModal({ onClose, children }) {
+  const sideModalNode = useContext(SideModalContext);
+  if (!sideModalNode) return null;
 
   return ReactDOM.createPortal(
-    <div id="modal">
-      <div id="modal-background" onClick={onClose} />
-      <div id="modal-content">{children}</div>
+    <div id="side-modal">
+      <div id="side-modal-background" onClick={onClose} />
+      <div id="side-modal-content">{children}</div>
     </div>,
-    modalNode
+    sideModalNode
   );
 }

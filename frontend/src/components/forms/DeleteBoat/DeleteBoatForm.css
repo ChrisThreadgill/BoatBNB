@@ -1,0 +1,41 @@
+.delete__boat__form {
+  display: flex;
+  flex-direction: column;
+  width: 651px;
+  height: 288px;
+  padding: 48px 58px;
+}
+
+.delete__boat__header__container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.delete__boat__close {
+  font-size: 22px;
+  transform: translate(22px, -30px);
+  color: rgba(40, 39, 39, 0.6);
+  cursor: pointer;
+}
+
+.delete__boat__question {
+  font-size: 16px;
+  color: #17233c;
+  margin: 0 0 16px;
+}
+
+.delete__boat__confirm {
+  width: 257px;
+  height: 55px;
+  color: #ffffff;
+  background-color: firebrick;
+  padding: 13px;
+  font-size: 13px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin: 22px 0px;
+  cursor: pointer;
+}

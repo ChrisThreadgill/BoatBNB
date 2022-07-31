@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Modal } from "../../context/Modal";
+import { SideModal } from "../SideModal/Index";
 import { FaHome, FaDharmachakra, FaSignOutAlt, FaSignInAlt } from "react-icons/fa";
 
 import BoatReviewForm from "../../components/forms/BoatReviewForm";
@@ -15,9 +16,9 @@ function NewBoatReviewModal({ reviews }) {
         {`SEE ALL ${reviews.length} REVIEWS`}
       </div>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
+        <SideModal onClose={() => setShowModal(false)}>
           <NewBoatReviewForm reviews={reviews} setShowModal={setShowModal}></NewBoatReviewForm>
-        </Modal>
+        </SideModal>
       )}
     </>
   );

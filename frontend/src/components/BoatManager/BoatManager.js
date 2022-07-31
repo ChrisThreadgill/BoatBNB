@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import * as boatsActions from "../../store/boats";
 import BoatCard from "../Boats/BoatCard";
 import * as sessionActions from "../../store/session";
+import EditBoatModal from "../../context/EditBoatModal/EditBoatModal";
+import DeleteBoatModal from "../../context/DeleteBoatModal/DeleteBoatModal";
 
 function BoatManager() {
   const dispatch = useDispatch();
@@ -57,17 +59,8 @@ function BoatManager() {
               <div className="boat__manager__boat__card__container">
                 <BoatCard boat={boat}></BoatCard>
                 <div className="boat__manager__buttons__container">
-                  <div
-                    className="boat__manager__delete__listing"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      deleteBoat(boat.id);
-                      window.location.reload();
-                    }}
-                  >
-                    Delete listing
-                  </div>
-                  <div className="boat__manager__edit__listing">Edit</div>
+                  <DeleteBoatModal boat={boat}></DeleteBoatModal>
+                  <EditBoatModal boat={boat}></EditBoatModal>
                 </div>
               </div>
             );

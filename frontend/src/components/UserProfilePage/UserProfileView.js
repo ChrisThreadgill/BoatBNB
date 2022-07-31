@@ -73,6 +73,7 @@ function UserProfileView() {
               </div>
             )}
           </div>
+
           <UserReviews user={user}></UserReviews>
         </div>
       ) : (

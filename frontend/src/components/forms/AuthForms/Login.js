@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as sessionActions from "../../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -12,12 +12,14 @@ function LoginForm() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const [credential, setCredential] = useState("");
+  const [credSelect, setCredSelect] = useState(false);
+  const [noCreds, setNoCreds] = useState(false);
+  const [authErr, setAuthErr] = useState(false);
   const [password, setPassword] = useState("");
+  const [noPassword, setNoPassword] = useState(false);
   const [errors, setErrors] = useState([]);
   const [passwordShow, setPasswordShow] = useState(false);
   const history = useHistory();
-
-  if (sessionUser) return <Redirect to="/" />;
 
   const demoLogin = () => {
     setErrors([]);
@@ -26,7 +28,14 @@ function LoginForm() {
       if (data && data.errors) setErrors(data.errors);
     });
   };
-
+  useEffect(() => {
+    for (let i = 0; i < errors.length; i++) {
+      const err = errors[i];
+      if (err.includes("email")) setNoCreds(true);
+      if (err.includes("password")) setNoPassword(true);
+      if (err.includes("credentials")) setAuthErr(true);
+    }
+  }, [errors]);
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
@@ -36,35 +45,57 @@ function LoginForm() {
     });
   };
 
+  if (sessionUser) return <Redirect to="/" />;
   return (
     <div className="login__form__div">
       <form onSubmit={handleSubmit} className="login__form">
         {/* <img src="/BNB.svg" className="boat__bnb__logo" /> */}
         <h2>Welcome back! Please Log in</h2>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx} className="list__errors__signin">
-              {error}
-            </li>
-          ))}
-        </ul>
 
-        <div className="login__form__input__container">
+        <div className={authErr || noCreds ? "login__form__input__container__error" : "login__form__input__container"}>
+          {authErr || credSelect || noCreds || credential ? (
+            <div
+              className={
+                authErr || noCreds ? "login__input__header__selected__error" : "login__input__header__selected"
+              }
+            >
+              Email
+              {noCreds ? <span className="login__credential__error"> - *Valid e-mail required</span> : null}
+              {authErr ? <span className="login__credential__error"> - *Invalid Credentials</span> : null}
+            </div>
+          ) : null}
+
           <input
             className="login__form__input"
             type="text"
-            placeholder="Email"
+            placeholder={credSelect || authErr || noCreds ? null : "Email"}
+            onFocus={() => setCredSelect(true)}
+            onBlur={() => setCredSelect(false)}
             value={credential}
-            onChange={(e) => setCredential(e.target.value)}
+            onChange={(e) => {
+              setAuthErr(false);
+              setNoCreds(false);
+              setCredential(e.target.value);
+            }}
           />
         </div>
-        <div className="login__form__input__container">
+        <div
+          className={
+            noPassword || authErr
+              ? "login__form__password__input__container__error"
+              : "login__form__password__input__container"
+          }
+        >
           <input
-            className="login__form__input"
+            className={noPassword ? "login__form__input__error" : "login__form__input"}
             type={passwordShow ? "text" : "password"}
-            placeholder="Password"
+            placeholder={noPassword ? `Password -*Required` : "Password"}
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setNoPassword(false);
+              setAuthErr(false);
+              setPassword(e.target.value);
+            }}
           />
           {passwordShow ? (
             <FaEye className="password__show__hide" onClick={() => setPasswordShow(false)}></FaEye>

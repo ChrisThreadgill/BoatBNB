@@ -199,7 +199,7 @@ function SignUpForm() {
             // required
           />
         </div>
-        <div className={emailErr ? "sign__up__input__container__error" : "sign__up__input__container"}>
+        <div className={emailErr || newEmailErr ? "sign__up__input__container__error" : "sign__up__input__container"}>
           {emailSelected || emailErr || newEmailErr || email ? (
             <div className="sign__up__input__header__selected">
               Email
@@ -246,7 +246,7 @@ function SignUpForm() {
         ) : null}{" "}
         <div
           className={
-            passwordErr || passwordMatch
+            passwordErr || passwordMatch || passwordLengthErr
               ? "sign__up__password__input__container__errors"
               : "sign__up__password__input__container"
           }
@@ -284,7 +284,7 @@ function SignUpForm() {
         ) : null}{" "}
         <div
           className={
-            passwordErr || passwordMatch
+            passwordErr || passwordMatch || confirmPasswordLengthErr
               ? "sign__up__password__input__container__errors"
               : "sign__up__password__input__container"
           }

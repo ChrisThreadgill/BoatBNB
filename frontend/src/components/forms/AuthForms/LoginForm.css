@@ -17,9 +17,96 @@
   color: #17233c;
   margin-bottom: 25px;
 }
-.login__form__input__container {
+.login__form__password__input__container {
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 398px;
+  height: 50px;
+  border: 1px solid #17233c;
+  border-radius: 5px;
+  margin: 20px 0px 20px 0px;
+}
+
+.login__credential__error {
+  font-size: 13px;
+  font-weight: bold;
+  color: firebrick;
+}
+.login__input__header__selected {
+  position: absolute;
+  margin: 0 0px 33px 4px;
+  font-size: 13px;
+  color: rgba(40, 39, 39, 0.7);
+}
+.login__input__header__selected__error {
+  position: absolute;
+  margin: 0 0px 33px 4px;
+  font-size: 13px;
+  color: firebrick;
+}
+.login__input__header__selected__error {
+  font-size: 13px;
+  font-weight: bold;
+  color: firebrick;
+}
+.login__form__input__container__error {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  max-width: 398px;
+  height: 52px;
+  border: 1px solid #17233c;
+  border: 2px solid firebrick;
+  z-index: 5;
+  border-radius: 5px;
+  margin: 20px 0px 20px 0px;
+  color: firebrick;
+}
+.login__form__password__input__container__error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 398px;
+  height: 52px;
+  border: 1px solid #17233c;
+  border: 2px solid firebrick;
+  z-index: 5;
+  border-radius: 5px;
+  margin: 20px 0px 20px 0px;
+}
+.login__form__input__error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 398px;
+  padding: 12px 12px 8px;
+  height: 46px;
+  border-radius: 5px;
+  outline: 0;
+  border: none;
+  font-size: 14px;
+  background-color: whitesmoke;
+  color: firebrick;
+}
+.login__form__input__error::placeholder {
+  color: firebrick;
+}
+
+.login__form__input__error:-ms-input-placeholder {
+  color: red;
+}
+.login__form__input__error::-ms-input-placeholder {
+  color: red;
+}
+
+.login__form__input__container {
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   max-width: 398px;
@@ -44,6 +131,7 @@
   /* border: 1px solid red; */
   /* margin: 20px 0px 20px 0px; */
 }
+
 .login__form__button {
   max-width: 400px;
   width: 100%;

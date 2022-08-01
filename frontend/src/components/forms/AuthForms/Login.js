@@ -140,7 +140,7 @@ function LoginForm() {
         <div>
           <ExternalLink
             className="about__links__auth__container__external__link"
-            href="https://www.christhreadgill.com"
+            href="https://christhreadgill.github.io/"
           >
             <div className="about__links__portfolio__icon">CT</div>
             <div>Chris' Portfolio</div>

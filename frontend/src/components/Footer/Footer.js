@@ -22,7 +22,7 @@ function Footer() {
             <div className="footer__profile__name__link">
               {" "}
               <span>2022 </span>
-              <ExternalLink href="https://christhreadgill.com/" className="footer__external__links">
+              <ExternalLink href="https://christhreadgill.github.io/" className="footer__external__links">
                 <div className="footer__portfolio__link">Chris Threadgill</div>
               </ExternalLink>
             </div>
@@ -35,7 +35,7 @@ function Footer() {
             <ExternalLink href="https://github.com/ChrisThreadgill" className="footer__external__links">
               <div className="footer__profile__links">Github</div>
             </ExternalLink>
-            <ExternalLink href="https://christhreadgill.com/" className="footer__external__links">
+            <ExternalLink href="https://christhreadgill.github.io/" className="footer__external__links">
               <div className="footer__profile__links">Portfolio</div>
             </ExternalLink>
           </div>

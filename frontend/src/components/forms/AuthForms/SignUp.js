@@ -334,7 +334,7 @@ function SignUpForm() {
         <div className="sign__up__about__container">
           <ExternalLink
             className="about__links__auth__container__external__link__signup"
-            href="https://www.christhreadgill.com"
+            href="https://christhreadgill.github.io/"
           >
             <div className="sign__up__portfolio__icon">CT</div>
             <span>Portfolio</span>

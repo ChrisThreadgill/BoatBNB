@@ -95,6 +95,54 @@ module.exports = {
           boatId: 9,
           url: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658255646596.jpg",
         },
+        {
+          boatId: 10,
+          url: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658255646596.jpg",
+        },
+        {
+          boatId: 10,
+          url: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658444955437.jpg",
+        },
+        {
+          boatId: 11,
+          url: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658444955422.jpg",
+        },
+        {
+          boatId: 11,
+          url: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658444955428.jpg",
+        },
+        {
+          boatId: 12,
+          url: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658435726834.jpg",
+        },
+        {
+          boatId: 12,
+          url: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658435726838.jpg",
+        },
+        {
+          boatId: 13,
+          url: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658387589094.jpg",
+        },
+        {
+          boatId: 13,
+          url: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658438560633.jpg",
+        },
+        {
+          boatId: 14,
+          url: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658386370771.jpg",
+        },
+        {
+          boatId: 14,
+          url: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658387589086.jpg",
+        },
+        {
+          boatId: 15,
+          url: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658386370764.jpg",
+        },
+        {
+          boatId: 15,
+          url: "https://boat-bnb.s3.us-east-2.amazonaws.com/1658386370767.jpg",
+        },
       ],
       {}
     );

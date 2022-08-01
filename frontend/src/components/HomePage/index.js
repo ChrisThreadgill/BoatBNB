@@ -11,6 +11,8 @@ import HomePageInfo from "./HomePageInfo/HomePageInfo.js";
 import HomePageDiscover from "./HomePageDiscover/HomePageDiscover.js";
 import Footer from "../Footer/Footer.js";
 import { GoogleMap, useJsApiLoader, useLoadScript } from "@react-google-maps/api";
+import HomePageTech from "./HomePageTech/HomePageTech.js";
+import HomePageWork from "./HomePageWork/HomePageWork.js";
 
 function HomePage({ searchState, setSearchState }) {
   const dispatch = useDispatch();
@@ -35,6 +37,8 @@ function HomePage({ searchState, setSearchState }) {
       <HomePageSearch searchState={searchState} setSearchState={setSearchState}></HomePageSearch>
       <HomePageInfo></HomePageInfo>
       <HomePageDiscover></HomePageDiscover>
+      <HomePageWork></HomePageWork>
+      <HomePageTech></HomePageTech>
       <Footer></Footer>
       {/* <div className="homepage__test">
         <div className="test__two__works">

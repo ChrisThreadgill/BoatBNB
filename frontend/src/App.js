@@ -28,6 +28,7 @@ import { GoogleMap, useJsApiLoader, useLoadScript } from "@react-google-maps/api
 import UserBookings from "./components/UserBookings/UserBookings";
 import { google } from "./components/Utils";
 import BoatManager from "./components/BoatManager/BoatManager";
+import HomePageTech from "./components/HomePage/HomePageTech/HomePageTech";
 
 function App() {
   const dispatch = useDispatch();
@@ -106,6 +107,9 @@ function App() {
             </Route>
             <Route path="/boats/:boatId">
               <BoatPage></BoatPage>
+            </Route>
+            <Route path="/test">
+              <HomePageTech></HomePageTech>
             </Route>
             {/* <Route path="/test/:userId">
               <UserProfilePage></UserProfilePage>

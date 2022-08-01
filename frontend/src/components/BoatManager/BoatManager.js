@@ -54,9 +54,9 @@ function BoatManager() {
             <h2>Boat manager</h2>
             <div onClick={() => history.push("/new-listing")}>LIST A NEW BOAT</div>
           </div>
-          {Object.values(boats).map((boat) => {
+          {Object.values(boats).map((boat, idx) => {
             return (
-              <div className="boat__manager__boat__card__container">
+              <div className="boat__manager__boat__card__container" key={idx}>
                 <BoatCard boat={boat}></BoatCard>
                 <div className="boat__manager__buttons__container">
                   <DeleteBoatModal boat={boat}></DeleteBoatModal>

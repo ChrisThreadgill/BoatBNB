@@ -4,10 +4,13 @@ import UserReviewCard from "./UserReviewCard/UserReviewCard";
 import UserReviewCardRatingDisplay from "./UserReviewCardRatingDisplay/UserReviewCardRatingDisplay";
 import UserRatingCard from "../UserRatings/UserRatingCard";
 import NewUserReviewModal from "../../context/NewUserReviewModal/NewUserReviewModal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function UserReviews({ user }) {
   const dispatch = useDispatch();
+
+  const session = useSelector((state) => state.session.user);
+
   //
   const [userRatings, setUserRatings] = useState(user.UserRatings);
   const [userReviews, setUserReviews] = useState(user.UserReviews);
@@ -44,7 +47,7 @@ function UserReviews({ user }) {
               spreadReviewsRatings.length
             }) `}
 
-        <NewUserReviewModal></NewUserReviewModal>
+        {user.id !== session.id ? <NewUserReviewModal></NewUserReviewModal> : null}
       </div>
       <div className="profile__reviews__container">
         {" "}

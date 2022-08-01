@@ -4,12 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { FaStar, FaSoap, FaCouch, FaWrench } from "react-icons/fa";
 import NewBoatReviewCard from "./NewBoatReviewCard";
-import * as reviewActions from "../../../store/boatReviews";
+import * as boatReviewActions from "../../../store/boatReviews";
+// import * as reviewActions from "../../../store/boatReviews";
 import * as ratingActions from "../../../store/boatRatings";
 
 function NewBoatReviewForm({ reviews, setShowModal }) {
   const { boatId } = useParams();
   const dispatch = useDispatch();
+
+  const boat = useSelector((state) => state.boats);
 
   const user = useSelector((state) => state.session.user);
   const [rating, setRating] = useState(null);
@@ -64,7 +67,7 @@ function NewBoatReviewForm({ reviews, setShowModal }) {
       if (review && !rating) {
         const reviewBody = { userId: user.id, boatId, review };
 
-        dispatch(reviewActions.addReview(reviewBody)).then((res) => {
+        dispatch(boatReviewActions.addReview(reviewBody)).then((res) => {
           setReview("");
           setShowModal(false);
           window.location.reload();
@@ -85,7 +88,8 @@ function NewBoatReviewForm({ reviews, setShowModal }) {
         if (comfort === 0) ratingBody.comfort = rating;
         const reviewBody = { userId: user.id, boatId, review };
 
-        dispatch(reviewActions.addReviewWithRating(reviewBody, ratingBody)).then((res) => {
+        dispatch(boatReviewActions.addBoatReviewWithRating(reviewBody, ratingBody)).then((res) => {
+          console.log(res);
           setReview("");
           setRating(0);
           setClean(0);
@@ -101,131 +105,137 @@ function NewBoatReviewForm({ reviews, setShowModal }) {
   // console.log(reviews, "-------------------");
   return (
     <div className="boat__review__form__modal__wrapper">
-      <h1>Ratings {"& "}reviews</h1>
+      <h1 className="boat__review__form__header">Ratings {"& "}reviews</h1>
+      {user.id !== boat.userId ? (
+        <form className="boat__review__form" onSubmit={handleSubmit}>
+          <div className="new__boat__rating__container">
+            <div className="new__boat__review__container">
+              <div>Leave a review </div>
+              {reviewLengthError ? (
+                <span className="new__boat__error">- * Review must be between 1-500 characters * -</span>
+              ) : null}
+              <textarea
+                className="new__boat__review__text__area"
+                onChange={(e) => setReview(e.target.value)}
+              ></textarea>
+              <button onClick={handleSubmit}>SUBMIT</button>
+            </div>
+            <div className="star__rating__form">
+              <div>
+                <h3>Rating</h3>
+                {[...Array(5)].map((star, idx) => {
+                  const currentVal = idx + 1;
+                  return (
+                    <label key={idx + 1}>
+                      <input
+                        className="star__radio__buttons"
+                        type="radio"
+                        name="rating"
+                        value={currentVal}
+                        onClick={() => {
+                          setRating(currentVal);
+                          setFunc(currentVal);
+                          setComfort(currentVal);
+                          setClean(currentVal);
+                        }}
+                      ></input>
+                      <FaStar
+                        size={13}
+                        color={currentVal <= (hover || rating) ? "#72d4ba" : "#adc0d8"}
+                        className="user__stars"
+                        onMouseEnter={() => setHover(currentVal)}
+                        onMouseLeave={() => setHover(null)}
+                      ></FaStar>
+                    </label>
+                  );
+                })}
+              </div>
 
-      <form className="boat__review__form" onSubmit={handleSubmit}>
-        <div className="new__boat__rating__container">
-          <div className="new__boat__review__container">
-            <div>Leave a review </div>
-            {reviewLengthError ? (
-              <span className="new__boat__error">- * Review must be between 1-500 characters * -</span>
-            ) : null}
-            <textarea className="new__boat__review__text__area" onChange={(e) => setReview(e.target.value)}></textarea>
-            <button onClick={handleSubmit}>SUBMIT</button>
+              <div>
+                <h3>Functionality</h3>
+                {[...Array(5)].map((star, idx) => {
+                  const currentVal = idx + 1;
+                  return (
+                    <label key={idx + 1}>
+                      <input
+                        className="star__radio__buttons"
+                        type="radio"
+                        name="rating"
+                        value={currentVal}
+                        onClick={() => setFunc(currentVal)}
+                      ></input>
+                      <FaWrench
+                        size={10}
+                        color={currentVal <= (funcHover || func) ? "#72d4ba" : "#adc0d8"}
+                        className="user__stars"
+                        onMouseEnter={() => setFuncHover(currentVal)}
+                        onMouseLeave={() => setFuncHover(null)}
+                      ></FaWrench>
+                    </label>
+                  );
+                })}
+              </div>
+
+              <div>
+                <h3>Comfort</h3>
+                {[...Array(5)].map((star, idx) => {
+                  const currentVal = idx + 1;
+                  return (
+                    <label key={idx + 1}>
+                      <input
+                        className="star__radio__buttons"
+                        type="radio"
+                        name="rating"
+                        value={currentVal}
+                        onClick={() => setComfort(currentVal)}
+                      ></input>
+                      <FaCouch
+                        size={10}
+                        color={currentVal <= (comfortHover || comfort) ? "#72d4ba" : "#adc0d8"}
+                        className="user__stars"
+                        onMouseEnter={() => setComfortHover(currentVal)}
+                        onMouseLeave={() => setComfortHover(null)}
+                      ></FaCouch>
+                    </label>
+                  );
+                })}
+              </div>
+
+              <div>
+                <h3>Cleanliness</h3>
+                {[...Array(5)].map((star, idx) => {
+                  const currentVal = idx + 1;
+                  return (
+                    <label key={idx + 1}>
+                      <input
+                        className="star__radio__buttons"
+                        type="radio"
+                        name="rating"
+                        value={currentVal}
+                        onClick={() => setClean(currentVal)}
+                      ></input>
+                      <FaSoap
+                        size={10}
+                        color={currentVal <= (cleanHover || clean) ? "#72d4ba" : "#adc0d8"}
+                        className="user__stars"
+                        onMouseEnter={() => setCleanHover(currentVal)}
+                        onMouseLeave={() => setCleanHover(null)}
+                      ></FaSoap>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-          <div className="star__rating__form">
-            <div>
-              <h3>Rating</h3>
-              {[...Array(5)].map((star, idx) => {
-                const currentVal = idx + 1;
-                return (
-                  <label key={idx + 1}>
-                    <input
-                      className="star__radio__buttons"
-                      type="radio"
-                      name="rating"
-                      value={currentVal}
-                      onClick={() => {
-                        setRating(currentVal);
-                        setFunc(currentVal);
-                        setComfort(currentVal);
-                        setClean(currentVal);
-                      }}
-                    ></input>
-                    <FaStar
-                      size={13}
-                      color={currentVal <= (hover || rating) ? "#72d4ba" : "#adc0d8"}
-                      className="user__stars"
-                      onMouseEnter={() => setHover(currentVal)}
-                      onMouseLeave={() => setHover(null)}
-                    ></FaStar>
-                  </label>
-                );
-              })}
-            </div>
+        </form>
+      ) : null}
 
-            <div>
-              <h3>Functionality</h3>
-              {[...Array(5)].map((star, idx) => {
-                const currentVal = idx + 1;
-                return (
-                  <label key={idx + 1}>
-                    <input
-                      className="star__radio__buttons"
-                      type="radio"
-                      name="rating"
-                      value={currentVal}
-                      onClick={() => setFunc(currentVal)}
-                    ></input>
-                    <FaWrench
-                      size={10}
-                      color={currentVal <= (funcHover || func) ? "#72d4ba" : "#adc0d8"}
-                      className="user__stars"
-                      onMouseEnter={() => setFuncHover(currentVal)}
-                      onMouseLeave={() => setFuncHover(null)}
-                    ></FaWrench>
-                  </label>
-                );
-              })}
-            </div>
-
-            <div>
-              <h3>Comfort</h3>
-              {[...Array(5)].map((star, idx) => {
-                const currentVal = idx + 1;
-                return (
-                  <label key={idx + 1}>
-                    <input
-                      className="star__radio__buttons"
-                      type="radio"
-                      name="rating"
-                      value={currentVal}
-                      onClick={() => setComfort(currentVal)}
-                    ></input>
-                    <FaCouch
-                      size={10}
-                      color={currentVal <= (comfortHover || comfort) ? "#72d4ba" : "#adc0d8"}
-                      className="user__stars"
-                      onMouseEnter={() => setComfortHover(currentVal)}
-                      onMouseLeave={() => setComfortHover(null)}
-                    ></FaCouch>
-                  </label>
-                );
-              })}
-            </div>
-
-            <div>
-              <h3>Cleanliness</h3>
-              {[...Array(5)].map((star, idx) => {
-                const currentVal = idx + 1;
-                return (
-                  <label key={idx + 1}>
-                    <input
-                      className="star__radio__buttons"
-                      type="radio"
-                      name="rating"
-                      value={currentVal}
-                      onClick={() => setClean(currentVal)}
-                    ></input>
-                    <FaSoap
-                      size={10}
-                      color={currentVal <= (cleanHover || clean) ? "#72d4ba" : "#adc0d8"}
-                      className="user__stars"
-                      onMouseEnter={() => setCleanHover(currentVal)}
-                      onMouseLeave={() => setCleanHover(null)}
-                    ></FaSoap>
-                  </label>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </form>
       <div className="reviews__modal__display">
         <div className="modal__reviews__container">
+          {reviews.length > 0 ? <h3>What others are saying</h3> : <h3>No reviews yet</h3>}
           {reviews &&
-            reviews.map((review) => {
-              return <NewBoatReviewCard review={review}></NewBoatReviewCard>;
+            reviews.map((review, idx) => {
+              return <NewBoatReviewCard key={idx} review={review}></NewBoatReviewCard>;
             })}
         </div>
       </div>

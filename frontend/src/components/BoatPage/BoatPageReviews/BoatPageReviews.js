@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import NewBoatReviewModal from "../../../context/NewBoatReviewModal/NewBoatReviewModa";
 import BoatRatingDisplay from "../../Ratings/BoatRatingDisplay";
 import BoatPageRatingCard from "./BoatPageRatingCard";
@@ -7,6 +8,8 @@ import "./BoatPageReviews.css";
 
 function BoatPageReviews({ boat }) {
   // console.log(boat, "============ boat");
+
+  const [boatReviews, setBoatReviews] = useState([...boat.BoatRatings, ...boat.boatReviewsNoRating]);
   //
   // console.log(boat.boatReviewsNoRating, "--------------- boat reviews no rating");
 
@@ -21,9 +24,12 @@ function BoatPageReviews({ boat }) {
     // a must be equal to b
     // return 0;
   }
-  useEffect(() => {}, [boat]);
+  useEffect(() => {
+    setBoatReviews([...boat.BoatRatings, ...boat.boatReviewsNoRating].sort(compare));
+  }, [boat]);
 
-  const boatReviews = [...boat.BoatRatings, ...boat.boatReviewsNoRating];
+  // const boatReviews = [...boat.BoatRatings, ...boat.boatReviewsNoRating];
+  // console.log(boatReviews);
   const boatPageReviewPreview = boatReviews.slice(0, 6);
   // console.log(boatReviews, "---------------------");
 
@@ -37,12 +43,12 @@ function BoatPageReviews({ boat }) {
         <NewBoatReviewModal reviews={boatReviews}></NewBoatReviewModal>
       </div>
       <div className="boat__page__review__container">
-        {boatPageReviewPreview.map((rating) => {
+        {boatPageReviewPreview.map((rating, idx) => {
           // console.log(rating);
           return rating.average ? (
-            <BoatPageRatingCard rating={rating}></BoatPageRatingCard>
+            <BoatPageRatingCard key={idx} rating={rating}></BoatPageRatingCard>
           ) : (
-            <BoatPageReviewCard review={rating}></BoatPageReviewCard>
+            <BoatPageReviewCard key={idx} review={rating}></BoatPageReviewCard>
           );
         })}
         {/* {boat.boatReviewsNoRating.map((review) => {

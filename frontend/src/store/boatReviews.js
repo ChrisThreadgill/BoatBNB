@@ -72,7 +72,7 @@ export const addReview = (reviewBody) => async (dispatch) => {
   return newBoatReview;
 };
 
-export const addReviewWithRating = (reviewBody, ratingBody) => async (dispatch) => {
+export const addBoatReviewWithRating = (reviewBody, ratingBody) => async (dispatch) => {
   const { userId } = reviewBody;
 
   const getUser = await csrfFetch(`/api/users/profile/${userId}`, {

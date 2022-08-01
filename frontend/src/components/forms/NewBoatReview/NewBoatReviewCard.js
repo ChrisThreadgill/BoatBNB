@@ -1,4 +1,5 @@
 import BoatPageRatingCard from "../../BoatPage/BoatPageReviews/BoatPageRatingCard";
+import BoatPageReviewCard from "../../BoatPage/BoatPageReviews/BoatPageReviewCard";
 import UserRatingDisplay from "../../Ratings/UserRatingDisplay";
 
 function NewBoatReviewCard({ review }) {
@@ -7,7 +8,11 @@ function NewBoatReviewCard({ review }) {
 
   return (
     <div className="modal__review__card">
-      {review.average ? <BoatPageRatingCard rating={review}></BoatPageRatingCard> : null}
+      {review.average ? (
+        <BoatPageRatingCard rating={review}></BoatPageRatingCard>
+      ) : (
+        <BoatPageReviewCard review={review}></BoatPageReviewCard>
+      )}
       {/* <BoatPageRatingCard rating={}></BoatPageRatingCard> */}
     </div>
   );

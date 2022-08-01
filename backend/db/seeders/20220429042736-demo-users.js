@@ -132,6 +132,22 @@ module.exports = {
           roleId: 2,
           profilePicture: null,
         },
+        {
+          firstName: "Maica",
+          lastName: "Santos",
+          email: "maica@maica.io",
+          hashedPassword: bcrypt.hashSync("password"),
+          roleId: 1,
+          profilePicture: null,
+        },
+        {
+          firstName: "Steven",
+          lastName: "Smith",
+          email: "steven@smith.io",
+          hashedPassword: bcrypt.hashSync("password"),
+          roleId: 1,
+          profilePicture: null,
+        },
       ],
       {}
     );

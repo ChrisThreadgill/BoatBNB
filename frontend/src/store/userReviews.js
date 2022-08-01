@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 const GET_REVIEWS_USER = "reviews/userGetAll";
 const GET_ONE_REVIEW = "reviews/boatsGetOne";
 const ADD_REVIEW_NR = "reviews/addReviewNR";
-const ADD_REVIEW = "reviews/addReview";
+const ADD_USER_REVIEW = "reviews/addUserReview";
 
 const singleUserReviews = (reviews) => {
   return {
@@ -20,7 +20,7 @@ const addUserReviewNR = (review) => {
 
 const addUserReview = (review) => {
   return {
-    type: ADD_REVIEW,
+    type: ADD_USER_REVIEW,
     payload: review,
   };
 };
@@ -76,7 +76,7 @@ const userReviewsReducer = (state = initialState, action) => {
       for (let review of action.payload.userReviews) allReviews[review.id] = review;
       return { ...state, ...allReviews };
 
-    case ADD_REVIEW:
+    case ADD_USER_REVIEW:
       newState[action.payload.id] = action.payload;
       return newState;
     case ADD_REVIEW_NR:

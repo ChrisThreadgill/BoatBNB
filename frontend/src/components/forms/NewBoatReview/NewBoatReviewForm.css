@@ -27,7 +27,9 @@
     margin-left: 0;
   }
 }
-
+.boat__review__form__header {
+  margin-left: 22px;
+}
 .boat__review__form {
   /* color: #adc0d8; */
   /* box-shadow: 1px 1px 1px 1px rgba(40, 39, 39, 0.2); */

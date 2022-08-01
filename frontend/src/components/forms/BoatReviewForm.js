@@ -67,7 +67,7 @@ function BoatReviewForm({ boat, rating, setRating, setClean, setComfort, setFunc
         if (comfort === 0) ratingBody.comfort = rating;
         const reviewBody = { userId: loggedInUser.id, boatId, review };
 
-        dispatch(reviewActions.addReviewWithRating(reviewBody, ratingBody));
+        // dispatch(reviewActions.addReviewWithRating(reviewBody, ratingBody));
 
         setReview("");
         setRating(0);

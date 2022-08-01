@@ -253,7 +253,7 @@ function NewBoatForm() {
       <div className="new__boat__listing__header__container">
         <h1 className="new__boat__header">Tell us a little about your boat</h1>
         <div className="new__boat__about">
-          Please make sure your address to the boat's location is correct and you specify if it is already at a slip.
+          Please make sure that you select your address from the drop down to ensure the correct location for your boat.
         </div>
       </div>
       <form className="new__boat__form" onSubmit={handleSubmit}>
@@ -274,7 +274,7 @@ function NewBoatForm() {
                 setSelected(false);
                 getPlacePredictions({ input: evt.target.value });
               }}
-              loading={isPlacePredictionsLoading}
+              // loading={isPlacePredictionsLoading}
               // onChange={(place, inputRef, autocomplete) => {
               //   // setValue(e.target.value);
               //   console.log(place, inputRef, autocomplete, "---------------------value in the onchange");
@@ -344,7 +344,7 @@ function NewBoatForm() {
                 setYear(e.target.value);
               }}
             >
-              <option className="option__placeholder" value="" disabled selected hidden>
+              <option className="option__placeholder" value="" disabled defaultValue={null} hidden>
                 Select
               </option>
               {years.map((year) => {
@@ -430,7 +430,6 @@ function NewBoatForm() {
             className="new__boat__images__input"
             type="file"
             multiple="multiple"
-            fieldName="image"
             onChange={(e) => {
               updateImage(e);
             }}

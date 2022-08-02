@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import { GoogleMap, useJsApiLoader, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import { getKey } from "../../store/maps";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { states, statesCoords } from "../Utils";
 // import usePlacesAutoComplete, {
@@ -24,6 +24,9 @@ import MapHoverCard from "./MapHoverCard/MapHoverCard";
 function BoatSearchMap({ searchState, markers }) {
   const dispatch = useDispatch();
   const history = useHistory();
+  const state = useParams();
+  console.log(state, "------------");
+  console.log(searchState, "-------------------");
   const key = useSelector((state) => state.maps.key);
   const boats = useSelector((state) => state.boats);
 
@@ -40,12 +43,16 @@ function BoatSearchMap({ searchState, markers }) {
       searchCoords = states.filter((state) => state.includes(searchState));
       const currState = statesCoords[searchState];
       if (searchState === "AK") setZoom(5);
-      if (searchState === "CA" || searchState === "TX") setZoom(6);
+      else if (searchState === "CA" || searchState === "TX") setZoom(6);
+      else {
+        setZoom(6.5);
+      }
+      // if (searchState === "CA" || searchState === "TX") setZoom(6);
       setLat(currState[0]);
       setLong(currState[1]);
       setIsLoadedCenter(true);
     }
-  }, [dispatch, searchState]);
+  }, [dispatch, state, searchState]);
 
   const containerStyle = {
     width: "40vw",

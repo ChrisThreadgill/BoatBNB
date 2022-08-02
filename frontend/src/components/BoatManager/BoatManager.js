@@ -45,7 +45,7 @@ function BoatManager() {
 
     // history.push(`/users/${userId}/profile`);
   };
-
+  if (!user) history.push("/");
   return (
     <div className="boat__manager__container">
       {isLoaded ? (

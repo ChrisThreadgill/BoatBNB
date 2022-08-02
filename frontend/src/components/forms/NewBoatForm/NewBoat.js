@@ -23,6 +23,7 @@ function NewBoatForm() {
   const { placesService, placePredictions, getPlacePredictions, isPlacePredictionsLoading } = usePlacesService({
     apiKey: key,
   });
+  console.log(isPlacePredictionsLoading, "-----------------");
   const dispatch = useDispatch();
   const uploadHiddenInput = useRef();
 

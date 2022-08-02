@@ -47,7 +47,7 @@ function UserReviews({ user }) {
               spreadReviewsRatings.length
             }) `}
 
-        {user.id !== session.id ? <NewUserReviewModal></NewUserReviewModal> : null}
+        {session && user.id !== session?.id ? <NewUserReviewModal></NewUserReviewModal> : null}
       </div>
       <div className="profile__reviews__container">
         {" "}

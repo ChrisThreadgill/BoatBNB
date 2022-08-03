@@ -14,13 +14,19 @@ function OwnerInformationCard({ boat }) {
         {boat.User.profilePicture ? (
           <img
             className="boat__information__profile__picture"
-            onClick={() => history.push(`/users/${boat.User.id}`)}
+            onClick={() => {
+              history.push(`/users/${boat.User.id}`);
+              window.location.reload();
+            }}
             src={boat.User.profilePicture ? `${boat.User.profilePicture}` : null}
           ></img>
         ) : (
           <div
             className="boat__information__no__profile__picture"
-            onClick={() => history.push(`/users/${boat.User.id}`)}
+            onClick={() => {
+              history.push(`/users/${boat.User.id}`);
+              window.location.reload();
+            }}
           >
             {boat.User.firstName.slice(0, 1).toUpperCase()}
             {boat.User.lastName.slice(0, 1).toUpperCase()}

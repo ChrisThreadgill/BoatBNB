@@ -15,6 +15,7 @@ function UserRatingCard({ rating }) {
           className="review__profile__picture"
           onClick={() => {
             history.push(`/users/${rating.User.id}`);
+            window.location.reload();
           }}
         />
         <div>{`${rating.User.firstName.slice(0, 1).toUpperCase()}${rating.User.firstName.slice(1)}`}</div>

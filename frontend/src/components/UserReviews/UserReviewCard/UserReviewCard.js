@@ -18,6 +18,7 @@ function UserReviewCard({ review }) {
           className="review__profile__picture"
           onClick={() => {
             history.push(`/users/${review.User.id}`);
+            window.location.reload();
           }}
         />
         <div>{`${review.User.firstName.slice(0, 1).toUpperCase()}${review.User.firstName.slice(1)}`}</div>

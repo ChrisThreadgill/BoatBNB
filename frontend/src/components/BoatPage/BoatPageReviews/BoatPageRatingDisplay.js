@@ -15,13 +15,19 @@ function BoatPageRatingDisplay({ boatRating }) {
         {boatRating.User.profilePicture ? (
           <img
             className="boat__information__profile__picture"
-            onClick={() => history.push(`/users/${boatRating.User.id}`)}
+            onClick={() => {
+              history.push(`/users/${boatRating.User.id}`);
+              window.location.reload();
+            }}
             src={boatRating.User.profilePicture ? `${boatRating.User.profilePicture}` : null}
           ></img>
         ) : (
           <div
             className="boat__information__no__profile__picture"
-            onClick={() => history.push(`/users/${boatRating.User.id}`)}
+            onClick={() => {
+              history.push(`/users/${boatRating.User.id}`);
+              window.location.reload();
+            }}
           >
             {boatRating.User.firstName.slice(0, 1).toUpperCase()}
           </div>

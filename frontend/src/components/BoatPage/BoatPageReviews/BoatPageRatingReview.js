@@ -17,13 +17,19 @@ function BoatPageRatingReview({ rating }) {
         {rating.User.profilePicture ? (
           <img
             className="boat__information__profile__picture"
-            onClick={() => history.push(`/users/${rating.User.id}`)}
+            onClick={() => {
+              history.push(`/users/${rating.User.id}`);
+              window.location.reload();
+            }}
             src={rating.User.profilePicture ? `${rating.User.profilePicture}` : null}
           ></img>
         ) : (
           <div
             className="boat__information__no__profile__picture"
-            onClick={() => history.push(`/users/${rating.User.id}`)}
+            onClick={() => {
+              history.push(`/users/${rating.User.id}`);
+              window.location.reload();
+            }}
           >
             {rating.User.firstName.slice(0, 1).toUpperCase()}
           </div>

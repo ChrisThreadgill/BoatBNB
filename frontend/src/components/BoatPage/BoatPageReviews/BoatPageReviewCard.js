@@ -16,13 +16,19 @@ function BoatPageReviewCard({ review, user }) {
         {review.User.profilePicture ? (
           <img
             className="boat__information__profile__picture"
-            onClick={() => history.push(`/users/${review.User.id}`)}
+            onClick={() => {
+              history.push(`/users/${review.User.id}`);
+              window.location.reload();
+            }}
             src={review.User.profilePicture ? `${review.User.profilePicture}` : null}
           ></img>
         ) : (
           <div
             className="boat__information__no__profile__picture"
-            onClick={() => history.push(`/users/${review.User.id}`)}
+            onClick={() => {
+              history.push(`/users/${review.User.id}`);
+              window.location.reload();
+            }}
           >
             {review.User.firstName.slice(0, 1).toUpperCase()}
           </div>

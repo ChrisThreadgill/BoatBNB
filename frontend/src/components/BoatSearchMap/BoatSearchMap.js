@@ -25,8 +25,8 @@ function BoatSearchMap({ searchState, markers }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const state = useParams();
-  console.log(state, "------------");
-  console.log(searchState, "-------------------");
+  // console.log(state, "------------");
+  // console.log(searchState, "-------------------");
   const key = useSelector((state) => state.maps.key);
   const boats = useSelector((state) => state.boats);
 

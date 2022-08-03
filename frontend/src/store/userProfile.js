@@ -19,7 +19,7 @@ export const getUserProfile = (userId) => async (dispatch) => {
     method: "GET",
   });
   const userProfile = await response.json();
-  console.log(userProfile);
+  // console.log(userProfile);
   let sortedUserRatings = [];
   if (userProfile.user.UserRatings.length > 0) {
     for (let i = 0; i < userProfile.user.UserRatings.length; i++) {

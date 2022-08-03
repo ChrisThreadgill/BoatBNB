@@ -62,7 +62,7 @@ export const getAllBoats = (boatId) => async (dispatch) => {
   });
 
   const boat = await response.json();
-  console.log(boat, "in the thunk");
+  // console.log(boat, "in the thunk");
 
   dispatch(oneBoat(boat));
   return boat;

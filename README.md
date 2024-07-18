@@ -13,13 +13,14 @@ Git wiki: https://github.com/ChrisThreadgill/BoatBNB/wiki
 
 ---
 
-## BoatBNB is a clone of AirBnB with an emphasis on booking boats.
+## MVPs.
 
 1. Users will have the option between being a renter or a provider.
 2. Users will have access to book and cancel loads
 3. Users Will have access to leave a rating or a review on a boat.
 4. Providers will be able to book listings, make changes to their listings, and delete a listing.
 5. Providers will be allowed to cancel user bookings that are booked on their boat.
+6. Providers and users will be able to cancel their own bookings.
 
 ## Build Instructions
 

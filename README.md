@@ -2,7 +2,6 @@
 
 ### Under maintenance for Backend Rework
 
-Git wiki: https://github.com/ChrisThreadgill/BoatBNB/wiki
 
 ### Contact
 
@@ -51,7 +50,7 @@ Git wiki: https://github.com/ChrisThreadgill/BoatBNB/wiki
 
 ##
 
-## Front End Rework after graduating
+## FRONT END REWORK 1 WEEK SPRINT
 
 ![boat__bnb__portfolio__resize](https://user-images.githubusercontent.com/96981717/182683801-0de8b7ab-3781-4591-a2d4-e6ae6b29c33f.gif)
 
@@ -84,4 +83,4 @@ Git wiki: https://github.com/ChrisThreadgill/BoatBNB/wiki
 - Interactive schedule with disabled dates based on bookings
 - User Ratings / Reviews (Coming soon!).
 - Map Api to allow nearby searches for boats
-- User profile editing capabilities
+- User profile editing capabilitiesgh
